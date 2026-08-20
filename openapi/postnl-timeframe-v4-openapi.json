@@ -1,0 +1,702 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Timeframe API",
+    "description": "This API can be used to determine the delivery date and time window of a specific service",
+    "contact": {
+      "name": "PostNL",
+      "url": "https://developer.postnl.nl/integration-with-postnl/api-overview/"
+    },
+    "version": "v4"
+  },
+  "servers": [
+    {
+      "url": "https://api-sandbox.postnl.nl",
+      "description": "Non-Production server"
+    },
+    {
+      "url": "https://api.postnl.nl",
+      "description": "Production server"
+    }
+  ],
+  "security": [
+    {
+      "apikey": []
+    }
+  ],
+  "paths": {
+    "/shipment/delivery/v4/timeframe/multipleservices": {
+      "post": {
+        "summary": "Get available delivery dates and time windows for multiple services",
+        "description": "This API can be used to determine the delivery date and time window of multiple services.",
+        "operationId": "GetDeliveryDateWithMultipleServices",
+        "requestBody": {
+          "x-name": "request",
+          "required": true,
+          "x-position": 1,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/ServicesDeliveryDateRequest" },
+              "examples": {
+                "Example 1": {
+                  "value": {
+                    "handoverDate": "2026-06-15",
+                    "receiverAddress": {
+                      "countryIso": "BE",
+                      "postalCode": "8000",
+                      "street": "Langerei",
+                      "city": "Brugge"
+                    },
+                    "services": ["daytime", "evening"],
+                    "shipmentType": "parcel",
+                    "numberOfDays": 1,
+                    "customerCode": "ABC",
+                    "customerNumber": "123"
+                  }
+                },
+                "Example 2": {
+                  "value": {
+                    "handoverDate": "2026-06-15",
+                    "receiverAddress": {
+                      "countryIso": "NL",
+                      "postalCode": "2521CA",
+                      "street": null,
+                      "city": null
+                    },
+                    "services": ["daytime", "evening"],
+                    "shipmentType": "parcel",
+                    "numberOfDays": 1,
+                    "customerCode": "ABC",
+                    "customerNumber": "123"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful retrieval of available delivery dates and time windows",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ServicesDeliveryDateResponse" },
+                "example": {
+                  "deliveryDates": [
+                    {
+                      "services": [
+                        {
+                          "service": "daytime",
+                          "timeFrame": { "from": "08:30:00", "until": "21:30:00" },
+                          "sustainability": { "code": "01", "description": "Sustainable delivery" },
+                          "shipmentType": "parcel",
+                          "availability": true,
+                          "reason": null
+                        },
+                        {
+                          "service": "evening",
+                          "timeFrame": null,
+                          "sustainability": null,
+                          "shipmentType": "parcel",
+                          "availability": false,
+                          "reason": "This postal code is not within the service area for the requested product"
+                        }
+                      ],
+                      "deliveryDate": "2025-12-31"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": { "$ref": "#/components/schemas/ValidationProblemDetails" },
+                "example": {
+                  "type": "https://tools.ietf.org/html/rfc9110#section-15.5.1",
+                  "title": "One or more validation errors occurred.",
+                  "status": 400,
+                  "detail": "See the errors property for more details.",
+                  "errors": {
+                    "address": ["The address field is required."],
+                    "postalCode": ["The postalCode field is required"]
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid apikey",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Unauthorized" }
+              }
+            }
+          },
+          "403": { "description": "Forbidden" },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": { "$ref": "#/components/schemas/ProblemDetails" },
+                "example": {
+                  "type": "https://tools.ietf.org/html/rfc9110#section-15.6.1",
+                  "title": "Business error occurred.",
+                  "status": 404,
+                  "detail": "See the errors property for more details.",
+                  "errors": {
+                    "request": ["This postalCode value cannot be found."]
+                  }
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method not allowed",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/MethodNotAllowed" }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many requests",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/TooManyRequests" }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": { "$ref": "#/components/schemas/ProblemDetails" },
+                "example": {
+                  "type": "https://tools.ietf.org/html/rfc9110#section-15.6.1",
+                  "title": "Unknown error occurred.",
+                  "status": 500,
+                  "errors": {
+                    "request": ["Error message."]
+                  }
+                }
+              }
+            }
+          },
+          "503": { "description": "Service Unavailable" },
+          "504": { "description": "Gateway Timeout" }
+        }
+      }
+    },
+    "/shipment/delivery/v4/timeframe/singleservice": {
+      "post": {
+        "summary": "Get available delivery dates and time windows",
+        "description": "This API can be used to determine the delivery date and time window of a specific service.",
+        "operationId": "GetDeliveryDate",
+        "requestBody": {
+          "x-name": "request",
+          "required": true,
+          "x-position": 1,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/DeliveryDateRequest" },
+              "examples": {
+                "Example 1": {
+                  "value": {
+                    "handoverDate": "2026-06-15",
+                    "deliveryDays": 2,
+                    "receiverAddress": {
+                      "countryIso": "BE",
+                      "postalCode": "8000",
+                      "street": "Langerei",
+                      "city": "Brugge"
+                    },
+                    "service": "daytime",
+                    "shipmentType": "parcel",
+                    "customerCode": "ABC",
+                    "customerNumber": "123"
+                  }
+                },
+                "Example 2": {
+                  "value": {
+                    "handoverDate": "2026-06-15",
+                    "deliveryDays": 2,
+                    "receiverAddress": {
+                      "countryIso": "NL",
+                      "postalCode": "2521CA",
+                      "street": null,
+                      "city": null
+                    },
+                    "service": "daytime",
+                    "shipmentType": "parcel",
+                    "customerCode": "ABC",
+                    "customerNumber": "123"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful retrieval of available delivery dates and time windows",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/DeliveryDateResponse" },
+                "example": {
+                  "deliveryDates": [
+                    {
+                      "deliveryDate": "2025-12-31",
+                      "timeFrame": { "from": "08:30:00", "until": "21:30:00" },
+                      "sustainability": { "code": "01", "description": "Sustainable delivery" },
+                      "service": "daytime",
+                      "shipmentType": "parcel"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": { "$ref": "#/components/schemas/ValidationProblemDetails" },
+                "example": {
+                  "type": "https://tools.ietf.org/html/rfc9110#section-15.5.1",
+                  "title": "One or more validation errors occurred.",
+                  "status": 400,
+                  "detail": "See the errors property for more details.",
+                  "errors": {
+                    "address": ["The address field is required."],
+                    "postalCode": ["The postalCode field is required"]
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid apikey",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Unauthorized" }
+              }
+            }
+          },
+          "403": { "description": "Forbidden" },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": { "$ref": "#/components/schemas/ProblemDetails" },
+                "example": {
+                  "type": "https://tools.ietf.org/html/rfc9110#section-15.6.1",
+                  "title": "Business error occurred.",
+                  "status": 404,
+                  "detail": "See the errors property for more details.",
+                  "errors": {
+                    "request": ["This postalCode value cannot be found."]
+                  }
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method not allowed",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/MethodNotAllowed" }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many requests",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/TooManyRequests" }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": { "$ref": "#/components/schemas/ProblemDetails" },
+                "example": {
+                  "type": "https://tools.ietf.org/html/rfc9110#section-15.6.1",
+                  "title": "Unknown error occurred.",
+                  "status": 500,
+                  "errors": {
+                    "request": ["Error message."]
+                  }
+                }
+              }
+            }
+          },
+          "503": { "description": "Service Unavailable" },
+          "504": { "description": "Gateway Timeout" }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "DeliveryDateResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "deliveryDates": {
+            "type": "array",
+            "description": "Date of possible delivery dates based on how many delivery days requested",
+            "items": { "$ref": "#/components/schemas/DeliveryDate" }
+          }
+        }
+      },
+      "DeliveryDate": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "deliveryDate": {
+            "type": "string",
+            "description": "Date on which PostNL expects to deliver the shipment",
+            "format": "date"
+          },
+          "timeFrame": {
+            "description": "Timeframe in which PostNL expects to deliver the shipment",
+            "allOf": [ { "$ref": "#/components/schemas/TimeFrame" } ]
+          },
+          "sustainability": {
+            "description": "Indicates how sustainable the delivery will be",
+            "allOf": [ { "$ref": "#/components/schemas/Sustainability" } ]
+          },
+          "service": {
+            "description": "The services that a user can use",
+            "allOf": [ { "$ref": "#/components/schemas/ServiceType" } ]
+          },
+          "shipmentType": {
+            "description": "Indicates what kind of type a shipment is",
+            "allOf": [ { "$ref": "#/components/schemas/ShipmentType" } ]
+          }
+        }
+      },
+      "TimeFrame": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "from": {
+            "type": "string",
+            "description": "Start of the timeframe (HH:mm:ss)",
+            "format": "time"
+          },
+          "until": {
+            "type": "string",
+            "description": "End of the timeframe (HH:mm:ss)",
+            "format": "time"
+          }
+        }
+      },
+      "Sustainability": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "code": {
+            "description": "Code of sustainability",
+            "allOf": [ { "$ref": "#/components/schemas/SustainabilityCode" } ]
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of sustainability"
+          }
+        }
+      },
+      "SustainabilityCode": {
+        "type": "string",
+        "description": "Describes available sustainability codes",
+        "default": "00",
+        "x-extensible-enum": ["00", "01", "02", "03"]
+      },
+      "ServiceType": {
+        "type": "string",
+        "description": "Describes available service types",
+        "default": "daytime",
+        "x-extensible-enum": [
+          "daytime",
+          "evening",
+          "guaranteed before 10",
+          "guaranteed before 12",
+          "guaranteed before 17"
+        ]
+      },
+      "ShipmentType": {
+        "type": "string",
+        "description": "Describes available shipment types",
+        "default": "parcel",
+        "x-extensible-enum": ["parcel"]
+      },
+      "ValidationProblemDetails": {
+        "allOf": [
+          { "$ref": "#/components/schemas/HttpValidationProblemDetails" },
+          {
+            "type": "object",
+            "additionalProperties": { "type": "object", "nullable": true },
+            "properties": {
+              "errors": {
+                "type": "object",
+                "additionalProperties": { "type": "array", "items": { "type": "string" } }
+              }
+            }
+          }
+        ]
+      },
+      "HttpValidationProblemDetails": {
+        "allOf": [
+          { "$ref": "#/components/schemas/ProblemDetails" },
+          {
+            "type": "object",
+            "additionalProperties": { "type": "object", "nullable": true },
+            "properties": {
+              "errors": {
+                "type": "object",
+                "additionalProperties": { "type": "array", "items": { "type": "string" } }
+              }
+            }
+          }
+        ]
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "additionalProperties": { "type": "object", "nullable": true },
+        "properties": {
+          "type":     { "type": "string",  "nullable": true },
+          "title":    { "type": "string",  "nullable": true },
+          "status":   { "type": "integer", "format": "int32", "nullable": true },
+          "detail":   { "type": "string",  "nullable": true },
+          "instance": { "type": "string",  "nullable": true }
+        }
+      },
+      "DeliveryDateRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["handoverDate", "receiverAddress", "customerCode", "customerNumber"],
+        "properties": {
+          "handoverDate": {
+            "type": "string",
+            "description": "The date on which the user hands over the shipment to PostNL before the cutoff time. Must be today or a future date. If unsure, use tomorrow's date (today + 1). Format: yyyy-MM-dd (e.g. \"2026-03-10\").",
+            "format": "date"
+          },
+          "deliveryDays": {
+            "type": "integer",
+            "description": "The number of delivery days there will be in the response",
+            "format": "int32",
+            "default": 1,
+            "maximum": 14,
+            "minimum": 1
+          },
+          "receiverAddress": {
+            "description": "The address of the receiver",
+            "allOf": [ { "$ref": "#/components/schemas/Address" } ]
+          },
+          "service": {
+            "description": "The service that a user can use",
+            "allOf": [ { "$ref": "#/components/schemas/ServiceType" } ]
+          },
+          "shipmentType": {
+            "description": "Indicates what kind of type a shipment is",
+            "allOf": [ { "$ref": "#/components/schemas/ShipmentType" } ]
+          },
+          "customerCode": {
+            "type": "string",
+            "description": "The unique code to identify the customer",
+            "minLength": 1
+          },
+          "customerNumber": {
+            "type": "string",
+            "description": "The unique number to identify the customer",
+            "minLength": 1
+          }
+        }
+      },
+      "Address": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["countryIso", "postalCode"],
+        "properties": {
+          "countryIso": {
+            "type": "string",
+            "description": "Country of the recipient (ISO 3166-1 alpha-2)",
+            "minLength": 2,
+            "pattern": "^(BE|NL)$"
+          },
+          "postalCode": {
+            "type": "string",
+            "description": "Postal code of the recipient",
+            "maxLength": 17,
+            "minLength": 4
+          },
+          "street": {
+            "type": "string",
+            "description": "Name of the street of the recipient",
+            "maxLength": 95,
+            "nullable": true
+          },
+          "city": {
+            "type": "string",
+            "description": "City of the recipient address",
+            "maxLength": 35,
+            "nullable": true
+          }
+        }
+      },
+      "ServicesDeliveryDateResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "deliveryDates": {
+            "type": "array",
+            "description": "Date of possible delivery dates based on how many products requested",
+            "items": { "$ref": "#/components/schemas/ServiceDeliveryDate" }
+          }
+        }
+      },
+      "ServiceDeliveryDate": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "services": {
+            "type": "array",
+            "description": "List of requested services and their availability for the specified delivery date",
+            "items": { "$ref": "#/components/schemas/ServiceDelivery" }
+          },
+          "deliveryDate": {
+            "type": "string",
+            "description": "Date on which PostNL expects to deliver the shipment",
+            "format": "date"
+          }
+        }
+      },
+      "ServiceDelivery": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "service": {
+            "description": "Service for which the date is applicable",
+            "allOf": [ { "$ref": "#/components/schemas/ServiceType" } ]
+          },
+          "timeFrame": {
+            "description": "Timeframe in which PostNL expects to deliver the shipment",
+            "nullable": true,
+            "allOf": [ { "$ref": "#/components/schemas/TimeFrame" } ]
+          },
+          "sustainability": {
+            "description": "Indicates how sustainable the delivery will be",
+            "nullable": true,
+            "allOf": [ { "$ref": "#/components/schemas/Sustainability" } ]
+          },
+          "shipmentType": {
+            "description": "Type of shipment for which the date is applicable",
+            "allOf": [ { "$ref": "#/components/schemas/ShipmentType" } ]
+          },
+          "availability": {
+            "type": "boolean",
+            "description": "Indicates the availability of the service on the date"
+          },
+          "reason": {
+            "type": "string",
+            "description": "Reason describing why a service is not available on the specified delivery date",
+            "nullable": true
+          }
+        }
+      },
+      "ServicesDeliveryDateRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["handoverDate", "receiverAddress", "customerCode", "customerNumber"],
+        "properties": {
+          "handoverDate": {
+            "type": "string",
+            "description": "The date on which the user hands over the shipment to PostNL before the cutoff time. Must be today + 1 or a future date. If unsure, use tomorrow's date (today + 1). Format: yyyy-MM-dd (e.g. \"2026-03-10\").",
+            "format": "date"
+          },
+          "receiverAddress": {
+            "description": "The address of the receiver",
+            "allOf": [ { "$ref": "#/components/schemas/Address" } ]
+          },
+          "services": {
+            "type": "array",
+            "description": "The services that a user can use",
+            "items": { "$ref": "#/components/schemas/ServiceType" }
+          },
+          "shipmentType": {
+            "description": "Indicates what kind of type a shipment is",
+            "allOf": [ { "$ref": "#/components/schemas/ShipmentType" } ]
+          },
+          "numberOfDays": {
+            "type": "integer",
+            "description": "The number of days that is needed to look ahead for the availability of the requested services",
+            "format": "int32",
+            "default": 1,
+            "maximum": 14,
+            "minimum": 1
+          },
+          "customerCode": {
+            "type": "string",
+            "description": "The unique code to identify the customer",
+            "minLength": 1
+          },
+          "customerNumber": {
+            "type": "string",
+            "description": "The unique number to identify the customer",
+            "minLength": 1
+          }
+        }
+      },
+      "Unauthorized": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Failed to resolve API Key variable 'request.header.apikey'"
+          },
+          "http_status_code": {
+            "type": "number",
+            "example": 401
+          }
+        }
+      },
+      "MethodNotAllowed": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Only POST requests allowed"
+          },
+          "http_status_code": {
+            "type": "number",
+            "example": 405
+          }
+        }
+      },
+      "TooManyRequests": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Too many requests. Rate limit exceeded!"
+          },
+          "http_status_code": {
+            "type": "number",
+            "example": 429
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "apikey": {
+        "type": "apiKey",
+        "name": "apikey",
+        "in": "header"
+      }
+    }
+  }
+}

@@ -1,0 +1,1218 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Locations API",
+        "description": "This API can be used to search for locations around a given area",
+        "contact": {
+            "name": "PostNL",
+            "url": "https://developer.postnl.nl/integration-with-postnl/api-overview/"
+        },
+        "version": "v4"
+    },
+    "servers": [
+        {
+            "url": "https://api-sandbox.postnl.nl",
+            "description": "Non-Production server"
+        },
+        {
+            "url": "https://api.postnl.nl",
+            "description": "Production server"
+        }
+    ],
+    "security": [
+        {
+            "apikey": []
+        }
+    ],
+    "paths": {
+        "/shipment/delivery/v4/locations/near-coordinates": {
+            "post": {
+                "summary": "Get available locations",
+                "description": "This API can be used to search for locations around a given area by coordinates",
+                "operationId": "GetPickupLocationsByCoordinates",
+                "requestBody": {
+                    "x-name": "request",
+                    "required": true,
+                    "x-position": 1,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PickupNearCoordinatesRequest"
+                            },
+                            "example": {
+                                "numberOfLocations": 2,
+                                "coordinates": {
+                                    "latitude": 52.370216,
+                                    "longitude": 4.895168
+                                },
+                                "locationType": "Retail",
+                                "pickupDate": "2026-06-15",
+                                "receiverCountryIso": "BE",
+                                "customerCode": "ABC",
+                                "customerNumber": "123"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful retrieval of pickup locations",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PickupLocationResponse"
+                                },
+                                "example": {
+                                    "locations": [
+                                        {
+                                            "pickupLocationId": "123456789",
+                                            "locationType": "ParcelLocker",
+                                            "name": "PostNL Pickup Point",
+                                            "address": {
+                                                "countryIso": "NL",
+                                                "postalCode": "1234AB",
+                                                "houseNumber": "123",
+                                                "houseNumberAddition": "A",
+                                                "street": "Main Street",
+                                                "city": "Amsterdam"
+                                            },
+                                            "coordinates": {
+                                                "latitude": 52.3676,
+                                                "longitude": 4.9041
+                                            },
+                                            "distance": 20,
+                                            "openingTimes": [
+                                                {
+                                                    "day": "Monday",
+                                                    "times": [
+                                                        {
+                                                            "from": "08:00:00",
+                                                            "until": "20:00:00"
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "sustainability": {
+                                                "code": "01",
+                                                "description": "Sustainable delivery"
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/problem+json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationProblemDetails"
+                                },
+                                "example": {
+                                    "type": "https://tools.ietf.org/html/rfc9110#section-15.5.1",
+                                    "title": "One or more validation errors occurred.",
+                                    "status": 400,
+                                    "detail": "See the errors property for more details.",
+                                    "errors": {
+                                        "countryIso": [
+                                            "The countryIso field is required."
+                                        ],
+                                        "address": [
+                                            "The address field is required."
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid apikey",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Unauthorized"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/problem+json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProblemDetails"
+                                },
+                                "example": {
+                                    "type": "https://tools.ietf.org/html/rfc9110#section-15.6.1",
+                                    "title": "Business error occurred.",
+                                    "status": 404,
+                                    "detail": "See the errors property for more details.",
+                                    "errors": {
+                                        "request": [
+                                            "No locations found for payload"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "405": {
+                        "description": "Method not allowed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MethodNotAllowed"
+                                }
+                            }
+                        }
+                    },
+                    "429": {
+                        "description": "Too many requests",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TooManyRequests"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/problem+json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProblemDetails"
+                                },
+                                "example": {
+                                    "type": "https://tools.ietf.org/html/rfc9110#section-15.6.1",
+                                    "title": "Unknown error occurred.",
+                                    "status": 500,
+                                    "errors": {
+                                        "request": [
+                                            "Error message."
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "503": {
+                        "description": "Service Unavailable"
+                    },
+                    "504": {
+                        "description": "Gateway Timeout"
+                    }
+                }
+            }
+        },
+        "/shipment/delivery/v4/locations/lookup": {
+            "post": {
+                "summary": "Get location status and details",
+                "description": "This API can be used to retrieve the details and status of a specific location on a specific date",
+                "operationId": "GetPickupLocationLookup",
+                "requestBody": {
+                    "x-name": "request",
+                    "required": true,
+                    "x-position": 1,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PickupLocationLookupRequest"
+                            },
+                            "example": {
+                                "pickupLocationId": "123456",
+                                "countryIso": "NL",
+                                "pickupDate": "2026-06-15",
+                                "customerCode": "PLI",
+                                "customerNumber": "12345"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful retrieval of location details and status",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PickupLocationLookupResponse"
+                                },
+                                "example": {
+                                    "location": {
+                                        "pickupLocationId": "163272",
+                                        "pickupLocationAvailable": false,
+                                        "locationType": "Retail",
+                                        "name": "Kantoorboekhandel van Remortel Sluis",
+                                        "address": {
+                                            "countryIso": "NL",
+                                            "postalCode": "4524EC",
+                                            "houseNumber": "25",
+                                            "houseNumberAddition": "A",
+                                            "street": "Nieuwstraat",
+                                            "city": "Sluis"
+                                        },
+                                        "coordinates": {
+                                            "latitude": 52.3676,
+                                            "longitude": 4.9041
+                                        },
+                                        "openingTimes": [
+                                            {
+                                                "day": "Monday",
+                                                "times": [
+                                                    {
+                                                        "from": "08:00:00",
+                                                        "until": "20:00:00"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "day": "Tuesday",
+                                                "times": [
+                                                    {
+                                                        "from": "08:00:00",
+                                                        "until": "20:00:00"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "day": "Wednesday",
+                                                "times": [
+                                                    {
+                                                        "from": "08:00:00",
+                                                        "until": "20:00:00"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "sustainability": {
+                                            "code": "02",
+                                            "description": "Sustainable option"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/problem+json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationProblemDetails"
+                                },
+                                "example": {
+                                    "type": "https://tools.ietf.org/html/rfc9110#section-15.5.1",
+                                    "title": "One or more validation errors occurred.",
+                                    "status": 400,
+                                    "detail": "See the errors property for more details.",
+                                    "errors": {
+                                        "countryIso": [
+                                            "The countryIso field is required."
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid apikey",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Unauthorized"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/problem+json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProblemDetails"
+                                },
+                                "example": {
+                                    "type": "https://tools.ietf.org/html/rfc9110#section-15.6.1",
+                                    "title": "Business error occurred.",
+                                    "status": 404,
+                                    "detail": "See the errors property for more details.",
+                                    "errors": {
+                                        "request": [
+                                            "Location does not exist or has been permanently closed"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "405": {
+                        "description": "Method not allowed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MethodNotAllowed"
+                                }
+                            }
+                        }
+                    },
+                    "429": {
+                        "description": "Too many requests",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TooManyRequests"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/problem+json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProblemDetails"
+                                },
+                                "example": {
+                                    "type": "https://tools.ietf.org/html/rfc9110#section-15.6.1",
+                                    "title": "Unknown error occurred.",
+                                    "status": 500,
+                                    "errors": {
+                                        "request": [
+                                            "Error message."
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "503": {
+                        "description": "Service Unavailable"
+                    },
+                    "504": {
+                        "description": "Gateway Timeout"
+                    }
+                }
+            }
+        },
+        "/shipment/delivery/v4/locations/near-address": {
+            "post": {
+                "summary": "Get available locations",
+                "description": "This API can be used to search for locations around a given area by address",
+                "operationId": "GetPickupLocationsByAddress",
+                "requestBody": {
+                    "x-name": "request",
+                    "required": true,
+                    "x-position": 1,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PickupNearAddressRequest"
+                            },
+                            "examples": {
+                                "Example 1": {
+                                    "value": {
+                                        "numberOfLocations": 2,
+                                        "receiverAddress": {
+                                            "countryIso": "BE",
+                                            "postalCode": "8000",
+                                            "street": "Langerei",
+                                            "city": "Brugge",
+                                            "houseNumber": null,
+                                            "houseNumberAddition": null
+                                        },
+                                        "locationType": null,
+                                        "pickupDate": "2026-06-15",
+                                        "customerCode": "ABC",
+                                        "customerNumber": "123"
+                                    }
+                                },
+                                "Example 2": {
+                                    "value": {
+                                        "numberOfLocations": 10,
+                                        "receiverAddress": {
+                                            "countryIso": "NL",
+                                            "postalCode": "2521CA",
+                                            "street": null,
+                                            "city": null,
+                                            "houseNumber": null,
+                                            "houseNumberAddition": null
+                                        },
+                                        "locationType": "Retail",
+                                        "pickupDate": "2026-06-15",
+                                        "customerCode": "ABC",
+                                        "customerNumber": "123"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful retrieval of pickup locations",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PickupLocationResponse"
+                                },
+                                "example": {
+                                    "locations": [
+                                        {
+                                            "pickupLocationId": "123456789",
+                                            "locationType": "ParcelLocker",
+                                            "name": "PostNL Pickup Point",
+                                            "address": {
+                                                "countryIso": "NL",
+                                                "postalCode": "1234AB",
+                                                "houseNumber": "123",
+                                                "houseNumberAddition": "A",
+                                                "street": "Main Street",
+                                                "city": "Amsterdam"
+                                            },
+                                            "coordinates": {
+                                                "latitude": 52.3676,
+                                                "longitude": 4.9041
+                                            },
+                                            "distance": 20,
+                                            "openingTimes": [
+                                                {
+                                                    "day": "Monday",
+                                                    "times": [
+                                                        {
+                                                            "from": "08:00:00",
+                                                            "until": "20:00:00"
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "sustainability": {
+                                                "code": "01",
+                                                "description": "Sustainable delivery"
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/problem+json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationProblemDetails"
+                                },
+                                "example": {
+                                    "type": "https://tools.ietf.org/html/rfc9110#section-15.5.1",
+                                    "title": "One or more validation errors occurred.",
+                                    "status": 400,
+                                    "detail": "See the errors property for more details.",
+                                    "errors": {
+                                        "countryIso": [
+                                            "The countryIso field is required."
+                                        ],
+                                        "address": [
+                                            "The address field is required."
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid apikey",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Unauthorized"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/problem+json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProblemDetails"
+                                },
+                                "example": {
+                                    "type": "https://tools.ietf.org/html/rfc9110#section-15.6.1",
+                                    "title": "Business error occurred.",
+                                    "status": 404,
+                                    "detail": "See the errors property for more details.",
+                                    "errors": {
+                                        "request": [
+                                            "No locations found for payload"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "405": {
+                        "description": "Method not allowed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MethodNotAllowed"
+                                }
+                            }
+                        }
+                    },
+                    "429": {
+                        "description": "Too many requests",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TooManyRequests"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/problem+json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProblemDetails"
+                                },
+                                "example": {
+                                    "type": "https://tools.ietf.org/html/rfc9110#section-15.6.1",
+                                    "title": "Unknown error occurred.",
+                                    "status": 500,
+                                    "errors": {
+                                        "request": [
+                                            "Error message."
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "503": {
+                        "description": "Service Unavailable"
+                    },
+                    "504": {
+                        "description": "Gateway Timeout"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "PickupLocationResponse": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "locations": {
+                        "type": "array",
+                        "description": "List of locations",
+                        "items": {
+                            "$ref": "#/components/schemas/Location"
+                        }
+                    }
+                }
+            },
+            "Location": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "pickupLocationId": {
+                        "type": "string",
+                        "description": "Unique identifier of the pickup location"
+                    },
+                    "locationType": {
+                        "description": "Type of location",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/LocationType"
+                            }
+                        ]
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Name of the location"
+                    },
+                    "address": {
+                        "description": "Address of the location",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Address"
+                            }
+                        ]
+                    },
+                    "coordinates": {
+                        "description": "Coordinates of the location",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/CoordinateResponse"
+                            }
+                        ]
+                    },
+                    "distance": {
+                        "type": "number",
+                        "description": "Distance to location from centre point of requested area",
+                        "format": "double"
+                    },
+                    "openingTimes": {
+                        "type": "array",
+                        "description": "Weekday list containing the opening times for that weekday",
+                        "items": {
+                            "$ref": "#/components/schemas/OpeningTime"
+                        }
+                    },
+                    "sustainability": {
+                        "description": "Indicates how sustainable this location is",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Sustainability"
+                            }
+                        ]
+                    }
+                }
+            },
+            "LocationType": {
+                "type": "string",
+                "description": "Describes available location types",
+                "default": "Retail",
+                "x-extensible-enum": [
+                    "Retail",
+                    "ParcelLocker"
+                ]
+            },
+            "Address": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "countryIso": {
+                        "type": "string",
+                        "description": "Country code"
+                    },
+                    "postalCode": {
+                        "type": "string",
+                        "description": "Postal code"
+                    },
+                    "houseNumber": {
+                        "type": "string",
+                        "description": "House number"
+                    },
+                    "houseNumberAddition": {
+                        "type": "string",
+                        "description": "Addition to house number"
+                    },
+                    "street": {
+                        "type": "string",
+                        "description": "Street"
+                    },
+                    "city": {
+                        "type": "string",
+                        "description": "City"
+                    }
+                }
+            },
+            "CoordinateResponse": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "latitude": {
+                        "type": "number",
+                        "description": "Latitude of the location",
+                        "format": "double"
+                    },
+                    "longitude": {
+                        "type": "number",
+                        "description": "Longitude of the location",
+                        "format": "double"
+                    }
+                }
+            },
+            "OpeningTime": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "day": {
+                        "type": "string",
+                        "description": "Day of the week for which the opening times are applicable"
+                    },
+                    "times": {
+                        "type": "array",
+                        "description": "Time of the day",
+                        "items": {
+                            "$ref": "#/components/schemas/TimeFrame"
+                        }
+                    }
+                }
+            },
+            "TimeFrame": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "from": {
+                        "type": "string",
+                        "description": "Starting time of the opening period (HH:mm:ss)",
+                        "format": "time"
+                    },
+                    "until": {
+                        "type": "string",
+                        "description": "Closing time of the opening period (HH:mm:ss)",
+                        "format": "time"
+                    }
+                }
+            },
+            "Sustainability": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "code": {
+                        "description": "Code of sustainability",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/SustainabilityCode"
+                            }
+                        ]
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "Description of sustainability"
+                    }
+                }
+            },
+            "SustainabilityCode": {
+                "type": "string",
+                "description": "Describes available sustainability codes",
+                "default": "00",
+                "x-extensible-enum": [
+                    "00",
+                    "01",
+                    "02",
+                    "03"
+                ]
+            },
+            "ValidationProblemDetails": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    },
+                    {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "object",
+                            "nullable": true
+                        },
+                        "properties": {
+                            "errors": {
+                                "type": "object",
+                                "additionalProperties": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ]
+            },
+            "HttpValidationProblemDetails": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "object",
+                            "nullable": true
+                        },
+                        "properties": {
+                            "errors": {
+                                "type": "object",
+                                "additionalProperties": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ]
+            },
+            "ProblemDetails": {
+                "type": "object",
+                "additionalProperties": {
+                    "type": "object",
+                    "nullable": true
+                },
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "title": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "status": {
+                        "type": "integer",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "detail": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "instance": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                }
+            },
+            "PickupNearAddressRequest": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                    "receiverAddress",
+                    "pickupDate",
+                    "customerCode",
+                    "customerNumber"
+                ],
+                "properties": {
+                    "numberOfLocations": {
+                        "type": "integer",
+                        "description": "Field that specifies the number of desired locations by the webshops",
+                        "format": "int32",
+                        "default": 10,
+                        "maximum": 10,
+                        "minimum": 1
+                    },
+                    "receiverAddress": {
+                        "description": "Object, that contains address information that will be used as a reference to retrieve pickup locations",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/ReceiverAddress"
+                            }
+                        ]
+                    },
+                    "locationType": {
+                        "description": "Field that specifies the type of locations that are desired as pickup possibility; either Retail or ParcelLocker",
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/LocationType"
+                            }
+                        ]
+                    },
+                    "pickupDate": {
+                        "type": "string",
+                        "description": "Field that specifies the date on which the parcel needs to be delivered at the pickup location. Must be today or a future date. If unsure, use tomorrow's date (today + 1). Format: yyyy-MM-dd (e.g. \"2026-03-10\").",
+                        "format": "date"
+                    },
+                    "customerCode": {
+                        "type": "string",
+                        "description": "The unique code to identify the customer",
+                        "minLength": 1
+                    },
+                    "customerNumber": {
+                        "type": "string",
+                        "description": "The unique number to identify the customer",
+                        "minLength": 1
+                    }
+                }
+            },
+            "ReceiverAddress": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                    "countryIso",
+                    "postalCode"
+                ],
+                "properties": {
+                    "countryIso": {
+                        "type": "string",
+                        "description": "Country of the reference address (ISO 3166-1 alpha-2)",
+                        "minLength": 2,
+                        "pattern": "^[A-Z]{2}$"
+                    },
+                    "postalCode": {
+                        "type": "string",
+                        "description": "Postal code of the reference address",
+                        "maxLength": 17,
+                        "minLength": 4
+                    },
+                    "street": {
+                        "type": "string",
+                        "description": "Name of the street of the reference address",
+                        "maxLength": 95,
+                        "nullable": true
+                    },
+                    "city": {
+                        "type": "string",
+                        "description": "City of the reference address",
+                        "maxLength": 35,
+                        "nullable": true
+                    },
+                    "houseNumber": {
+                        "type": "string",
+                        "description": "House number of the reference address",
+                        "maxLength": 35,
+                        "nullable": true
+                    },
+                    "houseNumberAddition": {
+                        "type": "string",
+                        "description": "Addition to the house number of the reference address",
+                        "maxLength": 35,
+                        "nullable": true
+                    }
+                }
+            },
+            "PickupNearCoordinatesRequest": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                    "coordinates",
+                    "pickupDate",
+                    "receiverCountryIso",
+                    "customerCode",
+                    "customerNumber"
+                ],
+                "properties": {
+                    "numberOfLocations": {
+                        "type": "integer",
+                        "description": "Field that specifies the number of desired locations by the webshops",
+                        "format": "int32",
+                        "default": 10,
+                        "maximum": 10,
+                        "minimum": 1
+                    },
+                    "coordinates": {
+                        "description": "Object that contains the reference point marked in coordinates from which locations need to be retrieved",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Coordinate"
+                            }
+                        ]
+                    },
+                    "locationType": {
+                        "description": "Field that specifies the type of locations that are desired as pickup possibility; either Retail or ParcelLocker",
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/LocationType"
+                            }
+                        ]
+                    },
+                    "pickupDate": {
+                        "type": "string",
+                        "description": "Field that specifies the date on which the parcel needs to be delivered at the pickup location. Must be today or a future date. If unsure, use tomorrow's date (today + 1). Format: yyyy-MM-dd (e.g. \"2026-03-10\").",
+                        "format": "date"
+                    },
+                    "receiverCountryIso": {
+                        "type": "string",
+                        "description": "Restricts the returned locations to the specified country. Country ISO format (ISO 3166-1 alpha-2)",
+                        "minLength": 2,
+                        "pattern": "^[A-Z]{2}$"
+                    },
+                    "customerCode": {
+                        "type": "string",
+                        "description": "The unique code to identify the customer",
+                        "minLength": 1
+                    },
+                    "customerNumber": {
+                        "type": "string",
+                        "description": "The unique number to identify the customer",
+                        "minLength": 1
+                    }
+                }
+            },
+            "Coordinate": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                    "latitude",
+                    "longitude"
+                ],
+                "properties": {
+                    "latitude": {
+                        "type": "number",
+                        "description": "Latitude of the location",
+                        "format": "double"
+                    },
+                    "longitude": {
+                        "type": "number",
+                        "description": "Longitude of the location",
+                        "format": "double"
+                    }
+                }
+            },
+            "PickupLocationLookupResponse": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "location": {
+                        "description": "Location details",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/LocationStatus"
+                            }
+                        ]
+                    }
+                }
+            },
+            "LocationStatus": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "pickupLocationId": {
+                        "type": "string",
+                        "description": "Identifier of the pickup location"
+                    },
+                    "pickupLocationAvailable": {
+                        "type": "boolean",
+                        "description": "Boolean that indicates whether the requested location is available for checkout on the specified date"
+                    },
+                    "locationType": {
+                        "description": "Type of location",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/LocationType"
+                            }
+                        ]
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Name of the location"
+                    },
+                    "address": {
+                        "description": "Address of the location",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Address"
+                            }
+                        ]
+                    },
+                    "coordinates": {
+                        "description": "Coordinates of the location",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/CoordinateResponse"
+                            }
+                        ]
+                    },
+                    "openingTimes": {
+                        "type": "array",
+                        "description": "Opening hours of the location",
+                        "items": {
+                            "$ref": "#/components/schemas/OpeningTime"
+                        }
+                    },
+                    "sustainability": {
+                        "description": "Indicates how sustainable this location is",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Sustainability"
+                            }
+                        ]
+                    }
+                }
+            },
+            "PickupLocationLookupRequest": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                    "pickupLocationId",
+                    "countryIso",
+                    "pickupDate",
+                    "customerCode",
+                    "customerNumber"
+                ],
+                "properties": {
+                    "pickupLocationId": {
+                        "type": "string",
+                        "description": "Identifier of the pickup location",
+                        "minLength": 1
+                    },
+                    "countryIso": {
+                        "type": "string",
+                        "description": "Country in which the location resides",
+                        "minLength": 2,
+                        "pattern": "^[A-Z]{2}$"
+                    },
+                    "pickupDate": {
+                        "type": "string",
+                        "description": "Date on which the parcel will be collected from the location by the consumer. Must be today or a future date. If unsure, use tomorrow's date (today + 1). Format: yyyy-MM-dd (e.g. \"2026-03-10\").",
+                        "format": "date"
+                    },
+                    "customerCode": {
+                        "type": "string",
+                        "description": "The unique code to identify the customer",
+                        "minLength": 1
+                    },
+                    "customerNumber": {
+                        "type": "string",
+                        "description": "The unique number to identify the customer",
+                        "minLength": 1
+                    }
+                }
+            },
+            "Unauthorized": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "example": "Failed to resolve API Key variable 'request.header.apikey'"
+                    },
+                    "http_status_code": {
+                        "type": "number",
+                        "example": 401
+                    }
+                }
+            },
+            "MethodNotAllowed": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "example": "Only POST requests allowed"
+                    },
+                    "http_status_code": {
+                        "type": "number",
+                        "example": 405
+                    }
+                }
+            },
+            "TooManyRequests": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "example": "Too many requests. Rate limit exceeded!"
+                    },
+                    "http_status_code": {
+                        "type": "number",
+                        "example": 429
+                    }
+                }
+            }
+        },
+        "securitySchemes": {
+            "apikey": {
+                "type": "apiKey",
+                "name": "apikey",
+                "in": "header"
+            }
+        }
+    }
+}

@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PostNL Shipment API",
+    "version": "v4"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "CreateShipment",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api-sandbox.postnl.nl/shipment/delivery/v4/labelconfirm",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Create a shipment with the provided details, it will return generated labels and barcodes if not provided"
+    }
+  ],
+  "bundled": true
+}

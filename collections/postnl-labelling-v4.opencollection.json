@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PostNL Labelling API",
+    "version": "v4"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "CreateLabel",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api-sandbox.postnl.nl/shipment/delivery/v4/label",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "The PostNL Labelling API is a RESTful API that creates shipping labels for outbound shipments."
+    }
+  ],
+  "bundled": true
+}

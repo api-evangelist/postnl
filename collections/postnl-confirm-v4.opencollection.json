@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PostNL Confirming API",
+    "version": "v4"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ConfirmShipment",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api-sandbox.postnl.nl/shipment/delivery/v4/confirm",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Preannounce a shipment with the provided details, it will return generated barcodes if not provided"
+    }
+  ],
+  "bundled": true
+}

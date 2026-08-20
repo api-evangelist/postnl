@@ -1,0 +1,1757 @@
+{
+  "item": [
+    {
+      "id": "48c61a1d-e469-4edc-9334-46cdedcbecf9",
+      "name": "Deliverydate",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c7c0dac1-d6b5-4f5c-997e-d87f8aa0b906",
+          "name": "Calculate expected delivery date",
+          "request": {
+            "name": "Calculate expected delivery date",
+            "description": {
+              "content": "Request example:\n```\ncurl -X GET \"https://api-sandbox.postnl.nl/shipment/v2_2/calculate/date/delivery?ShippingDate=29-05-2022+14%3A00%3A00&amp;ShippingDuration=1&amp;CutOffTime=17%3A00%3A00&amp;PostalCode=2132WT&amp;CountryCode=NL&amp;City=Hoofddorp&amp;Street=Siriusdreef&amp;HouseNumber=42&amp;HouseNrExt=A\" \\\n -H \"Accept: application/json\" \\\n -H \"apikey: APIKEY-HERE\" \n```\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "shipment",
+                "v2_2",
+                "calculate",
+                "date",
+                "delivery"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "ShippingDate",
+                  "value": "<string>",
+                  "description": "(Required) Date/time of preparing the shipment for sending. Format: dd-MM-yyyy hh:mm:ss"
+                },
+                {
+                  "disabled": false,
+                  "key": "ShippingDuration",
+                  "value": "<integer>",
+                  "description": "(Required) The duration it takes for the shipment to be delivered to PostNL in days. A value of 1 means that the parcel will be delivered to PostNL on the same day as the date specified in ShippingDate. A value of 2 means the parcel will arrive at PostNL a day later etc."
+                },
+                {
+                  "disabled": false,
+                  "key": "CutOffTime",
+                  "value": "<string>",
+                  "description": "(Required) Default cutoff time"
+                },
+                {
+                  "disabled": false,
+                  "key": "PostalCode",
+                  "value": "<string>",
+                  "description": "(Required) Zipcode of the destination address"
+                },
+                {
+                  "disabled": false,
+                  "key": "CountryCode",
+                  "value": "<string>",
+                  "description": "(Required) The ISO2 destination country code"
+                },
+                {
+                  "disabled": false,
+                  "key": "OriginCountryCode",
+                  "value": "NL",
+                  "description": "The ISO2 origin country code"
+                },
+                {
+                  "disabled": false,
+                  "key": "City",
+                  "value": "<string>",
+                  "description": "City of the destination address"
+                },
+                {
+                  "disabled": false,
+                  "key": "Street",
+                  "value": "<string>",
+                  "description": "The street name of the destination address."
+                },
+                {
+                  "disabled": false,
+                  "key": "HouseNumber",
+                  "value": "<integer>",
+                  "description": "The house number of the destination address"
+                },
+                {
+                  "disabled": false,
+                  "key": "HouseNrExt",
+                  "value": "<string>",
+                  "description": "House number extension of the delivery address"
+                },
+                {
+                  "disabled": false,
+                  "key": "Options",
+                  "value": "<string>,<string>",
+                  "description": "(Required) The delivery options that you want to take into account when calculating the expected delivery date"
+                },
+                {
+                  "disabled": false,
+                  "key": "CutOffTimeMonday",
+                  "value": "<string>",
+                  "description": "Overrides default cutoff time specified in the CutOffTime parameter for mondays specifically"
+                },
+                {
+                  "disabled": false,
+                  "key": "AvailableMonday",
+                  "value": "<boolean>",
+                  "description": "Specifies if you are available to ship to PostNL on mondays"
+                },
+                {
+                  "disabled": false,
+                  "key": "CutOffTimeTuesday",
+                  "value": "<string>",
+                  "description": "Overrides default cutoff time specified in the CutOffTime parameter for tuesdays specifically"
+                },
+                {
+                  "disabled": false,
+                  "key": "AvailableTuesday",
+                  "value": "<boolean>",
+                  "description": "Specifies if you are available to ship to PostNL on tuesdays"
+                },
+                {
+                  "disabled": false,
+                  "key": "CutOffTimeWednesday",
+                  "value": "<string>",
+                  "description": "Overrides default cutoff time specified in the CutOffTime parameter for wednesdays specifically"
+                },
+                {
+                  "disabled": false,
+                  "key": "AvailableWednesday",
+                  "value": "<boolean>",
+                  "description": "Specifies if you are available to ship to PostNL on wednesdays"
+                },
+                {
+                  "disabled": false,
+                  "key": "CutOffTimeThursday",
+                  "value": "<string>",
+                  "description": "Overrides default cutoff time specified in the CutOffTime parameter for thursdays specifically"
+                },
+                {
+                  "disabled": false,
+                  "key": "AvailableThursday",
+                  "value": "<boolean>",
+                  "description": "Specifies if you are available to ship to PostNL on thursdays"
+                },
+                {
+                  "disabled": false,
+                  "key": "CutOffTimeFriday",
+                  "value": "<string>",
+                  "description": "Overrides default cutoff time specified in the CutOffTime parameter for fridays specifically"
+                },
+                {
+                  "disabled": false,
+                  "key": "AvailableFriday",
+                  "value": "<boolean>",
+                  "description": "Specifies if you are available to ship to PostNL on fridays"
+                },
+                {
+                  "disabled": false,
+                  "key": "CutOffTimeSaturday",
+                  "value": "<string>",
+                  "description": "Overrides default cutoff time specified in the CutOffTime parameter for saturdays specifically"
+                },
+                {
+                  "disabled": false,
+                  "key": "AvailableSaturday",
+                  "value": "<boolean>",
+                  "description": "Specifies if you are available to ship to PostNL on saturdays"
+                },
+                {
+                  "disabled": false,
+                  "key": "CutOffTimeSunday",
+                  "value": "<string>",
+                  "description": "Overrides default cutoff time specified in the CutOffTime parameter for sundays specifically"
+                },
+                {
+                  "disabled": false,
+                  "key": "AvailableSunday",
+                  "value": "<boolean>",
+                  "description": "Specifies if you are available to ship to PostNL on sundays"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "apikey"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "472e7940-457b-4e02-983c-fa46530f5fde",
+              "name": "Expected earliest delivery date",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2_2",
+                    "calculate",
+                    "date",
+                    "delivery"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ShippingDate",
+                      "value": "29-05-2022 14:00:00"
+                    },
+                    {
+                      "key": "ShippingDuration",
+                      "value": "1"
+                    },
+                    {
+                      "key": "CutOffTime",
+                      "value": "17:00:00"
+                    },
+                    {
+                      "key": "PostalCode",
+                      "value": "2132WT"
+                    },
+                    {
+                      "key": "CountryCode",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "OriginCountryCode",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "City",
+                      "value": "Hoofddorp"
+                    },
+                    {
+                      "key": "Street",
+                      "value": "Siriusdreef"
+                    },
+                    {
+                      "key": "HouseNumber",
+                      "value": "42"
+                    },
+                    {
+                      "key": "HouseNrExt",
+                      "value": "A"
+                    },
+                    {
+                      "key": "Options",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "CutOffTimeMonday",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AvailableMonday",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "CutOffTimeTuesday",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AvailableTuesday",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "CutOffTimeWednesday",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AvailableWednesday",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "CutOffTimeThursday",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AvailableThursday",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "CutOffTimeFriday",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AvailableFriday",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "CutOffTimeSaturday",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AvailableSaturday",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "CutOffTimeSunday",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AvailableSunday",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"DeliveryDate\": \"30-05-2022\",\n  \"Options\": {\n    \"string\": \"Daytime\"\n  },\n  \"Sustainability\": {\n    \"Code\": \"02\",\n    \"Description\": \"Sustainable option\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "424ade11-4e10-42a7-8b05-e6bc47d8f0a0",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2_2",
+                    "calculate",
+                    "date",
+                    "delivery"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ShippingDate",
+                      "value": "29-05-2022 14:00:00"
+                    },
+                    {
+                      "key": "ShippingDuration",
+                      "value": "1"
+                    },
+                    {
+                      "key": "CutOffTime",
+                      "value": "17:00:00"
+                    },
+                    {
+                      "key": "PostalCode",
+                      "value": "2132WT"
+                    },
+                    {
+                      "key": "CountryCode",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "OriginCountryCode",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "City",
+                      "value": "Hoofddorp"
+                    },
+                    {
+                      "key": "Street",
+                      "value": "Siriusdreef"
+                    },
+                    {
+                      "key": "HouseNumber",
+                      "value": "42"
+                    },
+                    {
+                      "key": "HouseNrExt",
+                      "value": "A"
+                    },
+                    {
+                      "key": "Options",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "CutOffTimeMonday",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AvailableMonday",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "CutOffTimeTuesday",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AvailableTuesday",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "CutOffTimeWednesday",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AvailableWednesday",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "CutOffTimeThursday",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AvailableThursday",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "CutOffTimeFriday",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AvailableFriday",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "CutOffTimeSaturday",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AvailableSaturday",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "CutOffTimeSunday",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AvailableSunday",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Date\": \"2024-06-17T10:00:50.371Z\",\n  \"Error\": {\n    \"ErrorCode\": \"3000\",\n    \"ErrorDescription\": \"Request format is invalid\"\n  },\n  \"RequestId\": \"09fd61fe-0099-4349-b71d-dce5c2472be9\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3efff790-faae-40a8-819e-27fbada111d3",
+              "name": "Invalid apikey",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2_2",
+                    "calculate",
+                    "date",
+                    "delivery"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ShippingDate",
+                      "value": "29-05-2022 14:00:00"
+                    },
+                    {
+                      "key": "ShippingDuration",
+                      "value": "1"
+                    },
+                    {
+                      "key": "CutOffTime",
+                      "value": "17:00:00"
+                    },
+                    {
+                      "key": "PostalCode",
+                      "value": "2132WT"
+                    },
+                    {
+                      "key": "CountryCode",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "OriginCountryCode",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "City",
+                      "value": "Hoofddorp"
+                    },
+                    {
+                      "key": "Street",
+                      "value": "Siriusdreef"
+                    },
+                    {
+                      "key": "HouseNumber",
+                      "value": "42"
+                    },
+                    {
+                      "key": "HouseNrExt",
+                      "value": "A"
+                    },
+                    {
+                      "key": "Options",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "CutOffTimeMonday",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AvailableMonday",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "CutOffTimeTuesday",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AvailableTuesday",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "CutOffTimeWednesday",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AvailableWednesday",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "CutOffTimeThursday",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AvailableThursday",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "CutOffTimeFriday",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AvailableFriday",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "CutOffTimeSaturday",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AvailableSaturday",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "CutOffTimeSunday",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AvailableSunday",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Failed to resolve API Key variable 'request.header.apikey'\",\n  \"http_status_code\": 401\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bb05ac93-a1dd-48a3-80b7-f47886d6f3c0",
+              "name": "Method not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2_2",
+                    "calculate",
+                    "date",
+                    "delivery"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ShippingDate",
+                      "value": "29-05-2022 14:00:00"
+                    },
+                    {
+                      "key": "ShippingDuration",
+                      "value": "1"
+                    },
+                    {
+                      "key": "CutOffTime",
+                      "value": "17:00:00"
+                    },
+                    {
+                      "key": "PostalCode",
+                      "value": "2132WT"
+                    },
+                    {
+                      "key": "CountryCode",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "OriginCountryCode",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "City",
+                      "value": "Hoofddorp"
+                    },
+                    {
+                      "key": "Street",
+                      "value": "Siriusdreef"
+                    },
+                    {
+                      "key": "HouseNumber",
+                      "value": "42"
+                    },
+                    {
+                      "key": "HouseNrExt",
+                      "value": "A"
+                    },
+                    {
+                      "key": "Options",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "CutOffTimeMonday",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AvailableMonday",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "CutOffTimeTuesday",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AvailableTuesday",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "CutOffTimeWednesday",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AvailableWednesday",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "CutOffTimeThursday",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AvailableThursday",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "CutOffTimeFriday",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AvailableFriday",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "CutOffTimeSaturday",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AvailableSaturday",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "CutOffTimeSunday",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AvailableSunday",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Only GET & POST requests allowed\",\n  \"http_status_code\": 405\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "01d68ab6-5fa7-45fd-8c06-670c076e4bbd",
+              "name": "Too many requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2_2",
+                    "calculate",
+                    "date",
+                    "delivery"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ShippingDate",
+                      "value": "29-05-2022 14:00:00"
+                    },
+                    {
+                      "key": "ShippingDuration",
+                      "value": "1"
+                    },
+                    {
+                      "key": "CutOffTime",
+                      "value": "17:00:00"
+                    },
+                    {
+                      "key": "PostalCode",
+                      "value": "2132WT"
+                    },
+                    {
+                      "key": "CountryCode",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "OriginCountryCode",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "City",
+                      "value": "Hoofddorp"
+                    },
+                    {
+                      "key": "Street",
+                      "value": "Siriusdreef"
+                    },
+                    {
+                      "key": "HouseNumber",
+                      "value": "42"
+                    },
+                    {
+                      "key": "HouseNrExt",
+                      "value": "A"
+                    },
+                    {
+                      "key": "Options",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "CutOffTimeMonday",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AvailableMonday",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "CutOffTimeTuesday",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AvailableTuesday",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "CutOffTimeWednesday",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AvailableWednesday",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "CutOffTimeThursday",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AvailableThursday",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "CutOffTimeFriday",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AvailableFriday",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "CutOffTimeSaturday",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AvailableSaturday",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "CutOffTimeSunday",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AvailableSunday",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Too many requests. Rate limit exceeded!\",\n  \"http_status_code\": 429\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bee27db1-0b5d-4485-ab55-f5f9e690b090",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2_2",
+                    "calculate",
+                    "date",
+                    "delivery"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ShippingDate",
+                      "value": "29-05-2022 14:00:00"
+                    },
+                    {
+                      "key": "ShippingDuration",
+                      "value": "1"
+                    },
+                    {
+                      "key": "CutOffTime",
+                      "value": "17:00:00"
+                    },
+                    {
+                      "key": "PostalCode",
+                      "value": "2132WT"
+                    },
+                    {
+                      "key": "CountryCode",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "OriginCountryCode",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "City",
+                      "value": "Hoofddorp"
+                    },
+                    {
+                      "key": "Street",
+                      "value": "Siriusdreef"
+                    },
+                    {
+                      "key": "HouseNumber",
+                      "value": "42"
+                    },
+                    {
+                      "key": "HouseNrExt",
+                      "value": "A"
+                    },
+                    {
+                      "key": "Options",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "CutOffTimeMonday",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AvailableMonday",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "CutOffTimeTuesday",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AvailableTuesday",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "CutOffTimeWednesday",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AvailableWednesday",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "CutOffTimeThursday",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AvailableThursday",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "CutOffTimeFriday",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AvailableFriday",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "CutOffTimeSaturday",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AvailableSaturday",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "CutOffTimeSunday",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AvailableSunday",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"fault\": {\n    \"faultstring\": \"Unexpected token in object literal\",\n    \"detail\": {\n      \"errorcode\": \"Validation Fault\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "af53e517-d863-4188-b208-5076ecdb3a86",
+          "name": "Calculate required shipping date",
+          "request": {
+            "name": "Calculate required shipping date",
+            "description": {
+              "content": "Request example:\n```\ncurl -X GET \"https://api-sandbox.postnl.nl/shipment/v2_2/calculate/date/shipping?DeliveryDate=30-05-2022&amp;ShippingDuration=1&amp;PostalCode=2132WT&amp;CountryCode=NL&amp;City=Hoofddorp&amp;Street=Siriusdreef&amp;HouseNumber=42&amp;HouseNrExt=A\" \\\n -H \"Accept: application/json\" \\\n -H \"apikey: APIKEY-HERE\" \\\n\n```\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "shipment",
+                "v2_2",
+                "calculate",
+                "date",
+                "shipping"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "DeliveryDate",
+                  "value": "<string>",
+                  "description": "(Required) Date of the expected delivery (to the final destination) of the shipment."
+                },
+                {
+                  "disabled": false,
+                  "key": "ShippingDuration",
+                  "value": "<integer>",
+                  "description": "(Required) The duration it takes for the shipment to be delivered to PostNL in days. A value of 1 means that the parcel will be delivered to PostNL on the same day as the date specified in ShippingDate. A value of 2 means the parcel will arrive at PostNL a day later etc."
+                },
+                {
+                  "disabled": false,
+                  "key": "PostalCode",
+                  "value": "<string>",
+                  "description": "(Required) Zipcode of the address"
+                },
+                {
+                  "disabled": false,
+                  "key": "CountryCode",
+                  "value": "NL",
+                  "description": "(Required) The ISO2 destination country code"
+                },
+                {
+                  "disabled": false,
+                  "key": "OriginCountryCode",
+                  "value": "NL",
+                  "description": "The ISO2 country code of the origin country"
+                },
+                {
+                  "disabled": false,
+                  "key": "City",
+                  "value": "<string>",
+                  "description": "City of the destination address"
+                },
+                {
+                  "disabled": false,
+                  "key": "Street",
+                  "value": "<string>",
+                  "description": "The street name of the destination address"
+                },
+                {
+                  "disabled": false,
+                  "key": "HouseNumber",
+                  "value": "<integer>",
+                  "description": "The house number of the destination address"
+                },
+                {
+                  "disabled": false,
+                  "key": "HouseNrExt",
+                  "value": "<string>",
+                  "description": "House number extension of the destination address"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "apikey"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "86659a64-e42b-4412-908a-70938d6bdfc6",
+              "name": "The calculated date that the parcel needs to be shipped to PostNL",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2_2",
+                    "calculate",
+                    "date",
+                    "shipping"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "DeliveryDate",
+                      "value": "30-05-2022"
+                    },
+                    {
+                      "key": "ShippingDuration",
+                      "value": "1"
+                    },
+                    {
+                      "key": "PostalCode",
+                      "value": "2132WT"
+                    },
+                    {
+                      "key": "CountryCode",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "OriginCountryCode",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "City",
+                      "value": "Hoofddorp"
+                    },
+                    {
+                      "key": "Street",
+                      "value": "Siriusdreef"
+                    },
+                    {
+                      "key": "HouseNumber",
+                      "value": "42"
+                    },
+                    {
+                      "key": "HouseNrExt",
+                      "value": "A"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"SentDate\": \"29-06-2022\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aef5e432-7ebe-4ede-95b9-4009257a2c05",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2_2",
+                    "calculate",
+                    "date",
+                    "shipping"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "DeliveryDate",
+                      "value": "30-05-2022"
+                    },
+                    {
+                      "key": "ShippingDuration",
+                      "value": "1"
+                    },
+                    {
+                      "key": "PostalCode",
+                      "value": "2132WT"
+                    },
+                    {
+                      "key": "CountryCode",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "OriginCountryCode",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "City",
+                      "value": "Hoofddorp"
+                    },
+                    {
+                      "key": "Street",
+                      "value": "Siriusdreef"
+                    },
+                    {
+                      "key": "HouseNumber",
+                      "value": "42"
+                    },
+                    {
+                      "key": "HouseNrExt",
+                      "value": "A"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Date\": \"2024-06-17T10:00:50.371Z\",\n  \"Error\": {\n    \"ErrorCode\": \"3000\",\n    \"ErrorDescription\": \"Request format is invalid\"\n  },\n  \"RequestId\": \"09fd61fe-0099-4349-b71d-dce5c2472be9\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3d5e1dc5-05de-4576-8a90-c17a617f5c58",
+              "name": "Invalid apikey",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2_2",
+                    "calculate",
+                    "date",
+                    "shipping"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "DeliveryDate",
+                      "value": "30-05-2022"
+                    },
+                    {
+                      "key": "ShippingDuration",
+                      "value": "1"
+                    },
+                    {
+                      "key": "PostalCode",
+                      "value": "2132WT"
+                    },
+                    {
+                      "key": "CountryCode",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "OriginCountryCode",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "City",
+                      "value": "Hoofddorp"
+                    },
+                    {
+                      "key": "Street",
+                      "value": "Siriusdreef"
+                    },
+                    {
+                      "key": "HouseNumber",
+                      "value": "42"
+                    },
+                    {
+                      "key": "HouseNrExt",
+                      "value": "A"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Failed to resolve API Key variable 'request.header.apikey'\",\n  \"http_status_code\": 401\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cb7d7b5e-4832-4b95-a30c-c7c54713fc61",
+              "name": "Method not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2_2",
+                    "calculate",
+                    "date",
+                    "shipping"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "DeliveryDate",
+                      "value": "30-05-2022"
+                    },
+                    {
+                      "key": "ShippingDuration",
+                      "value": "1"
+                    },
+                    {
+                      "key": "PostalCode",
+                      "value": "2132WT"
+                    },
+                    {
+                      "key": "CountryCode",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "OriginCountryCode",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "City",
+                      "value": "Hoofddorp"
+                    },
+                    {
+                      "key": "Street",
+                      "value": "Siriusdreef"
+                    },
+                    {
+                      "key": "HouseNumber",
+                      "value": "42"
+                    },
+                    {
+                      "key": "HouseNrExt",
+                      "value": "A"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Only GET & POST requests allowed\",\n  \"http_status_code\": 405\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "053c54dd-e2b2-4381-8dd7-91e400f66192",
+              "name": "Too many requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2_2",
+                    "calculate",
+                    "date",
+                    "shipping"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "DeliveryDate",
+                      "value": "30-05-2022"
+                    },
+                    {
+                      "key": "ShippingDuration",
+                      "value": "1"
+                    },
+                    {
+                      "key": "PostalCode",
+                      "value": "2132WT"
+                    },
+                    {
+                      "key": "CountryCode",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "OriginCountryCode",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "City",
+                      "value": "Hoofddorp"
+                    },
+                    {
+                      "key": "Street",
+                      "value": "Siriusdreef"
+                    },
+                    {
+                      "key": "HouseNumber",
+                      "value": "42"
+                    },
+                    {
+                      "key": "HouseNrExt",
+                      "value": "A"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Too many requests. Rate limit exceeded!\",\n  \"http_status_code\": 429\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "38f2a625-939d-417f-98ae-79c513486447",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2_2",
+                    "calculate",
+                    "date",
+                    "shipping"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "DeliveryDate",
+                      "value": "30-05-2022"
+                    },
+                    {
+                      "key": "ShippingDuration",
+                      "value": "1"
+                    },
+                    {
+                      "key": "PostalCode",
+                      "value": "2132WT"
+                    },
+                    {
+                      "key": "CountryCode",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "OriginCountryCode",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "City",
+                      "value": "Hoofddorp"
+                    },
+                    {
+                      "key": "Street",
+                      "value": "Siriusdreef"
+                    },
+                    {
+                      "key": "HouseNumber",
+                      "value": "42"
+                    },
+                    {
+                      "key": "HouseNrExt",
+                      "value": "A"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"fault\": {\n    \"faultstring\": \"Unexpected token in object literal\",\n    \"detail\": {\n      \"errorcode\": \"Validation Fault\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-sandbox.postnl.nl",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "5c0e08ba-6ea6-4e76-a79e-81934f5e1d54",
+    "name": "Deliverydate API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Calculate expected delivery date based on shipping date or required shipping date based on requested delivery date",
+      "type": "text/plain"
+    }
+  }
+}

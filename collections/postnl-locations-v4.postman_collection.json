@@ -1,0 +1,1808 @@
+{
+  "item": [
+    {
+      "id": "9ecd5724-7afc-4dd9-af69-b6004a769791",
+      "name": "Get available locations",
+      "request": {
+        "name": "Get available locations",
+        "description": {
+          "content": "This API can be used to search for locations around a given area by coordinates",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "shipment",
+            "delivery",
+            "v4",
+            "locations",
+            "near-coordinates"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"coordinates\": {\n    \"latitude\": \"<double>\",\n    \"longitude\": \"<double>\"\n  },\n  \"pickupDate\": \"<date>\",\n  \"receiverCountryIso\": \"<string>\",\n  \"customerCode\": \"<string>\",\n  \"customerNumber\": \"<string>\",\n  \"numberOfLocations\": 10,\n  \"locationType\": \"Retail\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "e03b6061-baf7-464b-a8f1-dcbc722bd4d4",
+          "name": "Successful retrieval of pickup locations",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "shipment",
+                "delivery",
+                "v4",
+                "locations",
+                "near-coordinates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "apikey",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"numberOfLocations\": 2,\n  \"coordinates\": {\n    \"latitude\": 52.370216,\n    \"longitude\": 4.895168\n  },\n  \"locationType\": \"Retail\",\n  \"pickupDate\": \"2026-06-15\",\n  \"receiverCountryIso\": \"BE\",\n  \"customerCode\": \"ABC\",\n  \"customerNumber\": \"123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"locations\": [\n    {\n      \"pickupLocationId\": \"123456789\",\n      \"locationType\": \"ParcelLocker\",\n      \"name\": \"PostNL Pickup Point\",\n      \"address\": {\n        \"countryIso\": \"NL\",\n        \"postalCode\": \"1234AB\",\n        \"houseNumber\": \"123\",\n        \"houseNumberAddition\": \"A\",\n        \"street\": \"Main Street\",\n        \"city\": \"Amsterdam\"\n      },\n      \"coordinates\": {\n        \"latitude\": 52.3676,\n        \"longitude\": 4.9041\n      },\n      \"distance\": 20,\n      \"openingTimes\": [\n        {\n          \"day\": \"Monday\",\n          \"times\": [\n            {\n              \"from\": \"08:00:00\",\n              \"until\": \"20:00:00\"\n            }\n          ]\n        }\n      ],\n      \"sustainability\": {\n        \"code\": \"01\",\n        \"description\": \"Sustainable delivery\"\n      }\n    }\n  ]\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "540c5c11-198e-4adb-a5b2-2739f2a39580",
+          "name": "Bad Request",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "shipment",
+                "delivery",
+                "v4",
+                "locations",
+                "near-coordinates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "apikey",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/problem+json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"numberOfLocations\": 2,\n  \"coordinates\": {\n    \"latitude\": 52.370216,\n    \"longitude\": 4.895168\n  },\n  \"locationType\": \"Retail\",\n  \"pickupDate\": \"2026-06-15\",\n  \"receiverCountryIso\": \"BE\",\n  \"customerCode\": \"ABC\",\n  \"customerNumber\": \"123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/problem+json"
+            }
+          ],
+          "body": "{\n  \"type\": \"https://tools.ietf.org/html/rfc9110#section-15.5.1\",\n  \"title\": \"One or more validation errors occurred.\",\n  \"status\": 400,\n  \"detail\": \"See the errors property for more details.\",\n  \"errors\": {\n    \"countryIso\": [\n      \"The countryIso field is required.\"\n    ],\n    \"address\": [\n      \"The address field is required.\"\n    ]\n  }\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "1317ed1e-eb3c-49b3-ae07-dfaef841d89e",
+          "name": "Invalid apikey",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "shipment",
+                "delivery",
+                "v4",
+                "locations",
+                "near-coordinates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "apikey",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"numberOfLocations\": 2,\n  \"coordinates\": {\n    \"latitude\": 52.370216,\n    \"longitude\": 4.895168\n  },\n  \"locationType\": \"Retail\",\n  \"pickupDate\": \"2026-06-15\",\n  \"receiverCountryIso\": \"BE\",\n  \"customerCode\": \"ABC\",\n  \"customerNumber\": \"123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Unauthorized",
+          "code": 401,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"message\": \"Failed to resolve API Key variable 'request.header.apikey'\",\n  \"http_status_code\": 401\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "a5a530b2-a153-4e90-9ba0-601473cf318b",
+          "name": "Forbidden",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "shipment",
+                "delivery",
+                "v4",
+                "locations",
+                "near-coordinates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "apikey",
+                "value": "<API Key>"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"numberOfLocations\": 2,\n  \"coordinates\": {\n    \"latitude\": 52.370216,\n    \"longitude\": 4.895168\n  },\n  \"locationType\": \"Retail\",\n  \"pickupDate\": \"2026-06-15\",\n  \"receiverCountryIso\": \"BE\",\n  \"customerCode\": \"ABC\",\n  \"customerNumber\": \"123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Forbidden",
+          "code": 403,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "text/plain"
+            }
+          ],
+          "body": "",
+          "cookie": [],
+          "_postman_previewlanguage": "text"
+        },
+        {
+          "id": "010fa2d5-13cc-4b5b-b6be-fc1e0ccd62f2",
+          "name": "Not Found",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "shipment",
+                "delivery",
+                "v4",
+                "locations",
+                "near-coordinates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "apikey",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/problem+json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"numberOfLocations\": 2,\n  \"coordinates\": {\n    \"latitude\": 52.370216,\n    \"longitude\": 4.895168\n  },\n  \"locationType\": \"Retail\",\n  \"pickupDate\": \"2026-06-15\",\n  \"receiverCountryIso\": \"BE\",\n  \"customerCode\": \"ABC\",\n  \"customerNumber\": \"123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Not Found",
+          "code": 404,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/problem+json"
+            }
+          ],
+          "body": "{\n  \"type\": \"https://tools.ietf.org/html/rfc9110#section-15.6.1\",\n  \"title\": \"Business error occurred.\",\n  \"status\": 404,\n  \"detail\": \"See the errors property for more details.\",\n  \"errors\": {\n    \"request\": [\n      \"No locations found for payload\"\n    ]\n  }\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "fe77ee28-b97c-43d7-9365-046c0868583a",
+          "name": "Method not allowed",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "shipment",
+                "delivery",
+                "v4",
+                "locations",
+                "near-coordinates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "apikey",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"numberOfLocations\": 2,\n  \"coordinates\": {\n    \"latitude\": 52.370216,\n    \"longitude\": 4.895168\n  },\n  \"locationType\": \"Retail\",\n  \"pickupDate\": \"2026-06-15\",\n  \"receiverCountryIso\": \"BE\",\n  \"customerCode\": \"ABC\",\n  \"customerNumber\": \"123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Method Not Allowed",
+          "code": 405,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"message\": \"Only POST requests allowed\",\n  \"http_status_code\": 405\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "c3a3de9a-2489-421d-bd54-6ed09d1c3074",
+          "name": "Too many requests",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "shipment",
+                "delivery",
+                "v4",
+                "locations",
+                "near-coordinates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "apikey",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"numberOfLocations\": 2,\n  \"coordinates\": {\n    \"latitude\": 52.370216,\n    \"longitude\": 4.895168\n  },\n  \"locationType\": \"Retail\",\n  \"pickupDate\": \"2026-06-15\",\n  \"receiverCountryIso\": \"BE\",\n  \"customerCode\": \"ABC\",\n  \"customerNumber\": \"123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Too Many Requests",
+          "code": 429,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"message\": \"Too many requests. Rate limit exceeded!\",\n  \"http_status_code\": 429\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "1747d6ff-0ab8-44b5-b504-4c7313bced79",
+          "name": "Internal Server Error",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "shipment",
+                "delivery",
+                "v4",
+                "locations",
+                "near-coordinates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "apikey",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/problem+json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"numberOfLocations\": 2,\n  \"coordinates\": {\n    \"latitude\": 52.370216,\n    \"longitude\": 4.895168\n  },\n  \"locationType\": \"Retail\",\n  \"pickupDate\": \"2026-06-15\",\n  \"receiverCountryIso\": \"BE\",\n  \"customerCode\": \"ABC\",\n  \"customerNumber\": \"123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Internal Server Error",
+          "code": 500,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/problem+json"
+            }
+          ],
+          "body": "{\n  \"type\": \"https://tools.ietf.org/html/rfc9110#section-15.6.1\",\n  \"title\": \"Unknown error occurred.\",\n  \"status\": 500,\n  \"errors\": {\n    \"request\": [\n      \"Error message.\"\n    ]\n  }\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "1d0d8ad8-4aaf-4916-9509-9c1ea92405a8",
+          "name": "Service Unavailable",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "shipment",
+                "delivery",
+                "v4",
+                "locations",
+                "near-coordinates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "apikey",
+                "value": "<API Key>"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"numberOfLocations\": 2,\n  \"coordinates\": {\n    \"latitude\": 52.370216,\n    \"longitude\": 4.895168\n  },\n  \"locationType\": \"Retail\",\n  \"pickupDate\": \"2026-06-15\",\n  \"receiverCountryIso\": \"BE\",\n  \"customerCode\": \"ABC\",\n  \"customerNumber\": \"123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Service Unavailable",
+          "code": 503,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "text/plain"
+            }
+          ],
+          "body": "",
+          "cookie": [],
+          "_postman_previewlanguage": "text"
+        },
+        {
+          "id": "97dc7c17-4ca1-456b-8bc0-0f9b884bba51",
+          "name": "Gateway Timeout",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "shipment",
+                "delivery",
+                "v4",
+                "locations",
+                "near-coordinates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "apikey",
+                "value": "<API Key>"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"numberOfLocations\": 2,\n  \"coordinates\": {\n    \"latitude\": 52.370216,\n    \"longitude\": 4.895168\n  },\n  \"locationType\": \"Retail\",\n  \"pickupDate\": \"2026-06-15\",\n  \"receiverCountryIso\": \"BE\",\n  \"customerCode\": \"ABC\",\n  \"customerNumber\": \"123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Gateway Timeout",
+          "code": 504,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "text/plain"
+            }
+          ],
+          "body": "",
+          "cookie": [],
+          "_postman_previewlanguage": "text"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "ff978d65-832d-4379-b2b8-9cd2acd01bef",
+      "name": "Get location status and details",
+      "request": {
+        "name": "Get location status and details",
+        "description": {
+          "content": "This API can be used to retrieve the details and status of a specific location on a specific date",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "shipment",
+            "delivery",
+            "v4",
+            "locations",
+            "lookup"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"pickupLocationId\": \"<string>\",\n  \"countryIso\": \"<string>\",\n  \"pickupDate\": \"<date>\",\n  \"customerCode\": \"<string>\",\n  \"customerNumber\": \"<string>\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "568a5f91-c5fd-4588-b8ff-bbc63664b2e2",
+          "name": "Successful retrieval of location details and status",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "shipment",
+                "delivery",
+                "v4",
+                "locations",
+                "lookup"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "apikey",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"pickupLocationId\": \"123456\",\n  \"countryIso\": \"NL\",\n  \"pickupDate\": \"2026-06-15\",\n  \"customerCode\": \"PLI\",\n  \"customerNumber\": \"12345\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"location\": {\n    \"pickupLocationId\": \"163272\",\n    \"pickupLocationAvailable\": false,\n    \"locationType\": \"Retail\",\n    \"name\": \"Kantoorboekhandel van Remortel Sluis\",\n    \"address\": {\n      \"countryIso\": \"NL\",\n      \"postalCode\": \"4524EC\",\n      \"houseNumber\": \"25\",\n      \"houseNumberAddition\": \"A\",\n      \"street\": \"Nieuwstraat\",\n      \"city\": \"Sluis\"\n    },\n    \"coordinates\": {\n      \"latitude\": 52.3676,\n      \"longitude\": 4.9041\n    },\n    \"openingTimes\": [\n      {\n        \"day\": \"Monday\",\n        \"times\": [\n          {\n            \"from\": \"08:00:00\",\n            \"until\": \"20:00:00\"\n          }\n        ]\n      },\n      {\n        \"day\": \"Tuesday\",\n        \"times\": [\n          {\n            \"from\": \"08:00:00\",\n            \"until\": \"20:00:00\"\n          }\n        ]\n      },\n      {\n        \"day\": \"Wednesday\",\n        \"times\": [\n          {\n            \"from\": \"08:00:00\",\n            \"until\": \"20:00:00\"\n          }\n        ]\n      }\n    ],\n    \"sustainability\": {\n      \"code\": \"02\",\n      \"description\": \"Sustainable option\"\n    }\n  }\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "c9930716-be38-4163-a685-58fe70c677eb",
+          "name": "Bad Request",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "shipment",
+                "delivery",
+                "v4",
+                "locations",
+                "lookup"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "apikey",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/problem+json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"pickupLocationId\": \"123456\",\n  \"countryIso\": \"NL\",\n  \"pickupDate\": \"2026-06-15\",\n  \"customerCode\": \"PLI\",\n  \"customerNumber\": \"12345\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/problem+json"
+            }
+          ],
+          "body": "{\n  \"type\": \"https://tools.ietf.org/html/rfc9110#section-15.5.1\",\n  \"title\": \"One or more validation errors occurred.\",\n  \"status\": 400,\n  \"detail\": \"See the errors property for more details.\",\n  \"errors\": {\n    \"countryIso\": [\n      \"The countryIso field is required.\"\n    ]\n  }\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "c14d6846-2b41-4b23-8505-41b1b81f5e6a",
+          "name": "Invalid apikey",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "shipment",
+                "delivery",
+                "v4",
+                "locations",
+                "lookup"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "apikey",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"pickupLocationId\": \"123456\",\n  \"countryIso\": \"NL\",\n  \"pickupDate\": \"2026-06-15\",\n  \"customerCode\": \"PLI\",\n  \"customerNumber\": \"12345\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Unauthorized",
+          "code": 401,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"message\": \"Failed to resolve API Key variable 'request.header.apikey'\",\n  \"http_status_code\": 401\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "1b14f28a-87ed-4d2d-97ee-271a241a8cf2",
+          "name": "Forbidden",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "shipment",
+                "delivery",
+                "v4",
+                "locations",
+                "lookup"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "apikey",
+                "value": "<API Key>"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"pickupLocationId\": \"123456\",\n  \"countryIso\": \"NL\",\n  \"pickupDate\": \"2026-06-15\",\n  \"customerCode\": \"PLI\",\n  \"customerNumber\": \"12345\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Forbidden",
+          "code": 403,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "text/plain"
+            }
+          ],
+          "body": "",
+          "cookie": [],
+          "_postman_previewlanguage": "text"
+        },
+        {
+          "id": "f81e97f1-9a2d-4b60-9bf8-a8f9e68d749a",
+          "name": "Not Found",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "shipment",
+                "delivery",
+                "v4",
+                "locations",
+                "lookup"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "apikey",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/problem+json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"pickupLocationId\": \"123456\",\n  \"countryIso\": \"NL\",\n  \"pickupDate\": \"2026-06-15\",\n  \"customerCode\": \"PLI\",\n  \"customerNumber\": \"12345\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Not Found",
+          "code": 404,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/problem+json"
+            }
+          ],
+          "body": "{\n  \"type\": \"https://tools.ietf.org/html/rfc9110#section-15.6.1\",\n  \"title\": \"Business error occurred.\",\n  \"status\": 404,\n  \"detail\": \"See the errors property for more details.\",\n  \"errors\": {\n    \"request\": [\n      \"Location does not exist or has been permanently closed\"\n    ]\n  }\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "1ac7e7f8-98b9-48c4-9486-90b66d75ada5",
+          "name": "Method not allowed",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "shipment",
+                "delivery",
+                "v4",
+                "locations",
+                "lookup"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "apikey",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"pickupLocationId\": \"123456\",\n  \"countryIso\": \"NL\",\n  \"pickupDate\": \"2026-06-15\",\n  \"customerCode\": \"PLI\",\n  \"customerNumber\": \"12345\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Method Not Allowed",
+          "code": 405,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"message\": \"Only POST requests allowed\",\n  \"http_status_code\": 405\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "1b3dfd02-c161-454e-8b81-be4c189fd4b4",
+          "name": "Too many requests",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "shipment",
+                "delivery",
+                "v4",
+                "locations",
+                "lookup"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "apikey",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"pickupLocationId\": \"123456\",\n  \"countryIso\": \"NL\",\n  \"pickupDate\": \"2026-06-15\",\n  \"customerCode\": \"PLI\",\n  \"customerNumber\": \"12345\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Too Many Requests",
+          "code": 429,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"message\": \"Too many requests. Rate limit exceeded!\",\n  \"http_status_code\": 429\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "83253106-979b-4dcf-bf03-cf2cf1a21fca",
+          "name": "Internal Server Error",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "shipment",
+                "delivery",
+                "v4",
+                "locations",
+                "lookup"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "apikey",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/problem+json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"pickupLocationId\": \"123456\",\n  \"countryIso\": \"NL\",\n  \"pickupDate\": \"2026-06-15\",\n  \"customerCode\": \"PLI\",\n  \"customerNumber\": \"12345\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Internal Server Error",
+          "code": 500,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/problem+json"
+            }
+          ],
+          "body": "{\n  \"type\": \"https://tools.ietf.org/html/rfc9110#section-15.6.1\",\n  \"title\": \"Unknown error occurred.\",\n  \"status\": 500,\n  \"errors\": {\n    \"request\": [\n      \"Error message.\"\n    ]\n  }\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "ec9797f1-c405-4283-9233-f09dfa6d4b07",
+          "name": "Service Unavailable",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "shipment",
+                "delivery",
+                "v4",
+                "locations",
+                "lookup"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "apikey",
+                "value": "<API Key>"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"pickupLocationId\": \"123456\",\n  \"countryIso\": \"NL\",\n  \"pickupDate\": \"2026-06-15\",\n  \"customerCode\": \"PLI\",\n  \"customerNumber\": \"12345\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Service Unavailable",
+          "code": 503,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "text/plain"
+            }
+          ],
+          "body": "",
+          "cookie": [],
+          "_postman_previewlanguage": "text"
+        },
+        {
+          "id": "2fc23c9f-9932-4533-bc48-62c77f1f46d0",
+          "name": "Gateway Timeout",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "shipment",
+                "delivery",
+                "v4",
+                "locations",
+                "lookup"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "apikey",
+                "value": "<API Key>"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"pickupLocationId\": \"123456\",\n  \"countryIso\": \"NL\",\n  \"pickupDate\": \"2026-06-15\",\n  \"customerCode\": \"PLI\",\n  \"customerNumber\": \"12345\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Gateway Timeout",
+          "code": 504,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "text/plain"
+            }
+          ],
+          "body": "",
+          "cookie": [],
+          "_postman_previewlanguage": "text"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "36c25f24-8b65-4594-b437-05151c01d3d6",
+      "name": "Get available locations",
+      "request": {
+        "name": "Get available locations",
+        "description": {
+          "content": "This API can be used to search for locations around a given area by address",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "shipment",
+            "delivery",
+            "v4",
+            "locations",
+            "near-address"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"receiverAddress\": {\n    \"countryIso\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"street\": \"<string>\",\n    \"city\": \"<string>\",\n    \"houseNumber\": \"<string>\",\n    \"houseNumberAddition\": \"<string>\"\n  },\n  \"pickupDate\": \"<date>\",\n  \"customerCode\": \"<string>\",\n  \"customerNumber\": \"<string>\",\n  \"numberOfLocations\": 10,\n  \"locationType\": \"Retail\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "8a11a8e6-2514-49b9-8a57-8083c5f05f35",
+          "name": "Successful retrieval of pickup locations",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "shipment",
+                "delivery",
+                "v4",
+                "locations",
+                "near-address"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "apikey",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"numberOfLocations\": 2,\n  \"receiverAddress\": {\n    \"countryIso\": \"BE\",\n    \"postalCode\": \"8000\",\n    \"street\": \"Langerei\",\n    \"city\": \"Brugge\",\n    \"houseNumber\": null,\n    \"houseNumberAddition\": null\n  },\n  \"locationType\": null,\n  \"pickupDate\": \"2026-06-15\",\n  \"customerCode\": \"ABC\",\n  \"customerNumber\": \"123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"locations\": [\n    {\n      \"pickupLocationId\": \"123456789\",\n      \"locationType\": \"ParcelLocker\",\n      \"name\": \"PostNL Pickup Point\",\n      \"address\": {\n        \"countryIso\": \"NL\",\n        \"postalCode\": \"1234AB\",\n        \"houseNumber\": \"123\",\n        \"houseNumberAddition\": \"A\",\n        \"street\": \"Main Street\",\n        \"city\": \"Amsterdam\"\n      },\n      \"coordinates\": {\n        \"latitude\": 52.3676,\n        \"longitude\": 4.9041\n      },\n      \"distance\": 20,\n      \"openingTimes\": [\n        {\n          \"day\": \"Monday\",\n          \"times\": [\n            {\n              \"from\": \"08:00:00\",\n              \"until\": \"20:00:00\"\n            }\n          ]\n        }\n      ],\n      \"sustainability\": {\n        \"code\": \"01\",\n        \"description\": \"Sustainable delivery\"\n      }\n    }\n  ]\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "a434e71d-fe7c-4cba-ad30-5b53c165c459",
+          "name": "Bad Request",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "shipment",
+                "delivery",
+                "v4",
+                "locations",
+                "near-address"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "apikey",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/problem+json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"numberOfLocations\": 2,\n  \"receiverAddress\": {\n    \"countryIso\": \"BE\",\n    \"postalCode\": \"8000\",\n    \"street\": \"Langerei\",\n    \"city\": \"Brugge\",\n    \"houseNumber\": null,\n    \"houseNumberAddition\": null\n  },\n  \"locationType\": null,\n  \"pickupDate\": \"2026-06-15\",\n  \"customerCode\": \"ABC\",\n  \"customerNumber\": \"123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/problem+json"
+            }
+          ],
+          "body": "{\n  \"type\": \"https://tools.ietf.org/html/rfc9110#section-15.5.1\",\n  \"title\": \"One or more validation errors occurred.\",\n  \"status\": 400,\n  \"detail\": \"See the errors property for more details.\",\n  \"errors\": {\n    \"countryIso\": [\n      \"The countryIso field is required.\"\n    ],\n    \"address\": [\n      \"The address field is required.\"\n    ]\n  }\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "0cda93e4-68fe-457b-9a20-2853683a06e3",
+          "name": "Invalid apikey",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "shipment",
+                "delivery",
+                "v4",
+                "locations",
+                "near-address"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "apikey",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"numberOfLocations\": 2,\n  \"receiverAddress\": {\n    \"countryIso\": \"BE\",\n    \"postalCode\": \"8000\",\n    \"street\": \"Langerei\",\n    \"city\": \"Brugge\",\n    \"houseNumber\": null,\n    \"houseNumberAddition\": null\n  },\n  \"locationType\": null,\n  \"pickupDate\": \"2026-06-15\",\n  \"customerCode\": \"ABC\",\n  \"customerNumber\": \"123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Unauthorized",
+          "code": 401,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"message\": \"Failed to resolve API Key variable 'request.header.apikey'\",\n  \"http_status_code\": 401\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "8bae2059-ea01-473a-acf9-9bf61c4dd964",
+          "name": "Forbidden",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "shipment",
+                "delivery",
+                "v4",
+                "locations",
+                "near-address"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "apikey",
+                "value": "<API Key>"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"numberOfLocations\": 2,\n  \"receiverAddress\": {\n    \"countryIso\": \"BE\",\n    \"postalCode\": \"8000\",\n    \"street\": \"Langerei\",\n    \"city\": \"Brugge\",\n    \"houseNumber\": null,\n    \"houseNumberAddition\": null\n  },\n  \"locationType\": null,\n  \"pickupDate\": \"2026-06-15\",\n  \"customerCode\": \"ABC\",\n  \"customerNumber\": \"123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Forbidden",
+          "code": 403,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "text/plain"
+            }
+          ],
+          "body": "",
+          "cookie": [],
+          "_postman_previewlanguage": "text"
+        },
+        {
+          "id": "6a2b3072-ad10-4257-ba1f-1642345fae4a",
+          "name": "Not Found",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "shipment",
+                "delivery",
+                "v4",
+                "locations",
+                "near-address"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "apikey",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/problem+json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"numberOfLocations\": 2,\n  \"receiverAddress\": {\n    \"countryIso\": \"BE\",\n    \"postalCode\": \"8000\",\n    \"street\": \"Langerei\",\n    \"city\": \"Brugge\",\n    \"houseNumber\": null,\n    \"houseNumberAddition\": null\n  },\n  \"locationType\": null,\n  \"pickupDate\": \"2026-06-15\",\n  \"customerCode\": \"ABC\",\n  \"customerNumber\": \"123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Not Found",
+          "code": 404,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/problem+json"
+            }
+          ],
+          "body": "{\n  \"type\": \"https://tools.ietf.org/html/rfc9110#section-15.6.1\",\n  \"title\": \"Business error occurred.\",\n  \"status\": 404,\n  \"detail\": \"See the errors property for more details.\",\n  \"errors\": {\n    \"request\": [\n      \"No locations found for payload\"\n    ]\n  }\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "fe5efe77-44b4-4e5b-be51-44e9647d7dcb",
+          "name": "Method not allowed",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "shipment",
+                "delivery",
+                "v4",
+                "locations",
+                "near-address"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "apikey",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"numberOfLocations\": 2,\n  \"receiverAddress\": {\n    \"countryIso\": \"BE\",\n    \"postalCode\": \"8000\",\n    \"street\": \"Langerei\",\n    \"city\": \"Brugge\",\n    \"houseNumber\": null,\n    \"houseNumberAddition\": null\n  },\n  \"locationType\": null,\n  \"pickupDate\": \"2026-06-15\",\n  \"customerCode\": \"ABC\",\n  \"customerNumber\": \"123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Method Not Allowed",
+          "code": 405,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"message\": \"Only POST requests allowed\",\n  \"http_status_code\": 405\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "fe534f7d-fd6d-4898-8247-c79f9d0e57fd",
+          "name": "Too many requests",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "shipment",
+                "delivery",
+                "v4",
+                "locations",
+                "near-address"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "apikey",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"numberOfLocations\": 2,\n  \"receiverAddress\": {\n    \"countryIso\": \"BE\",\n    \"postalCode\": \"8000\",\n    \"street\": \"Langerei\",\n    \"city\": \"Brugge\",\n    \"houseNumber\": null,\n    \"houseNumberAddition\": null\n  },\n  \"locationType\": null,\n  \"pickupDate\": \"2026-06-15\",\n  \"customerCode\": \"ABC\",\n  \"customerNumber\": \"123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Too Many Requests",
+          "code": 429,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"message\": \"Too many requests. Rate limit exceeded!\",\n  \"http_status_code\": 429\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "3a500381-8822-46f7-93cf-ac90f189d22d",
+          "name": "Internal Server Error",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "shipment",
+                "delivery",
+                "v4",
+                "locations",
+                "near-address"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "apikey",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/problem+json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"numberOfLocations\": 2,\n  \"receiverAddress\": {\n    \"countryIso\": \"BE\",\n    \"postalCode\": \"8000\",\n    \"street\": \"Langerei\",\n    \"city\": \"Brugge\",\n    \"houseNumber\": null,\n    \"houseNumberAddition\": null\n  },\n  \"locationType\": null,\n  \"pickupDate\": \"2026-06-15\",\n  \"customerCode\": \"ABC\",\n  \"customerNumber\": \"123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Internal Server Error",
+          "code": 500,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/problem+json"
+            }
+          ],
+          "body": "{\n  \"type\": \"https://tools.ietf.org/html/rfc9110#section-15.6.1\",\n  \"title\": \"Unknown error occurred.\",\n  \"status\": 500,\n  \"errors\": {\n    \"request\": [\n      \"Error message.\"\n    ]\n  }\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "3d0cd0d3-2f62-49b4-b618-6421588ae3d6",
+          "name": "Service Unavailable",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "shipment",
+                "delivery",
+                "v4",
+                "locations",
+                "near-address"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "apikey",
+                "value": "<API Key>"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"numberOfLocations\": 2,\n  \"receiverAddress\": {\n    \"countryIso\": \"BE\",\n    \"postalCode\": \"8000\",\n    \"street\": \"Langerei\",\n    \"city\": \"Brugge\",\n    \"houseNumber\": null,\n    \"houseNumberAddition\": null\n  },\n  \"locationType\": null,\n  \"pickupDate\": \"2026-06-15\",\n  \"customerCode\": \"ABC\",\n  \"customerNumber\": \"123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Service Unavailable",
+          "code": 503,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "text/plain"
+            }
+          ],
+          "body": "",
+          "cookie": [],
+          "_postman_previewlanguage": "text"
+        },
+        {
+          "id": "47650cba-343f-4316-9aa0-a1115401b50c",
+          "name": "Gateway Timeout",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "shipment",
+                "delivery",
+                "v4",
+                "locations",
+                "near-address"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "apikey",
+                "value": "<API Key>"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"numberOfLocations\": 2,\n  \"receiverAddress\": {\n    \"countryIso\": \"BE\",\n    \"postalCode\": \"8000\",\n    \"street\": \"Langerei\",\n    \"city\": \"Brugge\",\n    \"houseNumber\": null,\n    \"houseNumberAddition\": null\n  },\n  \"locationType\": null,\n  \"pickupDate\": \"2026-06-15\",\n  \"customerCode\": \"ABC\",\n  \"customerNumber\": \"123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Gateway Timeout",
+          "code": 504,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "text/plain"
+            }
+          ],
+          "body": "",
+          "cookie": [],
+          "_postman_previewlanguage": "text"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-sandbox.postnl.nl",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f2d55016-3cc5-4b85-8ae5-c3bd078ae143",
+    "name": "Locations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This API can be used to search for locations around a given area\n\nContact Support:\n Name: PostNL",
+      "type": "text/plain"
+    }
+  }
+}

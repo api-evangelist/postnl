@@ -1,0 +1,63 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Locations API",
+    "version": "v4"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Get available locations",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api-sandbox.postnl.nl/shipment/delivery/v4/locations/near-coordinates",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "This API can be used to search for locations around a given area by coordinates"
+    },
+    {
+      "info": {
+        "name": "Get location status and details",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api-sandbox.postnl.nl/shipment/delivery/v4/locations/lookup",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "This API can be used to retrieve the details and status of a specific location on a specific date"
+    },
+    {
+      "info": {
+        "name": "Get available locations",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api-sandbox.postnl.nl/shipment/delivery/v4/locations/near-address",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "This API can be used to search for locations around a given area by address"
+    }
+  ],
+  "bundled": true
+}

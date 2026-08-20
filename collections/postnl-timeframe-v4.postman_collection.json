@@ -1,0 +1,1218 @@
+{
+  "item": [
+    {
+      "id": "eb404f75-7825-46be-a44e-c314082095f1",
+      "name": "Get available delivery dates and time windows for multiple services",
+      "request": {
+        "name": "Get available delivery dates and time windows for multiple services",
+        "description": {
+          "content": "This API can be used to determine the delivery date and time window of multiple services.",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "shipment",
+            "delivery",
+            "v4",
+            "timeframe",
+            "multipleservices"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"handoverDate\": \"<date>\",\n  \"receiverAddress\": {\n    \"countryIso\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"street\": \"<string>\",\n    \"city\": \"<string>\"\n  },\n  \"customerCode\": \"<string>\",\n  \"customerNumber\": \"<string>\",\n  \"services\": [\n    \"daytime\",\n    \"daytime\"\n  ],\n  \"shipmentType\": \"parcel\",\n  \"numberOfDays\": 1\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "d106e8f7-dbf9-428e-8add-e0c78d5ecfdf",
+          "name": "Successful retrieval of available delivery dates and time windows",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "shipment",
+                "delivery",
+                "v4",
+                "timeframe",
+                "multipleservices"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "apikey",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"handoverDate\": \"2026-06-15\",\n  \"receiverAddress\": {\n    \"countryIso\": \"BE\",\n    \"postalCode\": \"8000\",\n    \"street\": \"Langerei\",\n    \"city\": \"Brugge\"\n  },\n  \"services\": [\n    \"daytime\",\n    \"evening\"\n  ],\n  \"shipmentType\": \"parcel\",\n  \"numberOfDays\": 1,\n  \"customerCode\": \"ABC\",\n  \"customerNumber\": \"123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"deliveryDates\": [\n    {\n      \"services\": [\n        {\n          \"service\": \"daytime\",\n          \"timeFrame\": {\n            \"from\": \"08:30:00\",\n            \"until\": \"21:30:00\"\n          },\n          \"sustainability\": {\n            \"code\": \"01\",\n            \"description\": \"Sustainable delivery\"\n          },\n          \"shipmentType\": \"parcel\",\n          \"availability\": true,\n          \"reason\": null\n        },\n        {\n          \"service\": \"evening\",\n          \"timeFrame\": null,\n          \"sustainability\": null,\n          \"shipmentType\": \"parcel\",\n          \"availability\": false,\n          \"reason\": \"This postal code is not within the service area for the requested product\"\n        }\n      ],\n      \"deliveryDate\": \"2025-12-31\"\n    }\n  ]\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "d156bc5a-8be6-42c0-b03d-e9e05df5bc1a",
+          "name": "Bad Request",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "shipment",
+                "delivery",
+                "v4",
+                "timeframe",
+                "multipleservices"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "apikey",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/problem+json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"handoverDate\": \"2026-06-15\",\n  \"receiverAddress\": {\n    \"countryIso\": \"BE\",\n    \"postalCode\": \"8000\",\n    \"street\": \"Langerei\",\n    \"city\": \"Brugge\"\n  },\n  \"services\": [\n    \"daytime\",\n    \"evening\"\n  ],\n  \"shipmentType\": \"parcel\",\n  \"numberOfDays\": 1,\n  \"customerCode\": \"ABC\",\n  \"customerNumber\": \"123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/problem+json"
+            }
+          ],
+          "body": "{\n  \"type\": \"https://tools.ietf.org/html/rfc9110#section-15.5.1\",\n  \"title\": \"One or more validation errors occurred.\",\n  \"status\": 400,\n  \"detail\": \"See the errors property for more details.\",\n  \"errors\": {\n    \"address\": [\n      \"The address field is required.\"\n    ],\n    \"postalCode\": [\n      \"The postalCode field is required\"\n    ]\n  }\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "fb3c29f2-c8d4-4703-a389-bcc3c3b86e84",
+          "name": "Invalid apikey",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "shipment",
+                "delivery",
+                "v4",
+                "timeframe",
+                "multipleservices"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "apikey",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"handoverDate\": \"2026-06-15\",\n  \"receiverAddress\": {\n    \"countryIso\": \"BE\",\n    \"postalCode\": \"8000\",\n    \"street\": \"Langerei\",\n    \"city\": \"Brugge\"\n  },\n  \"services\": [\n    \"daytime\",\n    \"evening\"\n  ],\n  \"shipmentType\": \"parcel\",\n  \"numberOfDays\": 1,\n  \"customerCode\": \"ABC\",\n  \"customerNumber\": \"123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Unauthorized",
+          "code": 401,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"message\": \"Failed to resolve API Key variable 'request.header.apikey'\",\n  \"http_status_code\": 401\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "2156de6f-0881-44a3-92de-5a804cc83bda",
+          "name": "Forbidden",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "shipment",
+                "delivery",
+                "v4",
+                "timeframe",
+                "multipleservices"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "apikey",
+                "value": "<API Key>"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"handoverDate\": \"2026-06-15\",\n  \"receiverAddress\": {\n    \"countryIso\": \"BE\",\n    \"postalCode\": \"8000\",\n    \"street\": \"Langerei\",\n    \"city\": \"Brugge\"\n  },\n  \"services\": [\n    \"daytime\",\n    \"evening\"\n  ],\n  \"shipmentType\": \"parcel\",\n  \"numberOfDays\": 1,\n  \"customerCode\": \"ABC\",\n  \"customerNumber\": \"123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Forbidden",
+          "code": 403,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "text/plain"
+            }
+          ],
+          "body": "",
+          "cookie": [],
+          "_postman_previewlanguage": "text"
+        },
+        {
+          "id": "d4dee5b9-3220-4adb-9fe0-3a8627be7677",
+          "name": "Not Found",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "shipment",
+                "delivery",
+                "v4",
+                "timeframe",
+                "multipleservices"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "apikey",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/problem+json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"handoverDate\": \"2026-06-15\",\n  \"receiverAddress\": {\n    \"countryIso\": \"BE\",\n    \"postalCode\": \"8000\",\n    \"street\": \"Langerei\",\n    \"city\": \"Brugge\"\n  },\n  \"services\": [\n    \"daytime\",\n    \"evening\"\n  ],\n  \"shipmentType\": \"parcel\",\n  \"numberOfDays\": 1,\n  \"customerCode\": \"ABC\",\n  \"customerNumber\": \"123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Not Found",
+          "code": 404,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/problem+json"
+            }
+          ],
+          "body": "{\n  \"type\": \"https://tools.ietf.org/html/rfc9110#section-15.6.1\",\n  \"title\": \"Business error occurred.\",\n  \"status\": 404,\n  \"detail\": \"See the errors property for more details.\",\n  \"errors\": {\n    \"request\": [\n      \"This postalCode value cannot be found.\"\n    ]\n  }\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "6bf7cf33-482a-4ba9-a8b4-a05c3b12b236",
+          "name": "Method not allowed",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "shipment",
+                "delivery",
+                "v4",
+                "timeframe",
+                "multipleservices"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "apikey",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"handoverDate\": \"2026-06-15\",\n  \"receiverAddress\": {\n    \"countryIso\": \"BE\",\n    \"postalCode\": \"8000\",\n    \"street\": \"Langerei\",\n    \"city\": \"Brugge\"\n  },\n  \"services\": [\n    \"daytime\",\n    \"evening\"\n  ],\n  \"shipmentType\": \"parcel\",\n  \"numberOfDays\": 1,\n  \"customerCode\": \"ABC\",\n  \"customerNumber\": \"123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Method Not Allowed",
+          "code": 405,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"message\": \"Only POST requests allowed\",\n  \"http_status_code\": 405\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "d7556609-3066-4c68-ac16-a0aa5e239a5a",
+          "name": "Too many requests",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "shipment",
+                "delivery",
+                "v4",
+                "timeframe",
+                "multipleservices"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "apikey",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"handoverDate\": \"2026-06-15\",\n  \"receiverAddress\": {\n    \"countryIso\": \"BE\",\n    \"postalCode\": \"8000\",\n    \"street\": \"Langerei\",\n    \"city\": \"Brugge\"\n  },\n  \"services\": [\n    \"daytime\",\n    \"evening\"\n  ],\n  \"shipmentType\": \"parcel\",\n  \"numberOfDays\": 1,\n  \"customerCode\": \"ABC\",\n  \"customerNumber\": \"123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Too Many Requests",
+          "code": 429,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"message\": \"Too many requests. Rate limit exceeded!\",\n  \"http_status_code\": 429\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "a86304c4-58fd-4b6d-82fd-2020f4d3353f",
+          "name": "Internal Server Error",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "shipment",
+                "delivery",
+                "v4",
+                "timeframe",
+                "multipleservices"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "apikey",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/problem+json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"handoverDate\": \"2026-06-15\",\n  \"receiverAddress\": {\n    \"countryIso\": \"BE\",\n    \"postalCode\": \"8000\",\n    \"street\": \"Langerei\",\n    \"city\": \"Brugge\"\n  },\n  \"services\": [\n    \"daytime\",\n    \"evening\"\n  ],\n  \"shipmentType\": \"parcel\",\n  \"numberOfDays\": 1,\n  \"customerCode\": \"ABC\",\n  \"customerNumber\": \"123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Internal Server Error",
+          "code": 500,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/problem+json"
+            }
+          ],
+          "body": "{\n  \"type\": \"https://tools.ietf.org/html/rfc9110#section-15.6.1\",\n  \"title\": \"Unknown error occurred.\",\n  \"status\": 500,\n  \"errors\": {\n    \"request\": [\n      \"Error message.\"\n    ]\n  }\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "b5b117b7-bbac-492d-bed5-d5245a83aebb",
+          "name": "Service Unavailable",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "shipment",
+                "delivery",
+                "v4",
+                "timeframe",
+                "multipleservices"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "apikey",
+                "value": "<API Key>"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"handoverDate\": \"2026-06-15\",\n  \"receiverAddress\": {\n    \"countryIso\": \"BE\",\n    \"postalCode\": \"8000\",\n    \"street\": \"Langerei\",\n    \"city\": \"Brugge\"\n  },\n  \"services\": [\n    \"daytime\",\n    \"evening\"\n  ],\n  \"shipmentType\": \"parcel\",\n  \"numberOfDays\": 1,\n  \"customerCode\": \"ABC\",\n  \"customerNumber\": \"123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Service Unavailable",
+          "code": 503,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "text/plain"
+            }
+          ],
+          "body": "",
+          "cookie": [],
+          "_postman_previewlanguage": "text"
+        },
+        {
+          "id": "f445fd6f-33eb-4d63-a2a6-411e12e251aa",
+          "name": "Gateway Timeout",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "shipment",
+                "delivery",
+                "v4",
+                "timeframe",
+                "multipleservices"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "apikey",
+                "value": "<API Key>"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"handoverDate\": \"2026-06-15\",\n  \"receiverAddress\": {\n    \"countryIso\": \"BE\",\n    \"postalCode\": \"8000\",\n    \"street\": \"Langerei\",\n    \"city\": \"Brugge\"\n  },\n  \"services\": [\n    \"daytime\",\n    \"evening\"\n  ],\n  \"shipmentType\": \"parcel\",\n  \"numberOfDays\": 1,\n  \"customerCode\": \"ABC\",\n  \"customerNumber\": \"123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Gateway Timeout",
+          "code": 504,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "text/plain"
+            }
+          ],
+          "body": "",
+          "cookie": [],
+          "_postman_previewlanguage": "text"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "1560a918-06fc-4925-93a4-4a2cbdc21003",
+      "name": "Get available delivery dates and time windows",
+      "request": {
+        "name": "Get available delivery dates and time windows",
+        "description": {
+          "content": "This API can be used to determine the delivery date and time window of a specific service.",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "shipment",
+            "delivery",
+            "v4",
+            "timeframe",
+            "singleservice"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"handoverDate\": \"<date>\",\n  \"receiverAddress\": {\n    \"countryIso\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"street\": \"<string>\",\n    \"city\": \"<string>\"\n  },\n  \"customerCode\": \"<string>\",\n  \"customerNumber\": \"<string>\",\n  \"deliveryDays\": 1,\n  \"service\": \"daytime\",\n  \"shipmentType\": \"parcel\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "0421ebaf-94c6-432c-80a4-ab40bb27ea8a",
+          "name": "Successful retrieval of available delivery dates and time windows",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "shipment",
+                "delivery",
+                "v4",
+                "timeframe",
+                "singleservice"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "apikey",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"handoverDate\": \"2026-06-15\",\n  \"deliveryDays\": 2,\n  \"receiverAddress\": {\n    \"countryIso\": \"BE\",\n    \"postalCode\": \"8000\",\n    \"street\": \"Langerei\",\n    \"city\": \"Brugge\"\n  },\n  \"service\": \"daytime\",\n  \"shipmentType\": \"parcel\",\n  \"customerCode\": \"ABC\",\n  \"customerNumber\": \"123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"deliveryDates\": [\n    {\n      \"deliveryDate\": \"2025-12-31\",\n      \"timeFrame\": {\n        \"from\": \"08:30:00\",\n        \"until\": \"21:30:00\"\n      },\n      \"sustainability\": {\n        \"code\": \"01\",\n        \"description\": \"Sustainable delivery\"\n      },\n      \"service\": \"daytime\",\n      \"shipmentType\": \"parcel\"\n    }\n  ]\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "2d0a0de7-978c-4a8f-9fed-6339393ee559",
+          "name": "Bad Request",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "shipment",
+                "delivery",
+                "v4",
+                "timeframe",
+                "singleservice"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "apikey",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/problem+json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"handoverDate\": \"2026-06-15\",\n  \"deliveryDays\": 2,\n  \"receiverAddress\": {\n    \"countryIso\": \"BE\",\n    \"postalCode\": \"8000\",\n    \"street\": \"Langerei\",\n    \"city\": \"Brugge\"\n  },\n  \"service\": \"daytime\",\n  \"shipmentType\": \"parcel\",\n  \"customerCode\": \"ABC\",\n  \"customerNumber\": \"123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/problem+json"
+            }
+          ],
+          "body": "{\n  \"type\": \"https://tools.ietf.org/html/rfc9110#section-15.5.1\",\n  \"title\": \"One or more validation errors occurred.\",\n  \"status\": 400,\n  \"detail\": \"See the errors property for more details.\",\n  \"errors\": {\n    \"address\": [\n      \"The address field is required.\"\n    ],\n    \"postalCode\": [\n      \"The postalCode field is required\"\n    ]\n  }\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "9369e2dd-a48e-472e-b07a-38109263f26d",
+          "name": "Invalid apikey",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "shipment",
+                "delivery",
+                "v4",
+                "timeframe",
+                "singleservice"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "apikey",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"handoverDate\": \"2026-06-15\",\n  \"deliveryDays\": 2,\n  \"receiverAddress\": {\n    \"countryIso\": \"BE\",\n    \"postalCode\": \"8000\",\n    \"street\": \"Langerei\",\n    \"city\": \"Brugge\"\n  },\n  \"service\": \"daytime\",\n  \"shipmentType\": \"parcel\",\n  \"customerCode\": \"ABC\",\n  \"customerNumber\": \"123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Unauthorized",
+          "code": 401,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"message\": \"Failed to resolve API Key variable 'request.header.apikey'\",\n  \"http_status_code\": 401\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "924151de-222f-4900-8acc-94e2679f434d",
+          "name": "Forbidden",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "shipment",
+                "delivery",
+                "v4",
+                "timeframe",
+                "singleservice"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "apikey",
+                "value": "<API Key>"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"handoverDate\": \"2026-06-15\",\n  \"deliveryDays\": 2,\n  \"receiverAddress\": {\n    \"countryIso\": \"BE\",\n    \"postalCode\": \"8000\",\n    \"street\": \"Langerei\",\n    \"city\": \"Brugge\"\n  },\n  \"service\": \"daytime\",\n  \"shipmentType\": \"parcel\",\n  \"customerCode\": \"ABC\",\n  \"customerNumber\": \"123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Forbidden",
+          "code": 403,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "text/plain"
+            }
+          ],
+          "body": "",
+          "cookie": [],
+          "_postman_previewlanguage": "text"
+        },
+        {
+          "id": "e79498bc-7fe1-4986-b386-05ad802e5a58",
+          "name": "Not Found",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "shipment",
+                "delivery",
+                "v4",
+                "timeframe",
+                "singleservice"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "apikey",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/problem+json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"handoverDate\": \"2026-06-15\",\n  \"deliveryDays\": 2,\n  \"receiverAddress\": {\n    \"countryIso\": \"BE\",\n    \"postalCode\": \"8000\",\n    \"street\": \"Langerei\",\n    \"city\": \"Brugge\"\n  },\n  \"service\": \"daytime\",\n  \"shipmentType\": \"parcel\",\n  \"customerCode\": \"ABC\",\n  \"customerNumber\": \"123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Not Found",
+          "code": 404,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/problem+json"
+            }
+          ],
+          "body": "{\n  \"type\": \"https://tools.ietf.org/html/rfc9110#section-15.6.1\",\n  \"title\": \"Business error occurred.\",\n  \"status\": 404,\n  \"detail\": \"See the errors property for more details.\",\n  \"errors\": {\n    \"request\": [\n      \"This postalCode value cannot be found.\"\n    ]\n  }\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "a69a2751-e43a-4c95-befd-b250ca40852b",
+          "name": "Method not allowed",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "shipment",
+                "delivery",
+                "v4",
+                "timeframe",
+                "singleservice"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "apikey",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"handoverDate\": \"2026-06-15\",\n  \"deliveryDays\": 2,\n  \"receiverAddress\": {\n    \"countryIso\": \"BE\",\n    \"postalCode\": \"8000\",\n    \"street\": \"Langerei\",\n    \"city\": \"Brugge\"\n  },\n  \"service\": \"daytime\",\n  \"shipmentType\": \"parcel\",\n  \"customerCode\": \"ABC\",\n  \"customerNumber\": \"123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Method Not Allowed",
+          "code": 405,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"message\": \"Only POST requests allowed\",\n  \"http_status_code\": 405\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "daab7e43-21c9-4d58-aa26-4c137db3f689",
+          "name": "Too many requests",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "shipment",
+                "delivery",
+                "v4",
+                "timeframe",
+                "singleservice"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "apikey",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"handoverDate\": \"2026-06-15\",\n  \"deliveryDays\": 2,\n  \"receiverAddress\": {\n    \"countryIso\": \"BE\",\n    \"postalCode\": \"8000\",\n    \"street\": \"Langerei\",\n    \"city\": \"Brugge\"\n  },\n  \"service\": \"daytime\",\n  \"shipmentType\": \"parcel\",\n  \"customerCode\": \"ABC\",\n  \"customerNumber\": \"123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Too Many Requests",
+          "code": 429,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"message\": \"Too many requests. Rate limit exceeded!\",\n  \"http_status_code\": 429\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "895ca3c3-5f77-4523-ad04-88af1ec44d6d",
+          "name": "Internal Server Error",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "shipment",
+                "delivery",
+                "v4",
+                "timeframe",
+                "singleservice"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "apikey",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/problem+json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"handoverDate\": \"2026-06-15\",\n  \"deliveryDays\": 2,\n  \"receiverAddress\": {\n    \"countryIso\": \"BE\",\n    \"postalCode\": \"8000\",\n    \"street\": \"Langerei\",\n    \"city\": \"Brugge\"\n  },\n  \"service\": \"daytime\",\n  \"shipmentType\": \"parcel\",\n  \"customerCode\": \"ABC\",\n  \"customerNumber\": \"123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Internal Server Error",
+          "code": 500,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/problem+json"
+            }
+          ],
+          "body": "{\n  \"type\": \"https://tools.ietf.org/html/rfc9110#section-15.6.1\",\n  \"title\": \"Unknown error occurred.\",\n  \"status\": 500,\n  \"errors\": {\n    \"request\": [\n      \"Error message.\"\n    ]\n  }\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "c26cd1a3-7c96-4796-b8a8-237c0a627b86",
+          "name": "Service Unavailable",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "shipment",
+                "delivery",
+                "v4",
+                "timeframe",
+                "singleservice"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "apikey",
+                "value": "<API Key>"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"handoverDate\": \"2026-06-15\",\n  \"deliveryDays\": 2,\n  \"receiverAddress\": {\n    \"countryIso\": \"BE\",\n    \"postalCode\": \"8000\",\n    \"street\": \"Langerei\",\n    \"city\": \"Brugge\"\n  },\n  \"service\": \"daytime\",\n  \"shipmentType\": \"parcel\",\n  \"customerCode\": \"ABC\",\n  \"customerNumber\": \"123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Service Unavailable",
+          "code": 503,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "text/plain"
+            }
+          ],
+          "body": "",
+          "cookie": [],
+          "_postman_previewlanguage": "text"
+        },
+        {
+          "id": "1f44b6c3-d147-477f-9dc5-b8d13f345b90",
+          "name": "Gateway Timeout",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "shipment",
+                "delivery",
+                "v4",
+                "timeframe",
+                "singleservice"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "apikey",
+                "value": "<API Key>"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"handoverDate\": \"2026-06-15\",\n  \"deliveryDays\": 2,\n  \"receiverAddress\": {\n    \"countryIso\": \"BE\",\n    \"postalCode\": \"8000\",\n    \"street\": \"Langerei\",\n    \"city\": \"Brugge\"\n  },\n  \"service\": \"daytime\",\n  \"shipmentType\": \"parcel\",\n  \"customerCode\": \"ABC\",\n  \"customerNumber\": \"123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Gateway Timeout",
+          "code": 504,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "text/plain"
+            }
+          ],
+          "body": "",
+          "cookie": [],
+          "_postman_previewlanguage": "text"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-sandbox.postnl.nl",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "737fe08f-fc55-4952-81ac-d702cc3a4b29",
+    "name": "Timeframe API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This API can be used to determine the delivery date and time window of a specific service\n\nContact Support:\n Name: PostNL",
+      "type": "text/plain"
+    }
+  }
+}

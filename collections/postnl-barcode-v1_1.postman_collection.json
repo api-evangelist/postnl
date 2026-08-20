@@ -1,0 +1,512 @@
+{
+  "item": [
+    {
+      "id": "2efe3cbd-fea5-452e-9c6c-ea45a508f367",
+      "name": "Barcode",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9934033d-75f1-46bd-b4af-5b0e663e0c6b",
+          "name": "Generate a unique barcode",
+          "request": {
+            "name": "Generate a unique barcode",
+            "description": {
+              "content": "Request example:\n```\ncurl -X GET \"https://api-sandbox.postnl.nl/shipment/v1_1/barcode?CustomerCode=DEVC&amp;CustomerNumber=11223344&amp;Type=3S&amp;Serie=000000000-999999999&amp\" \\\n -H \"Accept: application/json\" \\\n -H \"apikey: APIKEY-HERE\" \n```\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "shipment",
+                "v1_1",
+                "barcode"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "CustomerCode",
+                  "value": "<string>",
+                  "description": "(Required) The customer code for which you want a barcode to be generated"
+                },
+                {
+                  "disabled": false,
+                  "key": "CustomerNumber",
+                  "value": "<string>",
+                  "description": "(Required) The customer code for which you want a barcode to be generated"
+                },
+                {
+                  "disabled": false,
+                  "key": "Type",
+                  "value": "<string>",
+                  "description": "(Required) The barcode type that you want to be generated"
+                },
+                {
+                  "disabled": false,
+                  "key": "Serie",
+                  "value": "<string>",
+                  "description": "Barcode serie in the format '###000000-###000000', for example 100000-20000. The range must consist of a minimal difference of 100.000. It is allowed to add extra leading zeros at the beginning of the serie. See [Guidelines](https://developer.postnl.nl/docs/#/http/api-endpoints/send-track/barcode/guidelines) for more information."
+                },
+                {
+                  "disabled": false,
+                  "key": "Range",
+                  "value": "<string>",
+                  "description": "Only used for International Mail and Packet products (PEPS) shipments (with type LA, RI, UE). Identifying the issuing postal administration's country (NL in this case)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "apikey"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "28067bfb-8d52-4427-985d-3b910666379a",
+              "name": "A barcode",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v1_1",
+                    "barcode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "CustomerCode",
+                      "value": "DEVC"
+                    },
+                    {
+                      "key": "CustomerNumber",
+                      "value": "11223344"
+                    },
+                    {
+                      "key": "Type",
+                      "value": "3S"
+                    },
+                    {
+                      "key": "Serie",
+                      "value": "100000000"
+                    },
+                    {
+                      "key": "Range",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Barcode\": \"3SDEVC903942795\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "43305adf-c5e3-45b4-a817-94f647617633",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v1_1",
+                    "barcode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "CustomerCode",
+                      "value": "DEVC"
+                    },
+                    {
+                      "key": "CustomerNumber",
+                      "value": "11223344"
+                    },
+                    {
+                      "key": "Type",
+                      "value": "3S"
+                    },
+                    {
+                      "key": "Serie",
+                      "value": "100000000"
+                    },
+                    {
+                      "key": "Range",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"ErrorMsg\": \"Too many numbers in series\",\n      \"ErrorNumber\": \"8\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "21f03b28-bc53-4710-b0c6-943cb42cdd12",
+              "name": "Invalid apikey",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v1_1",
+                    "barcode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "CustomerCode",
+                      "value": "DEVC"
+                    },
+                    {
+                      "key": "CustomerNumber",
+                      "value": "11223344"
+                    },
+                    {
+                      "key": "Type",
+                      "value": "3S"
+                    },
+                    {
+                      "key": "Serie",
+                      "value": "100000000"
+                    },
+                    {
+                      "key": "Range",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Failed to resolve API Key variable 'request.header.apikey'\",\n  \"http_status_code\": 401\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "af0393c3-4039-42cf-af68-62ca4b0cde44",
+              "name": "Method not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v1_1",
+                    "barcode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "CustomerCode",
+                      "value": "DEVC"
+                    },
+                    {
+                      "key": "CustomerNumber",
+                      "value": "11223344"
+                    },
+                    {
+                      "key": "Type",
+                      "value": "3S"
+                    },
+                    {
+                      "key": "Serie",
+                      "value": "100000000"
+                    },
+                    {
+                      "key": "Range",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Only GET & POST requests allowed\",\n  \"http_status_code\": 405\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "48b78e9d-cbcc-49a3-942b-6fa00f302d6b",
+              "name": "Too many requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v1_1",
+                    "barcode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "CustomerCode",
+                      "value": "DEVC"
+                    },
+                    {
+                      "key": "CustomerNumber",
+                      "value": "11223344"
+                    },
+                    {
+                      "key": "Type",
+                      "value": "3S"
+                    },
+                    {
+                      "key": "Serie",
+                      "value": "100000000"
+                    },
+                    {
+                      "key": "Range",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Too many requests. Rate limit exceeded!\",\n  \"http_status_code\": 429\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c42b8b7f-3619-496c-8b1d-840b6148a541",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v1_1",
+                    "barcode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "CustomerCode",
+                      "value": "DEVC"
+                    },
+                    {
+                      "key": "CustomerNumber",
+                      "value": "11223344"
+                    },
+                    {
+                      "key": "Type",
+                      "value": "3S"
+                    },
+                    {
+                      "key": "Serie",
+                      "value": "100000000"
+                    },
+                    {
+                      "key": "Range",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"fault\": {\n    \"faultstring\": \"Unexpected token in object literal\",\n    \"detail\": {\n      \"errorcode\": \"Validation Fault\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-sandbox.postnl.nl",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "e1b5c956-9b3e-4b96-8de8-cff00bbc8c93",
+    "name": "Barcode API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Generate a unique barcode to use for your shipping label",
+      "type": "text/plain"
+    }
+  }
+}

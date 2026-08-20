@@ -1,0 +1,2107 @@
+{
+  "item": [
+    {
+      "id": "cf92026b-4035-47d7-8c97-db449d623ac7",
+      "name": "Locations",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3797a255-1de0-47df-8a97-eed064c26bd9",
+          "name": "Returns pickup locations nearest to the provided address.",
+          "request": {
+            "name": "Returns pickup locations nearest to the provided address.",
+            "description": {
+              "content": "Request example:\n```\ncurl -X GET \"https://api-sandbox.postnl.nl/shipment/v2_1/locations/nearest?CountryCode=NL&PostalCode=2132WT&City=Hoofddorp&Street=Siriusdreef&HouseNumber=42&HouseNumberExtension=-60&DeliveryDate=24-12-2022&OpeningTime=09%3A00%3A00\" \\\n -H \"Accept: application/json\" \\\n -H \"apikey: APIKEY-HERE\" \\\n```\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "shipment",
+                "v2_1",
+                "locations",
+                "nearest"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "CountryCode",
+                  "value": "<string>",
+                  "description": "(Required) The country of the recipient's address"
+                },
+                {
+                  "disabled": false,
+                  "key": "PostalCode",
+                  "value": "<string>",
+                  "description": "(Required) The zipcode of the recipient's address"
+                },
+                {
+                  "disabled": false,
+                  "key": "City",
+                  "value": "<string>",
+                  "description": "The city of the recipient's address"
+                },
+                {
+                  "disabled": false,
+                  "key": "Street",
+                  "value": "<string>",
+                  "description": "The street name of the recipient's address"
+                },
+                {
+                  "disabled": false,
+                  "key": "HouseNumber",
+                  "value": "<integer>",
+                  "description": "The house number of the recipient's address"
+                },
+                {
+                  "disabled": false,
+                  "key": "HouseNumberExtension",
+                  "value": "<string>",
+                  "description": "The house number extension of the recipient's address"
+                },
+                {
+                  "disabled": false,
+                  "key": "DeliveryDate",
+                  "value": "<string>",
+                  "description": "The date of the earliest delivery date at the pickup location. Format:  dd-MM-yyyy. Note: this date cannot be in the past, otherwise an error is returned. If not provided, the present day is used as a default"
+                },
+                {
+                  "disabled": false,
+                  "key": "OpeningTime",
+                  "value": "<string>",
+                  "description": "Opening time filter. Format: hh:mm:ss. This field will be used to filter out locations that are closed at the time provided. If no opening time is provided all locations will be returned regardless of their opening times."
+                },
+                {
+                  "disabled": false,
+                  "key": "DeliveryOptions",
+                  "value": "PG,PG",
+                  "description": "The pickup location types for which locations should be filtered. By default all location types are returned (PG = Retail points and parcel lockers). This can be used to filter on only parcel lockers (PA) or specifically exclude parcel lockers from the response (PG_EX)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "apikey"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "6efdacd5-5ff4-4551-a782-0cd6c32a3093",
+              "name": "Locations nearest to the address provided",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2_1",
+                    "locations",
+                    "nearest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "CountryCode",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "PostalCode",
+                      "value": "2132WT"
+                    },
+                    {
+                      "key": "City",
+                      "value": "Hoofddorp"
+                    },
+                    {
+                      "key": "Street",
+                      "value": "Siriusdreef"
+                    },
+                    {
+                      "key": "HouseNumber",
+                      "value": "42"
+                    },
+                    {
+                      "key": "HouseNumberExtension",
+                      "value": "-60"
+                    },
+                    {
+                      "key": "DeliveryDate",
+                      "value": "24-12-2022"
+                    },
+                    {
+                      "key": "OpeningTime",
+                      "value": "09:00:00"
+                    },
+                    {
+                      "key": "DeliveryOptions",
+                      "value": "PG,PG"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"GetLocationsResult\": {\n    \"ResponseLocation\": [\n      {\n        \"Address\": {\n          \"City\": \"City6\",\n          \"Countrycode\": \"Countrycode2\",\n          \"HouseNr\": 136,\n          \"HouseNrExt\": \"HouseNrExt4\",\n          \"Remark\": \"Remark8\"\n        },\n        \"DeliveryOptions\": {\n          \"string\": [\n            \"string6\",\n            \"string7\"\n          ]\n        },\n        \"Distance\": 244,\n        \"Latitude\": 103.5,\n        \"LocationCode\": 102\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "724d698e-f87d-44e4-bae3-e4b709451b35",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2_1",
+                    "locations",
+                    "nearest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "CountryCode",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "PostalCode",
+                      "value": "2132WT"
+                    },
+                    {
+                      "key": "City",
+                      "value": "Hoofddorp"
+                    },
+                    {
+                      "key": "Street",
+                      "value": "Siriusdreef"
+                    },
+                    {
+                      "key": "HouseNumber",
+                      "value": "42"
+                    },
+                    {
+                      "key": "HouseNumberExtension",
+                      "value": "-60"
+                    },
+                    {
+                      "key": "DeliveryDate",
+                      "value": "24-12-2022"
+                    },
+                    {
+                      "key": "OpeningTime",
+                      "value": "09:00:00"
+                    },
+                    {
+                      "key": "DeliveryOptions",
+                      "value": "PG,PG"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Date\": \"2024-06-11T12:38:45.413Z\",\n  \"Error\": {\n    \"ErrorCode\": \"3000\",\n    \"ErrorDescription\": \"Request format is invalid\"\n  },\n  \"RequestId\": \"09fd61fe-0099-4349-b71d-dce5c2472be9\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2f771863-50f9-4462-8d26-f93b48488c56",
+              "name": "Invalid apikey",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2_1",
+                    "locations",
+                    "nearest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "CountryCode",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "PostalCode",
+                      "value": "2132WT"
+                    },
+                    {
+                      "key": "City",
+                      "value": "Hoofddorp"
+                    },
+                    {
+                      "key": "Street",
+                      "value": "Siriusdreef"
+                    },
+                    {
+                      "key": "HouseNumber",
+                      "value": "42"
+                    },
+                    {
+                      "key": "HouseNumberExtension",
+                      "value": "-60"
+                    },
+                    {
+                      "key": "DeliveryDate",
+                      "value": "24-12-2022"
+                    },
+                    {
+                      "key": "OpeningTime",
+                      "value": "09:00:00"
+                    },
+                    {
+                      "key": "DeliveryOptions",
+                      "value": "PG,PG"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Failed to resolve API Key variable 'request.header.apikey'\",\n  \"http_status_code\": 401\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2452e5b5-0646-475c-8ca6-1e589ddadef5",
+              "name": "Method not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2_1",
+                    "locations",
+                    "nearest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "CountryCode",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "PostalCode",
+                      "value": "2132WT"
+                    },
+                    {
+                      "key": "City",
+                      "value": "Hoofddorp"
+                    },
+                    {
+                      "key": "Street",
+                      "value": "Siriusdreef"
+                    },
+                    {
+                      "key": "HouseNumber",
+                      "value": "42"
+                    },
+                    {
+                      "key": "HouseNumberExtension",
+                      "value": "-60"
+                    },
+                    {
+                      "key": "DeliveryDate",
+                      "value": "24-12-2022"
+                    },
+                    {
+                      "key": "OpeningTime",
+                      "value": "09:00:00"
+                    },
+                    {
+                      "key": "DeliveryOptions",
+                      "value": "PG,PG"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Only GET & POST requests allowed\",\n  \"http_status_code\": 405\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e65e72f3-4d17-4271-a965-317de9eb653e",
+              "name": "Too many requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2_1",
+                    "locations",
+                    "nearest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "CountryCode",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "PostalCode",
+                      "value": "2132WT"
+                    },
+                    {
+                      "key": "City",
+                      "value": "Hoofddorp"
+                    },
+                    {
+                      "key": "Street",
+                      "value": "Siriusdreef"
+                    },
+                    {
+                      "key": "HouseNumber",
+                      "value": "42"
+                    },
+                    {
+                      "key": "HouseNumberExtension",
+                      "value": "-60"
+                    },
+                    {
+                      "key": "DeliveryDate",
+                      "value": "24-12-2022"
+                    },
+                    {
+                      "key": "OpeningTime",
+                      "value": "09:00:00"
+                    },
+                    {
+                      "key": "DeliveryOptions",
+                      "value": "PG,PG"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Too many requests. Rate limit exceeded!\",\n  \"http_status_code\": 429\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "08e32105-0850-432b-8539-9c8e6dcebb45",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2_1",
+                    "locations",
+                    "nearest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "CountryCode",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "PostalCode",
+                      "value": "2132WT"
+                    },
+                    {
+                      "key": "City",
+                      "value": "Hoofddorp"
+                    },
+                    {
+                      "key": "Street",
+                      "value": "Siriusdreef"
+                    },
+                    {
+                      "key": "HouseNumber",
+                      "value": "42"
+                    },
+                    {
+                      "key": "HouseNumberExtension",
+                      "value": "-60"
+                    },
+                    {
+                      "key": "DeliveryDate",
+                      "value": "24-12-2022"
+                    },
+                    {
+                      "key": "OpeningTime",
+                      "value": "09:00:00"
+                    },
+                    {
+                      "key": "DeliveryOptions",
+                      "value": "PG,PG"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"fault\": {\n    \"faultstring\": \"Unexpected token in object literal\",\n    \"detail\": {\n      \"errorcode\": \"Validation Fault\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d477be22-4544-4303-8f85-f38c8201e8ca",
+          "name": "Returns pickup locations nearest to the provided coordinates.",
+          "request": {
+            "name": "Returns pickup locations nearest to the provided coordinates.",
+            "description": {
+              "content": "Request example:\n```\ncurl -X GET \"https://api-sandbox.postnl.nl/shipment/v2_1/locations/nearest/geocode?Latitude=52.2864669620795&Longitude=4.68239055845954&CountryCode=NL&DeliveryDate=24-12-2022&OpeningTime=09%3A00%3A00\" \\\n -H \"Accept: application/json\" \\\n -H \"apikey: APIKEY-HERE\" \\\n```\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "shipment",
+                "v2_1",
+                "locations",
+                "nearest",
+                "geocode"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "Latitude",
+                  "value": "<number>",
+                  "description": "(Required) The latitude of the location"
+                },
+                {
+                  "disabled": false,
+                  "key": "Longitude",
+                  "value": "<number>",
+                  "description": "(Required) The longitude of the location"
+                },
+                {
+                  "disabled": false,
+                  "key": "CountryCode",
+                  "value": "<string>",
+                  "description": "(Required) The coutry for which the coordinates are provided"
+                },
+                {
+                  "disabled": false,
+                  "key": "DeliveryDate",
+                  "value": "<string>",
+                  "description": "The date of the earliest delivery date. Format:  dd-MM-yyyy. Note: this date cannot be in the past, otherwise an error is returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "OpeningTime",
+                  "value": "<string>",
+                  "description": "Opening time filter. Format: hh:mm:ss. This field will be used to filter out locations that are closed at the time provided."
+                },
+                {
+                  "disabled": false,
+                  "key": "DeliveryOptions",
+                  "value": "PG,PG",
+                  "description": "The pickup location types for which locations should be filtered. By default all location types are returned (PG = Retail points and parcel lockers). This can be used to filter on only parcel lockers (PA) or specifically exclude parcel lockers from the response (PG_EX)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "apikey"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "861fa440-12df-49a7-8a09-bb4613e4fcf7",
+              "name": "Locations nearest to the coordinates provided",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2_1",
+                    "locations",
+                    "nearest",
+                    "geocode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Latitude",
+                      "value": "52.2864669620795"
+                    },
+                    {
+                      "key": "Longitude",
+                      "value": "4.68239055845954"
+                    },
+                    {
+                      "key": "CountryCode",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "DeliveryDate",
+                      "value": "24-12-2022"
+                    },
+                    {
+                      "key": "OpeningTime",
+                      "value": "09:00:00"
+                    },
+                    {
+                      "key": "DeliveryOptions",
+                      "value": "PG,PG"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"GetLocationsResult\": {\n    \"ResponseLocation\": [\n      {\n        \"Address\": {\n          \"City\": \"City6\",\n          \"Countrycode\": \"Countrycode2\",\n          \"HouseNr\": 136,\n          \"HouseNrExt\": \"HouseNrExt4\",\n          \"Remark\": \"Remark8\"\n        },\n        \"DeliveryOptions\": {\n          \"string\": [\n            \"string6\",\n            \"string7\"\n          ]\n        },\n        \"Distance\": 244,\n        \"Latitude\": 103.5,\n        \"LocationCode\": 102\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "afa74c6e-da56-46ae-a999-30097aa132ac",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2_1",
+                    "locations",
+                    "nearest",
+                    "geocode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Latitude",
+                      "value": "52.2864669620795"
+                    },
+                    {
+                      "key": "Longitude",
+                      "value": "4.68239055845954"
+                    },
+                    {
+                      "key": "CountryCode",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "DeliveryDate",
+                      "value": "24-12-2022"
+                    },
+                    {
+                      "key": "OpeningTime",
+                      "value": "09:00:00"
+                    },
+                    {
+                      "key": "DeliveryOptions",
+                      "value": "PG,PG"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Date\": \"2024-06-11T12:38:45.413Z\",\n  \"Error\": {\n    \"ErrorCode\": \"3000\",\n    \"ErrorDescription\": \"Request format is invalid\"\n  },\n  \"RequestId\": \"09fd61fe-0099-4349-b71d-dce5c2472be9\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b484d28d-2419-494c-a96e-899817512495",
+              "name": "Invalid apikey",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2_1",
+                    "locations",
+                    "nearest",
+                    "geocode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Latitude",
+                      "value": "52.2864669620795"
+                    },
+                    {
+                      "key": "Longitude",
+                      "value": "4.68239055845954"
+                    },
+                    {
+                      "key": "CountryCode",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "DeliveryDate",
+                      "value": "24-12-2022"
+                    },
+                    {
+                      "key": "OpeningTime",
+                      "value": "09:00:00"
+                    },
+                    {
+                      "key": "DeliveryOptions",
+                      "value": "PG,PG"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Failed to resolve API Key variable 'request.header.apikey'\",\n  \"http_status_code\": 401\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2faf1268-6466-4299-93d3-89b7ebf9bb66",
+              "name": "Method not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2_1",
+                    "locations",
+                    "nearest",
+                    "geocode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Latitude",
+                      "value": "52.2864669620795"
+                    },
+                    {
+                      "key": "Longitude",
+                      "value": "4.68239055845954"
+                    },
+                    {
+                      "key": "CountryCode",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "DeliveryDate",
+                      "value": "24-12-2022"
+                    },
+                    {
+                      "key": "OpeningTime",
+                      "value": "09:00:00"
+                    },
+                    {
+                      "key": "DeliveryOptions",
+                      "value": "PG,PG"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Only GET & POST requests allowed\",\n  \"http_status_code\": 405\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c1398337-f693-40f1-ae22-9fe24eb0143d",
+              "name": "Too many requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2_1",
+                    "locations",
+                    "nearest",
+                    "geocode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Latitude",
+                      "value": "52.2864669620795"
+                    },
+                    {
+                      "key": "Longitude",
+                      "value": "4.68239055845954"
+                    },
+                    {
+                      "key": "CountryCode",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "DeliveryDate",
+                      "value": "24-12-2022"
+                    },
+                    {
+                      "key": "OpeningTime",
+                      "value": "09:00:00"
+                    },
+                    {
+                      "key": "DeliveryOptions",
+                      "value": "PG,PG"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Too many requests. Rate limit exceeded!\",\n  \"http_status_code\": 429\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f1f02aa6-d4c3-4cc8-b1aa-4bea3b405010",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2_1",
+                    "locations",
+                    "nearest",
+                    "geocode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Latitude",
+                      "value": "52.2864669620795"
+                    },
+                    {
+                      "key": "Longitude",
+                      "value": "4.68239055845954"
+                    },
+                    {
+                      "key": "CountryCode",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "DeliveryDate",
+                      "value": "24-12-2022"
+                    },
+                    {
+                      "key": "OpeningTime",
+                      "value": "09:00:00"
+                    },
+                    {
+                      "key": "DeliveryOptions",
+                      "value": "PG,PG"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"fault\": {\n    \"faultstring\": \"Unexpected token in object literal\",\n    \"detail\": {\n      \"errorcode\": \"Validation Fault\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e05ff66f-65c4-480d-99f1-f224d969b89b",
+          "name": "Returns pickup locations within a provided area.",
+          "request": {
+            "name": "Returns pickup locations within a provided area.",
+            "description": {
+              "content": "Request example:\n```\ncurl -X GET \"https://api-sandbox.postnl.nl/shipment/v2_1/locations/area?LatitudeNorth=52.156439&LongitudeWest=5.015643&LatitudeSouth=52.017473&LongitudeEast=5.065254&CountryCode=NL&DeliveryDate=24-12-2023&OpeningTime=09%3A00%3A00\" \\\n -H \"Accept: application/json\" \\\n -H \"apikey: APIKEY-HERE\" \\\n```\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "shipment",
+                "v2_1",
+                "locations",
+                "area"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "LatitudeNorth",
+                  "value": "<number>",
+                  "description": "(Required) The northmost coordinates of the area"
+                },
+                {
+                  "disabled": false,
+                  "key": "LongitudeWest",
+                  "value": "<number>",
+                  "description": "(Required) The westmost coordinates of the area"
+                },
+                {
+                  "disabled": false,
+                  "key": "LatitudeSouth",
+                  "value": "<number>",
+                  "description": "(Required) The southmost coordinates of the area"
+                },
+                {
+                  "disabled": false,
+                  "key": "LongitudeEast",
+                  "value": "<number>",
+                  "description": "(Required) The eastmost coordinates of the area"
+                },
+                {
+                  "disabled": false,
+                  "key": "CountryCode",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "DeliveryDate",
+                  "value": "<string>",
+                  "description": "The date of the earliest delivery date. Format:  dd-MM-yyyy. Note: this date cannot be in the past, otherwise an error is returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "OpeningTime",
+                  "value": "<string>",
+                  "description": "Opening time filter. Format: hh:mm:ss. This field will be used to filter out locations that are closed at the time provided."
+                },
+                {
+                  "disabled": false,
+                  "key": "DeliveryOptions",
+                  "value": "PG,PG",
+                  "description": "The pickup location types for which locations should be filtered. By default all location types are returned (PG = Retail points and parcel lockers). This can be used to filter on only parcel lockers (PA) or specifically exclude parcel lockers from the response (PG_EX)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "apikey"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c5c1c463-eca5-4122-8569-4c2dd776f41a",
+              "name": "Locations nearest to the area provided",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2_1",
+                    "locations",
+                    "area"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "LatitudeNorth",
+                      "value": "52.156439"
+                    },
+                    {
+                      "key": "LongitudeWest",
+                      "value": "5.015643"
+                    },
+                    {
+                      "key": "LatitudeSouth",
+                      "value": "52.017473"
+                    },
+                    {
+                      "key": "LongitudeEast",
+                      "value": "5.065254"
+                    },
+                    {
+                      "key": "CountryCode",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "DeliveryDate",
+                      "value": "24-12-2023"
+                    },
+                    {
+                      "key": "OpeningTime",
+                      "value": "09:00:00"
+                    },
+                    {
+                      "key": "DeliveryOptions",
+                      "value": "PG,PG"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"GetLocationsResult\": {\n    \"ResponseLocation\": [\n      {\n        \"Address\": {\n          \"City\": \"City6\",\n          \"Countrycode\": \"Countrycode2\",\n          \"HouseNr\": 136,\n          \"HouseNrExt\": \"HouseNrExt4\",\n          \"Remark\": \"Remark8\"\n        },\n        \"DeliveryOptions\": {\n          \"string\": [\n            \"string6\",\n            \"string7\"\n          ]\n        },\n        \"Distance\": 244,\n        \"Latitude\": 103.5,\n        \"LocationCode\": 102\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "afd81f4a-936b-400f-a789-ef56be656f0e",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2_1",
+                    "locations",
+                    "area"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "LatitudeNorth",
+                      "value": "52.156439"
+                    },
+                    {
+                      "key": "LongitudeWest",
+                      "value": "5.015643"
+                    },
+                    {
+                      "key": "LatitudeSouth",
+                      "value": "52.017473"
+                    },
+                    {
+                      "key": "LongitudeEast",
+                      "value": "5.065254"
+                    },
+                    {
+                      "key": "CountryCode",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "DeliveryDate",
+                      "value": "24-12-2023"
+                    },
+                    {
+                      "key": "OpeningTime",
+                      "value": "09:00:00"
+                    },
+                    {
+                      "key": "DeliveryOptions",
+                      "value": "PG,PG"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Date\": \"2024-06-11T12:38:45.413Z\",\n  \"Error\": {\n    \"ErrorCode\": \"3000\",\n    \"ErrorDescription\": \"Request format is invalid\"\n  },\n  \"RequestId\": \"09fd61fe-0099-4349-b71d-dce5c2472be9\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "af5b0560-4e4b-4515-88ae-dd3286723501",
+              "name": "Invalid apikey",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2_1",
+                    "locations",
+                    "area"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "LatitudeNorth",
+                      "value": "52.156439"
+                    },
+                    {
+                      "key": "LongitudeWest",
+                      "value": "5.015643"
+                    },
+                    {
+                      "key": "LatitudeSouth",
+                      "value": "52.017473"
+                    },
+                    {
+                      "key": "LongitudeEast",
+                      "value": "5.065254"
+                    },
+                    {
+                      "key": "CountryCode",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "DeliveryDate",
+                      "value": "24-12-2023"
+                    },
+                    {
+                      "key": "OpeningTime",
+                      "value": "09:00:00"
+                    },
+                    {
+                      "key": "DeliveryOptions",
+                      "value": "PG,PG"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Failed to resolve API Key variable 'request.header.apikey'\",\n  \"http_status_code\": 401\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4499040b-b3c0-4589-97ae-d13b1030abab",
+              "name": "Method not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2_1",
+                    "locations",
+                    "area"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "LatitudeNorth",
+                      "value": "52.156439"
+                    },
+                    {
+                      "key": "LongitudeWest",
+                      "value": "5.015643"
+                    },
+                    {
+                      "key": "LatitudeSouth",
+                      "value": "52.017473"
+                    },
+                    {
+                      "key": "LongitudeEast",
+                      "value": "5.065254"
+                    },
+                    {
+                      "key": "CountryCode",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "DeliveryDate",
+                      "value": "24-12-2023"
+                    },
+                    {
+                      "key": "OpeningTime",
+                      "value": "09:00:00"
+                    },
+                    {
+                      "key": "DeliveryOptions",
+                      "value": "PG,PG"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Only GET & POST requests allowed\",\n  \"http_status_code\": 405\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1391bb3e-ba44-4b9f-b106-18b5f2e987e3",
+              "name": "Too many requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2_1",
+                    "locations",
+                    "area"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "LatitudeNorth",
+                      "value": "52.156439"
+                    },
+                    {
+                      "key": "LongitudeWest",
+                      "value": "5.015643"
+                    },
+                    {
+                      "key": "LatitudeSouth",
+                      "value": "52.017473"
+                    },
+                    {
+                      "key": "LongitudeEast",
+                      "value": "5.065254"
+                    },
+                    {
+                      "key": "CountryCode",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "DeliveryDate",
+                      "value": "24-12-2023"
+                    },
+                    {
+                      "key": "OpeningTime",
+                      "value": "09:00:00"
+                    },
+                    {
+                      "key": "DeliveryOptions",
+                      "value": "PG,PG"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Too many requests. Rate limit exceeded!\",\n  \"http_status_code\": 429\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "954fd3f5-818b-423b-8eba-09a77b5c4fc4",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2_1",
+                    "locations",
+                    "area"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "LatitudeNorth",
+                      "value": "52.156439"
+                    },
+                    {
+                      "key": "LongitudeWest",
+                      "value": "5.015643"
+                    },
+                    {
+                      "key": "LatitudeSouth",
+                      "value": "52.017473"
+                    },
+                    {
+                      "key": "LongitudeEast",
+                      "value": "5.065254"
+                    },
+                    {
+                      "key": "CountryCode",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "DeliveryDate",
+                      "value": "24-12-2023"
+                    },
+                    {
+                      "key": "OpeningTime",
+                      "value": "09:00:00"
+                    },
+                    {
+                      "key": "DeliveryOptions",
+                      "value": "PG,PG"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"fault\": {\n    \"faultstring\": \"Unexpected token in object literal\",\n    \"detail\": {\n      \"errorcode\": \"Validation Fault\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1a67c5b0-646f-450d-8b88-eba6b77b4e6c",
+          "name": "Returns a specific pickup location",
+          "request": {
+            "name": "Returns a specific pickup location",
+            "description": {
+              "content": "Request example:\n```\ncurl -X GET \"https://api-sandbox.postnl.nl/shipment/v2_1/locations/lookup?LocationCode=216877\" \\\n -H \"Accept: application/json\" \\\n -H \"apikey: APIKEY-HERE\" \n```\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "shipment",
+                "v2_1",
+                "locations",
+                "lookup"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "LocationCode",
+                  "value": "<string>",
+                  "description": "(Required) LocationCode information"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "apikey"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "7ac83090-214b-47ba-bda9-6526011ca1fc",
+              "name": "Location information",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2_1",
+                    "locations",
+                    "lookup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "LocationCode",
+                      "value": "216877"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"GetLocationsResult\": {\n    \"ResponseLocation\": {\n      \"Address\": {\n        \"City\": \"City6\",\n        \"Countrycode\": \"Countrycode2\",\n        \"HouseNr\": 136,\n        \"HouseNrExt\": \"HouseNrExt4\",\n        \"Remark\": \"Remark8\"\n      },\n      \"DeliveryOptions\": {\n        \"string\": [\n          \"string6\",\n          \"string7\"\n        ]\n      },\n      \"Distance\": 244,\n      \"Latitude\": 103.5,\n      \"LocationCode\": 102\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "34a4dd3c-cc56-45c1-91ef-5282579a32ba",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2_1",
+                    "locations",
+                    "lookup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "LocationCode",
+                      "value": "216877"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Date\": \"2024-06-11T12:38:45.413Z\",\n  \"Error\": {\n    \"ErrorCode\": \"3000\",\n    \"ErrorDescription\": \"Request format is invalid\"\n  },\n  \"RequestId\": \"09fd61fe-0099-4349-b71d-dce5c2472be9\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "80ceee10-1c91-4398-8690-48e79e91d887",
+              "name": "Invalid apikey",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2_1",
+                    "locations",
+                    "lookup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "LocationCode",
+                      "value": "216877"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Failed to resolve API Key variable 'request.header.apikey'\",\n  \"http_status_code\": 401\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7c96a53b-453a-4fed-9a45-a13beee04253",
+              "name": "Method not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2_1",
+                    "locations",
+                    "lookup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "LocationCode",
+                      "value": "216877"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Only GET & POST requests allowed\",\n  \"http_status_code\": 405\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c5297cb9-1831-424c-9f08-741111f555ab",
+              "name": "Too many requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2_1",
+                    "locations",
+                    "lookup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "LocationCode",
+                      "value": "216877"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Too many requests. Rate limit exceeded!\",\n  \"http_status_code\": 429\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7a968309-e0ad-4c9e-b463-a53f99aa26ed",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2_1",
+                    "locations",
+                    "lookup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "LocationCode",
+                      "value": "216877"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"fault\": {\n    \"faultstring\": \"Unexpected token in object literal\",\n    \"detail\": {\n      \"errorcode\": \"Validation Fault\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-sandbox.postnl.nl",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "b0303745-9cf8-4044-9313-cadaab9bb6b1",
+    "name": "Locations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Retrieve PostNL pick up points",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,237 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Locations API",
+    "version": "v2_1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Locations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Returns pickup locations nearest to the provided address.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.postnl.nl/shipment/v2_1/locations/nearest",
+            "params": [
+              {
+                "name": "CountryCode",
+                "value": "",
+                "type": "query",
+                "description": "The country of the recipient's address"
+              },
+              {
+                "name": "PostalCode",
+                "value": "",
+                "type": "query",
+                "description": "The zipcode of the recipient's address"
+              },
+              {
+                "name": "City",
+                "value": "",
+                "type": "query",
+                "description": "The city of the recipient's address"
+              },
+              {
+                "name": "Street",
+                "value": "",
+                "type": "query",
+                "description": "The street name of the recipient's address"
+              },
+              {
+                "name": "HouseNumber",
+                "value": "",
+                "type": "query",
+                "description": "The house number of the recipient's address"
+              },
+              {
+                "name": "HouseNumberExtension",
+                "value": "",
+                "type": "query",
+                "description": "The house number extension of the recipient's address"
+              },
+              {
+                "name": "DeliveryDate",
+                "value": "",
+                "type": "query",
+                "description": "The date of the earliest delivery date at the pickup location. Format:  dd-MM-yyyy. Note: this date cannot be in the past, otherwise an error is returned. If not provided, the present day is used as a default"
+              },
+              {
+                "name": "OpeningTime",
+                "value": "",
+                "type": "query",
+                "description": "Opening time filter. Format: hh:mm:ss. This field will be used to filter out locations that are closed at the time provided. If no opening time is provided all locations will be returned regardless of their opening times."
+              },
+              {
+                "name": "DeliveryOptions",
+                "value": "",
+                "type": "query",
+                "description": "The pickup location types for which locations should be filtered. By default all location types are returned (PG = Retail points and parcel lockers). This can be used to filter on only parcel lockers (PA) or specifically exclude parcel lockers from the response (PG_EX)."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "apikey",
+              "value": "{{apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Request example:\n```\ncurl -X GET \"https://api-sandbox.postnl.nl/shipment/v2_1/locations/nearest?CountryCode=NL&PostalCode=2132WT&City=Hoofddorp&Street=Siriusdreef&HouseNumber=42&HouseNumberExtension=-60&DeliveryDate=24-12-2022&OpeningTime=09%3A00%3A00\" \\\n -H \"Accept: application/json\" \\\n -H \"apikey: APIKEY-HERE\" \\\n```\n"
+        },
+        {
+          "info": {
+            "name": "Returns pickup locations nearest to the provided coordinates.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.postnl.nl/shipment/v2_1/locations/nearest/geocode",
+            "params": [
+              {
+                "name": "Latitude",
+                "value": "",
+                "type": "query",
+                "description": "The latitude of the location"
+              },
+              {
+                "name": "Longitude",
+                "value": "",
+                "type": "query",
+                "description": "The longitude of the location"
+              },
+              {
+                "name": "CountryCode",
+                "value": "",
+                "type": "query",
+                "description": "The coutry for which the coordinates are provided"
+              },
+              {
+                "name": "DeliveryDate",
+                "value": "",
+                "type": "query",
+                "description": "The date of the earliest delivery date. Format:  dd-MM-yyyy. Note: this date cannot be in the past, otherwise an error is returned."
+              },
+              {
+                "name": "OpeningTime",
+                "value": "",
+                "type": "query",
+                "description": "Opening time filter. Format: hh:mm:ss. This field will be used to filter out locations that are closed at the time provided."
+              },
+              {
+                "name": "DeliveryOptions",
+                "value": "",
+                "type": "query",
+                "description": "The pickup location types for which locations should be filtered. By default all location types are returned (PG = Retail points and parcel lockers). This can be used to filter on only parcel lockers (PA) or specifically exclude parcel lockers from the response (PG_EX)."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "apikey",
+              "value": "{{apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Request example:\n```\ncurl -X GET \"https://api-sandbox.postnl.nl/shipment/v2_1/locations/nearest/geocode?Latitude=52.2864669620795&Longitude=4.68239055845954&CountryCode=NL&DeliveryDate=24-12-2022&OpeningTime=09%3A00%3A00\" \\\n -H \"Accept: application/json\" \\\n -H \"apikey: APIKEY-HERE\" \\\n```\n"
+        },
+        {
+          "info": {
+            "name": "Returns pickup locations within a provided area.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.postnl.nl/shipment/v2_1/locations/area",
+            "params": [
+              {
+                "name": "LatitudeNorth",
+                "value": "",
+                "type": "query",
+                "description": "The northmost coordinates of the area"
+              },
+              {
+                "name": "LongitudeWest",
+                "value": "",
+                "type": "query",
+                "description": "The westmost coordinates of the area"
+              },
+              {
+                "name": "LatitudeSouth",
+                "value": "",
+                "type": "query",
+                "description": "The southmost coordinates of the area"
+              },
+              {
+                "name": "LongitudeEast",
+                "value": "",
+                "type": "query",
+                "description": "The eastmost coordinates of the area"
+              },
+              {
+                "name": "CountryCode",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "DeliveryDate",
+                "value": "",
+                "type": "query",
+                "description": "The date of the earliest delivery date. Format:  dd-MM-yyyy. Note: this date cannot be in the past, otherwise an error is returned."
+              },
+              {
+                "name": "OpeningTime",
+                "value": "",
+                "type": "query",
+                "description": "Opening time filter. Format: hh:mm:ss. This field will be used to filter out locations that are closed at the time provided."
+              },
+              {
+                "name": "DeliveryOptions",
+                "value": "",
+                "type": "query",
+                "description": "The pickup location types for which locations should be filtered. By default all location types are returned (PG = Retail points and parcel lockers). This can be used to filter on only parcel lockers (PA) or specifically exclude parcel lockers from the response (PG_EX)."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "apikey",
+              "value": "{{apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Request example:\n```\ncurl -X GET \"https://api-sandbox.postnl.nl/shipment/v2_1/locations/area?LatitudeNorth=52.156439&LongitudeWest=5.015643&LatitudeSouth=52.017473&LongitudeEast=5.065254&CountryCode=NL&DeliveryDate=24-12-2023&OpeningTime=09%3A00%3A00\" \\\n -H \"Accept: application/json\" \\\n -H \"apikey: APIKEY-HERE\" \\\n```\n"
+        },
+        {
+          "info": {
+            "name": "Returns a specific pickup location",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.postnl.nl/shipment/v2_1/locations/lookup",
+            "params": [
+              {
+                "name": "LocationCode",
+                "value": "",
+                "type": "query",
+                "description": "LocationCode information"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "apikey",
+              "value": "{{apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Request example:\n```\ncurl -X GET \"https://api-sandbox.postnl.nl/shipment/v2_1/locations/lookup?LocationCode=216877\" \\\n -H \"Accept: application/json\" \\\n -H \"apikey: APIKEY-HERE\" \n```\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

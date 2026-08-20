@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Timeframe API",
+    "version": "v4"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Get available delivery dates and time windows for multiple services",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api-sandbox.postnl.nl/shipment/delivery/v4/timeframe/multipleservices",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "This API can be used to determine the delivery date and time window of multiple services."
+    },
+    {
+      "info": {
+        "name": "Get available delivery dates and time windows",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api-sandbox.postnl.nl/shipment/delivery/v4/timeframe/singleservice",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "This API can be used to determine the delivery date and time window of a specific service."
+    }
+  ],
+  "bundled": true
+}

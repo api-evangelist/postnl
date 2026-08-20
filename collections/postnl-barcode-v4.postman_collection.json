@@ -1,0 +1,359 @@
+{
+  "item": [
+    {
+      "id": "c9da32f7-b478-4433-944d-5b827342a292",
+      "name": "Create Barcodes",
+      "request": {
+        "name": "Create Barcodes",
+        "description": {
+          "content": "Generates a 3S barcode for domestic and European flows. Optional fields allow specifying the barcode type, a numeric range, and the number of barcodes to return.",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "shipment",
+            "delivery",
+            "v4",
+            "barcode"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"customerNumber\": \"<string>\",\n  \"customerCode\": \"<string>\",\n  \"serieStart\": \"000000000\",\n  \"serieEnd\": \"999999999\",\n  \"numberOfBarcodes\": 1\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "bdc4e2c0-858a-46c0-89c5-130a31a778b7",
+          "name": "OK",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "shipment",
+                "delivery",
+                "v4",
+                "barcode"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "apikey",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"summary\": \"Minimal request with required fields only\",\n  \"value\": {\n    \"customerNumber\": \"11223344\",\n    \"customerCode\": \"DEVC\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"barcodes\": [\n    \"3SDEVC090807060\"\n  ]\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "fe46adf6-d72a-4cc6-854a-8fb65fa542a3",
+          "name": "One or more business errors occurred",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "shipment",
+                "delivery",
+                "v4",
+                "barcode"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "apikey",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"summary\": \"Minimal request with required fields only\",\n  \"value\": {\n    \"customerNumber\": \"11223344\",\n    \"customerCode\": \"DEVC\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"type\": \"https://tools.ietf.org/html/rfc9457#section-3.1\",\n  \"title\": \"One or more validation errors occurred.\",\n  \"status\": 400,\n  \"errors\": {\n    \"CustomerCode\": [\n      \"CustomerCode must be 1-4 letters.\"\n    ]\n  },\n  \"traceId\": \"00-f8bd486e5e0079e87aaf596c95c7fa34-e9d798feb208535f-01\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "81bc07df-657c-46fd-b4e8-40a2e5d4a441",
+          "name": "Invalid apikey",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "shipment",
+                "delivery",
+                "v4",
+                "barcode"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "apikey",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"summary\": \"Minimal request with required fields only\",\n  \"value\": {\n    \"customerNumber\": \"11223344\",\n    \"customerCode\": \"DEVC\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Unauthorized",
+          "code": 401,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"message\": \"Failed to resolve API Key variable 'request.header.apikey'\",\n  \"http_status_code\": 401\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "2d0e259d-5e40-4c45-a971-7307425bf204",
+          "name": "Method not allowed",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "shipment",
+                "delivery",
+                "v4",
+                "barcode"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "apikey",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"summary\": \"Minimal request with required fields only\",\n  \"value\": {\n    \"customerNumber\": \"11223344\",\n    \"customerCode\": \"DEVC\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Method Not Allowed",
+          "code": 405,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"message\": \"Only POST requests allowed\",\n  \"http_status_code\": 405\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "67ca042d-2e5f-4f3f-882e-b70ea09d247e",
+          "name": "Too many requests",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "shipment",
+                "delivery",
+                "v4",
+                "barcode"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "apikey",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"summary\": \"Minimal request with required fields only\",\n  \"value\": {\n    \"customerNumber\": \"11223344\",\n    \"customerCode\": \"DEVC\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Too Many Requests",
+          "code": 429,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"message\": \"Too many requests. Rate limit exceeded!\",\n  \"http_status_code\": 429\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-sandbox.postnl.nl",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1315e073-4cc6-4ba2-9e6e-d22ca68930f3",
+    "name": "PostNL Barcode API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": " The PostNL Barcode API is a RESTful API that generates 3S-barcodes for domestic and European parcel flows. Additional barcode domestic types may be added in future versions. Barcodes for non-european and mailpackets are generated automatically during Shipment v4 creation and cannot not be requested via this endpoint.\n\nContact Support:\n Name: PostNL",
+      "type": "text/plain"
+    }
+  }
+}

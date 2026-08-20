@@ -1,0 +1,430 @@
+{
+  "item": [
+    {
+      "id": "52c56f2c-cbbd-435f-972d-0fa2c0202ff8",
+      "name": "Checkout",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "dbb98e31-bc3a-4fb5-95b7-13c8d664a096",
+          "name": "Checkout",
+          "request": {
+            "name": "Checkout",
+            "description": {},
+            "url": {
+              "path": [
+                "shipment",
+                "v1",
+                "checkout"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "apikey"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"OrderDate\": \"<string>\",\n  \"CutOffTimes\": [\n    {\n      \"Day\": \"<string>\",\n      \"Available\": \"<boolean>\",\n      \"Type\": \"<string>\",\n      \"Time\": \"<string>\"\n    },\n    {\n      \"Day\": \"<string>\",\n      \"Available\": \"<boolean>\",\n      \"Type\": \"<string>\",\n      \"Time\": \"<string>\"\n    }\n  ],\n  \"Options\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"Locations\": \"<integer>\",\n  \"Days\": \"<integer>\",\n  \"Addresses\": [\n    {\n      \"AddressType\": \"<string>\",\n      \"HouseNr\": \"<integer>\",\n      \"Zipcode\": \"<string>\",\n      \"Countrycode\": \"<string>\",\n      \"Street\": \"<string>\",\n      \"HouseNrExt\": \"<string>\",\n      \"City\": \"<string>\"\n    },\n    {\n      \"AddressType\": \"<string>\",\n      \"HouseNr\": \"<integer>\",\n      \"Zipcode\": \"<string>\",\n      \"Countrycode\": \"<string>\",\n      \"Street\": \"<string>\",\n      \"HouseNrExt\": \"<string>\",\n      \"City\": \"<string>\"\n    }\n  ],\n  \"ShippingDuration\": \"<integer>\",\n  \"HolidaySorting\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "79a04a93-b983-4466-84d8-48fa3d712e1f",
+              "name": "Status object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v1",
+                    "checkout"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"OrderDate\": \"24-02-2021 12:00:00\",\n  \"ShippingDuration\": \"1\",\n  \"CutOffTimes\": [\n    {\n      \"Day\": \"00\",\n      \"Available\": \"true\",\n      \"Type\": \"Regular\",\n      \"Time\": \"20:00:00\"\n    },\n    {\n      \"Day\": \"00\",\n      \"Available\": \"true\",\n      \"Type\": \"Today\",\n      \"Time\": \"12:00:00\"\n    }\n  ],\n  \"HolidaySorting\": \"true\",\n  \"Options\": [\n    \"Daytime\",\n    \"Evening\",\n    \"Pickup\"\n  ],\n  \"Locations\": \"2\",\n  \"Days\": \"3\",\n  \"Addresses\": [\n    {\n      \"AddressType\": \"01\",\n      \"Street\": \"Molengraaffplantsoen\",\n      \"HouseNr\": \"74\",\n      \"Zipcode\": \"3571ZZ\",\n      \"City\": \"Utrecht\",\n      \"Countrycode\": \"NL\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"DeliveryOptions\": [\n    {\n      \"DeliveryDate\": \"09-07-2019\",\n      \"Timeframe\": [\n        {\n          \"From\": \"18:00:00\",\n          \"To\": \"22:30:00\",\n          \"Options\": [\n            \"Daytime\"\n          ],\n          \"ShippingDate\": \"08-07-2019\",\n          \"Sustainability\": {\n            \"Code\": \"02\",\n            \"Description\": \"Sustainable option\"\n          }\n        }\n      ]\n    }\n  ],\n  \"PickupOptions\": [\n    {\n      \"PickupDate\": \"09-07-2019\",\n      \"ShippingDate\": \"08-07-2019\",\n      \"Option\": \"Pickup\",\n      \"Locations\": [\n        {\n          \"Address\": {\n            \"Street\": \"Siriusdreef\",\n            \"Zipcode\": \"2132WT\",\n            \"HouseNr\": 42,\n            \"HouseNrExt\": \"-60\",\n            \"Countrycode\": \"NL\",\n            \"CompanyName\": \"Pickup company BV\"\n          },\n          \"PickupTime\": \"15:00\",\n          \"OpeningHours\": {\n            \"Monday\": {\n              \"From\": \"08:30:00\",\n              \"To\": \"22:30:00\"\n            },\n            \"Tuesday\": {\n              \"From\": \"08:30:00\",\n              \"To\": \"22:30:00\"\n            },\n            \"Wednesday\": {\n              \"From\": \"08:30:00\",\n              \"To\": \"22:30:00\"\n            },\n            \"Thursday\": {\n              \"From\": \"08:30:00\",\n              \"To\": \"22:30:00\"\n            },\n            \"Friday\": {\n              \"From\": \"08:30:00\",\n              \"To\": \"22:30:00\"\n            },\n            \"Saturday\": {\n              \"From\": \"08:30:00\",\n              \"To\": \"22:30:00\"\n            },\n            \"Sunday\": {\n              \"From\": \"08:30:00\",\n              \"To\": \"22:30:00\"\n            }\n          },\n          \"Distance\": 234,\n          \"LocationCode\": \"8101163043\",\n          \"PartnerID\": \"PNPNL-01\",\n          \"Sustainability\": {\n            \"Code\": \"02\",\n            \"Description\": \"Sustainable option\"\n          }\n        }\n      ]\n    }\n  ],\n  \"Warnings\": [\n    {\n      \"DeliveryDate\": \"07-07-2019\",\n      \"Code\": \"5034\",\n      \"Description\": \"No delivery option found on date\",\n      \"Options\": \"Daytime\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6e40973e-cbc7-4289-9170-ff1ca79c6574",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v1",
+                    "checkout"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"OrderDate\": \"24-02-2021 12:00:00\",\n  \"ShippingDuration\": \"1\",\n  \"CutOffTimes\": [\n    {\n      \"Day\": \"00\",\n      \"Available\": \"true\",\n      \"Type\": \"Regular\",\n      \"Time\": \"20:00:00\"\n    },\n    {\n      \"Day\": \"00\",\n      \"Available\": \"true\",\n      \"Type\": \"Today\",\n      \"Time\": \"12:00:00\"\n    }\n  ],\n  \"HolidaySorting\": \"true\",\n  \"Options\": [\n    \"Daytime\",\n    \"Evening\",\n    \"Pickup\"\n  ],\n  \"Locations\": \"2\",\n  \"Days\": \"3\",\n  \"Addresses\": [\n    {\n      \"AddressType\": \"01\",\n      \"Street\": \"Molengraaffplantsoen\",\n      \"HouseNr\": \"74\",\n      \"Zipcode\": \"3571ZZ\",\n      \"City\": \"Utrecht\",\n      \"Countrycode\": \"NL\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Date\": \"2024-06-11T12:38:45.413Z\",\n  \"Error\": {\n    \"ErrorCode\": \"3000\",\n    \"ErrorDescription\": \"Request format is invalid\"\n  },\n  \"RequestId\": \"09fd61fe-0099-4349-b71d-dce5c2472be9\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b79fc418-7db5-4a8b-b1d2-1e11eaefe920",
+              "name": "Invalid apikey",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v1",
+                    "checkout"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"OrderDate\": \"24-02-2021 12:00:00\",\n  \"ShippingDuration\": \"1\",\n  \"CutOffTimes\": [\n    {\n      \"Day\": \"00\",\n      \"Available\": \"true\",\n      \"Type\": \"Regular\",\n      \"Time\": \"20:00:00\"\n    },\n    {\n      \"Day\": \"00\",\n      \"Available\": \"true\",\n      \"Type\": \"Today\",\n      \"Time\": \"12:00:00\"\n    }\n  ],\n  \"HolidaySorting\": \"true\",\n  \"Options\": [\n    \"Daytime\",\n    \"Evening\",\n    \"Pickup\"\n  ],\n  \"Locations\": \"2\",\n  \"Days\": \"3\",\n  \"Addresses\": [\n    {\n      \"AddressType\": \"01\",\n      \"Street\": \"Molengraaffplantsoen\",\n      \"HouseNr\": \"74\",\n      \"Zipcode\": \"3571ZZ\",\n      \"City\": \"Utrecht\",\n      \"Countrycode\": \"NL\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Failed to resolve API Key variable 'request.header.apikey'\",\n  \"http_status_code\": 401\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3783f64c-6355-4632-adc5-d91e6b4e5716",
+              "name": "Method not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v1",
+                    "checkout"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"OrderDate\": \"24-02-2021 12:00:00\",\n  \"ShippingDuration\": \"1\",\n  \"CutOffTimes\": [\n    {\n      \"Day\": \"00\",\n      \"Available\": \"true\",\n      \"Type\": \"Regular\",\n      \"Time\": \"20:00:00\"\n    },\n    {\n      \"Day\": \"00\",\n      \"Available\": \"true\",\n      \"Type\": \"Today\",\n      \"Time\": \"12:00:00\"\n    }\n  ],\n  \"HolidaySorting\": \"true\",\n  \"Options\": [\n    \"Daytime\",\n    \"Evening\",\n    \"Pickup\"\n  ],\n  \"Locations\": \"2\",\n  \"Days\": \"3\",\n  \"Addresses\": [\n    {\n      \"AddressType\": \"01\",\n      \"Street\": \"Molengraaffplantsoen\",\n      \"HouseNr\": \"74\",\n      \"Zipcode\": \"3571ZZ\",\n      \"City\": \"Utrecht\",\n      \"Countrycode\": \"NL\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Only POST requests allowed\",\n  \"http_status_code\": 405\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "67eccfaf-601e-4ffe-a1cd-9e06e992bb48",
+              "name": "Too many requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v1",
+                    "checkout"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"OrderDate\": \"24-02-2021 12:00:00\",\n  \"ShippingDuration\": \"1\",\n  \"CutOffTimes\": [\n    {\n      \"Day\": \"00\",\n      \"Available\": \"true\",\n      \"Type\": \"Regular\",\n      \"Time\": \"20:00:00\"\n    },\n    {\n      \"Day\": \"00\",\n      \"Available\": \"true\",\n      \"Type\": \"Today\",\n      \"Time\": \"12:00:00\"\n    }\n  ],\n  \"HolidaySorting\": \"true\",\n  \"Options\": [\n    \"Daytime\",\n    \"Evening\",\n    \"Pickup\"\n  ],\n  \"Locations\": \"2\",\n  \"Days\": \"3\",\n  \"Addresses\": [\n    {\n      \"AddressType\": \"01\",\n      \"Street\": \"Molengraaffplantsoen\",\n      \"HouseNr\": \"74\",\n      \"Zipcode\": \"3571ZZ\",\n      \"City\": \"Utrecht\",\n      \"Countrycode\": \"NL\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Too many requests. Rate limit exceeded!\",\n  \"http_status_code\": 429\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0ab74de7-3cf9-4e6d-bda5-dd83802b2617",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v1",
+                    "checkout"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"OrderDate\": \"24-02-2021 12:00:00\",\n  \"ShippingDuration\": \"1\",\n  \"CutOffTimes\": [\n    {\n      \"Day\": \"00\",\n      \"Available\": \"true\",\n      \"Type\": \"Regular\",\n      \"Time\": \"20:00:00\"\n    },\n    {\n      \"Day\": \"00\",\n      \"Available\": \"true\",\n      \"Type\": \"Today\",\n      \"Time\": \"12:00:00\"\n    }\n  ],\n  \"HolidaySorting\": \"true\",\n  \"Options\": [\n    \"Daytime\",\n    \"Evening\",\n    \"Pickup\"\n  ],\n  \"Locations\": \"2\",\n  \"Days\": \"3\",\n  \"Addresses\": [\n    {\n      \"AddressType\": \"01\",\n      \"Street\": \"Molengraaffplantsoen\",\n      \"HouseNr\": \"74\",\n      \"Zipcode\": \"3571ZZ\",\n      \"City\": \"Utrecht\",\n      \"Countrycode\": \"NL\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"fault\": {\n    \"faultstring\": \"Unexpected token in object literal\",\n    \"detail\": {\n      \"errorcode\": \"Validation Fault\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-sandbox.postnl.nl",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "71f58361-8463-4e73-b447-1142e0bf7baa",
+    "name": "PostCIF-CheckoutService",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Returns delivery information",
+      "type": "text/plain"
+    }
+  }
+}

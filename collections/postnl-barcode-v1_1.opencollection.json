@@ -1,0 +1,67 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Barcode API",
+    "version": "v1_1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Barcode",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Generate a unique barcode",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.postnl.nl/shipment/v1_1/barcode",
+            "params": [
+              {
+                "name": "CustomerCode",
+                "value": "",
+                "type": "query",
+                "description": "The customer code for which you want a barcode to be generated"
+              },
+              {
+                "name": "CustomerNumber",
+                "value": "",
+                "type": "query",
+                "description": "The customer code for which you want a barcode to be generated"
+              },
+              {
+                "name": "Type",
+                "value": "",
+                "type": "query",
+                "description": "The barcode type that you want to be generated"
+              },
+              {
+                "name": "Serie",
+                "value": "",
+                "type": "query",
+                "description": "Barcode serie in the format '###000000-###000000', for example 100000-20000. The range must consist of a minimal difference of 100.000. It is allowed to add extra leading zeros at the beginning of the serie. See [Guidelines](https://developer.postnl.nl/docs/#/http/api-endpoints/send-track/barcode/guidelines) for more information."
+              },
+              {
+                "name": "Range",
+                "value": "",
+                "type": "query",
+                "description": "Only used for International Mail and Packet products (PEPS) shipments (with type LA, RI, UE). Identifying the issuing postal administration's country (NL in this case)."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "apikey",
+              "value": "{{apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Request example:\n```\ncurl -X GET \"https://api-sandbox.postnl.nl/shipment/v1_1/barcode?CustomerCode=DEVC&amp;CustomerNumber=11223344&amp;Type=3S&amp;Serie=000000000-999999999&amp\" \\\n -H \"Accept: application/json\" \\\n -H \"apikey: APIKEY-HERE\" \n```\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,180 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ShippingStatus API",
+    "version": "V2"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ShippingStatus",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Returns the statuses for a particular barcode",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.postnl.nl/shipment/v2/status/barcode/:barcode",
+            "params": [
+              {
+                "name": "barcode",
+                "value": "",
+                "type": "path",
+                "description": "Barcode of the shipment. This is a unique value."
+              },
+              {
+                "name": "detail",
+                "value": "",
+                "type": "query",
+                "description": "Option to include old statuses in the response"
+              },
+              {
+                "name": "language",
+                "value": "",
+                "type": "query",
+                "description": "Language of the returned shipment and status descriptions (default is Dutch)."
+              },
+              {
+                "name": "maxDays",
+                "value": "",
+                "type": "query",
+                "description": "Limit the number of days that will be searched (decrease this amount for better performance)."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "apikey",
+              "value": "{{apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Request example:\n```\ncurl -X GET \"https://api-sandbox.postnl.nl/shipment/v2/status/barcode/3SDEVC172649258\" \\\n -H \"Accept: application/json\" \\\n -H \"apikey: APIKEY-HERE\" \\\n```\n"
+        },
+        {
+          "info": {
+            "name": "Get status information by customer reference",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.postnl.nl/shipment/v2/status/reference/:referenceId",
+            "params": [
+              {
+                "name": "customerCode",
+                "value": "",
+                "type": "query",
+                "description": "Customer code as known at PostNL Pakketten"
+              },
+              {
+                "name": "customerNumber",
+                "value": "",
+                "type": "query",
+                "description": "Customer number as known at PostNL Pakketten"
+              },
+              {
+                "name": "referenceId",
+                "value": "",
+                "type": "path",
+                "description": "The customer reference belonging to the shipment"
+              },
+              {
+                "name": "detail",
+                "value": "",
+                "type": "query",
+                "description": "Option to include old statuses in the response"
+              },
+              {
+                "name": "language",
+                "value": "",
+                "type": "query",
+                "description": "Language of the returned shipment and status descriptions (default is Dutch)."
+              },
+              {
+                "name": "maxDays",
+                "value": "",
+                "type": "query",
+                "description": "Limit the number of days that will be searched (decrease this amount for better performance). By default this is 90 days in the past."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "apikey",
+              "value": "{{apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Request example:\n```\ncurl -X GET \"https://api-sandbox.postnl.nl/shipment/v2/status/reference?detail=true&language=NL&customerCode={{CustomerCode}}&customerNumber={{CustomerNumber}}&reference=REF98173245876329\" \\\n -H \"Accept: application/json\" \\\n -H \"apikey: APIKEY-HERE\" \n```\n"
+        },
+        {
+          "info": {
+            "name": "Returns the signature of a particular shipment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.postnl.nl/shipment/v2/status/signature/:barcode",
+            "params": [
+              {
+                "name": "barcode",
+                "value": "",
+                "type": "path",
+                "description": "Barcode of the shipment"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "apikey",
+              "value": "{{apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Request example:\n```\ncurl -X GET \"https://api-sandbox.postnl.nl/shipment/v2/status/signature/3SDEVC172649258\" \\\n -H \"Accept: application/json\" \\\n -H \"apikey: APIKEY-HERE\" \n```\n"
+        },
+        {
+          "info": {
+            "name": "Returns the updated statuses for a particular customer number",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.postnl.nl/shipment/v2/status/:customernumber/updatedshipments",
+            "params": [
+              {
+                "name": "customernumber",
+                "value": "",
+                "type": "path",
+                "description": "Your customer number"
+              },
+              {
+                "name": "period",
+                "value": "",
+                "type": "query",
+                "description": "Optional array which defines a specific period in which to return updated shipments. For optimal results, schedule calls at a frequency between 5-15 minutes and align the requested period accordingly to ensure complete coverage of past updates. Shorter periods yield improved response times. The API accommodates a maximum requested period of 2 hours, granting access to shipment data up to 48 hours in the past. Please use the following format: YYYY-MM-DDTHH:MM:SS and repeat this variable to define the period (e.g. /updatedshipments?period=2022-11-07T12:00:00.000&period=2022-11-07T12:05:00.000)."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "apikey",
+              "value": "{{apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Request example:\n```\ncurl -X GET \"https://api-sandbox.postnl.nl/shipment/v2/status/11223344/updatedshipments?period=2022-12-25T10:00:00&amp;period=2022-12-25T10:12:00\" \\\n -H \"Accept: application/json\" \\\n -H \"apikey: APIKEY-HERE\" \\\n```\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,822 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "PostNL Return API",
+        "description": "The PostNL Return API is a RESTful API that creates a label and confirms a shipments for return shipments.",
+        "termsOfService": "https://www.postnl.nl/en/terms-and-conditions/business/",
+        "contact": {
+            "name": "PostNL",
+            "url": "https://developer.postnl.nl/support/"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "v4"
+    },
+    "servers": [
+        {
+            "url": "https://api-sandbox.postnl.nl",
+            "description": "Non-Production server"
+        },
+        {
+            "url": "https://api.postnl.nl",
+            "description": "Production server"
+        }
+    ],
+    "security": [
+        {
+            "apikey": []
+        }
+    ],
+    "paths": {
+        "/shipment/delivery/v4/return/generate": {
+            "post": {
+                "description": "Create a return shipment with the provided details, it will return generated labels",
+                "operationId": "CreateReturnShipment",
+                "requestBody": {
+                    "description": "The details of the return shipment to create",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ReturnShipmentRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ShipmentResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "One or more business errors occurred",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BadRequestResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid apikey",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Unauthorized"
+                                }
+                            }
+                        }
+                    },
+                    "405": {
+                        "description": "Method not allowed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MethodNotAllowed"
+                                }
+                            }
+                        }
+                    },
+                    "429": {
+                        "description": "Too many requests",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TooManyRequests"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "ShipmentResponse": {
+                "type": "object",
+                "description": "The response of a successful shipment creation",
+                "additionalProperties": false,
+                "properties": {
+                    "traceId": {
+                        "type": "string",
+                        "description": "The trace Id within the PostNL landscape of this request",
+                        "example": "12345678-1234-1234-1234-123456789012"
+                    },
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ResponseItem"
+                        }
+                    },
+                    "warnings": {
+                        "type": "array",
+                        "description": "A list of warnings that occurred during the processing of the request, which are not blocking",
+                        "items": {
+                            "$ref": "#/components/schemas/ResponseWarning"
+                        }
+                    }
+                }
+            },
+            "ResponseItem": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "shipmentReference": {
+                        "type": "string",
+                        "description": "The customer reference of the shipment, which is the same as the customer reference in the request",
+                        "example": "1234567890"
+                    },
+                    "returnReference": {
+                        "type": "string",
+                        "description": "The customer reference of the return shipment, which is the same as the return reference in the request",
+                        "example": "0987654321"
+                    },
+                    "returnBarcode": {
+                        "type": "string",
+                        "description": "The barcode of the return shipment, provided by the customer",
+                        "example": "3SDEVC159487236"
+                    },
+                    "labels": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ResponseLabel"
+                        }
+                    },
+                    "barcode": {
+                        "type": "string",
+                        "description": "The barcode of the shipment, generated or provided by the customer",
+                        "example": "3SDEVC123456789"
+                    },
+                    "partnerId": {
+                        "type": "string",
+                        "description": "The Id of the selected Partner for shipping provided when a label is generated.",
+                        "example": "PNL-01/B2B/MULTIPLE/Good"
+                    },
+                    "partnerBarcode": {
+                        "type": "string",
+                        "description": "The barcode provided by the partner when a label is generated.",
+                        "example": "05211234567890M"
+                    },
+                    "codingText": {
+                        "type": "string",
+                        "example": "#X486T4C#51#1417#"
+                    }
+                }
+            },
+            "ResponseLabel": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "label": {
+                        "type": "string",
+                        "description": "Base64 encoded binary data of the label",
+                        "example": "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABaElEQVR42mNk"
+                    },
+                    "outputType": {
+                        "type": "string",
+                        "description": "The file format of the label content",
+                        "example": "pdf"
+                    },
+                    "labelType": {
+                        "type": "string",
+                        "description": "The type of the label that is in the content",
+                        "example": "Label"
+                    }
+                }
+            },
+            "ResponseWarning": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "description": {
+                        "type": "string",
+                        "example": "Postalcode validation failed, housenumber not within known range"
+                    }
+                }
+            },
+            "BadRequestResponse": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "description": "A URI reference that identifies the problem type according to RFC 9457",
+                        "example": "https://www.rfc-editor.org/rfc/rfc9457.html"
+                    },
+                    "title": {
+                        "type": "string",
+                        "description": "A short, human-readable summary of the problem type"
+                    },
+                    "status": {
+                        "type": "integer",
+                        "description": "HTTP status code generated by the origin server"
+                    },
+                    "errors": {
+                        "type": "object",
+                        "description": "An error object detailing the cause(s) of failure",
+                        "additionalProperties": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "traceId": {
+                        "type": "string",
+                        "description": "The trace Id within the PostNL landscape of this request",
+                        "example": "12345678-1234-1234-1234-123456789012"
+                    }
+                }
+            },
+            "ReturnShipmentRequest": {
+                "type": "object",
+                "description": "The details of a return shipment to be created",
+                "additionalProperties": false,
+                "required": [
+                    "receiver",
+                    "sender",
+                    "labelSettings",
+                    "shipmentType"
+                ],
+                "properties": {
+                    "receiver": {
+                        "description": "The receiver details of the return shipment",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/ReturnShipmentReceiver"
+                            }
+                        ]
+                    },
+                    "sender": {
+                        "description": "The sender details of the return shipment",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/ReturnShipmentSender"
+                            }
+                        ]
+                    },
+                    "labelSettings": {
+                        "description": "The information used to generate a label",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/ReturnShipmentLabelSettings"
+                            }
+                        ]
+                    },
+                    "returnOptions": {
+                        "description": "The return options for the shipment",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/ReturnShipmentReturnOptions"
+                            }
+                        ]
+                    },
+                    "items": {
+                        "type": "array",
+                        "description": "The details of the return in the shipment",
+                        "items": {
+                            "$ref": "#/components/schemas/ReturnShipmentItem"
+                        }
+                    },
+                    "shipmentType": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/ReturnShipmentType"
+                            }
+                        ]
+                    }
+                }
+            },
+            "ReturnShipmentReceiver": {
+                "type": "object",
+                "description": "The details of a customer",
+                "additionalProperties": false,
+                "required": [
+                    "address",
+                    "customerNumber",
+                    "customerCode"
+                ],
+                "properties": {
+                    "contact": {
+                        "description": "Contact information of a person",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Contact"
+                            }
+                        ]
+                    },
+                    "address": {
+                        "description": "A postal address",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Address"
+                            }
+                        ]
+                    },
+                    "undeliverableReturnAddress": {
+                        "description": "The undeliverable return address for this customer",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Address"
+                            }
+                        ]
+                    },
+                    "customerNumber": {
+                        "type": "string",
+                        "maxLength": 10,
+                        "minLength": 1,
+                        "example": "123456"
+                    },
+                    "customerCode": {
+                        "type": "string",
+                        "maxLength": 4,
+                        "minLength": 1,
+                        "example": "DEVC"
+                    }
+                }
+            },
+            "Contact": {
+                "type": "object",
+                "description": "Contact information of a person",
+                "additionalProperties": false,
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "description": "The email address of the contact person",
+                        "maxLength": 50,
+                        "example": "jan@jansen.nl"
+                    },
+                    "firstName": {
+                        "type": "string",
+                        "description": "The first name of the contact person",
+                        "maxLength": 35,
+                        "example": "Jan"
+                    },
+                    "lastName": {
+                        "type": "string",
+                        "description": "The last name of the contact person",
+                        "maxLength": 35,
+                        "example": "Jansen"
+                    },
+                    "mobileNumber": {
+                        "type": "string",
+                        "description": "The mobile number of the contact person",
+                        "maxLength": 17,
+                        "minLength": 7,
+                        "example": "0612345678"
+                    }
+                }
+            },
+            "Address": {
+                "type": "object",
+                "description": "A postal address",
+                "additionalProperties": false,
+                "required": [
+                    "countryIso"
+                ],
+                "properties": {
+                    "city": {
+                        "type": "string",
+                        "description": "A city is a recognized area within a particular country that has a common name",
+                        "maxLength": 35,
+                        "example": "s Gravenhage"
+                    },
+                    "countryIso": {
+                        "type": "string",
+                        "description": "A countryIso is a recognized ISO2 code for an area that has a common name",
+                        "maxLength": 2,
+                        "minLength": 2,
+                        "pattern": "^[A-Z]{2}$",
+                        "example": "NL"
+                    },
+                    "houseNumber": {
+                        "type": "string",
+                        "description": "A houseNumber is an identifying indicator that identifies a particular building on a street or road",
+                        "maxLength": 10,
+                        "example": "3"
+                    },
+                    "houseNumberAddition": {
+                        "type": "string",
+                        "description": "A houseNumberAddition is an identifying indicator that identifies a particular part of a building on a street or road\n            in case there are multiple residents living at the same address",
+                        "maxLength": 10,
+                        "example": "bis"
+                    },
+                    "postalCode": {
+                        "type": "string",
+                        "description": "A postalCode is a code of letters and digits that identifies a geographical area that is added to an address and is used by the postal service to sort mail",
+                        "maxLength": 17,
+                        "example": "2521CA"
+                    },
+                    "street": {
+                        "type": "string",
+                        "description": "A street is an identifying name that is given to a street or road",
+                        "maxLength": 95,
+                        "example": "Waldorpstraat"
+                    },
+                    "addressLine": {
+                        "type": "string",
+                        "description": "An addressLine is a combination of the elements that identifies a particular address within a city.\n            Can only be used for a combination of Street, HouseNumber and HouseNumberAddition",
+                        "example": "Waldorpstraat 3 bis"
+                    },
+                    "companyName": {
+                        "type": "string",
+                        "description": "Name of the company at this address",
+                        "maxLength": 35,
+                        "example": "PostNL"
+                    },
+                    "departmentName": {
+                        "type": "string",
+                        "description": "Name of the department at this address",
+                        "maxLength": 35,
+                        "example": "Finance department"
+                    },
+                    "internationalAddressData": {
+                        "description": "Fields specific to international shipment addresses",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/InternationalAddress"
+                            }
+                        ]
+                    }
+                }
+            },
+            "InternationalAddress": {
+                "type": "object",
+                "description": "Fields specific to an international shipment address",
+                "additionalProperties": false,
+                "properties": {
+                    "area": {
+                        "type": "string",
+                        "description": "Area of the address",
+                        "maxLength": 35,
+                        "example": "Area 51"
+                    },
+                    "buildingName": {
+                        "type": "string",
+                        "description": "Buildingname of the address",
+                        "maxLength": 35,
+                        "example": "Main building"
+                    },
+                    "doorCode": {
+                        "type": "string",
+                        "description": "Doorcode of the address",
+                        "maxLength": 35,
+                        "example": "A1"
+                    },
+                    "floor": {
+                        "type": "string",
+                        "description": "Floor of the address",
+                        "maxLength": 35,
+                        "example": "3"
+                    },
+                    "region": {
+                        "type": "string",
+                        "description": "Region of the address",
+                        "maxLength": 35,
+                        "example": "California"
+                    }
+                }
+            },
+            "ReturnShipmentSender": {
+                "type": "object",
+                "description": "The sender details of a return shipment",
+                "additionalProperties": false,
+                "required": [
+                    "address"
+                ],
+                "properties": {
+                    "contact": {
+                        "description": "Contact information of a person",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Contact"
+                            }
+                        ]
+                    },
+                    "address": {
+                        "description": "A postal address",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Address"
+                            }
+                        ]
+                    }
+                }
+            },
+            "ReturnShipmentLabelSettings": {
+                "type": "object",
+                "description": "The information (type and orientation) used to generate a label",
+                "additionalProperties": false,
+                "required": [
+                    "printMethod"
+                ],
+                "properties": {
+                    "printMethod": {
+                        "type": "string",
+                        "description": "Specifies which party will print the shipment label. Sending the return from BE means only consumerPrint is available. Sending from NL means only retailPrint is available.",
+                        "minLength": 1,
+                        "example": "consumer"
+                    },
+                    "outputType": {
+                        "description": "The file format of the label",
+                        "default": "pdf",
+                        "example": "pdf",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/OutputType"
+                            }
+                        ]
+                    },
+                    "pageOrientation": {
+                        "description": "Orientation of the page the label is printed on",
+                        "example": "portrait",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/PageOrientation"
+                            }
+                        ]
+                    },
+                    "resolution": {
+                        "description": "Resolution of the label that is returned in DPI.",
+                        "default": "200",
+                        "example": "200",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Resolution"
+                            }
+                        ]
+                    }
+                }
+            },
+            "OutputType": {
+                "type": "string",
+                "x-extensible-enum": [
+                    "zpl",
+                    "pdf",
+                    "gif",
+                    "jpg",
+                    "png"
+                ]
+            },
+            "PageOrientation": {
+                "type": "string",
+                "x-extensible-enum": [
+                    "portrait",
+                    "landscape"
+                ]
+            },
+            "Resolution": {
+                "type": "string",
+                "x-extensible-enum": [
+                    "200",
+                    "300",
+                    "600"
+                ]
+            },
+            "ReturnShipmentReturnOptions": {
+                "type": "object",
+                "description": "The return options for the shipment",
+                "additionalProperties": false,
+                "properties": {
+                    "domestic": {
+                        "description": "Domestic return options",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/DomesticReturnOptions"
+                            }
+                        ]
+                    },
+                    "shipmentInternational": {
+                        "description": "International return options",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/ReturnShipmentInternationalReturnOptions"
+                            }
+                        ]
+                    }
+                }
+            },
+            "DomesticReturnOptions": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "valuableReturn": {
+                        "type": "boolean",
+                        "description": "Specifies whether or not the return is valuable"
+                    },
+                    "returnPeriod": {
+                        "description": "The number of days the shipment can be returned to the sender. Only values allowed are 20 or 35.",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/ReturnShipmentReturnPeriod"
+                            }
+                        ]
+                    }
+                }
+            },
+            "ReturnShipmentReturnPeriod": {
+                "type": "string",
+                "x-extensible-enum": [
+                    "20",
+                    "35"
+                ]
+            },
+            "ReturnShipmentInternationalReturnOptions": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "networkType": {
+                        "description": "This field is used for International Returns to determine whether the international operator should deliver through commercial or postal network",
+                        "example": "commercial",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/NetworkType"
+                            }
+                        ]
+                    },
+                    "consolidationMode": {
+                        "description": "This field is used for International Returns to determine whether a customer wants to provide their shipment consolidated",
+                        "example": "none",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/ConsolidationMode"
+                            }
+                        ]
+                    }
+                }
+            },
+            "NetworkType": {
+                "type": "string",
+                "x-extensible-enum": [
+                    "postal",
+                    "commercial"
+                ]
+            },
+            "ConsolidationMode": {
+                "type": "string",
+                "x-extensible-enum": [
+                    "none",
+                    "bulk"
+                ]
+            },
+            "ReturnShipmentItem": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "barcode": {
+                        "type": "string",
+                        "description": "The barcode of the item, generated or provided by the customer",
+                        "example": "3SDEVC123456789"
+                    },
+                    "dimensions": {
+                        "description": "The dimensions of the return shipment item",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Dimensions"
+                            }
+                        ]
+                    },
+                    "customerReferences": {
+                        "description": "The references of a shipment used by the customer",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/CustomerReferences"
+                            }
+                        ]
+                    }
+                }
+            },
+            "Dimensions": {
+                "type": "object",
+                "description": "The dimensions of the shipment item",
+                "additionalProperties": false,
+                "properties": {
+                    "height": {
+                        "type": "integer",
+                        "description": "The height of the parcel in mm",
+                        "minimum": 0.0,
+                        "example": 101
+                    },
+                    "length": {
+                        "type": "integer",
+                        "description": "The length of the parcel in mm",
+                        "minimum": 0.0,
+                        "example": 420
+                    },
+                    "volume": {
+                        "type": "integer",
+                        "description": "The volume of the parcel in cubic cm",
+                        "minimum": 0.0,
+                        "example": 8908
+                    },
+                    "weight": {
+                        "type": "integer",
+                        "description": "The weight of the parcel in grams",
+                        "minimum": 0.0,
+                        "example": 1144
+                    },
+                    "width": {
+                        "type": "integer",
+                        "description": "The width of the parcel in mm",
+                        "minimum": 0.0,
+                        "example": 210
+                    }
+                }
+            },
+            "CustomerReferences": {
+                "type": "object",
+                "description": "The references of a shipment used by the customer",
+                "additionalProperties": false,
+                "properties": {
+                    "costCenter": {
+                        "type": "string",
+                        "description": "The cost center reference of the shipment",
+                        "example": "costCenter"
+                    },
+                    "shipmentReference": {
+                        "type": "string",
+                        "description": "The customer reference of the shipment",
+                        "example": "reference"
+                    },
+                    "returnReference": {
+                        "type": "string",
+                        "description": "The customer reference of the return shipment",
+                        "example": "RMA: 66532"
+                    },
+                    "shipmentRemark": {
+                        "type": "string",
+                        "description": "An additional remark for the shipment",
+                        "example": "remark"
+                    }
+                }
+            },
+            "ReturnShipmentType": {
+                "type": "string",
+                "x-extensible-enum": [
+                    "parcel",
+                    "packet"
+                ]
+            },
+            "Unauthorized": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "example": "Failed to resolve API Key variable 'request.header.apikey'"
+                    },
+                    "http_status_code": {
+                        "type": "number",
+                        "example": 401
+                    }
+                }
+            },
+            "MethodNotAllowed": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "example": "Only POST requests allowed"
+                    },
+                    "http_status_code": {
+                        "type": "number",
+                        "example": 405
+                    }
+                }
+            },
+            "TooManyRequests": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "example": "Too many requests. Rate limit exceeded!"
+                    },
+                    "http_status_code": {
+                        "type": "number",
+                        "example": 429
+                    }
+                }
+            }
+        },
+        "securitySchemes": {
+            "apikey": {
+                "type": "apiKey",
+                "name": "apikey",
+                "in": "header"
+            }
+        }
+    },
+    "externalDocs": {
+        "description": "Find our API documentation here",
+        "url": "https://developer.postnl.nl/docs/#/http/api-endpoints/send-track/shipment/generate-return"
+    }
+}

@@ -1,0 +1,359 @@
+{
+  "item": [
+    {
+      "id": "23cfeaed-a8d5-49eb-b788-698ca767437c",
+      "name": "Create Shipment",
+      "request": {
+        "name": "Create Shipment",
+        "description": {
+          "content": "Create a shipment with the provided details, it will return generated labels and barcodes if not provided",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "shipment",
+            "delivery",
+            "v4",
+            "labelconfirm"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"receiver\": {\n    \"address\": {\n      \"countryIso\": \"<string>\",\n      \"city\": \"<string>\",\n      \"houseNumber\": \"<string>\",\n      \"houseNumberAddition\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"street\": \"<string>\",\n      \"addressLine\": \"<string>\",\n      \"companyName\": \"<string>\",\n      \"departmentName\": \"<string>\",\n      \"internationalAddressData\": {\n        \"area\": \"<string>\",\n        \"buildingName\": \"<string>\",\n        \"doorCode\": \"<string>\",\n        \"floor\": \"<string>\",\n        \"region\": \"<string>\"\n      }\n    },\n    \"contact\": {\n      \"email\": \"<string>\",\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"mobileNumber\": \"<string>\"\n    },\n    \"type\": \"<string>\"\n  },\n  \"sender\": {\n    \"customerNumber\": \"<string>\",\n    \"customerCode\": \"<string>\",\n    \"address\": {\n      \"countryIso\": \"<string>\",\n      \"city\": \"<string>\",\n      \"houseNumber\": \"<string>\",\n      \"houseNumberAddition\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"street\": \"<string>\",\n      \"addressLine\": \"<string>\",\n      \"companyName\": \"<string>\",\n      \"departmentName\": \"<string>\",\n      \"internationalAddressData\": {\n        \"area\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"buildingName\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"doorCode\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"floor\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"region\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"undeliverableReturnAddress\": {\n      \"countryIso\": \"<string>\",\n      \"city\": \"<string>\",\n      \"houseNumber\": \"<string>\",\n      \"houseNumberAddition\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"street\": \"<string>\",\n      \"addressLine\": \"<string>\",\n      \"companyName\": \"<string>\",\n      \"departmentName\": \"<string>\",\n      \"internationalAddressData\": {\n        \"area\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"buildingName\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"doorCode\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"floor\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"region\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"contact\": {\n      \"email\": \"<string>\",\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"mobileNumber\": \"<string>\"\n    }\n  },\n  \"shipmentType\": \"<string>\",\n  \"deliveryLocation\": {\n    \"pickupLocationId\": \"<string>\"\n  },\n  \"returnOptions\": {\n    \"returnBarcode\": \"<string>\",\n    \"returnPeriod\": \"<string>\",\n    \"returnAddress\": {\n      \"countryIso\": \"<string>\",\n      \"city\": \"<string>\",\n      \"houseNumber\": \"<string>\",\n      \"houseNumberAddition\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"street\": \"<string>\",\n      \"addressLine\": \"<string>\",\n      \"companyName\": \"<string>\",\n      \"departmentName\": \"<string>\",\n      \"internationalAddressData\": {\n        \"area\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"buildingName\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"doorCode\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"floor\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"region\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"valuableReturn\": \"<boolean>\"\n  },\n  \"itemCount\": \"<integer>\",\n  \"items\": [\n    {\n      \"barcode\": \"<string>\",\n      \"dimensions\": {\n        \"height\": \"<integer>\",\n        \"length\": \"<integer>\",\n        \"volume\": \"<integer>\",\n        \"weight\": \"<integer>\",\n        \"width\": \"<integer>\"\n      },\n      \"customerReferences\": {\n        \"costCenter\": \"<string>\",\n        \"shipmentReference\": \"<string>\",\n        \"returnReference\": \"<string>\",\n        \"shipmentRemark\": \"<string>\"\n      }\n    },\n    {\n      \"barcode\": \"<string>\",\n      \"dimensions\": {\n        \"height\": \"<integer>\",\n        \"length\": \"<integer>\",\n        \"volume\": \"<integer>\",\n        \"weight\": \"<integer>\",\n        \"width\": \"<integer>\"\n      },\n      \"customerReferences\": {\n        \"costCenter\": \"<string>\",\n        \"shipmentReference\": \"<string>\",\n        \"returnReference\": \"<string>\",\n        \"shipmentRemark\": \"<string>\"\n      }\n    }\n  ],\n  \"services\": {\n    \"insuredValue\": \"<decimal>\",\n    \"deliveryWindow\": {\n      \"service\": \"<string>\",\n      \"guaranteedBefore\": \"<string>\",\n      \"duration\": \"<string>\"\n    },\n    \"statedAddressOnly\": \"<boolean>\",\n    \"returnWhenNotHome\": \"<boolean>\",\n    \"minimalAgeCheck\": \"<string>\",\n    \"deliveryConfirmation\": \"<string>\",\n    \"adrLq\": \"<boolean>\",\n    \"registered\": \"<boolean>\",\n    \"idCheck\": \"<boolean>\"\n  },\n  \"handoverDate\": \"<date>\",\n  \"labelSettings\": {\n    \"outputType\": \"<string>\",\n    \"pageOrientation\": \"<string>\",\n    \"resolution\": \"200\"\n  },\n  \"internationalShipmentData\": {\n    \"pudo\": \"<boolean>\",\n    \"bundle\": \"<string>\",\n    \"customs\": {\n      \"transactionCode\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"handleAsNonDeliverable\": false,\n      \"senderIdentification\": \"<string>\",\n      \"receiverIdentification\": \"<string>\",\n      \"labelSignature\": \"<string>\",\n      \"content\": [\n        {\n          \"countryOfOrigin\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"hsTariffNumber\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"quantity\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"weight\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"countryOfOrigin\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"hsTariffNumber\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"quantity\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"weight\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"associatedDocument\": {\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"number\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "abf33fe1-a359-456b-bbf3-fa29a1fa65e1",
+          "name": "OK",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "shipment",
+                "delivery",
+                "v4",
+                "labelconfirm"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "apikey",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"receiver\": {\n    \"address\": {\n      \"countryIso\": \"NL\",\n      \"city\": \"s Gravenhage\",\n      \"houseNumber\": \"3\",\n      \"houseNumberAddition\": \"bis\",\n      \"postalCode\": \"2521CA\",\n      \"street\": \"Waldorpstraat\",\n      \"addressLine\": \"Waldorpstraat 3 bis\",\n      \"companyName\": \"PostNL\",\n      \"departmentName\": \"Finance department\",\n      \"internationalAddressData\": {\n        \"area\": \"Area 51\",\n        \"buildingName\": \"Main building\",\n        \"doorCode\": \"A1\",\n        \"floor\": \"3\",\n        \"region\": \"California\"\n      }\n    },\n    \"contact\": {\n      \"email\": \"jan@jansen.nl\",\n      \"firstName\": \"Jan\",\n      \"lastName\": \"Jansen\",\n      \"mobileNumber\": \"0612345678\"\n    },\n    \"type\": \"consumer\"\n  },\n  \"sender\": {\n    \"customerNumber\": \"123456\",\n    \"customerCode\": \"DEVC\",\n    \"address\": {\n      \"countryIso\": \"NL\",\n      \"city\": \"s Gravenhage\",\n      \"houseNumber\": \"3\",\n      \"houseNumberAddition\": \"bis\",\n      \"postalCode\": \"2521CA\",\n      \"street\": \"Waldorpstraat\",\n      \"addressLine\": \"Waldorpstraat 3 bis\",\n      \"companyName\": \"PostNL\",\n      \"departmentName\": \"Finance department\",\n      \"internationalAddressData\": {\n        \"area\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"buildingName\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"doorCode\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"floor\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"region\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"undeliverableReturnAddress\": {\n      \"countryIso\": \"NL\",\n      \"city\": \"s Gravenhage\",\n      \"houseNumber\": \"3\",\n      \"houseNumberAddition\": \"bis\",\n      \"postalCode\": \"2521CA\",\n      \"street\": \"Waldorpstraat\",\n      \"addressLine\": \"Waldorpstraat 3 bis\",\n      \"companyName\": \"PostNL\",\n      \"departmentName\": \"Finance department\",\n      \"internationalAddressData\": {\n        \"area\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"buildingName\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"doorCode\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"floor\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"region\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"contact\": {\n      \"email\": \"jan@jansen.nl\",\n      \"firstName\": \"Jan\",\n      \"lastName\": \"Jansen\",\n      \"mobileNumber\": \"0612345678\"\n    }\n  },\n  \"shipmentType\": \"letterbox\",\n  \"deliveryLocation\": {\n    \"pickupLocationId\": \"910216\"\n  },\n  \"returnOptions\": {\n    \"returnBarcode\": \"3SDEVC123456789\",\n    \"returnPeriod\": \"<string>\",\n    \"returnAddress\": {\n      \"countryIso\": \"NL\",\n      \"city\": \"s Gravenhage\",\n      \"houseNumber\": \"3\",\n      \"houseNumberAddition\": \"bis\",\n      \"postalCode\": \"2521CA\",\n      \"street\": \"Waldorpstraat\",\n      \"addressLine\": \"Waldorpstraat 3 bis\",\n      \"companyName\": \"PostNL\",\n      \"departmentName\": \"Finance department\",\n      \"internationalAddressData\": {\n        \"area\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"buildingName\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"doorCode\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"floor\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"region\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"valuableReturn\": true\n  },\n  \"itemCount\": 2,\n  \"items\": [\n    {\n      \"barcode\": \"3SDEVC123456789\",\n      \"dimensions\": {\n        \"height\": 101,\n        \"length\": 420,\n        \"volume\": 8908,\n        \"weight\": 1144,\n        \"width\": 210\n      },\n      \"customerReferences\": {\n        \"costCenter\": \"costCenter\",\n        \"shipmentReference\": \"reference\",\n        \"returnReference\": \"RMA: 66532\",\n        \"shipmentRemark\": \"remark\"\n      }\n    },\n    {\n      \"barcode\": \"3SDEVC123456789\",\n      \"dimensions\": {\n        \"height\": 101,\n        \"length\": 420,\n        \"volume\": 8908,\n        \"weight\": 1144,\n        \"width\": 210\n      },\n      \"customerReferences\": {\n        \"costCenter\": \"costCenter\",\n        \"shipmentReference\": \"reference\",\n        \"returnReference\": \"RMA: 66532\",\n        \"shipmentRemark\": \"remark\"\n      }\n    }\n  ],\n  \"services\": {\n    \"insuredValue\": 100.99,\n    \"deliveryWindow\": {\n      \"service\": \"<string>\",\n      \"guaranteedBefore\": \"10:00\",\n      \"duration\": \"24hours\"\n    },\n    \"statedAddressOnly\": \"<boolean>\",\n    \"returnWhenNotHome\": \"<boolean>\",\n    \"minimalAgeCheck\": \"<string>\",\n    \"deliveryConfirmation\": \"signature\",\n    \"adrLq\": \"<boolean>\",\n    \"registered\": \"<boolean>\",\n    \"idCheck\": \"<boolean>\"\n  },\n  \"handoverDate\": \"2024-04-20\",\n  \"labelSettings\": {\n    \"outputType\": \"pdf\",\n    \"pageOrientation\": \"portrait\",\n    \"resolution\": \"200\"\n  },\n  \"internationalShipmentData\": {\n    \"pudo\": false,\n    \"bundle\": \"track_trace\",\n    \"customs\": {\n      \"transactionCode\": \"<string>\",\n      \"currency\": \"EUR\",\n      \"handleAsNonDeliverable\": true,\n      \"senderIdentification\": \"<string>\",\n      \"receiverIdentification\": \"<string>\",\n      \"labelSignature\": \"R0lG...AAA7\",\n      \"content\": [\n        {\n          \"countryOfOrigin\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"hsTariffNumber\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"quantity\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"weight\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"countryOfOrigin\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"hsTariffNumber\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"quantity\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"weight\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"associatedDocument\": {\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"number\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"traceId\": \"12345678-1234-1234-1234-123456789012\",\n  \"items\": [\n    {\n      \"shipmentReference\": \"1234567890\",\n      \"returnReference\": \"0987654321\",\n      \"returnBarcode\": \"3SDEVC159487236\",\n      \"labels\": [\n        {\n          \"label\": \"iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABaElEQVR42mNk\",\n          \"outputType\": \"pdf\",\n          \"labelType\": \"Label\"\n        },\n        {\n          \"label\": \"iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABaElEQVR42mNk\",\n          \"outputType\": \"pdf\",\n          \"labelType\": \"Label\"\n        }\n      ],\n      \"barcode\": \"3SDEVC123456789\",\n      \"partnerId\": \"PNL-01/B2B/MULTIPLE/Good\",\n      \"partnerBarcode\": \"05211234567890M\",\n      \"codingText\": \"#X486T4C#51#1417#\"\n    },\n    {\n      \"shipmentReference\": \"1234567890\",\n      \"returnReference\": \"0987654321\",\n      \"returnBarcode\": \"3SDEVC159487236\",\n      \"labels\": [\n        {\n          \"label\": \"iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABaElEQVR42mNk\",\n          \"outputType\": \"pdf\",\n          \"labelType\": \"Label\"\n        },\n        {\n          \"label\": \"iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABaElEQVR42mNk\",\n          \"outputType\": \"pdf\",\n          \"labelType\": \"Label\"\n        }\n      ],\n      \"barcode\": \"3SDEVC123456789\",\n      \"partnerId\": \"PNL-01/B2B/MULTIPLE/Good\",\n      \"partnerBarcode\": \"05211234567890M\",\n      \"codingText\": \"#X486T4C#51#1417#\"\n    }\n  ],\n  \"warnings\": [\n    {\n      \"description\": \"Postalcode validation failed, housenumber not within known range\"\n    },\n    {\n      \"description\": \"Postalcode validation failed, housenumber not within known range\"\n    }\n  ]\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "3d3bd27f-ecd9-4f0d-a82e-3d9138b5915f",
+          "name": "One or more business errors occurred",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "shipment",
+                "delivery",
+                "v4",
+                "labelconfirm"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "apikey",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"receiver\": {\n    \"address\": {\n      \"countryIso\": \"NL\",\n      \"city\": \"s Gravenhage\",\n      \"houseNumber\": \"3\",\n      \"houseNumberAddition\": \"bis\",\n      \"postalCode\": \"2521CA\",\n      \"street\": \"Waldorpstraat\",\n      \"addressLine\": \"Waldorpstraat 3 bis\",\n      \"companyName\": \"PostNL\",\n      \"departmentName\": \"Finance department\",\n      \"internationalAddressData\": {\n        \"area\": \"Area 51\",\n        \"buildingName\": \"Main building\",\n        \"doorCode\": \"A1\",\n        \"floor\": \"3\",\n        \"region\": \"California\"\n      }\n    },\n    \"contact\": {\n      \"email\": \"jan@jansen.nl\",\n      \"firstName\": \"Jan\",\n      \"lastName\": \"Jansen\",\n      \"mobileNumber\": \"0612345678\"\n    },\n    \"type\": \"consumer\"\n  },\n  \"sender\": {\n    \"customerNumber\": \"123456\",\n    \"customerCode\": \"DEVC\",\n    \"address\": {\n      \"countryIso\": \"NL\",\n      \"city\": \"s Gravenhage\",\n      \"houseNumber\": \"3\",\n      \"houseNumberAddition\": \"bis\",\n      \"postalCode\": \"2521CA\",\n      \"street\": \"Waldorpstraat\",\n      \"addressLine\": \"Waldorpstraat 3 bis\",\n      \"companyName\": \"PostNL\",\n      \"departmentName\": \"Finance department\",\n      \"internationalAddressData\": {\n        \"area\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"buildingName\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"doorCode\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"floor\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"region\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"undeliverableReturnAddress\": {\n      \"countryIso\": \"NL\",\n      \"city\": \"s Gravenhage\",\n      \"houseNumber\": \"3\",\n      \"houseNumberAddition\": \"bis\",\n      \"postalCode\": \"2521CA\",\n      \"street\": \"Waldorpstraat\",\n      \"addressLine\": \"Waldorpstraat 3 bis\",\n      \"companyName\": \"PostNL\",\n      \"departmentName\": \"Finance department\",\n      \"internationalAddressData\": {\n        \"area\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"buildingName\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"doorCode\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"floor\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"region\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"contact\": {\n      \"email\": \"jan@jansen.nl\",\n      \"firstName\": \"Jan\",\n      \"lastName\": \"Jansen\",\n      \"mobileNumber\": \"0612345678\"\n    }\n  },\n  \"shipmentType\": \"letterbox\",\n  \"deliveryLocation\": {\n    \"pickupLocationId\": \"910216\"\n  },\n  \"returnOptions\": {\n    \"returnBarcode\": \"3SDEVC123456789\",\n    \"returnPeriod\": \"<string>\",\n    \"returnAddress\": {\n      \"countryIso\": \"NL\",\n      \"city\": \"s Gravenhage\",\n      \"houseNumber\": \"3\",\n      \"houseNumberAddition\": \"bis\",\n      \"postalCode\": \"2521CA\",\n      \"street\": \"Waldorpstraat\",\n      \"addressLine\": \"Waldorpstraat 3 bis\",\n      \"companyName\": \"PostNL\",\n      \"departmentName\": \"Finance department\",\n      \"internationalAddressData\": {\n        \"area\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"buildingName\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"doorCode\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"floor\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"region\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"valuableReturn\": true\n  },\n  \"itemCount\": 2,\n  \"items\": [\n    {\n      \"barcode\": \"3SDEVC123456789\",\n      \"dimensions\": {\n        \"height\": 101,\n        \"length\": 420,\n        \"volume\": 8908,\n        \"weight\": 1144,\n        \"width\": 210\n      },\n      \"customerReferences\": {\n        \"costCenter\": \"costCenter\",\n        \"shipmentReference\": \"reference\",\n        \"returnReference\": \"RMA: 66532\",\n        \"shipmentRemark\": \"remark\"\n      }\n    },\n    {\n      \"barcode\": \"3SDEVC123456789\",\n      \"dimensions\": {\n        \"height\": 101,\n        \"length\": 420,\n        \"volume\": 8908,\n        \"weight\": 1144,\n        \"width\": 210\n      },\n      \"customerReferences\": {\n        \"costCenter\": \"costCenter\",\n        \"shipmentReference\": \"reference\",\n        \"returnReference\": \"RMA: 66532\",\n        \"shipmentRemark\": \"remark\"\n      }\n    }\n  ],\n  \"services\": {\n    \"insuredValue\": 100.99,\n    \"deliveryWindow\": {\n      \"service\": \"<string>\",\n      \"guaranteedBefore\": \"10:00\",\n      \"duration\": \"24hours\"\n    },\n    \"statedAddressOnly\": \"<boolean>\",\n    \"returnWhenNotHome\": \"<boolean>\",\n    \"minimalAgeCheck\": \"<string>\",\n    \"deliveryConfirmation\": \"signature\",\n    \"adrLq\": \"<boolean>\",\n    \"registered\": \"<boolean>\",\n    \"idCheck\": \"<boolean>\"\n  },\n  \"handoverDate\": \"2024-04-20\",\n  \"labelSettings\": {\n    \"outputType\": \"pdf\",\n    \"pageOrientation\": \"portrait\",\n    \"resolution\": \"200\"\n  },\n  \"internationalShipmentData\": {\n    \"pudo\": false,\n    \"bundle\": \"track_trace\",\n    \"customs\": {\n      \"transactionCode\": \"<string>\",\n      \"currency\": \"EUR\",\n      \"handleAsNonDeliverable\": true,\n      \"senderIdentification\": \"<string>\",\n      \"receiverIdentification\": \"<string>\",\n      \"labelSignature\": \"R0lG...AAA7\",\n      \"content\": [\n        {\n          \"countryOfOrigin\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"hsTariffNumber\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"quantity\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"weight\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"countryOfOrigin\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"hsTariffNumber\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"quantity\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"weight\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"associatedDocument\": {\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"number\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"type\": \"https://www.rfc-editor.org/rfc/rfc9457.html\",\n  \"title\": \"string\",\n  \"status\": 8812,\n  \"errors\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_1\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"traceId\": \"12345678-1234-1234-1234-123456789012\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "9c5ef219-79fb-4f8d-b76c-48a2fef5e3fe",
+          "name": "Invalid apikey",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "shipment",
+                "delivery",
+                "v4",
+                "labelconfirm"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "apikey",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"receiver\": {\n    \"address\": {\n      \"countryIso\": \"NL\",\n      \"city\": \"s Gravenhage\",\n      \"houseNumber\": \"3\",\n      \"houseNumberAddition\": \"bis\",\n      \"postalCode\": \"2521CA\",\n      \"street\": \"Waldorpstraat\",\n      \"addressLine\": \"Waldorpstraat 3 bis\",\n      \"companyName\": \"PostNL\",\n      \"departmentName\": \"Finance department\",\n      \"internationalAddressData\": {\n        \"area\": \"Area 51\",\n        \"buildingName\": \"Main building\",\n        \"doorCode\": \"A1\",\n        \"floor\": \"3\",\n        \"region\": \"California\"\n      }\n    },\n    \"contact\": {\n      \"email\": \"jan@jansen.nl\",\n      \"firstName\": \"Jan\",\n      \"lastName\": \"Jansen\",\n      \"mobileNumber\": \"0612345678\"\n    },\n    \"type\": \"consumer\"\n  },\n  \"sender\": {\n    \"customerNumber\": \"123456\",\n    \"customerCode\": \"DEVC\",\n    \"address\": {\n      \"countryIso\": \"NL\",\n      \"city\": \"s Gravenhage\",\n      \"houseNumber\": \"3\",\n      \"houseNumberAddition\": \"bis\",\n      \"postalCode\": \"2521CA\",\n      \"street\": \"Waldorpstraat\",\n      \"addressLine\": \"Waldorpstraat 3 bis\",\n      \"companyName\": \"PostNL\",\n      \"departmentName\": \"Finance department\",\n      \"internationalAddressData\": {\n        \"area\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"buildingName\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"doorCode\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"floor\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"region\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"undeliverableReturnAddress\": {\n      \"countryIso\": \"NL\",\n      \"city\": \"s Gravenhage\",\n      \"houseNumber\": \"3\",\n      \"houseNumberAddition\": \"bis\",\n      \"postalCode\": \"2521CA\",\n      \"street\": \"Waldorpstraat\",\n      \"addressLine\": \"Waldorpstraat 3 bis\",\n      \"companyName\": \"PostNL\",\n      \"departmentName\": \"Finance department\",\n      \"internationalAddressData\": {\n        \"area\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"buildingName\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"doorCode\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"floor\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"region\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"contact\": {\n      \"email\": \"jan@jansen.nl\",\n      \"firstName\": \"Jan\",\n      \"lastName\": \"Jansen\",\n      \"mobileNumber\": \"0612345678\"\n    }\n  },\n  \"shipmentType\": \"letterbox\",\n  \"deliveryLocation\": {\n    \"pickupLocationId\": \"910216\"\n  },\n  \"returnOptions\": {\n    \"returnBarcode\": \"3SDEVC123456789\",\n    \"returnPeriod\": \"<string>\",\n    \"returnAddress\": {\n      \"countryIso\": \"NL\",\n      \"city\": \"s Gravenhage\",\n      \"houseNumber\": \"3\",\n      \"houseNumberAddition\": \"bis\",\n      \"postalCode\": \"2521CA\",\n      \"street\": \"Waldorpstraat\",\n      \"addressLine\": \"Waldorpstraat 3 bis\",\n      \"companyName\": \"PostNL\",\n      \"departmentName\": \"Finance department\",\n      \"internationalAddressData\": {\n        \"area\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"buildingName\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"doorCode\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"floor\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"region\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"valuableReturn\": true\n  },\n  \"itemCount\": 2,\n  \"items\": [\n    {\n      \"barcode\": \"3SDEVC123456789\",\n      \"dimensions\": {\n        \"height\": 101,\n        \"length\": 420,\n        \"volume\": 8908,\n        \"weight\": 1144,\n        \"width\": 210\n      },\n      \"customerReferences\": {\n        \"costCenter\": \"costCenter\",\n        \"shipmentReference\": \"reference\",\n        \"returnReference\": \"RMA: 66532\",\n        \"shipmentRemark\": \"remark\"\n      }\n    },\n    {\n      \"barcode\": \"3SDEVC123456789\",\n      \"dimensions\": {\n        \"height\": 101,\n        \"length\": 420,\n        \"volume\": 8908,\n        \"weight\": 1144,\n        \"width\": 210\n      },\n      \"customerReferences\": {\n        \"costCenter\": \"costCenter\",\n        \"shipmentReference\": \"reference\",\n        \"returnReference\": \"RMA: 66532\",\n        \"shipmentRemark\": \"remark\"\n      }\n    }\n  ],\n  \"services\": {\n    \"insuredValue\": 100.99,\n    \"deliveryWindow\": {\n      \"service\": \"<string>\",\n      \"guaranteedBefore\": \"10:00\",\n      \"duration\": \"24hours\"\n    },\n    \"statedAddressOnly\": \"<boolean>\",\n    \"returnWhenNotHome\": \"<boolean>\",\n    \"minimalAgeCheck\": \"<string>\",\n    \"deliveryConfirmation\": \"signature\",\n    \"adrLq\": \"<boolean>\",\n    \"registered\": \"<boolean>\",\n    \"idCheck\": \"<boolean>\"\n  },\n  \"handoverDate\": \"2024-04-20\",\n  \"labelSettings\": {\n    \"outputType\": \"pdf\",\n    \"pageOrientation\": \"portrait\",\n    \"resolution\": \"200\"\n  },\n  \"internationalShipmentData\": {\n    \"pudo\": false,\n    \"bundle\": \"track_trace\",\n    \"customs\": {\n      \"transactionCode\": \"<string>\",\n      \"currency\": \"EUR\",\n      \"handleAsNonDeliverable\": true,\n      \"senderIdentification\": \"<string>\",\n      \"receiverIdentification\": \"<string>\",\n      \"labelSignature\": \"R0lG...AAA7\",\n      \"content\": [\n        {\n          \"countryOfOrigin\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"hsTariffNumber\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"quantity\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"weight\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"countryOfOrigin\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"hsTariffNumber\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"quantity\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"weight\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"associatedDocument\": {\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"number\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Unauthorized",
+          "code": 401,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"message\": \"Failed to resolve API Key variable 'request.header.apikey'\",\n  \"http_status_code\": 401\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "7a311c2c-5005-42ee-96a5-aafc6520d58d",
+          "name": "Method not allowed",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "shipment",
+                "delivery",
+                "v4",
+                "labelconfirm"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "apikey",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"receiver\": {\n    \"address\": {\n      \"countryIso\": \"NL\",\n      \"city\": \"s Gravenhage\",\n      \"houseNumber\": \"3\",\n      \"houseNumberAddition\": \"bis\",\n      \"postalCode\": \"2521CA\",\n      \"street\": \"Waldorpstraat\",\n      \"addressLine\": \"Waldorpstraat 3 bis\",\n      \"companyName\": \"PostNL\",\n      \"departmentName\": \"Finance department\",\n      \"internationalAddressData\": {\n        \"area\": \"Area 51\",\n        \"buildingName\": \"Main building\",\n        \"doorCode\": \"A1\",\n        \"floor\": \"3\",\n        \"region\": \"California\"\n      }\n    },\n    \"contact\": {\n      \"email\": \"jan@jansen.nl\",\n      \"firstName\": \"Jan\",\n      \"lastName\": \"Jansen\",\n      \"mobileNumber\": \"0612345678\"\n    },\n    \"type\": \"consumer\"\n  },\n  \"sender\": {\n    \"customerNumber\": \"123456\",\n    \"customerCode\": \"DEVC\",\n    \"address\": {\n      \"countryIso\": \"NL\",\n      \"city\": \"s Gravenhage\",\n      \"houseNumber\": \"3\",\n      \"houseNumberAddition\": \"bis\",\n      \"postalCode\": \"2521CA\",\n      \"street\": \"Waldorpstraat\",\n      \"addressLine\": \"Waldorpstraat 3 bis\",\n      \"companyName\": \"PostNL\",\n      \"departmentName\": \"Finance department\",\n      \"internationalAddressData\": {\n        \"area\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"buildingName\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"doorCode\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"floor\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"region\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"undeliverableReturnAddress\": {\n      \"countryIso\": \"NL\",\n      \"city\": \"s Gravenhage\",\n      \"houseNumber\": \"3\",\n      \"houseNumberAddition\": \"bis\",\n      \"postalCode\": \"2521CA\",\n      \"street\": \"Waldorpstraat\",\n      \"addressLine\": \"Waldorpstraat 3 bis\",\n      \"companyName\": \"PostNL\",\n      \"departmentName\": \"Finance department\",\n      \"internationalAddressData\": {\n        \"area\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"buildingName\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"doorCode\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"floor\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"region\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"contact\": {\n      \"email\": \"jan@jansen.nl\",\n      \"firstName\": \"Jan\",\n      \"lastName\": \"Jansen\",\n      \"mobileNumber\": \"0612345678\"\n    }\n  },\n  \"shipmentType\": \"letterbox\",\n  \"deliveryLocation\": {\n    \"pickupLocationId\": \"910216\"\n  },\n  \"returnOptions\": {\n    \"returnBarcode\": \"3SDEVC123456789\",\n    \"returnPeriod\": \"<string>\",\n    \"returnAddress\": {\n      \"countryIso\": \"NL\",\n      \"city\": \"s Gravenhage\",\n      \"houseNumber\": \"3\",\n      \"houseNumberAddition\": \"bis\",\n      \"postalCode\": \"2521CA\",\n      \"street\": \"Waldorpstraat\",\n      \"addressLine\": \"Waldorpstraat 3 bis\",\n      \"companyName\": \"PostNL\",\n      \"departmentName\": \"Finance department\",\n      \"internationalAddressData\": {\n        \"area\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"buildingName\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"doorCode\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"floor\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"region\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"valuableReturn\": true\n  },\n  \"itemCount\": 2,\n  \"items\": [\n    {\n      \"barcode\": \"3SDEVC123456789\",\n      \"dimensions\": {\n        \"height\": 101,\n        \"length\": 420,\n        \"volume\": 8908,\n        \"weight\": 1144,\n        \"width\": 210\n      },\n      \"customerReferences\": {\n        \"costCenter\": \"costCenter\",\n        \"shipmentReference\": \"reference\",\n        \"returnReference\": \"RMA: 66532\",\n        \"shipmentRemark\": \"remark\"\n      }\n    },\n    {\n      \"barcode\": \"3SDEVC123456789\",\n      \"dimensions\": {\n        \"height\": 101,\n        \"length\": 420,\n        \"volume\": 8908,\n        \"weight\": 1144,\n        \"width\": 210\n      },\n      \"customerReferences\": {\n        \"costCenter\": \"costCenter\",\n        \"shipmentReference\": \"reference\",\n        \"returnReference\": \"RMA: 66532\",\n        \"shipmentRemark\": \"remark\"\n      }\n    }\n  ],\n  \"services\": {\n    \"insuredValue\": 100.99,\n    \"deliveryWindow\": {\n      \"service\": \"<string>\",\n      \"guaranteedBefore\": \"10:00\",\n      \"duration\": \"24hours\"\n    },\n    \"statedAddressOnly\": \"<boolean>\",\n    \"returnWhenNotHome\": \"<boolean>\",\n    \"minimalAgeCheck\": \"<string>\",\n    \"deliveryConfirmation\": \"signature\",\n    \"adrLq\": \"<boolean>\",\n    \"registered\": \"<boolean>\",\n    \"idCheck\": \"<boolean>\"\n  },\n  \"handoverDate\": \"2024-04-20\",\n  \"labelSettings\": {\n    \"outputType\": \"pdf\",\n    \"pageOrientation\": \"portrait\",\n    \"resolution\": \"200\"\n  },\n  \"internationalShipmentData\": {\n    \"pudo\": false,\n    \"bundle\": \"track_trace\",\n    \"customs\": {\n      \"transactionCode\": \"<string>\",\n      \"currency\": \"EUR\",\n      \"handleAsNonDeliverable\": true,\n      \"senderIdentification\": \"<string>\",\n      \"receiverIdentification\": \"<string>\",\n      \"labelSignature\": \"R0lG...AAA7\",\n      \"content\": [\n        {\n          \"countryOfOrigin\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"hsTariffNumber\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"quantity\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"weight\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"countryOfOrigin\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"hsTariffNumber\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"quantity\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"weight\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"associatedDocument\": {\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"number\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Method Not Allowed",
+          "code": 405,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"message\": \"Only POST requests allowed\",\n  \"http_status_code\": 405\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "f8469dd7-bce5-4746-93bd-6be9546ba579",
+          "name": "Too many requests",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "shipment",
+                "delivery",
+                "v4",
+                "labelconfirm"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "apikey",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"receiver\": {\n    \"address\": {\n      \"countryIso\": \"NL\",\n      \"city\": \"s Gravenhage\",\n      \"houseNumber\": \"3\",\n      \"houseNumberAddition\": \"bis\",\n      \"postalCode\": \"2521CA\",\n      \"street\": \"Waldorpstraat\",\n      \"addressLine\": \"Waldorpstraat 3 bis\",\n      \"companyName\": \"PostNL\",\n      \"departmentName\": \"Finance department\",\n      \"internationalAddressData\": {\n        \"area\": \"Area 51\",\n        \"buildingName\": \"Main building\",\n        \"doorCode\": \"A1\",\n        \"floor\": \"3\",\n        \"region\": \"California\"\n      }\n    },\n    \"contact\": {\n      \"email\": \"jan@jansen.nl\",\n      \"firstName\": \"Jan\",\n      \"lastName\": \"Jansen\",\n      \"mobileNumber\": \"0612345678\"\n    },\n    \"type\": \"consumer\"\n  },\n  \"sender\": {\n    \"customerNumber\": \"123456\",\n    \"customerCode\": \"DEVC\",\n    \"address\": {\n      \"countryIso\": \"NL\",\n      \"city\": \"s Gravenhage\",\n      \"houseNumber\": \"3\",\n      \"houseNumberAddition\": \"bis\",\n      \"postalCode\": \"2521CA\",\n      \"street\": \"Waldorpstraat\",\n      \"addressLine\": \"Waldorpstraat 3 bis\",\n      \"companyName\": \"PostNL\",\n      \"departmentName\": \"Finance department\",\n      \"internationalAddressData\": {\n        \"area\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"buildingName\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"doorCode\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"floor\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"region\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"undeliverableReturnAddress\": {\n      \"countryIso\": \"NL\",\n      \"city\": \"s Gravenhage\",\n      \"houseNumber\": \"3\",\n      \"houseNumberAddition\": \"bis\",\n      \"postalCode\": \"2521CA\",\n      \"street\": \"Waldorpstraat\",\n      \"addressLine\": \"Waldorpstraat 3 bis\",\n      \"companyName\": \"PostNL\",\n      \"departmentName\": \"Finance department\",\n      \"internationalAddressData\": {\n        \"area\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"buildingName\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"doorCode\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"floor\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"region\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"contact\": {\n      \"email\": \"jan@jansen.nl\",\n      \"firstName\": \"Jan\",\n      \"lastName\": \"Jansen\",\n      \"mobileNumber\": \"0612345678\"\n    }\n  },\n  \"shipmentType\": \"letterbox\",\n  \"deliveryLocation\": {\n    \"pickupLocationId\": \"910216\"\n  },\n  \"returnOptions\": {\n    \"returnBarcode\": \"3SDEVC123456789\",\n    \"returnPeriod\": \"<string>\",\n    \"returnAddress\": {\n      \"countryIso\": \"NL\",\n      \"city\": \"s Gravenhage\",\n      \"houseNumber\": \"3\",\n      \"houseNumberAddition\": \"bis\",\n      \"postalCode\": \"2521CA\",\n      \"street\": \"Waldorpstraat\",\n      \"addressLine\": \"Waldorpstraat 3 bis\",\n      \"companyName\": \"PostNL\",\n      \"departmentName\": \"Finance department\",\n      \"internationalAddressData\": {\n        \"area\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"buildingName\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"doorCode\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"floor\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"region\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"valuableReturn\": true\n  },\n  \"itemCount\": 2,\n  \"items\": [\n    {\n      \"barcode\": \"3SDEVC123456789\",\n      \"dimensions\": {\n        \"height\": 101,\n        \"length\": 420,\n        \"volume\": 8908,\n        \"weight\": 1144,\n        \"width\": 210\n      },\n      \"customerReferences\": {\n        \"costCenter\": \"costCenter\",\n        \"shipmentReference\": \"reference\",\n        \"returnReference\": \"RMA: 66532\",\n        \"shipmentRemark\": \"remark\"\n      }\n    },\n    {\n      \"barcode\": \"3SDEVC123456789\",\n      \"dimensions\": {\n        \"height\": 101,\n        \"length\": 420,\n        \"volume\": 8908,\n        \"weight\": 1144,\n        \"width\": 210\n      },\n      \"customerReferences\": {\n        \"costCenter\": \"costCenter\",\n        \"shipmentReference\": \"reference\",\n        \"returnReference\": \"RMA: 66532\",\n        \"shipmentRemark\": \"remark\"\n      }\n    }\n  ],\n  \"services\": {\n    \"insuredValue\": 100.99,\n    \"deliveryWindow\": {\n      \"service\": \"<string>\",\n      \"guaranteedBefore\": \"10:00\",\n      \"duration\": \"24hours\"\n    },\n    \"statedAddressOnly\": \"<boolean>\",\n    \"returnWhenNotHome\": \"<boolean>\",\n    \"minimalAgeCheck\": \"<string>\",\n    \"deliveryConfirmation\": \"signature\",\n    \"adrLq\": \"<boolean>\",\n    \"registered\": \"<boolean>\",\n    \"idCheck\": \"<boolean>\"\n  },\n  \"handoverDate\": \"2024-04-20\",\n  \"labelSettings\": {\n    \"outputType\": \"pdf\",\n    \"pageOrientation\": \"portrait\",\n    \"resolution\": \"200\"\n  },\n  \"internationalShipmentData\": {\n    \"pudo\": false,\n    \"bundle\": \"track_trace\",\n    \"customs\": {\n      \"transactionCode\": \"<string>\",\n      \"currency\": \"EUR\",\n      \"handleAsNonDeliverable\": true,\n      \"senderIdentification\": \"<string>\",\n      \"receiverIdentification\": \"<string>\",\n      \"labelSignature\": \"R0lG...AAA7\",\n      \"content\": [\n        {\n          \"countryOfOrigin\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"hsTariffNumber\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"quantity\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"weight\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"countryOfOrigin\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"hsTariffNumber\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"quantity\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"weight\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"associatedDocument\": {\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"number\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Too Many Requests",
+          "code": 429,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"message\": \"Too many requests. Rate limit exceeded!\",\n  \"http_status_code\": 429\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-sandbox.postnl.nl",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "8d03e1bb-0857-4488-a5cb-15c442ab2f21",
+    "name": "PostNL Shipment API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The PostNL Shipment API is a RESTful API that generates a barcode, confirms a shipment manifest to PostNL and retrieves a labels all at once for an outbound shipment\n\nContact Support:\n Name: PostNL",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Checkout Postalcode Check API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Postalcode check",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Checkout postalcode check",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.postnl.nl/shipment/checkout/v1/postalcodecheck",
+            "params": [
+              {
+                "name": "postalcode",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "housenumber",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "housenumberaddition",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "apikey",
+              "value": "{{apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Please note that this API is not available on the sandbox environment.\n\nRequest example:\n```\ncurl -X GET \"https://api.postnl.nl/shipment/checkout/v1/postalcodecheck?postalcode=3571ZZ&amp;housenumber=74&amp;housenumberaddition=bis\" \\\n -H \"Accept: application/json\" \\\n -H \"apikey: APIKEY-HERE\" \n```\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

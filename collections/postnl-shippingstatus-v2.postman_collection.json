@@ -1,0 +1,1942 @@
+{
+  "item": [
+    {
+      "id": "24c68c42-d4d0-4882-94e0-a4544473e5eb",
+      "name": "ShippingStatus",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "080b9306-33e0-433f-80e8-b7dae5c1f382",
+          "name": "Returns the statuses for a particular barcode",
+          "request": {
+            "name": "Returns the statuses for a particular barcode",
+            "description": {
+              "content": "Request example:\n```\ncurl -X GET \"https://api-sandbox.postnl.nl/shipment/v2/status/barcode/3SDEVC172649258\" \\\n -H \"Accept: application/json\" \\\n -H \"apikey: APIKEY-HERE\" \\\n```\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "shipment",
+                "v2",
+                "status",
+                "barcode",
+                ":barcode"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "detail",
+                  "value": "false",
+                  "description": "Option to include old statuses in the response"
+                },
+                {
+                  "disabled": false,
+                  "key": "language",
+                  "value": "<string>",
+                  "description": "Language of the returned shipment and status descriptions (default is Dutch)."
+                },
+                {
+                  "disabled": false,
+                  "key": "maxDays",
+                  "value": "<string>",
+                  "description": "Limit the number of days that will be searched (decrease this amount for better performance)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "barcode",
+                  "description": "(Required) Barcode of the shipment. This is a unique value."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "apikey"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "772aaa55-63f9-40ee-91a7-10448781ff05",
+              "name": "Status object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2",
+                    "status",
+                    "barcode",
+                    ":barcode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "detail",
+                      "value": "false"
+                    },
+                    {
+                      "key": "language",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "maxDays",
+                      "value": "14"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "barcode",
+                      "description": "(Required) Barcode of the shipment. This is a unique value."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"CurrentStatus\": {\n    \"Shipment\": {\n      \"MainBarcode\": \"3SDEVC288882229\",\n      \"Barcode\": \"3SDEVC288882229\",\n      \"ShipmentAmount\": \"1\",\n      \"ShipmentCounter\": \"1\",\n      \"Customer\": {\n        \"CustomerCode\": \"DEVC\",\n        \"CustomerNumber\": \"11223344\",\n        \"Name\": \"Testaccount API PNP\"\n      },\n      \"ProductCode\": \"002285\",\n      \"ProductDescription\": \"Parcels, domestic &lt;= 10 kg\",\n      \"Reference\": \"202213331635095807\",\n      \"DeliveryDate\": \"2022-11-08\",\n      \"Dimension\": {\n        \"Height\": \"125\",\n        \"Length\": \"250\",\n        \"Volume\": \"6250\",\n        \"Weight\": \"180\",\n        \"Width\": \"200\"\n      },\n      \"Address\": [\n        {\n          \"AddressType\": \"01\",\n          \"Building\": {},\n          \"City\": \"Utrecht\",\n          \"CompanyName\": {},\n          \"CountryCode\": \"NL\",\n          \"DepartmentName\": {},\n          \"District\": {},\n          \"FirstName\": \"Peter\",\n          \"Floor\": {},\n          \"HouseNumber\": \"74\",\n          \"HouseNumberSuffix\": {},\n          \"LastName\": \"de Ruiter\",\n          \"Region\": {},\n          \"Remark\": {},\n          \"Street\": \"Molengraaffplantsoen\",\n          \"Zipcode\": \"3571ZZ\"\n        },\n        {\n          \"AddressType\": \"02\",\n          \"Building\": {},\n          \"City\": \"Hoofddorp\",\n          \"CompanyName\": \"PostNL Pakketten\",\n          \"CountryCode\": \"NL\",\n          \"DepartmentName\": {},\n          \"District\": {},\n          \"FirstName\": {},\n          \"Floor\": {},\n          \"HouseNumber\": \"42\",\n          \"HouseNumberSuffix\": \"-60\",\n          \"LastName\": {},\n          \"Region\": {},\n          \"Remark\": {},\n          \"Street\": \"Siriusdreef\",\n          \"Zipcode\": \"2132WT\"\n        }\n      ],\n      \"ProductOptions\": [\n        {\n          \"OptionCode\": \"6\",\n          \"CharacteristicCode\": \"118\"\n        }\n      ],\n      \"Status\": {\n        \"TimeStamp\": \"08-11-2022 10:13:20\",\n        \"StatusCode\": \"7\",\n        \"StatusDescription\": \"Shipment out for delivery\",\n        \"PhaseCode\": \"3\",\n        \"PhaseDescription\": \"Distribution\"\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "370d543e-fe1b-460c-ba6f-81a8939b97f6",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2",
+                    "status",
+                    "barcode",
+                    ":barcode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "detail",
+                      "value": "false"
+                    },
+                    {
+                      "key": "language",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "maxDays",
+                      "value": "14"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "barcode",
+                      "description": "(Required) Barcode of the shipment. This is a unique value."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"fault\": {\n    \"faultstring\": \"no barcode supplied in path\",\n    \"detail\": {\n      \"errorcode\": \"Validation Fault\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "64fba98f-205f-4c85-9544-ae386594b29d",
+              "name": "Invalid apikey",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2",
+                    "status",
+                    "barcode",
+                    ":barcode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "detail",
+                      "value": "false"
+                    },
+                    {
+                      "key": "language",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "maxDays",
+                      "value": "14"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "barcode",
+                      "description": "(Required) Barcode of the shipment. This is a unique value."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Failed to resolve API Key variable 'request.header.apikey'\",\n  \"http_status_code\": 401\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "baf6abb7-8dd6-4f9d-a779-b53bf4a825b1",
+              "name": "Method not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2",
+                    "status",
+                    "barcode",
+                    ":barcode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "detail",
+                      "value": "false"
+                    },
+                    {
+                      "key": "language",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "maxDays",
+                      "value": "14"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "barcode",
+                      "description": "(Required) Barcode of the shipment. This is a unique value."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Only GET requests allowed\",\n  \"http_status_code\": 405\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "066f9d2f-513a-43f8-bce4-c2aafabb6cb0",
+              "name": "Too many requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2",
+                    "status",
+                    "barcode",
+                    ":barcode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "detail",
+                      "value": "false"
+                    },
+                    {
+                      "key": "language",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "maxDays",
+                      "value": "14"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "barcode",
+                      "description": "(Required) Barcode of the shipment. This is a unique value."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Too many requests. Rate limit exceeded!\",\n  \"http_status_code\": 429\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d3445f67-387b-4f4e-a23c-64aa6e0d3dec",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2",
+                    "status",
+                    "barcode",
+                    ":barcode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "detail",
+                      "value": "false"
+                    },
+                    {
+                      "key": "language",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "maxDays",
+                      "value": "14"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "barcode",
+                      "description": "(Required) Barcode of the shipment. This is a unique value."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"fault\": {\n    \"faultstring\": \"no barcode supplied in path\",\n    \"detail\": {\n      \"errorcode\": \"Validation Fault\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a4faa4e0-7442-4cba-af0b-30a3548ece21",
+          "name": "Get status information by customer reference",
+          "request": {
+            "name": "Get status information by customer reference",
+            "description": {
+              "content": "Request example:\n```\ncurl -X GET \"https://api-sandbox.postnl.nl/shipment/v2/status/reference?detail=true&language=NL&customerCode={{CustomerCode}}&customerNumber={{CustomerNumber}}&reference=REF98173245876329\" \\\n -H \"Accept: application/json\" \\\n -H \"apikey: APIKEY-HERE\" \n```\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "shipment",
+                "v2",
+                "status",
+                "reference",
+                ":referenceId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "customerCode",
+                  "value": "<string>",
+                  "description": "(Required) Customer code as known at PostNL Pakketten"
+                },
+                {
+                  "disabled": false,
+                  "key": "customerNumber",
+                  "value": "<string>",
+                  "description": "(Required) Customer number as known at PostNL Pakketten"
+                },
+                {
+                  "disabled": false,
+                  "key": "detail",
+                  "value": "false",
+                  "description": "Option to include old statuses in the response"
+                },
+                {
+                  "disabled": false,
+                  "key": "language",
+                  "value": "<string>",
+                  "description": "Language of the returned shipment and status descriptions (default is Dutch)."
+                },
+                {
+                  "disabled": false,
+                  "key": "maxDays",
+                  "value": "<string>",
+                  "description": "Limit the number of days that will be searched (decrease this amount for better performance). By default this is 90 days in the past."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "referenceId",
+                  "description": "(Required) The customer reference belonging to the shipment"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "apikey"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ed077cb0-1d5d-4654-974c-4d80ce5b07e5",
+              "name": "Status object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2",
+                    "status",
+                    "reference",
+                    ":referenceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "customerCode",
+                      "value": "DEVC"
+                    },
+                    {
+                      "key": "customerNumber",
+                      "value": "11223344"
+                    },
+                    {
+                      "key": "detail",
+                      "value": "false"
+                    },
+                    {
+                      "key": "language",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "maxDays",
+                      "value": "14"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "referenceId",
+                      "description": "(Required) The customer reference belonging to the shipment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"CurrentStatus\": {\n    \"Shipment\": {\n      \"MainBarcode\": \"3SDEVC288882229\",\n      \"Barcode\": \"3SDEVC288882229\",\n      \"ShipmentAmount\": \"1\",\n      \"ShipmentCounter\": \"1\",\n      \"Customer\": {\n        \"CustomerCode\": \"DEVC\",\n        \"CustomerNumber\": \"11223344\",\n        \"Name\": \"Testaccount API PNP\"\n      },\n      \"ProductCode\": \"002285\",\n      \"ProductDescription\": \"Parcels, domestic &lt;= 10 kg\",\n      \"Reference\": \"202213331635095807\",\n      \"DeliveryDate\": \"2022-11-08\",\n      \"Dimension\": {\n        \"Height\": \"125\",\n        \"Length\": \"250\",\n        \"Volume\": \"6250\",\n        \"Weight\": \"180\",\n        \"Width\": \"200\"\n      },\n      \"Address\": [\n        {\n          \"AddressType\": \"01\",\n          \"Building\": {},\n          \"City\": \"Utrecht\",\n          \"CompanyName\": {},\n          \"CountryCode\": \"NL\",\n          \"DepartmentName\": {},\n          \"District\": {},\n          \"FirstName\": \"Peter\",\n          \"Floor\": {},\n          \"HouseNumber\": \"74\",\n          \"HouseNumberSuffix\": {},\n          \"LastName\": \"de Ruiter\",\n          \"Region\": {},\n          \"Remark\": {},\n          \"Street\": \"Molengraaffplantsoen\",\n          \"Zipcode\": \"3571ZZ\"\n        },\n        {\n          \"AddressType\": \"02\",\n          \"Building\": {},\n          \"City\": \"Hoofddorp\",\n          \"CompanyName\": \"PostNL Pakketten\",\n          \"CountryCode\": \"NL\",\n          \"DepartmentName\": {},\n          \"District\": {},\n          \"FirstName\": {},\n          \"Floor\": {},\n          \"HouseNumber\": \"42\",\n          \"HouseNumberSuffix\": \"-60\",\n          \"LastName\": {},\n          \"Region\": {},\n          \"Remark\": {},\n          \"Street\": \"Siriusdreef\",\n          \"Zipcode\": \"2132WT\"\n        }\n      ],\n      \"ProductOptions\": [\n        {\n          \"OptionCode\": \"6\",\n          \"CharacteristicCode\": \"118\"\n        }\n      ],\n      \"Status\": {\n        \"TimeStamp\": \"08-11-2022 10:13:20\",\n        \"StatusCode\": \"7\",\n        \"StatusDescription\": \"Shipment out for delivery\",\n        \"PhaseCode\": \"3\",\n        \"PhaseDescription\": \"Distribution\"\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4519060d-3286-41ac-8930-23831792e27d",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2",
+                    "status",
+                    "reference",
+                    ":referenceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "customerCode",
+                      "value": "DEVC"
+                    },
+                    {
+                      "key": "customerNumber",
+                      "value": "11223344"
+                    },
+                    {
+                      "key": "detail",
+                      "value": "false"
+                    },
+                    {
+                      "key": "language",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "maxDays",
+                      "value": "14"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "referenceId",
+                      "description": "(Required) The customer reference belonging to the shipment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"fault\": {\n    \"faultstring\": \"no barcode supplied in path\",\n    \"detail\": {\n      \"errorcode\": \"Validation Fault\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a463af49-d154-4201-b943-f427de79b13a",
+              "name": "Invalid apikey",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2",
+                    "status",
+                    "reference",
+                    ":referenceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "customerCode",
+                      "value": "DEVC"
+                    },
+                    {
+                      "key": "customerNumber",
+                      "value": "11223344"
+                    },
+                    {
+                      "key": "detail",
+                      "value": "false"
+                    },
+                    {
+                      "key": "language",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "maxDays",
+                      "value": "14"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "referenceId",
+                      "description": "(Required) The customer reference belonging to the shipment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Failed to resolve API Key variable 'request.header.apikey'\",\n  \"http_status_code\": 401\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eb18e0f6-e373-425a-9b18-570497911760",
+              "name": "Method not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2",
+                    "status",
+                    "reference",
+                    ":referenceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "customerCode",
+                      "value": "DEVC"
+                    },
+                    {
+                      "key": "customerNumber",
+                      "value": "11223344"
+                    },
+                    {
+                      "key": "detail",
+                      "value": "false"
+                    },
+                    {
+                      "key": "language",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "maxDays",
+                      "value": "14"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "referenceId",
+                      "description": "(Required) The customer reference belonging to the shipment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Only GET requests allowed\",\n  \"http_status_code\": 405\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e8a9dbf1-a1f5-4537-a2e7-912bcb42ac2f",
+              "name": "Too many requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2",
+                    "status",
+                    "reference",
+                    ":referenceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "customerCode",
+                      "value": "DEVC"
+                    },
+                    {
+                      "key": "customerNumber",
+                      "value": "11223344"
+                    },
+                    {
+                      "key": "detail",
+                      "value": "false"
+                    },
+                    {
+                      "key": "language",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "maxDays",
+                      "value": "14"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "referenceId",
+                      "description": "(Required) The customer reference belonging to the shipment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Too many requests. Rate limit exceeded!\",\n  \"http_status_code\": 429\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "da7a7dc9-d99b-4b0e-b4c9-159e7c7d0696",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2",
+                    "status",
+                    "reference",
+                    ":referenceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "customerCode",
+                      "value": "DEVC"
+                    },
+                    {
+                      "key": "customerNumber",
+                      "value": "11223344"
+                    },
+                    {
+                      "key": "detail",
+                      "value": "false"
+                    },
+                    {
+                      "key": "language",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "maxDays",
+                      "value": "14"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "referenceId",
+                      "description": "(Required) The customer reference belonging to the shipment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"fault\": {\n    \"faultstring\": \"no barcode supplied in path\",\n    \"detail\": {\n      \"errorcode\": \"Validation Fault\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b141b609-a2bb-474d-a0ab-f764cc96bdd5",
+          "name": "Returns the signature of a particular shipment",
+          "request": {
+            "name": "Returns the signature of a particular shipment",
+            "description": {
+              "content": "Request example:\n```\ncurl -X GET \"https://api-sandbox.postnl.nl/shipment/v2/status/signature/3SDEVC172649258\" \\\n -H \"Accept: application/json\" \\\n -H \"apikey: APIKEY-HERE\" \n```\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "shipment",
+                "v2",
+                "status",
+                "signature",
+                ":barcode"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "barcode",
+                  "description": "(Required) Barcode of the shipment"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "apikey"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b578ff60-ade5-462b-a272-ec07c4e75026",
+              "name": "A signature",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2",
+                    "status",
+                    "signature",
+                    ":barcode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "barcode",
+                      "description": "(Required) Barcode of the shipment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Signature\": {\n    \"Barcode\": \"3SDEVC317858754\",\n    \"SignatureDate\": \"2022-11-07T19:28:16\",\n    \"SignatureImage\": \"iVBORw0KGgoAAAANSUhEUgAAAogAAAGTCAYAAACrs[TRUNCATED]\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3100dd8c-203e-4a82-8ab1-22bef9036725",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2",
+                    "status",
+                    "signature",
+                    ":barcode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "barcode",
+                      "description": "(Required) Barcode of the shipment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"fault\": {\n    \"faultstring\": \"no barcode supplied in path\",\n    \"detail\": {\n      \"errorcode\": \"Validation Fault\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d5b2fd0e-6036-47a5-8283-c0465afbb4e6",
+              "name": "Invalid apikey",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2",
+                    "status",
+                    "signature",
+                    ":barcode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "barcode",
+                      "description": "(Required) Barcode of the shipment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Failed to resolve API Key variable 'request.header.apikey'\",\n  \"http_status_code\": 401\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0ad0fe42-bbf7-45b2-b4ac-97efb020ceb4",
+              "name": "Method not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2",
+                    "status",
+                    "signature",
+                    ":barcode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "barcode",
+                      "description": "(Required) Barcode of the shipment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Only GET requests allowed\",\n  \"http_status_code\": 405\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "86670514-8086-42e3-b53f-e90881838364",
+              "name": "Too many requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2",
+                    "status",
+                    "signature",
+                    ":barcode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "barcode",
+                      "description": "(Required) Barcode of the shipment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Too many requests. Rate limit exceeded!\",\n  \"http_status_code\": 429\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "01baaaec-6685-4079-8690-6099962390da",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2",
+                    "status",
+                    "signature",
+                    ":barcode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "barcode",
+                      "description": "(Required) Barcode of the shipment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"fault\": {\n    \"faultstring\": \"no barcode supplied in path\",\n    \"detail\": {\n      \"errorcode\": \"Validation Fault\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e7ee936a-9a9a-49ba-94ed-01a24edd55ca",
+          "name": "Returns the updated statuses for a particular customer number",
+          "request": {
+            "name": "Returns the updated statuses for a particular customer number",
+            "description": {
+              "content": "Request example:\n```\ncurl -X GET \"https://api-sandbox.postnl.nl/shipment/v2/status/11223344/updatedshipments?period=2022-12-25T10:00:00&amp;period=2022-12-25T10:12:00\" \\\n -H \"Accept: application/json\" \\\n -H \"apikey: APIKEY-HERE\" \\\n```\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "shipment",
+                "v2",
+                "status",
+                ":customernumber",
+                "updatedshipments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "period",
+                  "value": "<string>",
+                  "description": "Optional array which defines a specific period in which to return updated shipments. For optimal results, schedule calls at a frequency between 5-15 minutes and align the requested period accordingly to ensure complete coverage of past updates. Shorter periods yield improved response times. The API accommodates a maximum requested period of 2 hours, granting access to shipment data up to 48 hours in the past. Please use the following format: YYYY-MM-DDTHH:MM:SS and repeat this variable to define the period (e.g. /updatedshipments?period=2022-11-07T12:00:00.000&period=2022-11-07T12:05:00.000)."
+                },
+                {
+                  "disabled": false,
+                  "key": "period",
+                  "value": "<string>",
+                  "description": "Optional array which defines a specific period in which to return updated shipments. For optimal results, schedule calls at a frequency between 5-15 minutes and align the requested period accordingly to ensure complete coverage of past updates. Shorter periods yield improved response times. The API accommodates a maximum requested period of 2 hours, granting access to shipment data up to 48 hours in the past. Please use the following format: YYYY-MM-DDTHH:MM:SS and repeat this variable to define the period (e.g. /updatedshipments?period=2022-11-07T12:00:00.000&period=2022-11-07T12:05:00.000)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "customernumber",
+                  "description": "(Required) Your customer number"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "apikey"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "5db00868-ec01-4c7e-999e-1b3023186680",
+              "name": "Updated statuses",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2",
+                    "status",
+                    ":customernumber",
+                    "updatedshipments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "period",
+                      "value": "2022-11-07T12:00:00.000"
+                    },
+                    {
+                      "key": "period",
+                      "value": "2022-11-07T12:05:00.000"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customernumber",
+                      "description": "(Required) Your customer number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"Barcode\": \"3SDEVC2260332157\",\n    \"CreationDate\": \"2022-11-07T00:00:00\",\n    \"CustomerNumber\": \"11223344\",\n    \"CustomerCode\": \"DEVC\",\n    \"Status\": {\n      \"Timestamp\": \"2022-11-08T02:17:49\",\n      \"StatusCode\": \"5\",\n      \"StatusDescription\": \"Zending gesorteerd\",\n      \"PhaseCode\": \"2\",\n      \"PhaseDescription\": \"Sortering\"\n    }\n  },\n  {\n    \"Barcode\": \"3SDEVC775533088\",\n    \"CreationDate\": \"2022-11-07T00:00:00\",\n    \"CustomerNumber\": \"11223344\",\n    \"CustomerCode\": \"DEVC\",\n    \"Status\": {\n      \"Timestamp\": \"2022-11-08T04:15:00\",\n      \"StatusCode\": \"13\",\n      \"StatusDescription\": \"Voorgemeld: nog niet aangenomen\",\n      \"PhaseCode\": \"1\",\n      \"PhaseDescription\": \"Collectie\"\n    }\n  },\n  {\n    \"Barcode\": \"3SDEVC563372025\",\n    \"CreationDate\": \"2022-11-07T00:00:00\",\n    \"CustomerNumber\": \"11223344\",\n    \"CustomerCode\": \"DEVC\",\n    \"Status\": {\n      \"Timestamp\": \"2022-11-08T04:15:00\",\n      \"StatusCode\": \"13\",\n      \"StatusDescription\": \"Voorgemeld: nog niet aangenomen\",\n      \"PhaseCode\": \"1\",\n      \"PhaseDescription\": \"Collectie\"\n    }\n  },\n  {\n    \"Barcode\": \"3SDEVC336510881\",\n    \"CreationDate\": \"2022-11-08T00:00:00\",\n    \"CustomerNumber\": \"11223344\",\n    \"CustomerCode\": \"DEVC\",\n    \"Status\": {\n      \"Timestamp\": \"2022-11-08T01:01:28\",\n      \"StatusCode\": \"1\",\n      \"StatusDescription\": \"Zending voorgemeld\",\n      \"PhaseCode\": \"1\",\n      \"PhaseDescription\": \"Collectie\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b6cc5765-ac47-4525-ac8a-ca97805f4f8e",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2",
+                    "status",
+                    ":customernumber",
+                    "updatedshipments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "period",
+                      "value": "2022-11-07T12:00:00.000"
+                    },
+                    {
+                      "key": "period",
+                      "value": "2022-11-07T12:05:00.000"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customernumber",
+                      "description": "(Required) Your customer number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"fault\": {\n    \"faultstring\": \"no barcode supplied in path\",\n    \"detail\": {\n      \"errorcode\": \"Validation Fault\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c45d9c35-e472-4901-ba0c-3f88c6cecfe9",
+              "name": "Invalid apikey",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2",
+                    "status",
+                    ":customernumber",
+                    "updatedshipments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "period",
+                      "value": "2022-11-07T12:00:00.000"
+                    },
+                    {
+                      "key": "period",
+                      "value": "2022-11-07T12:05:00.000"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customernumber",
+                      "description": "(Required) Your customer number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Failed to resolve API Key variable 'request.header.apikey'\",\n  \"http_status_code\": 401\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9f0d6f37-348f-48ab-b094-ff6382eeb87c",
+              "name": "Method not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2",
+                    "status",
+                    ":customernumber",
+                    "updatedshipments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "period",
+                      "value": "2022-11-07T12:00:00.000"
+                    },
+                    {
+                      "key": "period",
+                      "value": "2022-11-07T12:05:00.000"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customernumber",
+                      "description": "(Required) Your customer number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Only GET requests allowed\",\n  \"http_status_code\": 405\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "907da94e-a852-49fe-94ce-f6138944aa8a",
+              "name": "Too many requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2",
+                    "status",
+                    ":customernumber",
+                    "updatedshipments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "period",
+                      "value": "2022-11-07T12:00:00.000"
+                    },
+                    {
+                      "key": "period",
+                      "value": "2022-11-07T12:05:00.000"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customernumber",
+                      "description": "(Required) Your customer number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Too many requests. Rate limit exceeded!\",\n  \"http_status_code\": 429\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "380dd1bf-4a13-45a9-80d1-ac0335dbc0be",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2",
+                    "status",
+                    ":customernumber",
+                    "updatedshipments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "period",
+                      "value": "2022-11-07T12:00:00.000"
+                    },
+                    {
+                      "key": "period",
+                      "value": "2022-11-07T12:05:00.000"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customernumber",
+                      "description": "(Required) Your customer number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"fault\": {\n    \"faultstring\": \"no barcode supplied in path\",\n    \"detail\": {\n      \"errorcode\": \"Validation Fault\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-sandbox.postnl.nl",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3c9bf502-558d-40b1-a652-435be86c39b8",
+    "name": "ShippingStatus API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Receive status information about your shipments",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,1055 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "PostNL Confirming API",
+    "description": "The PostNL Confirming API is a RESTful API that confirms a shipment manifest to PostNL without generating a shipping label.",
+    "termsOfService": "https://www.postnl.nl/en/terms-and-conditions/business/",
+    "contact": {
+      "name": "PostNL",
+      "url": "https://developer.postnl.nl/support/"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "v4"
+  },
+  "servers": [
+    {
+      "url": "https://api-sandbox.postnl.nl",
+      "description": "Non-Production server"
+    },
+    {
+      "url": "https://api.postnl.nl",
+      "description": "Production server"
+    }
+  ],
+    "security": [
+    {
+      "apikey": []
+    }
+  ],
+  "paths": {
+    "/shipment/delivery/v4/confirm": {
+      "post": {
+        "description": "Preannounce a shipment with the provided details, it will return generated barcodes if not provided",
+        "operationId": "ConfirmShipment",
+        "requestBody": {
+          "description": "The details of the shipment to create",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfirmShipmentRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConfirmShipmentResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "One or more business errors occurred",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid apikey",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Unauthorized"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method not allowed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MethodNotAllowed"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TooManyRequests"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ConfirmShipmentResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "traceId": {
+            "type": "string",
+            "description": "The trace Id within the PostNL landscape of this request",
+            "example": "12345678-1234-1234-1234-123456789012"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConfirmResponseItem"
+            }
+          },
+          "warnings": {
+            "type": "array",
+            "description": "A list of warnings that occurred during the processing of the request, which are not blocking",
+            "items": {
+              "$ref": "#/components/schemas/ResponseWarning"
+            }
+          }
+        }
+      },
+      "ConfirmResponseItem": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "barcode": {
+            "type": "string",
+            "description": "The barcode of the shipment, generated or provided by the customer.",
+            "example": "3SDEVC123456789"
+          },
+          "shipmentReference": {
+            "type": "string",
+            "description": "The customer reference of the shipment, which is the same as the customer reference in the request",
+            "example": "1234567890"
+          },
+          "returnReference": {
+            "type": "string",
+            "description": "The customer reference of the return shipment, which is the same as the return reference in the request",
+            "example": "0987654321"
+          },
+          "returnBarcode": {
+            "type": "string",
+            "description": "The barcode of the return shipment, provided by the customer",
+            "example": "3SDEVC159487236"
+          }
+        }
+      },
+      "ResponseWarning": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "description": {
+            "type": "string",
+            "example": "Postalcode validation failed, housenumber not within known range"
+          }
+        }
+      },
+      "BadRequestResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "A URI reference that identifies the problem type according to RFC 9457",
+            "example": "https://www.rfc-editor.org/rfc/rfc9457.html"
+          },
+          "title": {
+            "type": "string",
+            "description": "A short, human-readable summary of the problem type"
+          },
+          "status": {
+            "type": "integer",
+            "description": "HTTP status code generated by the origin server"
+          },
+          "errors": {
+            "type": "object",
+            "description": "An error object detailing the cause(s) of failure",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "traceId": {
+            "type": "string",
+            "description": "The trace Id within the PostNL landscape of this request",
+            "example": "12345678-1234-1234-1234-123456789012"
+          }
+        }
+      },
+      "ConfirmShipmentRequest": {
+        "type": "object",
+        "description": "The details of a shipment to be created",
+        "additionalProperties": false,
+        "required": [
+          "receiver",
+          "sender",
+          "shipmentType"
+        ],
+        "properties": {
+          "receiver": {
+            "description": "The receiver of the shipment",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Receiver"
+              }
+            ]
+          },
+          "sender": {
+            "description": "The sender of the shipment",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Customer"
+              }
+            ]
+          },
+          "deliveryLocation": {
+            "description": "Can be used to specify an alternative delivery location, overriding the receiver address",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DeliveryLocation"
+              }
+            ]
+          },
+          "returnOptions": {
+            "description": "The return options for the shipment",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ReturnOptions"
+              }
+            ]
+          },
+          "itemCount": {
+            "type": "integer",
+            "description": "The number of items in the shipment, with a maximum of 50",
+            "maximum": 50.0,
+            "minimum": 1.0,
+            "example": 2
+          },
+          "items": {
+            "type": "array",
+            "description": "The details per item in the shipment",
+            "items": {
+              "$ref": "#/components/schemas/ConfirmShipmentItem"
+            }
+          },
+          "shipmentType": {
+            "example": "letterbox",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ShipmentType"
+              }
+            ]
+          },
+          "services": {
+            "description": "The services that can be used for the shipment",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Services"
+              }
+            ]
+          },
+          "handoverDate": {
+            "type": "string",
+            "description": "The date on which the shipment is handed over",
+            "format": "date",
+            "example": "2024-04-20"
+          },
+          "internationalShipmentData": {
+            "description": "Data necessary for international shipments",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/InternationalConfirmShipmentData"
+              }
+            ]
+          }
+        }
+      },
+      "Receiver": {
+        "type": "object",
+        "description": "The details of the receiver of the shipment",
+        "additionalProperties": false,
+        "required": [
+          "address"
+        ],
+        "properties": {
+          "contact": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Contact"
+              }
+            ]
+          },
+          "address": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "type": {
+            "description": "Define the kind of receiver, possibly used to plan delivery times inside business hours. Only used for parcel shipments send to EU countries",
+            "example": "consumer",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ReceiverType"
+              }
+            ]
+          }
+        }
+      },
+      "Contact": {
+        "type": "object",
+        "description": "Contact information of a person",
+        "additionalProperties": false,
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "The email address of the contact person",
+            "maxLength": 50,
+            "example": "jan@jansen.nl"
+          },
+          "firstName": {
+            "type": "string",
+            "description": "The first name of the contact person",
+            "maxLength": 35,
+            "example": "Jan"
+          },
+          "lastName": {
+            "type": "string",
+            "description": "The last name of the contact person",
+            "maxLength": 35,
+            "example": "Jansen"
+          },
+          "mobileNumber": {
+            "type": "string",
+            "description": "The mobile number of the contact person",
+            "maxLength": 17,
+            "minLength": 7,
+            "example": "0612345678"
+          }
+        }
+      },
+      "Address": {
+        "type": "object",
+        "description": "A postal address",
+        "additionalProperties": false,
+        "required": [
+          "countryIso"
+        ],
+        "properties": {
+          "city": {
+            "type": "string",
+            "description": "A city is a recognized area within a particular country that has a common name",
+            "maxLength": 35,
+            "example": "s Gravenhage"
+          },
+          "countryIso": {
+            "type": "string",
+            "description": "A countryIso is a recognized ISO2 code for an area that has a common name",
+            "maxLength": 2,
+            "minLength": 2,
+            "pattern": "^[A-Z]{2}$",
+            "example": "NL"
+          },
+          "houseNumber": {
+            "type": "string",
+            "description": "A houseNumber is an identifying indicator that identifies a particular building on a street or road",
+            "maxLength": 10,
+            "example": "3"
+          },
+          "houseNumberAddition": {
+            "type": "string",
+            "description": "A houseNumberAddition is an identifying indicator that identifies a particular part of a building on a street or road\n            in case there are multiple residents living at the same address",
+            "maxLength": 10,
+            "example": "bis"
+          },
+          "postalCode": {
+            "type": "string",
+            "description": "A postalCode is a code of letters and digits that identifies a geographical area that is added to an address and is used by the postal service to sort mail",
+            "maxLength": 17,
+            "example": "2521CA"
+          },
+          "street": {
+            "type": "string",
+            "description": "A street is an identifying name that is given to a street or road",
+            "maxLength": 95,
+            "example": "Waldorpstraat"
+          },
+          "addressLine": {
+            "type": "string",
+            "description": "An addressLine is a combination of the elements that identifies a particular address within a city.\n            Can only be used for a combination of Street, HouseNumber and HouseNumberAddition",
+            "example": "Waldorpstraat 3 bis"
+          },
+          "companyName": {
+            "type": "string",
+            "description": "Name of the company at this address",
+            "maxLength": 35,
+            "example": "PostNL"
+          },
+          "departmentName": {
+            "type": "string",
+            "description": "Name of the department at this address",
+            "maxLength": 35,
+            "example": "Finance department"
+          },
+          "internationalAddressData": {
+            "description": "Fields specific to international shipment addresses",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/InternationalAddress"
+              }
+            ]
+          }
+        }
+      },
+      "InternationalAddress": {
+        "type": "object",
+        "description": "Fields specific to an international shipment address",
+        "additionalProperties": false,
+        "properties": {
+          "area": {
+            "type": "string",
+            "description": "Area of the address",
+            "maxLength": 35,
+            "example": "Area 51"
+          },
+          "buildingName": {
+            "type": "string",
+            "description": "Buildingname of the address",
+            "maxLength": 35,
+            "example": "Main building"
+          },
+          "doorCode": {
+            "type": "string",
+            "description": "Doorcode of the address",
+            "maxLength": 35,
+            "example": "A1"
+          },
+          "floor": {
+            "type": "string",
+            "description": "Floor of the address",
+            "maxLength": 35,
+            "example": "3"
+          },
+          "region": {
+            "type": "string",
+            "description": "Region of the address",
+            "maxLength": 35,
+            "example": "California"
+          }
+        }
+      },
+      "ReceiverType": {
+        "type": "string",
+        "x-extensible-enum": [
+          "business",
+          "consumer"
+        ]
+      },
+      "Customer": {
+        "type": "object",
+        "description": "The details of a customer",
+        "additionalProperties": false,
+        "required": [
+          "customerNumber",
+          "customerCode",
+          "address"
+        ],
+        "properties": {
+          "customerNumber": {
+            "type": "string",
+            "maxLength": 10,
+            "minLength": 1,
+            "example": "123456"
+          },
+          "customerCode": {
+            "type": "string",
+            "maxLength": 4,
+            "minLength": 1,
+            "example": "DEVC"
+          },
+          "address": {
+            "description": "The address of the customer",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Address"
+              }
+            ]
+          },
+          "undeliverableReturnAddress": {
+            "description": "The undeliverable return address for the customer",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Address"
+              }
+            ]
+          },
+          "contact": {
+            "description": "The contact information of the customer",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Contact"
+              }
+            ]
+          }
+        }
+      },
+      "DeliveryLocation": {
+        "type": "object",
+        "description": "Can be used to specify an alternative delivery location, overriding the receiver address",
+        "additionalProperties": false,
+        "properties": {
+          "pickupLocationId": {
+            "type": "string",
+            "description": "The pickup point id of the location where the shipment should be delivered, for example a PostNL location or automated parcel locker",
+            "example": "910216"
+          }
+        }
+      },
+      "ReturnOptions": {
+        "type": "object",
+        "description": "The return options for the shipment",
+        "additionalProperties": false,
+        "properties": {
+          "returnBarcode": {
+            "type": "string",
+            "description": "This field contains the return barcode that will be used for the label in the box",
+            "maxLength": 15,
+            "minLength": 12,
+            "example": "3SDEVC123456789"
+          },
+          "returnPeriod": {
+            "description": "The number of days the shipment can be returned to the sender. Options are 35, 100, 200, 365",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ReturnPeriod"
+              }
+            ]
+          },
+          "returnAddress": {
+            "description": "The address to which the shipment can be returned",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Address"
+              }
+            ]
+          },
+          "valuableReturn": {
+            "type": "boolean",
+            "description": "Indicates if the return shipment contains valuable goods..",
+            "example": true
+          }
+        }
+      },
+      "ReturnPeriod": {
+        "type": "string",
+        "x-extensible-enum": [
+          "35",
+          "100",
+          "200",
+          "365"
+        ]
+      },
+      "ConfirmShipmentItem": {
+        "type": "object",
+        "description": "The details per item in the shipment",
+        "additionalProperties": false,
+        "required": [
+          "barcode"
+        ],
+        "properties": {
+          "barcode": {
+            "type": "string",
+            "description": "The barcode of the item, generated or provided by the customer. This could be a 3S (domestic shipments) or S10 (international shipments) barcode.",
+            "maxLength": 15,
+            "minLength": 12,
+            "example": "3SDEVC123456789"
+          },
+          "dimensions": {
+            "description": "The dimensions of the shipment item",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Dimensions"
+              }
+            ]
+          },
+          "customerReferences": {
+            "description": "The customer references for the shipment item",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CustomerReferences"
+              }
+            ]
+          },
+          "codingText": {
+            "type": "string",
+            "example": "#X486T4C#51#1417#"
+          }
+        }
+      },
+      "Dimensions": {
+        "type": "object",
+        "description": "The dimensions of the shipment item",
+        "additionalProperties": false,
+        "properties": {
+          "height": {
+            "type": "integer",
+            "description": "The height of the parcel in mm",
+            "minimum": 0.0,
+            "example": 101
+          },
+          "length": {
+            "type": "integer",
+            "description": "The length of the parcel in mm",
+            "minimum": 0.0,
+            "example": 420
+          },
+          "volume": {
+            "type": "integer",
+            "description": "The volume of the parcel in cubic cm",
+            "minimum": 0.0,
+            "example": 8908
+          },
+          "weight": {
+            "type": "integer",
+            "description": "The weight of the parcel in grams",
+            "minimum": 0.0,
+            "example": 1144
+          },
+          "width": {
+            "type": "integer",
+            "description": "The width of the parcel in mm",
+            "minimum": 0.0,
+            "example": 210
+          }
+        }
+      },
+      "CustomerReferences": {
+        "type": "object",
+        "description": "The references of a shipment used by the customer",
+        "additionalProperties": false,
+        "properties": {
+          "costCenter": {
+            "type": "string",
+            "description": "The cost center reference of the shipment",
+            "example": "costCenter"
+          },
+          "shipmentReference": {
+            "type": "string",
+            "description": "The customer reference of the shipment",
+            "example": "reference"
+          },
+          "returnReference": {
+            "type": "string",
+            "description": "The customer reference of the return shipment",
+            "example": "RMA: 66532"
+          },
+          "shipmentRemark": {
+            "type": "string",
+            "description": "An additional remark for the shipment",
+            "example": "remark"
+          }
+        }
+      },
+      "ShipmentType": {
+        "type": "string",
+        "x-extensible-enum": [
+          "parcel",
+          "letterbox",
+          "packet",
+          "parcelnonstandard",
+          "letter"
+        ]
+      },
+      "Services": {
+        "type": "object",
+        "description": "The services that can be used for the shipment",
+        "additionalProperties": false,
+        "properties": {
+          "insuredValue": {
+            "type": "number",
+            "description": "The value of the shipment in EUR, used to insure the shipment when provided",
+            "format": "decimal",
+            "example": 100.99
+          },
+          "deliveryWindow": {
+            "description": "The delivery window service that can be used for the shipment",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DeliveryWindow"
+              }
+            ]
+          },
+          "statedAddressOnly": {
+            "type": "boolean",
+            "description": "When set to true, the shipment will only be delivered to the stated address"
+          },
+          "returnWhenNotHome": {
+            "type": "boolean",
+            "description": "When set to true, the shipment will be returned to the sender when the shipment cannot be delivered to the stated address"
+          },
+          "minimalAgeCheck": {
+            "description": "The age that the receiver must be to receive the shipment",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MinimalAgeCheck"
+              }
+            ]
+          },
+          "deliveryConfirmation": {
+            "description": "The type of confirmation that is required for the delivery, either a signature or a deliverycode",
+            "example": "signature",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DeliveryConfirmation"
+              }
+            ]
+          },
+          "adrLq": {
+            "type": "boolean",
+            "description": "When a contract exists for goods that have Limited Quantity hazardous materials then set this to true if this is an ADR LQ shipment"
+          },
+          "registered": {
+            "type": "boolean",
+            "description": "When set to true, the shipment will be sent as a registered parcel or mail item"
+          },
+          "idCheck": {
+            "type": "boolean",
+            "description": "Add ID check to registered letters"
+          }
+        }
+      },
+      "DeliveryWindow": {
+        "type": "object",
+        "description": "The delivery window service that can be used for the shipment",
+        "additionalProperties": false,
+        "properties": {
+          "service": {
+            "description": "The delivery window service that can be used for the shipment",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Service"
+              }
+            ]
+          },
+          "guaranteedBefore": {
+            "description": "The time before which the delivery is guaranteed to be delivered, using the Guaranteed Before service",
+            "example": "10:00",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GuaranteedBefore"
+              }
+            ]
+          },
+          "duration": {
+            "description": "The duration of the delivery window service",
+            "example": "24hours",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Duration"
+              }
+            ]
+          }
+        }
+      },
+      "GuaranteedBefore": {
+        "type": "string",
+        "x-extensible-enum": [
+          "10:00",
+          "12:00",
+          "17:00"
+        ]
+      },
+      "Duration": {
+        "type": "string",
+        "x-extensible-enum": [
+          "24hours",
+          "non24hours"
+        ]
+      },
+      "Service": {
+        "type": "string",
+        "x-extensible-enum": [
+          "evening"
+        ]
+      },
+      "DeliveryConfirmation": {
+        "type": "string",
+        "x-extensible-enum": [
+          "signature",
+          "deliverycode"
+        ]
+      },
+      "MinimalAgeCheck": {
+        "type": "string",
+        "x-extensible-enum": [
+          "18+"
+        ]
+      },
+      "InternationalConfirmShipmentData": {
+        "type": "object",
+        "description": "Data necessary for international shipments",
+        "additionalProperties": false,
+        "properties": {
+          "pudo": {
+            "type": "boolean",
+            "description": "A boolean to indicate whether or not a dropOff should be used or not",
+            "example": false
+          },
+          "partnerId": {
+            "type": "string",
+            "description": "The Id of the selected Partner for shipping provided when a label is generated.",
+            "example": "PNL-01/B2B/MULTIPLE/Good"
+          },
+          "partnerBarcode": {
+            "type": "string",
+            "description": "The barcode provided by the partner when a label is generated.",
+            "example": "05211234567890M"
+          },
+          "bundle": {
+            "description": "The type of service bundle that is used for the shipment",
+            "example": "track_trace",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Bundle"
+              }
+            ]
+          },
+          "customs": {
+            "description": "Object used when customs information is needed for the import or export of items",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Customs"
+              }
+            ]
+          }
+        }
+      },
+      "Bundle": {
+        "type": "string",
+        "x-extensible-enum": [
+          "track_trace",
+          "insured",
+          "insured_plus",
+          "untracked"
+        ]
+      },
+      "Customs": {
+        "type": "object",
+        "description": "Object used when customs information is needed for the import or export of items",
+        "additionalProperties": false,
+        "properties": {
+          "transactionCode": {
+            "description": "The transactionCode describing the type of shipment this is. Refer to reference table to find correct value",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TransactionCode"
+              }
+            ]
+          },
+          "currency": {
+            "type": "string",
+            "description": "The currency used for all values of the items in the customs section based on ISO3",
+            "maxLength": 3,
+            "minLength": 3,
+            "pattern": "^[A-Z]{3}$",
+            "example": "EUR"
+          },
+          "handleAsNonDeliverable": {
+            "type": "boolean",
+            "description": "Determines what to do when the shipment cannot be delivered the first time\n            (if this is set to true,the shipment will be returned after the first failed attempt)",
+            "default": false,
+            "example": true
+          },
+          "senderIdentification": {
+            "type": "string",
+            "description": "Use only when available. Is related to the ITMATT sender.identification.reference field.\n            Depending on the destination with this ID the customs process can be faster.\n            Only fill in this reference number if the sender is registered as Trusted Shipper in the country of destination.\n            Example:VOEC-number in Norway.",
+            "maxLength": 50
+          },
+          "receiverIdentification": {
+            "type": "string",
+            "description": "Use only when available. Is related to the ITMATT addressee.identification.reference field.\n            Depending on the destination with this ID the customs process can be faster.\n            Only fill in this reference number if the sender is registered in the country of destination.\n            Example:BSN in Brazil."
+          },
+          "content": {
+            "type": "array",
+            "description": "Array used to declare items in shipment for customs purposes",
+            "items": {
+              "$ref": "#/components/schemas/CustomsContent"
+            }
+          },
+          "associatedDocument": {
+            "description": "Fill in if applicable. Mandatory for Parcel shipments with the transactionCode 11, 21, or 32",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AssociatedDocument"
+              }
+            ]
+          }
+        }
+      },
+      "CustomsContent": {
+        "type": "object",
+        "description": "Item declaration used for customs purposes",
+        "additionalProperties": false,
+        "required": [
+          "countryOfOrigin",
+          "description",
+          "hsTariffNumber",
+          "quantity",
+          "value",
+          "weight"
+        ],
+        "properties": {
+          "countryOfOrigin": {
+            "type": "string",
+            "description": "Country where the shipped item was produced based on ISO2",
+            "maxLength": 2,
+            "minLength": 2,
+            "pattern": "^[A-Z]{2}$",
+            "example": "NL"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the shipped items",
+            "maxLength": 35,
+            "minLength": 2,
+            "example": "T-Shirts"
+          },
+          "hsTariffNumber": {
+            "type": "string",
+            "description": "The Harmonized System number of the shipped item with 6, 8 or 10 characters",
+            "maxLength": 10,
+            "minLength": 6,
+            "pattern": "^\\d{6}$|^\\d{8}$|^\\d{10}$",
+            "example": "610990"
+          },
+          "quantity": {
+            "type": "integer",
+            "description": "Number of the items within the shipment. Cannot be negative",
+            "minimum": 1.0,
+            "example": 2
+          },
+          "value": {
+            "type": "number",
+            "description": "Fill the total value of the item(s)",
+            "format": "decimal",
+            "minimum": 0.01,
+            "example": 3.19
+          },
+          "weight": {
+            "type": "integer",
+            "description": "Total net weight of the item(s) in grams. Max weight allowed of 32000",
+            "maximum": 32000.0,
+            "minimum": 1.0,
+            "example": 450
+          }
+        }
+      },
+      "AssociatedDocument": {
+        "type": "object",
+        "description": "Fill in if applicable. Mandatory for Parcel shipments with the transactionCode 11, 21, or 32",
+        "additionalProperties": false,
+        "properties": {
+          "type": {
+            "description": "Fill in if applicable. Mandatory for Parcel shipments with the transactionCode 11, 21, or 32",
+            "example": "invoice",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AssociatedDocumentType"
+              }
+            ]
+          },
+          "number": {
+            "type": "string",
+            "description": "Fill in if applicable. Mandatory for Parcel shipments with the transactionCode 11, 21, or 32",
+            "minLength": 1,
+            "example": "123354"
+          }
+        }
+      },
+      "AssociatedDocumentType": {
+        "type": "string",
+        "x-extensible-enum": [
+          "certificate",
+          "invoice",
+          "license"
+        ]
+      },
+      "TransactionCode": {
+        "type": "string",
+        "x-extensible-enum": [
+          "11",
+          "21",
+          "32",
+          "91"
+        ]
+      },
+      "Unauthorized": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Failed to resolve API Key variable 'request.header.apikey'"
+          },
+          "http_status_code": {
+            "type": "number",
+            "example": 401
+          }
+        }
+      },
+      "MethodNotAllowed": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Only POST requests allowed"
+          },
+          "http_status_code": {
+            "type": "number",
+            "example": 405
+          }
+        }
+      },
+      "TooManyRequests": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Too many requests. Rate limit exceeded!"
+          },
+          "http_status_code": {
+            "type": "number",
+            "example": 429
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "apikey": {
+        "type": "apiKey",
+        "name": "apikey",
+        "in": "header"
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find our API documentation here",
+    "url": "https://developer.postnl.nl/docs/#/http/api-endpoints/send-track/shipment/delivery-confirm"
+  }
+}

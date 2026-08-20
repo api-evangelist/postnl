@@ -1,0 +1,896 @@
+{
+  "item": [
+    {
+      "id": "7ee1d397-245a-45ab-b49c-e7f1a9856554",
+      "name": "Labelling",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3fe86912-91d2-4091-902d-0957b09aabe7",
+          "name": "Generate a label and confirmation",
+          "request": {
+            "name": "Generate a label and confirmation",
+            "description": {},
+            "url": {
+              "path": [
+                "shipment",
+                "v2_2",
+                "label"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "confirm",
+                  "value": "true",
+                  "description": "With the Confirm boolean in the request, you can determine if you want to confirm the shipment in the same call or not. If the Boolean variable is true the shipment will be preannounced. If this is set to false, then an additional Confirming API request needs to be made."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "apikey"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Customer\": {\n    \"CustomerCode\": \"<string>\",\n    \"CustomerNumber\": \"<string>\",\n    \"Address\": {\n      \"AddressType\": \"<string>\",\n      \"City\": \"<string>\",\n      \"Countrycode\": \"<string>\",\n      \"Area\": \"<string>\",\n      \"Buildingname\": \"<string>\",\n      \"CompanyName\": \"<string>\",\n      \"Department\": \"<string>\",\n      \"Doorcode\": \"<string>\",\n      \"FirstName\": \"<string>\",\n      \"Floor\": \"<string>\",\n      \"HouseNr\": \"<string>\",\n      \"HouseNrExt\": \"<string>\",\n      \"Name\": \"<string>\",\n      \"Region\": \"<string>\",\n      \"Street\": \"<string>\",\n      \"StreetHouseNrExt\": \"<string>\",\n      \"Zipcode\": \"<string>\"\n    },\n    \"CollectionLocation\": \"<string>\",\n    \"ContactPerson\": \"<string>\",\n    \"Email\": \"<string>\",\n    \"Name\": \"<string>\"\n  },\n  \"Message\": {\n    \"MessageID\": \"<string>\",\n    \"MessageTimeStamp\": \"<string>\",\n    \"Printertype\": \"<string>\"\n  },\n  \"Shipments\": [\n    {\n      \"Addresses\": [\n        {\n          \"AddressType\": \"01\",\n          \"Countrycode\": \"<string>\",\n          \"Area\": \"<string>\",\n          \"Buildingname\": \"<string>\",\n          \"City\": \"<string>\",\n          \"CompanyName\": \"<string>\",\n          \"Department\": \"<string>\",\n          \"Doorcode\": \"<string>\",\n          \"FirstName\": \"<string>\",\n          \"Floor\": \"<string>\",\n          \"HouseNr\": \"<string>\",\n          \"HouseNrExt\": \"<string>\",\n          \"Name\": \"<string>\",\n          \"Region\": \"<string>\",\n          \"Street\": \"<string>\",\n          \"StreetHouseNrExt\": \"<string>\",\n          \"Zipcode\": \"<string>\"\n        },\n        {\n          \"AddressType\": \"01\",\n          \"Countrycode\": \"<string>\",\n          \"Area\": \"<string>\",\n          \"Buildingname\": \"<string>\",\n          \"City\": \"<string>\",\n          \"CompanyName\": \"<string>\",\n          \"Department\": \"<string>\",\n          \"Doorcode\": \"<string>\",\n          \"FirstName\": \"<string>\",\n          \"Floor\": \"<string>\",\n          \"HouseNr\": \"<string>\",\n          \"HouseNrExt\": \"<string>\",\n          \"Name\": \"<string>\",\n          \"Region\": \"<string>\",\n          \"Street\": \"<string>\",\n          \"StreetHouseNrExt\": \"<string>\",\n          \"Zipcode\": \"<string>\"\n        }\n      ],\n      \"Barcode\": \"<string>\",\n      \"Dimension\": {\n        \"Weight\": \"<integer>\",\n        \"Height\": \"<integer>\",\n        \"Length\": \"<integer>\",\n        \"Volume\": \"<integer>\",\n        \"Width\": \"<integer>\"\n      },\n      \"ProductCodeDelivery\": \"3085\",\n      \"Amounts\": [\n        {\n          \"AmountType\": \"<string>\",\n          \"Value\": \"<double>\",\n          \"AccountName\": \"<string>\",\n          \"BIC\": \"<string>\",\n          \"Currency\": \"<string>\",\n          \"IBAN\": \"<string>\",\n          \"Reference\": \"<string>\",\n          \"TransactionNumber\": \"<string>\"\n        },\n        {\n          \"AmountType\": \"<string>\",\n          \"Value\": \"<double>\",\n          \"AccountName\": \"<string>\",\n          \"BIC\": \"<string>\",\n          \"Currency\": \"<string>\",\n          \"IBAN\": \"<string>\",\n          \"Reference\": \"<string>\",\n          \"TransactionNumber\": \"<string>\"\n        }\n      ],\n      \"CodingText\": \"<string>\",\n      \"CollectionTimeStampStart\": \"<string>\",\n      \"CollectionTimeStampEnd\": \"<string>\",\n      \"Contacts\": [\n        {\n          \"ContactType\": \"<string>\",\n          \"Email\": \"<string>\",\n          \"SMSNr\": \"<string>\",\n          \"TelNr\": \"<string>\"\n        },\n        {\n          \"ContactType\": \"<string>\",\n          \"Email\": \"<string>\",\n          \"SMSNr\": \"<string>\",\n          \"TelNr\": \"<string>\"\n        }\n      ],\n      \"Content\": \"<string>\",\n      \"CostCenter\": \"<string>\",\n      \"CustomerOrderNumber\": \"<string>\",\n      \"Customs\": {\n        \"Content\": [\n          {\n            \"Description\": \"<string>\",\n            \"Quantity\": \"<integer>\",\n            \"Value\": \"<double>\",\n            \"Weight\": \"<integer>\",\n            \"HSTariffNr\": \"<string>\",\n            \"CountryOfOrigin\": \"<string>\"\n          },\n          {\n            \"Description\": \"<string>\",\n            \"Quantity\": \"<integer>\",\n            \"Value\": \"<double>\",\n            \"Weight\": \"<integer>\",\n            \"HSTariffNr\": \"<string>\",\n            \"CountryOfOrigin\": \"<string>\"\n          }\n        ],\n        \"Currency\": \"<string>\",\n        \"ShipmentType\": \"<string>\",\n        \"Certificate\": \"<boolean>\",\n        \"CertificateNr\": \"<string>\",\n        \"License\": \"<boolean>\",\n        \"LicenseNr\": \"<string>\",\n        \"Invoice\": \"<boolean>\",\n        \"InvoiceNr\": \"<string>\",\n        \"HandleAsNonDeliverable\": \"<boolean>\",\n        \"TrustedShipperID\": \"<string>\",\n        \"ImporterReferenceCode\": \"<string>\",\n        \"TransactionCode\": \"<string>\",\n        \"TransactionDescription\": \"<string>\"\n      },\n      \"DeliveryAddress\": \"<string>\",\n      \"DeliveryDate\": \"<string>\",\n      \"DownPartnerBarcode\": \"<string>\",\n      \"DownPartnerID\": \"<string>\",\n      \"DownPartnerLocation\": \"<string>\",\n      \"Groups\": [\n        {\n          \"GroupType\": \"<string>\",\n          \"MainBarcode\": \"<string>\",\n          \"GroupSequence\": \"<integer>\",\n          \"GroupCount\": \"<integer>\"\n        },\n        {\n          \"GroupType\": \"<string>\",\n          \"MainBarcode\": \"<string>\",\n          \"GroupSequence\": \"<integer>\",\n          \"GroupCount\": \"<integer>\"\n        }\n      ],\n      \"HazardousMaterial\": [\n        {\n          \"ToxicSubstanceCode\": \"<string>\",\n          \"AdditionalToxicSubstanceCode\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"ADRPoints\": \"<string>\",\n          \"TunnelCode\": \"<string>\",\n          \"PackagingGroupCode\": \"<string>\",\n          \"PackagingGroupDescription\": \"<string>\",\n          \"GrossWeight\": \"<string>\",\n          \"UNDGNumber\": \"<string>\",\n          \"TransportCategoryCode\": \"<string>\",\n          \"ChemicalTechnicalDescription\": \"<string>\"\n        },\n        {\n          \"ToxicSubstanceCode\": \"<string>\",\n          \"AdditionalToxicSubstanceCode\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"ADRPoints\": \"<string>\",\n          \"TunnelCode\": \"<string>\",\n          \"PackagingGroupCode\": \"<string>\",\n          \"PackagingGroupDescription\": \"<string>\",\n          \"GrossWeight\": \"<string>\",\n          \"UNDGNumber\": \"<string>\",\n          \"TransportCategoryCode\": \"<string>\",\n          \"ChemicalTechnicalDescription\": \"<string>\"\n        }\n      ],\n      \"ProductCodeCollect\": \"<string>\",\n      \"ProductOptions\": [\n        {\n          \"Characteristic\": \"118\",\n          \"Option\": \"006\"\n        },\n        {\n          \"Characteristic\": \"118\",\n          \"Option\": \"006\"\n        }\n      ],\n      \"ReceiverDateOfBirth\": \"<string>\",\n      \"Reference\": \"<string>\",\n      \"ReferenceCollect\": \"<string>\",\n      \"Remark\": \"<string>\",\n      \"ReturnBarcode\": \"<string>\",\n      \"ReturnReference\": \"<string>\",\n      \"TimeslotID\": \"<string>\",\n      \"ExtraFields\": [\n        {\n          \"Key\": \"<string>\",\n          \"Value\": \"<string>\"\n        },\n        {\n          \"Key\": \"<string>\",\n          \"Value\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"Addresses\": [\n        {\n          \"AddressType\": \"01\",\n          \"Countrycode\": \"<string>\",\n          \"Area\": \"<string>\",\n          \"Buildingname\": \"<string>\",\n          \"City\": \"<string>\",\n          \"CompanyName\": \"<string>\",\n          \"Department\": \"<string>\",\n          \"Doorcode\": \"<string>\",\n          \"FirstName\": \"<string>\",\n          \"Floor\": \"<string>\",\n          \"HouseNr\": \"<string>\",\n          \"HouseNrExt\": \"<string>\",\n          \"Name\": \"<string>\",\n          \"Region\": \"<string>\",\n          \"Street\": \"<string>\",\n          \"StreetHouseNrExt\": \"<string>\",\n          \"Zipcode\": \"<string>\"\n        },\n        {\n          \"AddressType\": \"01\",\n          \"Countrycode\": \"<string>\",\n          \"Area\": \"<string>\",\n          \"Buildingname\": \"<string>\",\n          \"City\": \"<string>\",\n          \"CompanyName\": \"<string>\",\n          \"Department\": \"<string>\",\n          \"Doorcode\": \"<string>\",\n          \"FirstName\": \"<string>\",\n          \"Floor\": \"<string>\",\n          \"HouseNr\": \"<string>\",\n          \"HouseNrExt\": \"<string>\",\n          \"Name\": \"<string>\",\n          \"Region\": \"<string>\",\n          \"Street\": \"<string>\",\n          \"StreetHouseNrExt\": \"<string>\",\n          \"Zipcode\": \"<string>\"\n        }\n      ],\n      \"Barcode\": \"<string>\",\n      \"Dimension\": {\n        \"Weight\": \"<integer>\",\n        \"Height\": \"<integer>\",\n        \"Length\": \"<integer>\",\n        \"Volume\": \"<integer>\",\n        \"Width\": \"<integer>\"\n      },\n      \"ProductCodeDelivery\": \"3085\",\n      \"Amounts\": [\n        {\n          \"AmountType\": \"<string>\",\n          \"Value\": \"<double>\",\n          \"AccountName\": \"<string>\",\n          \"BIC\": \"<string>\",\n          \"Currency\": \"<string>\",\n          \"IBAN\": \"<string>\",\n          \"Reference\": \"<string>\",\n          \"TransactionNumber\": \"<string>\"\n        },\n        {\n          \"AmountType\": \"<string>\",\n          \"Value\": \"<double>\",\n          \"AccountName\": \"<string>\",\n          \"BIC\": \"<string>\",\n          \"Currency\": \"<string>\",\n          \"IBAN\": \"<string>\",\n          \"Reference\": \"<string>\",\n          \"TransactionNumber\": \"<string>\"\n        }\n      ],\n      \"CodingText\": \"<string>\",\n      \"CollectionTimeStampStart\": \"<string>\",\n      \"CollectionTimeStampEnd\": \"<string>\",\n      \"Contacts\": [\n        {\n          \"ContactType\": \"<string>\",\n          \"Email\": \"<string>\",\n          \"SMSNr\": \"<string>\",\n          \"TelNr\": \"<string>\"\n        },\n        {\n          \"ContactType\": \"<string>\",\n          \"Email\": \"<string>\",\n          \"SMSNr\": \"<string>\",\n          \"TelNr\": \"<string>\"\n        }\n      ],\n      \"Content\": \"<string>\",\n      \"CostCenter\": \"<string>\",\n      \"CustomerOrderNumber\": \"<string>\",\n      \"Customs\": {\n        \"Content\": [\n          {\n            \"Description\": \"<string>\",\n            \"Quantity\": \"<integer>\",\n            \"Value\": \"<double>\",\n            \"Weight\": \"<integer>\",\n            \"HSTariffNr\": \"<string>\",\n            \"CountryOfOrigin\": \"<string>\"\n          },\n          {\n            \"Description\": \"<string>\",\n            \"Quantity\": \"<integer>\",\n            \"Value\": \"<double>\",\n            \"Weight\": \"<integer>\",\n            \"HSTariffNr\": \"<string>\",\n            \"CountryOfOrigin\": \"<string>\"\n          }\n        ],\n        \"Currency\": \"<string>\",\n        \"ShipmentType\": \"<string>\",\n        \"Certificate\": \"<boolean>\",\n        \"CertificateNr\": \"<string>\",\n        \"License\": \"<boolean>\",\n        \"LicenseNr\": \"<string>\",\n        \"Invoice\": \"<boolean>\",\n        \"InvoiceNr\": \"<string>\",\n        \"HandleAsNonDeliverable\": \"<boolean>\",\n        \"TrustedShipperID\": \"<string>\",\n        \"ImporterReferenceCode\": \"<string>\",\n        \"TransactionCode\": \"<string>\",\n        \"TransactionDescription\": \"<string>\"\n      },\n      \"DeliveryAddress\": \"<string>\",\n      \"DeliveryDate\": \"<string>\",\n      \"DownPartnerBarcode\": \"<string>\",\n      \"DownPartnerID\": \"<string>\",\n      \"DownPartnerLocation\": \"<string>\",\n      \"Groups\": [\n        {\n          \"GroupType\": \"<string>\",\n          \"MainBarcode\": \"<string>\",\n          \"GroupSequence\": \"<integer>\",\n          \"GroupCount\": \"<integer>\"\n        },\n        {\n          \"GroupType\": \"<string>\",\n          \"MainBarcode\": \"<string>\",\n          \"GroupSequence\": \"<integer>\",\n          \"GroupCount\": \"<integer>\"\n        }\n      ],\n      \"HazardousMaterial\": [\n        {\n          \"ToxicSubstanceCode\": \"<string>\",\n          \"AdditionalToxicSubstanceCode\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"ADRPoints\": \"<string>\",\n          \"TunnelCode\": \"<string>\",\n          \"PackagingGroupCode\": \"<string>\",\n          \"PackagingGroupDescription\": \"<string>\",\n          \"GrossWeight\": \"<string>\",\n          \"UNDGNumber\": \"<string>\",\n          \"TransportCategoryCode\": \"<string>\",\n          \"ChemicalTechnicalDescription\": \"<string>\"\n        },\n        {\n          \"ToxicSubstanceCode\": \"<string>\",\n          \"AdditionalToxicSubstanceCode\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"ADRPoints\": \"<string>\",\n          \"TunnelCode\": \"<string>\",\n          \"PackagingGroupCode\": \"<string>\",\n          \"PackagingGroupDescription\": \"<string>\",\n          \"GrossWeight\": \"<string>\",\n          \"UNDGNumber\": \"<string>\",\n          \"TransportCategoryCode\": \"<string>\",\n          \"ChemicalTechnicalDescription\": \"<string>\"\n        }\n      ],\n      \"ProductCodeCollect\": \"<string>\",\n      \"ProductOptions\": [\n        {\n          \"Characteristic\": \"118\",\n          \"Option\": \"006\"\n        },\n        {\n          \"Characteristic\": \"118\",\n          \"Option\": \"006\"\n        }\n      ],\n      \"ReceiverDateOfBirth\": \"<string>\",\n      \"Reference\": \"<string>\",\n      \"ReferenceCollect\": \"<string>\",\n      \"Remark\": \"<string>\",\n      \"ReturnBarcode\": \"<string>\",\n      \"ReturnReference\": \"<string>\",\n      \"TimeslotID\": \"<string>\",\n      \"ExtraFields\": [\n        {\n          \"Key\": \"<string>\",\n          \"Value\": \"<string>\"\n        },\n        {\n          \"Key\": \"<string>\",\n          \"Value\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"LabelSignature\": \"<byte>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d3398c1e-99e9-4894-89eb-ad807cba0c30",
+              "name": "A Label",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2_2",
+                    "label"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "confirm",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Customer\": {\n    \"Address\": {\n      \"AddressType\": \"02\",\n      \"City\": \"Den Haag\",\n      \"CompanyName\": \"PostNL\",\n      \"Countrycode\": \"NL\",\n      \"HouseNr\": \"3\",\n      \"Street\": \"Waldorpstraat\",\n      \"Zipcode\": \"2521CA\"\n    },\n    \"CollectionLocation\": \"123456\",\n    \"ContactPerson\": \"Janssen\",\n    \"CustomerCode\": \"DEVC\",\n    \"CustomerNumber\": \"11223344\",\n    \"Email\": \"email@company.com\",\n    \"Name\": \"Janssen\"\n  },\n  \"Message\": {\n    \"MessageID\": \"1\",\n    \"MessageTimeStamp\": \"08-09-2022 12:00:00\",\n    \"Printertype\": \"GraphicFile|PDF\"\n  },\n  \"Shipments\": [\n    {\n      \"Addresses\": [\n        {\n          \"AddressType\": \"01\",\n          \"City\": \"Utrecht\",\n          \"Countrycode\": \"NL\",\n          \"FirstName\": \"Peter\",\n          \"HouseNr\": \"9\",\n          \"HouseNrExt\": \"a bis\",\n          \"Name\": \"de Ruiter\",\n          \"Street\": \"Bilderdijkstraat\",\n          \"Zipcode\": \"3532VA\"\n        }\n      ],\n      \"Barcode\": \"3SDEVC748859096\",\n      \"Contacts\": [\n        {\n          \"ContactType\": \"01\",\n          \"Email\": \"receiver@email.com\",\n          \"SMSNr\": \"+31612345678\",\n          \"TelNr\": \"+31301234567\"\n        }\n      ],\n      \"Dimension\": {\n        \"Weight\": \"2000\"\n      },\n      \"ProductCodeDelivery\": \"3085\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"MergedLabels\": [],\n  \"ResponseShipments\": [\n    {\n      \"Barcode\": \"3SDEVC272730803\",\n      \"Errors\": [],\n      \"Warnings\": [],\n      \"Labels\": [\n        {\n          \"Content\": \"JVBERi0xLjMKJeLjz9MKNSAwIG9iago8PAovQ29udGVudHMg[TRUNCATED]\",\n          \"Labeltype\": \"Label\",\n          \"OutputType\": \"PDF\"\n        }\n      ],\n      \"ProductCodeDelivery\": \"3085\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "637866ed-c299-4ade-bd12-179d13488ae9",
+              "name": "Error payload",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2_2",
+                    "label"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "confirm",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Customer\": {\n    \"Address\": {\n      \"AddressType\": \"02\",\n      \"City\": \"Den Haag\",\n      \"CompanyName\": \"PostNL\",\n      \"Countrycode\": \"NL\",\n      \"HouseNr\": \"3\",\n      \"Street\": \"Waldorpstraat\",\n      \"Zipcode\": \"2521CA\"\n    },\n    \"CollectionLocation\": \"123456\",\n    \"ContactPerson\": \"Janssen\",\n    \"CustomerCode\": \"DEVC\",\n    \"CustomerNumber\": \"11223344\",\n    \"Email\": \"email@company.com\",\n    \"Name\": \"Janssen\"\n  },\n  \"Message\": {\n    \"MessageID\": \"1\",\n    \"MessageTimeStamp\": \"08-09-2022 12:00:00\",\n    \"Printertype\": \"GraphicFile|PDF\"\n  },\n  \"Shipments\": [\n    {\n      \"Addresses\": [\n        {\n          \"AddressType\": \"01\",\n          \"City\": \"Utrecht\",\n          \"Countrycode\": \"NL\",\n          \"FirstName\": \"Peter\",\n          \"HouseNr\": \"9\",\n          \"HouseNrExt\": \"a bis\",\n          \"Name\": \"de Ruiter\",\n          \"Street\": \"Bilderdijkstraat\",\n          \"Zipcode\": \"3532VA\"\n        }\n      ],\n      \"Barcode\": \"3SDEVC748859096\",\n      \"Contacts\": [\n        {\n          \"ContactType\": \"01\",\n          \"Email\": \"receiver@email.com\",\n          \"SMSNr\": \"+31612345678\",\n          \"TelNr\": \"+31301234567\"\n        }\n      ],\n      \"Dimension\": {\n        \"Weight\": \"2000\"\n      },\n      \"ProductCodeDelivery\": \"3085\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Errors\": [\n    {\n      \"Error\": \"Validation failed for shipment: 3SDEVC949511897\",\n      \"Code\": \"1280202\",\n      \"Description\": \"Incorrect address specified in address type Sender\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f6418eb2-4c2f-4e94-8edc-e8b621235a93",
+              "name": "Invalid apikey",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2_2",
+                    "label"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "confirm",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Customer\": {\n    \"Address\": {\n      \"AddressType\": \"02\",\n      \"City\": \"Den Haag\",\n      \"CompanyName\": \"PostNL\",\n      \"Countrycode\": \"NL\",\n      \"HouseNr\": \"3\",\n      \"Street\": \"Waldorpstraat\",\n      \"Zipcode\": \"2521CA\"\n    },\n    \"CollectionLocation\": \"123456\",\n    \"ContactPerson\": \"Janssen\",\n    \"CustomerCode\": \"DEVC\",\n    \"CustomerNumber\": \"11223344\",\n    \"Email\": \"email@company.com\",\n    \"Name\": \"Janssen\"\n  },\n  \"Message\": {\n    \"MessageID\": \"1\",\n    \"MessageTimeStamp\": \"08-09-2022 12:00:00\",\n    \"Printertype\": \"GraphicFile|PDF\"\n  },\n  \"Shipments\": [\n    {\n      \"Addresses\": [\n        {\n          \"AddressType\": \"01\",\n          \"City\": \"Utrecht\",\n          \"Countrycode\": \"NL\",\n          \"FirstName\": \"Peter\",\n          \"HouseNr\": \"9\",\n          \"HouseNrExt\": \"a bis\",\n          \"Name\": \"de Ruiter\",\n          \"Street\": \"Bilderdijkstraat\",\n          \"Zipcode\": \"3532VA\"\n        }\n      ],\n      \"Barcode\": \"3SDEVC748859096\",\n      \"Contacts\": [\n        {\n          \"ContactType\": \"01\",\n          \"Email\": \"receiver@email.com\",\n          \"SMSNr\": \"+31612345678\",\n          \"TelNr\": \"+31301234567\"\n        }\n      ],\n      \"Dimension\": {\n        \"Weight\": \"2000\"\n      },\n      \"ProductCodeDelivery\": \"3085\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Failed to resolve API Key variable 'request.header.apikey'\",\n  \"http_status_code\": 401\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a48b8fb1-26a5-4acd-9a8c-671dbc02cbc9",
+              "name": "Method not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2_2",
+                    "label"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "confirm",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Customer\": {\n    \"Address\": {\n      \"AddressType\": \"02\",\n      \"City\": \"Den Haag\",\n      \"CompanyName\": \"PostNL\",\n      \"Countrycode\": \"NL\",\n      \"HouseNr\": \"3\",\n      \"Street\": \"Waldorpstraat\",\n      \"Zipcode\": \"2521CA\"\n    },\n    \"CollectionLocation\": \"123456\",\n    \"ContactPerson\": \"Janssen\",\n    \"CustomerCode\": \"DEVC\",\n    \"CustomerNumber\": \"11223344\",\n    \"Email\": \"email@company.com\",\n    \"Name\": \"Janssen\"\n  },\n  \"Message\": {\n    \"MessageID\": \"1\",\n    \"MessageTimeStamp\": \"08-09-2022 12:00:00\",\n    \"Printertype\": \"GraphicFile|PDF\"\n  },\n  \"Shipments\": [\n    {\n      \"Addresses\": [\n        {\n          \"AddressType\": \"01\",\n          \"City\": \"Utrecht\",\n          \"Countrycode\": \"NL\",\n          \"FirstName\": \"Peter\",\n          \"HouseNr\": \"9\",\n          \"HouseNrExt\": \"a bis\",\n          \"Name\": \"de Ruiter\",\n          \"Street\": \"Bilderdijkstraat\",\n          \"Zipcode\": \"3532VA\"\n        }\n      ],\n      \"Barcode\": \"3SDEVC748859096\",\n      \"Contacts\": [\n        {\n          \"ContactType\": \"01\",\n          \"Email\": \"receiver@email.com\",\n          \"SMSNr\": \"+31612345678\",\n          \"TelNr\": \"+31301234567\"\n        }\n      ],\n      \"Dimension\": {\n        \"Weight\": \"2000\"\n      },\n      \"ProductCodeDelivery\": \"3085\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Only POST requests allowed\",\n  \"http_status_code\": 405\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f8adb7eb-f677-4a4c-95d1-94c96e220d91",
+              "name": "Too many requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2_2",
+                    "label"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "confirm",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Customer\": {\n    \"Address\": {\n      \"AddressType\": \"02\",\n      \"City\": \"Den Haag\",\n      \"CompanyName\": \"PostNL\",\n      \"Countrycode\": \"NL\",\n      \"HouseNr\": \"3\",\n      \"Street\": \"Waldorpstraat\",\n      \"Zipcode\": \"2521CA\"\n    },\n    \"CollectionLocation\": \"123456\",\n    \"ContactPerson\": \"Janssen\",\n    \"CustomerCode\": \"DEVC\",\n    \"CustomerNumber\": \"11223344\",\n    \"Email\": \"email@company.com\",\n    \"Name\": \"Janssen\"\n  },\n  \"Message\": {\n    \"MessageID\": \"1\",\n    \"MessageTimeStamp\": \"08-09-2022 12:00:00\",\n    \"Printertype\": \"GraphicFile|PDF\"\n  },\n  \"Shipments\": [\n    {\n      \"Addresses\": [\n        {\n          \"AddressType\": \"01\",\n          \"City\": \"Utrecht\",\n          \"Countrycode\": \"NL\",\n          \"FirstName\": \"Peter\",\n          \"HouseNr\": \"9\",\n          \"HouseNrExt\": \"a bis\",\n          \"Name\": \"de Ruiter\",\n          \"Street\": \"Bilderdijkstraat\",\n          \"Zipcode\": \"3532VA\"\n        }\n      ],\n      \"Barcode\": \"3SDEVC748859096\",\n      \"Contacts\": [\n        {\n          \"ContactType\": \"01\",\n          \"Email\": \"receiver@email.com\",\n          \"SMSNr\": \"+31612345678\",\n          \"TelNr\": \"+31301234567\"\n        }\n      ],\n      \"Dimension\": {\n        \"Weight\": \"2000\"\n      },\n      \"ProductCodeDelivery\": \"3085\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Too many requests. Rate limit exceeded!\",\n  \"http_status_code\": 429\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "348684e7-5fba-44cd-9513-71377b542da3",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2_2",
+                    "label"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "confirm",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Customer\": {\n    \"Address\": {\n      \"AddressType\": \"02\",\n      \"City\": \"Den Haag\",\n      \"CompanyName\": \"PostNL\",\n      \"Countrycode\": \"NL\",\n      \"HouseNr\": \"3\",\n      \"Street\": \"Waldorpstraat\",\n      \"Zipcode\": \"2521CA\"\n    },\n    \"CollectionLocation\": \"123456\",\n    \"ContactPerson\": \"Janssen\",\n    \"CustomerCode\": \"DEVC\",\n    \"CustomerNumber\": \"11223344\",\n    \"Email\": \"email@company.com\",\n    \"Name\": \"Janssen\"\n  },\n  \"Message\": {\n    \"MessageID\": \"1\",\n    \"MessageTimeStamp\": \"08-09-2022 12:00:00\",\n    \"Printertype\": \"GraphicFile|PDF\"\n  },\n  \"Shipments\": [\n    {\n      \"Addresses\": [\n        {\n          \"AddressType\": \"01\",\n          \"City\": \"Utrecht\",\n          \"Countrycode\": \"NL\",\n          \"FirstName\": \"Peter\",\n          \"HouseNr\": \"9\",\n          \"HouseNrExt\": \"a bis\",\n          \"Name\": \"de Ruiter\",\n          \"Street\": \"Bilderdijkstraat\",\n          \"Zipcode\": \"3532VA\"\n        }\n      ],\n      \"Barcode\": \"3SDEVC748859096\",\n      \"Contacts\": [\n        {\n          \"ContactType\": \"01\",\n          \"Email\": \"receiver@email.com\",\n          \"SMSNr\": \"+31612345678\",\n          \"TelNr\": \"+31301234567\"\n        }\n      ],\n      \"Dimension\": {\n        \"Weight\": \"2000\"\n      },\n      \"ProductCodeDelivery\": \"3085\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"fault\": {\n    \"faultstring\": \"Unexpected token in object literal\",\n    \"detail\": {\n      \"errorcode\": \"Validation Fault\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "2a0b774f-a1e9-4e28-aaae-d0d8531a915b",
+      "name": "Shipment",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0eaa3848-4916-4c55-9119-9e7d8583328a",
+          "name": "Generate a label and confirmation",
+          "request": {
+            "name": "Generate a label and confirmation",
+            "description": {},
+            "url": {
+              "path": [
+                "shipment",
+                "v2_2",
+                "label"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "confirm",
+                  "value": "true",
+                  "description": "With the Confirm boolean in the request, you can determine if you want to confirm the shipment in the same call or not. If the Boolean variable is true the shipment will be preannounced. If this is set to false, then an additional Confirming API request needs to be made."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "apikey"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Customer\": {\n    \"CustomerCode\": \"<string>\",\n    \"CustomerNumber\": \"<string>\",\n    \"Address\": {\n      \"AddressType\": \"<string>\",\n      \"City\": \"<string>\",\n      \"Countrycode\": \"<string>\",\n      \"Area\": \"<string>\",\n      \"Buildingname\": \"<string>\",\n      \"CompanyName\": \"<string>\",\n      \"Department\": \"<string>\",\n      \"Doorcode\": \"<string>\",\n      \"FirstName\": \"<string>\",\n      \"Floor\": \"<string>\",\n      \"HouseNr\": \"<string>\",\n      \"HouseNrExt\": \"<string>\",\n      \"Name\": \"<string>\",\n      \"Region\": \"<string>\",\n      \"Street\": \"<string>\",\n      \"StreetHouseNrExt\": \"<string>\",\n      \"Zipcode\": \"<string>\"\n    },\n    \"CollectionLocation\": \"<string>\",\n    \"ContactPerson\": \"<string>\",\n    \"Email\": \"<string>\",\n    \"Name\": \"<string>\"\n  },\n  \"Message\": {\n    \"MessageID\": \"<string>\",\n    \"MessageTimeStamp\": \"<string>\",\n    \"Printertype\": \"<string>\"\n  },\n  \"Shipments\": [\n    {\n      \"Addresses\": [\n        {\n          \"AddressType\": \"01\",\n          \"Countrycode\": \"<string>\",\n          \"Area\": \"<string>\",\n          \"Buildingname\": \"<string>\",\n          \"City\": \"<string>\",\n          \"CompanyName\": \"<string>\",\n          \"Department\": \"<string>\",\n          \"Doorcode\": \"<string>\",\n          \"FirstName\": \"<string>\",\n          \"Floor\": \"<string>\",\n          \"HouseNr\": \"<string>\",\n          \"HouseNrExt\": \"<string>\",\n          \"Name\": \"<string>\",\n          \"Region\": \"<string>\",\n          \"Street\": \"<string>\",\n          \"StreetHouseNrExt\": \"<string>\",\n          \"Zipcode\": \"<string>\"\n        },\n        {\n          \"AddressType\": \"01\",\n          \"Countrycode\": \"<string>\",\n          \"Area\": \"<string>\",\n          \"Buildingname\": \"<string>\",\n          \"City\": \"<string>\",\n          \"CompanyName\": \"<string>\",\n          \"Department\": \"<string>\",\n          \"Doorcode\": \"<string>\",\n          \"FirstName\": \"<string>\",\n          \"Floor\": \"<string>\",\n          \"HouseNr\": \"<string>\",\n          \"HouseNrExt\": \"<string>\",\n          \"Name\": \"<string>\",\n          \"Region\": \"<string>\",\n          \"Street\": \"<string>\",\n          \"StreetHouseNrExt\": \"<string>\",\n          \"Zipcode\": \"<string>\"\n        }\n      ],\n      \"Barcode\": \"<string>\",\n      \"Dimension\": {\n        \"Weight\": \"<integer>\",\n        \"Height\": \"<integer>\",\n        \"Length\": \"<integer>\",\n        \"Volume\": \"<integer>\",\n        \"Width\": \"<integer>\"\n      },\n      \"ProductCodeDelivery\": \"3085\",\n      \"Amounts\": [\n        {\n          \"AmountType\": \"<string>\",\n          \"Value\": \"<double>\",\n          \"AccountName\": \"<string>\",\n          \"BIC\": \"<string>\",\n          \"Currency\": \"<string>\",\n          \"IBAN\": \"<string>\",\n          \"Reference\": \"<string>\",\n          \"TransactionNumber\": \"<string>\"\n        },\n        {\n          \"AmountType\": \"<string>\",\n          \"Value\": \"<double>\",\n          \"AccountName\": \"<string>\",\n          \"BIC\": \"<string>\",\n          \"Currency\": \"<string>\",\n          \"IBAN\": \"<string>\",\n          \"Reference\": \"<string>\",\n          \"TransactionNumber\": \"<string>\"\n        }\n      ],\n      \"CodingText\": \"<string>\",\n      \"CollectionTimeStampStart\": \"<string>\",\n      \"CollectionTimeStampEnd\": \"<string>\",\n      \"Contacts\": [\n        {\n          \"ContactType\": \"<string>\",\n          \"Email\": \"<string>\",\n          \"SMSNr\": \"<string>\",\n          \"TelNr\": \"<string>\"\n        },\n        {\n          \"ContactType\": \"<string>\",\n          \"Email\": \"<string>\",\n          \"SMSNr\": \"<string>\",\n          \"TelNr\": \"<string>\"\n        }\n      ],\n      \"Content\": \"<string>\",\n      \"CostCenter\": \"<string>\",\n      \"CustomerOrderNumber\": \"<string>\",\n      \"Customs\": {\n        \"Content\": [\n          {\n            \"Description\": \"<string>\",\n            \"Quantity\": \"<integer>\",\n            \"Value\": \"<double>\",\n            \"Weight\": \"<integer>\",\n            \"HSTariffNr\": \"<string>\",\n            \"CountryOfOrigin\": \"<string>\"\n          },\n          {\n            \"Description\": \"<string>\",\n            \"Quantity\": \"<integer>\",\n            \"Value\": \"<double>\",\n            \"Weight\": \"<integer>\",\n            \"HSTariffNr\": \"<string>\",\n            \"CountryOfOrigin\": \"<string>\"\n          }\n        ],\n        \"Currency\": \"<string>\",\n        \"ShipmentType\": \"<string>\",\n        \"Certificate\": \"<boolean>\",\n        \"CertificateNr\": \"<string>\",\n        \"License\": \"<boolean>\",\n        \"LicenseNr\": \"<string>\",\n        \"Invoice\": \"<boolean>\",\n        \"InvoiceNr\": \"<string>\",\n        \"HandleAsNonDeliverable\": \"<boolean>\",\n        \"TrustedShipperID\": \"<string>\",\n        \"ImporterReferenceCode\": \"<string>\",\n        \"TransactionCode\": \"<string>\",\n        \"TransactionDescription\": \"<string>\"\n      },\n      \"DeliveryAddress\": \"<string>\",\n      \"DeliveryDate\": \"<string>\",\n      \"DownPartnerBarcode\": \"<string>\",\n      \"DownPartnerID\": \"<string>\",\n      \"DownPartnerLocation\": \"<string>\",\n      \"Groups\": [\n        {\n          \"GroupType\": \"<string>\",\n          \"MainBarcode\": \"<string>\",\n          \"GroupSequence\": \"<integer>\",\n          \"GroupCount\": \"<integer>\"\n        },\n        {\n          \"GroupType\": \"<string>\",\n          \"MainBarcode\": \"<string>\",\n          \"GroupSequence\": \"<integer>\",\n          \"GroupCount\": \"<integer>\"\n        }\n      ],\n      \"HazardousMaterial\": [\n        {\n          \"ToxicSubstanceCode\": \"<string>\",\n          \"AdditionalToxicSubstanceCode\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"ADRPoints\": \"<string>\",\n          \"TunnelCode\": \"<string>\",\n          \"PackagingGroupCode\": \"<string>\",\n          \"PackagingGroupDescription\": \"<string>\",\n          \"GrossWeight\": \"<string>\",\n          \"UNDGNumber\": \"<string>\",\n          \"TransportCategoryCode\": \"<string>\",\n          \"ChemicalTechnicalDescription\": \"<string>\"\n        },\n        {\n          \"ToxicSubstanceCode\": \"<string>\",\n          \"AdditionalToxicSubstanceCode\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"ADRPoints\": \"<string>\",\n          \"TunnelCode\": \"<string>\",\n          \"PackagingGroupCode\": \"<string>\",\n          \"PackagingGroupDescription\": \"<string>\",\n          \"GrossWeight\": \"<string>\",\n          \"UNDGNumber\": \"<string>\",\n          \"TransportCategoryCode\": \"<string>\",\n          \"ChemicalTechnicalDescription\": \"<string>\"\n        }\n      ],\n      \"ProductCodeCollect\": \"<string>\",\n      \"ProductOptions\": [\n        {\n          \"Characteristic\": \"118\",\n          \"Option\": \"006\"\n        },\n        {\n          \"Characteristic\": \"118\",\n          \"Option\": \"006\"\n        }\n      ],\n      \"ReceiverDateOfBirth\": \"<string>\",\n      \"Reference\": \"<string>\",\n      \"ReferenceCollect\": \"<string>\",\n      \"Remark\": \"<string>\",\n      \"ReturnBarcode\": \"<string>\",\n      \"ReturnReference\": \"<string>\",\n      \"TimeslotID\": \"<string>\",\n      \"ExtraFields\": [\n        {\n          \"Key\": \"<string>\",\n          \"Value\": \"<string>\"\n        },\n        {\n          \"Key\": \"<string>\",\n          \"Value\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"Addresses\": [\n        {\n          \"AddressType\": \"01\",\n          \"Countrycode\": \"<string>\",\n          \"Area\": \"<string>\",\n          \"Buildingname\": \"<string>\",\n          \"City\": \"<string>\",\n          \"CompanyName\": \"<string>\",\n          \"Department\": \"<string>\",\n          \"Doorcode\": \"<string>\",\n          \"FirstName\": \"<string>\",\n          \"Floor\": \"<string>\",\n          \"HouseNr\": \"<string>\",\n          \"HouseNrExt\": \"<string>\",\n          \"Name\": \"<string>\",\n          \"Region\": \"<string>\",\n          \"Street\": \"<string>\",\n          \"StreetHouseNrExt\": \"<string>\",\n          \"Zipcode\": \"<string>\"\n        },\n        {\n          \"AddressType\": \"01\",\n          \"Countrycode\": \"<string>\",\n          \"Area\": \"<string>\",\n          \"Buildingname\": \"<string>\",\n          \"City\": \"<string>\",\n          \"CompanyName\": \"<string>\",\n          \"Department\": \"<string>\",\n          \"Doorcode\": \"<string>\",\n          \"FirstName\": \"<string>\",\n          \"Floor\": \"<string>\",\n          \"HouseNr\": \"<string>\",\n          \"HouseNrExt\": \"<string>\",\n          \"Name\": \"<string>\",\n          \"Region\": \"<string>\",\n          \"Street\": \"<string>\",\n          \"StreetHouseNrExt\": \"<string>\",\n          \"Zipcode\": \"<string>\"\n        }\n      ],\n      \"Barcode\": \"<string>\",\n      \"Dimension\": {\n        \"Weight\": \"<integer>\",\n        \"Height\": \"<integer>\",\n        \"Length\": \"<integer>\",\n        \"Volume\": \"<integer>\",\n        \"Width\": \"<integer>\"\n      },\n      \"ProductCodeDelivery\": \"3085\",\n      \"Amounts\": [\n        {\n          \"AmountType\": \"<string>\",\n          \"Value\": \"<double>\",\n          \"AccountName\": \"<string>\",\n          \"BIC\": \"<string>\",\n          \"Currency\": \"<string>\",\n          \"IBAN\": \"<string>\",\n          \"Reference\": \"<string>\",\n          \"TransactionNumber\": \"<string>\"\n        },\n        {\n          \"AmountType\": \"<string>\",\n          \"Value\": \"<double>\",\n          \"AccountName\": \"<string>\",\n          \"BIC\": \"<string>\",\n          \"Currency\": \"<string>\",\n          \"IBAN\": \"<string>\",\n          \"Reference\": \"<string>\",\n          \"TransactionNumber\": \"<string>\"\n        }\n      ],\n      \"CodingText\": \"<string>\",\n      \"CollectionTimeStampStart\": \"<string>\",\n      \"CollectionTimeStampEnd\": \"<string>\",\n      \"Contacts\": [\n        {\n          \"ContactType\": \"<string>\",\n          \"Email\": \"<string>\",\n          \"SMSNr\": \"<string>\",\n          \"TelNr\": \"<string>\"\n        },\n        {\n          \"ContactType\": \"<string>\",\n          \"Email\": \"<string>\",\n          \"SMSNr\": \"<string>\",\n          \"TelNr\": \"<string>\"\n        }\n      ],\n      \"Content\": \"<string>\",\n      \"CostCenter\": \"<string>\",\n      \"CustomerOrderNumber\": \"<string>\",\n      \"Customs\": {\n        \"Content\": [\n          {\n            \"Description\": \"<string>\",\n            \"Quantity\": \"<integer>\",\n            \"Value\": \"<double>\",\n            \"Weight\": \"<integer>\",\n            \"HSTariffNr\": \"<string>\",\n            \"CountryOfOrigin\": \"<string>\"\n          },\n          {\n            \"Description\": \"<string>\",\n            \"Quantity\": \"<integer>\",\n            \"Value\": \"<double>\",\n            \"Weight\": \"<integer>\",\n            \"HSTariffNr\": \"<string>\",\n            \"CountryOfOrigin\": \"<string>\"\n          }\n        ],\n        \"Currency\": \"<string>\",\n        \"ShipmentType\": \"<string>\",\n        \"Certificate\": \"<boolean>\",\n        \"CertificateNr\": \"<string>\",\n        \"License\": \"<boolean>\",\n        \"LicenseNr\": \"<string>\",\n        \"Invoice\": \"<boolean>\",\n        \"InvoiceNr\": \"<string>\",\n        \"HandleAsNonDeliverable\": \"<boolean>\",\n        \"TrustedShipperID\": \"<string>\",\n        \"ImporterReferenceCode\": \"<string>\",\n        \"TransactionCode\": \"<string>\",\n        \"TransactionDescription\": \"<string>\"\n      },\n      \"DeliveryAddress\": \"<string>\",\n      \"DeliveryDate\": \"<string>\",\n      \"DownPartnerBarcode\": \"<string>\",\n      \"DownPartnerID\": \"<string>\",\n      \"DownPartnerLocation\": \"<string>\",\n      \"Groups\": [\n        {\n          \"GroupType\": \"<string>\",\n          \"MainBarcode\": \"<string>\",\n          \"GroupSequence\": \"<integer>\",\n          \"GroupCount\": \"<integer>\"\n        },\n        {\n          \"GroupType\": \"<string>\",\n          \"MainBarcode\": \"<string>\",\n          \"GroupSequence\": \"<integer>\",\n          \"GroupCount\": \"<integer>\"\n        }\n      ],\n      \"HazardousMaterial\": [\n        {\n          \"ToxicSubstanceCode\": \"<string>\",\n          \"AdditionalToxicSubstanceCode\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"ADRPoints\": \"<string>\",\n          \"TunnelCode\": \"<string>\",\n          \"PackagingGroupCode\": \"<string>\",\n          \"PackagingGroupDescription\": \"<string>\",\n          \"GrossWeight\": \"<string>\",\n          \"UNDGNumber\": \"<string>\",\n          \"TransportCategoryCode\": \"<string>\",\n          \"ChemicalTechnicalDescription\": \"<string>\"\n        },\n        {\n          \"ToxicSubstanceCode\": \"<string>\",\n          \"AdditionalToxicSubstanceCode\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"ADRPoints\": \"<string>\",\n          \"TunnelCode\": \"<string>\",\n          \"PackagingGroupCode\": \"<string>\",\n          \"PackagingGroupDescription\": \"<string>\",\n          \"GrossWeight\": \"<string>\",\n          \"UNDGNumber\": \"<string>\",\n          \"TransportCategoryCode\": \"<string>\",\n          \"ChemicalTechnicalDescription\": \"<string>\"\n        }\n      ],\n      \"ProductCodeCollect\": \"<string>\",\n      \"ProductOptions\": [\n        {\n          \"Characteristic\": \"118\",\n          \"Option\": \"006\"\n        },\n        {\n          \"Characteristic\": \"118\",\n          \"Option\": \"006\"\n        }\n      ],\n      \"ReceiverDateOfBirth\": \"<string>\",\n      \"Reference\": \"<string>\",\n      \"ReferenceCollect\": \"<string>\",\n      \"Remark\": \"<string>\",\n      \"ReturnBarcode\": \"<string>\",\n      \"ReturnReference\": \"<string>\",\n      \"TimeslotID\": \"<string>\",\n      \"ExtraFields\": [\n        {\n          \"Key\": \"<string>\",\n          \"Value\": \"<string>\"\n        },\n        {\n          \"Key\": \"<string>\",\n          \"Value\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"LabelSignature\": \"<byte>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2fefb2d4-5daa-4580-b5fe-df24c8f26a43",
+              "name": "A Label",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2_2",
+                    "label"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "confirm",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Customer\": {\n    \"Address\": {\n      \"AddressType\": \"02\",\n      \"City\": \"Den Haag\",\n      \"CompanyName\": \"PostNL\",\n      \"Countrycode\": \"NL\",\n      \"HouseNr\": \"3\",\n      \"Street\": \"Waldorpstraat\",\n      \"Zipcode\": \"2521CA\"\n    },\n    \"CollectionLocation\": \"123456\",\n    \"ContactPerson\": \"Janssen\",\n    \"CustomerCode\": \"DEVC\",\n    \"CustomerNumber\": \"11223344\",\n    \"Email\": \"email@company.com\",\n    \"Name\": \"Janssen\"\n  },\n  \"Message\": {\n    \"MessageID\": \"1\",\n    \"MessageTimeStamp\": \"08-09-2022 12:00:00\",\n    \"Printertype\": \"GraphicFile|PDF\"\n  },\n  \"Shipments\": [\n    {\n      \"Addresses\": [\n        {\n          \"AddressType\": \"01\",\n          \"City\": \"Utrecht\",\n          \"Countrycode\": \"NL\",\n          \"FirstName\": \"Peter\",\n          \"HouseNr\": \"9\",\n          \"HouseNrExt\": \"a bis\",\n          \"Name\": \"de Ruiter\",\n          \"Street\": \"Bilderdijkstraat\",\n          \"Zipcode\": \"3532VA\"\n        }\n      ],\n      \"Barcode\": \"3SDEVC748859096\",\n      \"Contacts\": [\n        {\n          \"ContactType\": \"01\",\n          \"Email\": \"receiver@email.com\",\n          \"SMSNr\": \"+31612345678\",\n          \"TelNr\": \"+31301234567\"\n        }\n      ],\n      \"Dimension\": {\n        \"Weight\": \"2000\"\n      },\n      \"ProductCodeDelivery\": \"3085\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"MergedLabels\": [],\n  \"ResponseShipments\": [\n    {\n      \"Barcode\": \"3SDEVC272730803\",\n      \"Errors\": [],\n      \"Warnings\": [],\n      \"Labels\": [\n        {\n          \"Content\": \"JVBERi0xLjMKJeLjz9MKNSAwIG9iago8PAovQ29udGVudHMg[TRUNCATED]\",\n          \"Labeltype\": \"Label\",\n          \"OutputType\": \"PDF\"\n        }\n      ],\n      \"ProductCodeDelivery\": \"3085\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "08448f17-aed9-494e-8463-3948363d4c41",
+              "name": "Error payload",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2_2",
+                    "label"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "confirm",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Customer\": {\n    \"Address\": {\n      \"AddressType\": \"02\",\n      \"City\": \"Den Haag\",\n      \"CompanyName\": \"PostNL\",\n      \"Countrycode\": \"NL\",\n      \"HouseNr\": \"3\",\n      \"Street\": \"Waldorpstraat\",\n      \"Zipcode\": \"2521CA\"\n    },\n    \"CollectionLocation\": \"123456\",\n    \"ContactPerson\": \"Janssen\",\n    \"CustomerCode\": \"DEVC\",\n    \"CustomerNumber\": \"11223344\",\n    \"Email\": \"email@company.com\",\n    \"Name\": \"Janssen\"\n  },\n  \"Message\": {\n    \"MessageID\": \"1\",\n    \"MessageTimeStamp\": \"08-09-2022 12:00:00\",\n    \"Printertype\": \"GraphicFile|PDF\"\n  },\n  \"Shipments\": [\n    {\n      \"Addresses\": [\n        {\n          \"AddressType\": \"01\",\n          \"City\": \"Utrecht\",\n          \"Countrycode\": \"NL\",\n          \"FirstName\": \"Peter\",\n          \"HouseNr\": \"9\",\n          \"HouseNrExt\": \"a bis\",\n          \"Name\": \"de Ruiter\",\n          \"Street\": \"Bilderdijkstraat\",\n          \"Zipcode\": \"3532VA\"\n        }\n      ],\n      \"Barcode\": \"3SDEVC748859096\",\n      \"Contacts\": [\n        {\n          \"ContactType\": \"01\",\n          \"Email\": \"receiver@email.com\",\n          \"SMSNr\": \"+31612345678\",\n          \"TelNr\": \"+31301234567\"\n        }\n      ],\n      \"Dimension\": {\n        \"Weight\": \"2000\"\n      },\n      \"ProductCodeDelivery\": \"3085\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Errors\": [\n    {\n      \"Error\": \"Validation failed for shipment: 3SDEVC949511897\",\n      \"Code\": \"1280202\",\n      \"Description\": \"Incorrect address specified in address type Sender\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8f38e7dc-2aab-403f-b88f-2a1696e568b9",
+              "name": "Invalid apikey",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2_2",
+                    "label"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "confirm",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Customer\": {\n    \"Address\": {\n      \"AddressType\": \"02\",\n      \"City\": \"Den Haag\",\n      \"CompanyName\": \"PostNL\",\n      \"Countrycode\": \"NL\",\n      \"HouseNr\": \"3\",\n      \"Street\": \"Waldorpstraat\",\n      \"Zipcode\": \"2521CA\"\n    },\n    \"CollectionLocation\": \"123456\",\n    \"ContactPerson\": \"Janssen\",\n    \"CustomerCode\": \"DEVC\",\n    \"CustomerNumber\": \"11223344\",\n    \"Email\": \"email@company.com\",\n    \"Name\": \"Janssen\"\n  },\n  \"Message\": {\n    \"MessageID\": \"1\",\n    \"MessageTimeStamp\": \"08-09-2022 12:00:00\",\n    \"Printertype\": \"GraphicFile|PDF\"\n  },\n  \"Shipments\": [\n    {\n      \"Addresses\": [\n        {\n          \"AddressType\": \"01\",\n          \"City\": \"Utrecht\",\n          \"Countrycode\": \"NL\",\n          \"FirstName\": \"Peter\",\n          \"HouseNr\": \"9\",\n          \"HouseNrExt\": \"a bis\",\n          \"Name\": \"de Ruiter\",\n          \"Street\": \"Bilderdijkstraat\",\n          \"Zipcode\": \"3532VA\"\n        }\n      ],\n      \"Barcode\": \"3SDEVC748859096\",\n      \"Contacts\": [\n        {\n          \"ContactType\": \"01\",\n          \"Email\": \"receiver@email.com\",\n          \"SMSNr\": \"+31612345678\",\n          \"TelNr\": \"+31301234567\"\n        }\n      ],\n      \"Dimension\": {\n        \"Weight\": \"2000\"\n      },\n      \"ProductCodeDelivery\": \"3085\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Failed to resolve API Key variable 'request.header.apikey'\",\n  \"http_status_code\": 401\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1643abb1-7ff9-48ec-9dbf-48ce3e7d798f",
+              "name": "Method not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2_2",
+                    "label"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "confirm",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Customer\": {\n    \"Address\": {\n      \"AddressType\": \"02\",\n      \"City\": \"Den Haag\",\n      \"CompanyName\": \"PostNL\",\n      \"Countrycode\": \"NL\",\n      \"HouseNr\": \"3\",\n      \"Street\": \"Waldorpstraat\",\n      \"Zipcode\": \"2521CA\"\n    },\n    \"CollectionLocation\": \"123456\",\n    \"ContactPerson\": \"Janssen\",\n    \"CustomerCode\": \"DEVC\",\n    \"CustomerNumber\": \"11223344\",\n    \"Email\": \"email@company.com\",\n    \"Name\": \"Janssen\"\n  },\n  \"Message\": {\n    \"MessageID\": \"1\",\n    \"MessageTimeStamp\": \"08-09-2022 12:00:00\",\n    \"Printertype\": \"GraphicFile|PDF\"\n  },\n  \"Shipments\": [\n    {\n      \"Addresses\": [\n        {\n          \"AddressType\": \"01\",\n          \"City\": \"Utrecht\",\n          \"Countrycode\": \"NL\",\n          \"FirstName\": \"Peter\",\n          \"HouseNr\": \"9\",\n          \"HouseNrExt\": \"a bis\",\n          \"Name\": \"de Ruiter\",\n          \"Street\": \"Bilderdijkstraat\",\n          \"Zipcode\": \"3532VA\"\n        }\n      ],\n      \"Barcode\": \"3SDEVC748859096\",\n      \"Contacts\": [\n        {\n          \"ContactType\": \"01\",\n          \"Email\": \"receiver@email.com\",\n          \"SMSNr\": \"+31612345678\",\n          \"TelNr\": \"+31301234567\"\n        }\n      ],\n      \"Dimension\": {\n        \"Weight\": \"2000\"\n      },\n      \"ProductCodeDelivery\": \"3085\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Only POST requests allowed\",\n  \"http_status_code\": 405\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0cbe7bac-ec00-4eae-bb6f-1cc612c1c6b5",
+              "name": "Too many requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2_2",
+                    "label"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "confirm",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Customer\": {\n    \"Address\": {\n      \"AddressType\": \"02\",\n      \"City\": \"Den Haag\",\n      \"CompanyName\": \"PostNL\",\n      \"Countrycode\": \"NL\",\n      \"HouseNr\": \"3\",\n      \"Street\": \"Waldorpstraat\",\n      \"Zipcode\": \"2521CA\"\n    },\n    \"CollectionLocation\": \"123456\",\n    \"ContactPerson\": \"Janssen\",\n    \"CustomerCode\": \"DEVC\",\n    \"CustomerNumber\": \"11223344\",\n    \"Email\": \"email@company.com\",\n    \"Name\": \"Janssen\"\n  },\n  \"Message\": {\n    \"MessageID\": \"1\",\n    \"MessageTimeStamp\": \"08-09-2022 12:00:00\",\n    \"Printertype\": \"GraphicFile|PDF\"\n  },\n  \"Shipments\": [\n    {\n      \"Addresses\": [\n        {\n          \"AddressType\": \"01\",\n          \"City\": \"Utrecht\",\n          \"Countrycode\": \"NL\",\n          \"FirstName\": \"Peter\",\n          \"HouseNr\": \"9\",\n          \"HouseNrExt\": \"a bis\",\n          \"Name\": \"de Ruiter\",\n          \"Street\": \"Bilderdijkstraat\",\n          \"Zipcode\": \"3532VA\"\n        }\n      ],\n      \"Barcode\": \"3SDEVC748859096\",\n      \"Contacts\": [\n        {\n          \"ContactType\": \"01\",\n          \"Email\": \"receiver@email.com\",\n          \"SMSNr\": \"+31612345678\",\n          \"TelNr\": \"+31301234567\"\n        }\n      ],\n      \"Dimension\": {\n        \"Weight\": \"2000\"\n      },\n      \"ProductCodeDelivery\": \"3085\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Too many requests. Rate limit exceeded!\",\n  \"http_status_code\": 429\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "072a872a-0070-42bf-b574-73f8cc05b455",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment",
+                    "v2_2",
+                    "label"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "confirm",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Customer\": {\n    \"Address\": {\n      \"AddressType\": \"02\",\n      \"City\": \"Den Haag\",\n      \"CompanyName\": \"PostNL\",\n      \"Countrycode\": \"NL\",\n      \"HouseNr\": \"3\",\n      \"Street\": \"Waldorpstraat\",\n      \"Zipcode\": \"2521CA\"\n    },\n    \"CollectionLocation\": \"123456\",\n    \"ContactPerson\": \"Janssen\",\n    \"CustomerCode\": \"DEVC\",\n    \"CustomerNumber\": \"11223344\",\n    \"Email\": \"email@company.com\",\n    \"Name\": \"Janssen\"\n  },\n  \"Message\": {\n    \"MessageID\": \"1\",\n    \"MessageTimeStamp\": \"08-09-2022 12:00:00\",\n    \"Printertype\": \"GraphicFile|PDF\"\n  },\n  \"Shipments\": [\n    {\n      \"Addresses\": [\n        {\n          \"AddressType\": \"01\",\n          \"City\": \"Utrecht\",\n          \"Countrycode\": \"NL\",\n          \"FirstName\": \"Peter\",\n          \"HouseNr\": \"9\",\n          \"HouseNrExt\": \"a bis\",\n          \"Name\": \"de Ruiter\",\n          \"Street\": \"Bilderdijkstraat\",\n          \"Zipcode\": \"3532VA\"\n        }\n      ],\n      \"Barcode\": \"3SDEVC748859096\",\n      \"Contacts\": [\n        {\n          \"ContactType\": \"01\",\n          \"Email\": \"receiver@email.com\",\n          \"SMSNr\": \"+31612345678\",\n          \"TelNr\": \"+31301234567\"\n        }\n      ],\n      \"Dimension\": {\n        \"Weight\": \"2000\"\n      },\n      \"ProductCodeDelivery\": \"3085\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"fault\": {\n    \"faultstring\": \"Unexpected token in object literal\",\n    \"detail\": {\n      \"errorcode\": \"Validation Fault\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-sandbox.postnl.nl",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "48312576-b4b6-4ecd-a3ca-24cec2483513",
+    "name": "Labelling API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Generate a label and (optional) confirmation",
+      "type": "text/plain"
+    }
+  }
+}

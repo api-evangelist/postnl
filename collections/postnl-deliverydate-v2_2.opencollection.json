@@ -1,0 +1,268 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Deliverydate API",
+    "version": "v2_2"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Deliverydate",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Calculate expected delivery date",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.postnl.nl/shipment/v2_2/calculate/date/delivery",
+            "params": [
+              {
+                "name": "ShippingDate",
+                "value": "",
+                "type": "query",
+                "description": "Date/time of preparing the shipment for sending. Format: dd-MM-yyyy hh:mm:ss"
+              },
+              {
+                "name": "ShippingDuration",
+                "value": "",
+                "type": "query",
+                "description": "The duration it takes for the shipment to be delivered to PostNL in days. A value of 1 means that the parcel will be delivered to PostNL on the same day as the date specified in ShippingDate. A value of 2 means the parcel will arrive at PostNL a day later etc."
+              },
+              {
+                "name": "CutOffTime",
+                "value": "",
+                "type": "query",
+                "description": "Default cutoff time"
+              },
+              {
+                "name": "PostalCode",
+                "value": "",
+                "type": "query",
+                "description": "Zipcode of the destination address"
+              },
+              {
+                "name": "CountryCode",
+                "value": "",
+                "type": "query",
+                "description": "The ISO2 destination country code"
+              },
+              {
+                "name": "OriginCountryCode",
+                "value": "",
+                "type": "query",
+                "description": "The ISO2 origin country code"
+              },
+              {
+                "name": "City",
+                "value": "",
+                "type": "query",
+                "description": "City of the destination address"
+              },
+              {
+                "name": "Street",
+                "value": "",
+                "type": "query",
+                "description": "The street name of the destination address."
+              },
+              {
+                "name": "HouseNumber",
+                "value": "",
+                "type": "query",
+                "description": "The house number of the destination address"
+              },
+              {
+                "name": "HouseNrExt",
+                "value": "",
+                "type": "query",
+                "description": "House number extension of the delivery address"
+              },
+              {
+                "name": "Options",
+                "value": "",
+                "type": "query",
+                "description": "The delivery options that you want to take into account when calculating the expected delivery date"
+              },
+              {
+                "name": "CutOffTimeMonday",
+                "value": "",
+                "type": "query",
+                "description": "Overrides default cutoff time specified in the CutOffTime parameter for mondays specifically"
+              },
+              {
+                "name": "AvailableMonday",
+                "value": "",
+                "type": "query",
+                "description": "Specifies if you are available to ship to PostNL on mondays"
+              },
+              {
+                "name": "CutOffTimeTuesday",
+                "value": "",
+                "type": "query",
+                "description": "Overrides default cutoff time specified in the CutOffTime parameter for tuesdays specifically"
+              },
+              {
+                "name": "AvailableTuesday",
+                "value": "",
+                "type": "query",
+                "description": "Specifies if you are available to ship to PostNL on tuesdays"
+              },
+              {
+                "name": "CutOffTimeWednesday",
+                "value": "",
+                "type": "query",
+                "description": "Overrides default cutoff time specified in the CutOffTime parameter for wednesdays specifically"
+              },
+              {
+                "name": "AvailableWednesday",
+                "value": "",
+                "type": "query",
+                "description": "Specifies if you are available to ship to PostNL on wednesdays"
+              },
+              {
+                "name": "CutOffTimeThursday",
+                "value": "",
+                "type": "query",
+                "description": "Overrides default cutoff time specified in the CutOffTime parameter for thursdays specifically"
+              },
+              {
+                "name": "AvailableThursday",
+                "value": "",
+                "type": "query",
+                "description": "Specifies if you are available to ship to PostNL on thursdays"
+              },
+              {
+                "name": "CutOffTimeFriday",
+                "value": "",
+                "type": "query",
+                "description": "Overrides default cutoff time specified in the CutOffTime parameter for fridays specifically"
+              },
+              {
+                "name": "AvailableFriday",
+                "value": "",
+                "type": "query",
+                "description": "Specifies if you are available to ship to PostNL on fridays"
+              },
+              {
+                "name": "CutOffTimeSaturday",
+                "value": "",
+                "type": "query",
+                "description": "Overrides default cutoff time specified in the CutOffTime parameter for saturdays specifically"
+              },
+              {
+                "name": "AvailableSaturday",
+                "value": "",
+                "type": "query",
+                "description": "Specifies if you are available to ship to PostNL on saturdays"
+              },
+              {
+                "name": "CutOffTimeSunday",
+                "value": "",
+                "type": "query",
+                "description": "Overrides default cutoff time specified in the CutOffTime parameter for sundays specifically"
+              },
+              {
+                "name": "AvailableSunday",
+                "value": "",
+                "type": "query",
+                "description": "Specifies if you are available to ship to PostNL on sundays"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "apikey",
+              "value": "{{apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Request example:\n```\ncurl -X GET \"https://api-sandbox.postnl.nl/shipment/v2_2/calculate/date/delivery?ShippingDate=29-05-2022+14%3A00%3A00&amp;ShippingDuration=1&amp;CutOffTime=17%3A00%3A00&amp;PostalCode=2132WT&amp;CountryCode=NL&amp;City=Hoofddorp&amp;Street=Siriusdreef&amp;HouseNumber=42&amp;HouseNrExt=A\" \\\n -H \"Accept: application/json\" \\\n -H \"apikey: APIKEY-HERE\" \n```\n"
+        },
+        {
+          "info": {
+            "name": "Calculate required shipping date",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.postnl.nl/shipment/v2_2/calculate/date/shipping",
+            "params": [
+              {
+                "name": "DeliveryDate",
+                "value": "",
+                "type": "query",
+                "description": "Date of the expected delivery (to the final destination) of the shipment."
+              },
+              {
+                "name": "ShippingDuration",
+                "value": "",
+                "type": "query",
+                "description": "The duration it takes for the shipment to be delivered to PostNL in days. A value of 1 means that the parcel will be delivered to PostNL on the same day as the date specified in ShippingDate. A value of 2 means the parcel will arrive at PostNL a day later etc."
+              },
+              {
+                "name": "PostalCode",
+                "value": "",
+                "type": "query",
+                "description": "Zipcode of the address"
+              },
+              {
+                "name": "CountryCode",
+                "value": "",
+                "type": "query",
+                "description": "The ISO2 destination country code"
+              },
+              {
+                "name": "OriginCountryCode",
+                "value": "",
+                "type": "query",
+                "description": "The ISO2 country code of the origin country"
+              },
+              {
+                "name": "City",
+                "value": "",
+                "type": "query",
+                "description": "City of the destination address"
+              },
+              {
+                "name": "Street",
+                "value": "",
+                "type": "query",
+                "description": "The street name of the destination address"
+              },
+              {
+                "name": "HouseNumber",
+                "value": "",
+                "type": "query",
+                "description": "The house number of the destination address"
+              },
+              {
+                "name": "HouseNrExt",
+                "value": "",
+                "type": "query",
+                "description": "House number extension of the destination address"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "apikey",
+              "value": "{{apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Request example:\n```\ncurl -X GET \"https://api-sandbox.postnl.nl/shipment/v2_2/calculate/date/shipping?DeliveryDate=30-05-2022&amp;ShippingDuration=1&amp;PostalCode=2132WT&amp;CountryCode=NL&amp;City=Hoofddorp&amp;Street=Siriusdreef&amp;HouseNumber=42&amp;HouseNrExt=A\" \\\n -H \"Accept: application/json\" \\\n -H \"apikey: APIKEY-HERE\" \\\n\n```\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

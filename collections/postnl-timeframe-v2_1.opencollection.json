@@ -1,0 +1,105 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Timeframe API",
+    "version": "v2_1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Timeframes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve expected delivery timeframes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.postnl.nl/shipment/v2_1/calculate/timeframes",
+            "params": [
+              {
+                "name": "AllowSundaySorting",
+                "value": "",
+                "type": "query",
+                "description": "Whether or not the requesting party allows for Sunday sorting (which leads to delivery on Monday)."
+              },
+              {
+                "name": "StartDate",
+                "value": "",
+                "type": "query",
+                "description": "Date of the beginning of the timeframe. Format: dd-MM-yyyy"
+              },
+              {
+                "name": "EndDate",
+                "value": "",
+                "type": "query",
+                "description": "Date of the enddate of the timeframe. Format:dd-MM-yyyy. Enddate may not be before StartDate."
+              },
+              {
+                "name": "CountryCode",
+                "value": "",
+                "type": "query",
+                "description": "The ISO2 country code of the delivery address"
+              },
+              {
+                "name": "PostalCode",
+                "value": "",
+                "type": "query",
+                "description": "Zipcode of the delivery address"
+              },
+              {
+                "name": "HouseNumber",
+                "value": "",
+                "type": "query",
+                "description": "The house number of the delivery address"
+              },
+              {
+                "name": "HouseNrExt",
+                "value": "",
+                "type": "query",
+                "description": "House number extension of the delivery address"
+              },
+              {
+                "name": "City",
+                "value": "",
+                "type": "query",
+                "description": "City of the delivery address"
+              },
+              {
+                "name": "Street",
+                "value": "",
+                "type": "query",
+                "description": "The street name of the delivery address"
+              },
+              {
+                "name": "Options",
+                "value": "",
+                "type": "query",
+                "description": "The delivery options for which expected timeframes should be calculated. At least one delivery option must be specified. Multiple values should be comma-separated."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "apikey",
+              "value": "{{apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Request example:\n```\ncurl -X GET \"https://api-sandbox.postnl.nl/shipment/v2_1/calculate/timeframes?AllowSundaySorting=false&StartDate=30-06-2022&EndDate=02-07-2022&CountryCode=NL&PostalCode=2132WT&HouseNumber=42&HouseNrExt=A&City=Hoofddorp&Street=Siriusdreef&Options=Daytime%2CEvening\" \\\n -H \"Accept: application/json\" \\\n -H \"apikey: APIKEY-HERE\" \\\n```\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
