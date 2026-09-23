@@ -1,0 +1,210 @@
+openapi: 3.2.0
+info:
+  title: Barcode API
+  description: Generate a unique barcode to use for your shipping label
+  version: v1_1
+servers:
+- url: https://api-sandbox.postnl.nl
+  description: Non-Production server
+- url: https://api.postnl.nl
+  description: Production server
+tags:
+- name: Barcode
+paths:
+  /shipment/v1_1/barcode:
+    get:
+      tags:
+      - Barcode
+      summary: Generate a unique barcode
+      operationId: GenerateBarcode
+      security:
+      - APIKeyHeader: []
+      description: 'Request example:
+
+        ```
+
+        curl -X GET "https://api-sandbox.postnl.nl/shipment/v1_1/barcode?CustomerCode=DEVC&CustomerNumber=11223344&Type=3S&Serie=000000000-999999999&" \
+
+        -H "Accept: application/json" \
+
+        -H "apikey: APIKEY-HERE"
+
+        ```'
+      parameters:
+      - name: CustomerCode
+        in: query
+        description: The customer code for which you want a barcode to be generated
+        required: true
+        schema:
+          type: string
+          example: DEVC
+      - name: CustomerNumber
+        in: query
+        description: The customer code for which you want a barcode to be generated
+        required: true
+        schema:
+          type: string
+          example: '11223344'
+      - name: Type
+        in: query
+        description: The barcode type that you want to be generated
+        required: true
+        schema:
+          type: string
+          example: 3S
+          enum:
+          - 2S
+          - 3S
+          - CC
+          - CP
+          - CD
+          - CF
+          - LA
+          - RI
+          - UE
+      - name: Serie
+        in: query
+        description: Barcode serie in the format '###000000-###000000', for example 100000-20000. The range must consist of a minimal difference of 100.000. It is allowed to add extra leading zeros at the beginning of the serie. See [Guidelines](https://developer.postnl.nl/docs/#/http/api-endpoints/send-track/barcode/guidelines) for more information.
+        required: false
+        schema:
+          type: string
+          minLength: 6
+          maxLength: 9
+          example: '100000000'
+      - name: Range
+        in: query
+        description: Only used for International Mail and Packet products (PEPS) shipments (with type LA, RI, UE). Identifying the issuing postal administration's country (NL in this case).
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A barcode
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/barcodeResponse'
+              example:
+                Barcode: 3SDEVC903942795
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/barcodeResponseInvalid'
+              example:
+                errors:
+                - ErrorMsg: Too many numbers in series
+                  ErrorNumber: '8'
+        '401':
+          description: Invalid apikey
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+              example:
+                message: Failed to resolve API Key variable 'request.header.apikey'
+                http_status_code: 401
+        '405':
+          description: Method not allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowedOnlyGetPost'
+              example:
+                message: Only GET & POST requests allowed
+                http_status_code: 405
+        '429':
+          description: Too many requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequests'
+              example:
+                message: Too many requests. Rate limit exceeded!
+                http_status_code: 429
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+              example:
+                fault:
+                  faultstring: Unexpected token in object literal
+                  detail:
+                    errorcode: Validation Fault
+components:
+  schemas:
+    MethodNotAllowedOnlyGetPost:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Only Get & POST requests allowed
+        http_status_code:
+          type: number
+          example: 405
+    barcodeError:
+      type: object
+      properties:
+        ErrorMsg:
+          type: string
+          description: The error message
+          example: Too many numbers in series
+        ErrorNumber:
+          type: string
+          description: The error code
+          example: '8'
+    InternalServerError:
+      type: object
+      properties:
+        fault:
+          type: object
+          properties:
+            faultstring:
+              type: string
+              example: Unexpected token in object literal
+            detail:
+              type: object
+              properties:
+                errorcode:
+                  type: string
+                  example: Validation Fault
+    Unauthorized:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Failed to resolve API Key variable 'request.header.apikey'
+        http_status_code:
+          type: number
+          example: 401
+    TooManyRequests:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Too many requests. Rate limit exceeded!
+        http_status_code:
+          type: number
+          example: 429
+    barcodeResponse:
+      type: object
+      properties:
+        Barcode:
+          type: string
+          example: 3SDEVC903942795
+    barcodeResponseInvalid:
+      type: object
+      properties:
+        errors:
+          type: array
+          description: A list of errors. See [Error codes](https://developer.postnl.nl/docs/#/http/reference-data/error-codes) for possible values.
+          items:
+            $ref: '#/components/schemas/barcodeError'
+  securitySchemes:
+    APIKeyHeader:
+      type: apiKey
+      name: apikey
+      in: header

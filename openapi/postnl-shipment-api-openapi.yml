@@ -1,0 +1,2897 @@
+openapi: 3.2.0
+info:
+  title: Postnl Shipment API
+  version: v4
+  description: 'Operations tagged Shipment across 7 of this provider''s published API definitions: postnl-barcode-v4-openapi.json, postnl-confirm-v4-openapi.json, postnl-labelling-v4-openapi.json, postnl-locations-v4-openapi.json, postnl-return-v4-openapi.json, postnl-shipment-v4-openapi.json, postnl-timeframe-v4-openapi.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api-sandbox.postnl.nl
+  description: Non-Production server
+- url: https://api.postnl.nl
+  description: Production server
+security:
+- apikey: []
+tags:
+- name: Shipment
+paths:
+  /shipment/delivery/v4/barcode:
+    post:
+      description: Generates a 3S barcode for domestic and European flows. Optional fields allow specifying the barcode type, a numeric range, and the number of barcodes to return.
+      operationId: CreateBarcodes
+      requestBody:
+        description: The payload providing customer details and specifications on the barcode(s) to generate.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateBarcodesRequest'
+            example:
+              summary: Minimal request with required fields only
+              value:
+                customerNumber: '11223344'
+                customerCode: DEVC
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateBarcodesResponse'
+        '400':
+          description: One or more business errors occurred
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+        '401':
+          description: Invalid apikey
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+        '405':
+          description: Method not allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+        '429':
+          description: Too many requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequests'
+      tags:
+      - Shipment
+      summary: Create barcodes
+      x-summary-source: derived
+    servers:
+    - url: https://api-sandbox.postnl.nl
+      description: Non-Production server
+    - url: https://api.postnl.nl
+      description: Production server
+  /shipment/delivery/v4/confirm:
+    post:
+      description: Preannounce a shipment with the provided details, it will return generated barcodes if not provided
+      operationId: ConfirmShipment
+      requestBody:
+        description: The details of the shipment to create
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfirmShipmentRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfirmShipmentResponse'
+        '400':
+          description: One or more business errors occurred
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse_2'
+        '401':
+          description: Invalid apikey
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+        '405':
+          description: Method not allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+        '429':
+          description: Too many requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequests'
+      tags:
+      - Shipment
+      summary: Confirm shipment
+      x-summary-source: derived
+    servers:
+    - url: https://api-sandbox.postnl.nl
+      description: Non-Production server
+    - url: https://api.postnl.nl
+      description: Production server
+  /shipment/delivery/v4/label:
+    post:
+      description: The PostNL Labelling API is a RESTful API that creates shipping labels for outbound shipments.
+      operationId: CreateLabel
+      requestBody:
+        description: The details of the shipment to create
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShipmentRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShipmentResponse'
+        '400':
+          description: One or more business errors occurred
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse_3'
+        '401':
+          description: Invalid apikey
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+        '405':
+          description: Method not allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+        '429':
+          description: Too many requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequests'
+      tags:
+      - Shipment
+      summary: Create label
+      x-summary-source: derived
+    servers:
+    - url: https://api-sandbox.postnl.nl
+      description: Non-Production server
+    - url: https://api.postnl.nl
+      description: Production server
+  /shipment/delivery/v4/locations/near-coordinates:
+    post:
+      summary: Get available locations
+      description: This API can be used to search for locations around a given area by coordinates
+      operationId: GetPickupLocationsByCoordinates
+      requestBody:
+        x-name: request
+        required: true
+        x-position: 1
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PickupNearCoordinatesRequest'
+            example:
+              numberOfLocations: 2
+              coordinates:
+                latitude: 52.370216
+                longitude: 4.895168
+              locationType: Retail
+              pickupDate: '2026-06-15'
+              receiverCountryIso: BE
+              customerCode: ABC
+              customerNumber: '123'
+      responses:
+        '200':
+          description: Successful retrieval of pickup locations
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PickupLocationResponse'
+              example:
+                locations:
+                - pickupLocationId: '123456789'
+                  locationType: ParcelLocker
+                  name: PostNL Pickup Point
+                  address:
+                    countryIso: NL
+                    postalCode: 1234AB
+                    houseNumber: '123'
+                    houseNumberAddition: A
+                    street: Main Street
+                    city: Amsterdam
+                  coordinates:
+                    latitude: 52.3676
+                    longitude: 4.9041
+                  distance: 20
+                  openingTimes:
+                  - day: Monday
+                    times:
+                    - from: 08:00:00
+                      until: '20:00:00'
+                  sustainability:
+                    code: '01'
+                    description: Sustainable delivery
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                detail: See the errors property for more details.
+                errors:
+                  countryIso:
+                  - The countryIso field is required.
+                  address:
+                  - The address field is required.
+        '401':
+          description: Invalid apikey
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: Business error occurred.
+                status: 404
+                detail: See the errors property for more details.
+                errors:
+                  request:
+                  - No locations found for payload
+        '405':
+          description: Method not allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+        '429':
+          description: Too many requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequests'
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: Unknown error occurred.
+                status: 500
+                errors:
+                  request:
+                  - Error message.
+        '503':
+          description: Service Unavailable
+        '504':
+          description: Gateway Timeout
+      tags:
+      - Shipment
+    servers:
+    - url: https://api-sandbox.postnl.nl
+      description: Non-Production server
+    - url: https://api.postnl.nl
+      description: Production server
+  /shipment/delivery/v4/locations/lookup:
+    post:
+      summary: Get location status and details
+      description: This API can be used to retrieve the details and status of a specific location on a specific date
+      operationId: GetPickupLocationLookup
+      requestBody:
+        x-name: request
+        required: true
+        x-position: 1
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PickupLocationLookupRequest'
+            example:
+              pickupLocationId: '123456'
+              countryIso: NL
+              pickupDate: '2026-06-15'
+              customerCode: PLI
+              customerNumber: '12345'
+      responses:
+        '200':
+          description: Successful retrieval of location details and status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PickupLocationLookupResponse'
+              example:
+                location:
+                  pickupLocationId: '163272'
+                  pickupLocationAvailable: false
+                  locationType: Retail
+                  name: Kantoorboekhandel van Remortel Sluis
+                  address:
+                    countryIso: NL
+                    postalCode: 4524EC
+                    houseNumber: '25'
+                    houseNumberAddition: A
+                    street: Nieuwstraat
+                    city: Sluis
+                  coordinates:
+                    latitude: 52.3676
+                    longitude: 4.9041
+                  openingTimes:
+                  - day: Monday
+                    times:
+                    - from: 08:00:00
+                      until: '20:00:00'
+                  - day: Tuesday
+                    times:
+                    - from: 08:00:00
+                      until: '20:00:00'
+                  - day: Wednesday
+                    times:
+                    - from: 08:00:00
+                      until: '20:00:00'
+                  sustainability:
+                    code: '02'
+                    description: Sustainable option
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                detail: See the errors property for more details.
+                errors:
+                  countryIso:
+                  - The countryIso field is required.
+        '401':
+          description: Invalid apikey
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: Business error occurred.
+                status: 404
+                detail: See the errors property for more details.
+                errors:
+                  request:
+                  - Location does not exist or has been permanently closed
+        '405':
+          description: Method not allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+        '429':
+          description: Too many requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequests'
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: Unknown error occurred.
+                status: 500
+                errors:
+                  request:
+                  - Error message.
+        '503':
+          description: Service Unavailable
+        '504':
+          description: Gateway Timeout
+      tags:
+      - Shipment
+    servers:
+    - url: https://api-sandbox.postnl.nl
+      description: Non-Production server
+    - url: https://api.postnl.nl
+      description: Production server
+  /shipment/delivery/v4/locations/near-address:
+    post:
+      summary: Get available locations
+      description: This API can be used to search for locations around a given area by address
+      operationId: GetPickupLocationsByAddress
+      requestBody:
+        x-name: request
+        required: true
+        x-position: 1
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PickupNearAddressRequest'
+            examples:
+              Example 1:
+                value:
+                  numberOfLocations: 2
+                  receiverAddress:
+                    countryIso: BE
+                    postalCode: '8000'
+                    street: Langerei
+                    city: Brugge
+                    houseNumber: null
+                    houseNumberAddition: null
+                  locationType: null
+                  pickupDate: '2026-06-15'
+                  customerCode: ABC
+                  customerNumber: '123'
+              Example 2:
+                value:
+                  numberOfLocations: 10
+                  receiverAddress:
+                    countryIso: NL
+                    postalCode: 2521CA
+                    street: null
+                    city: null
+                    houseNumber: null
+                    houseNumberAddition: null
+                  locationType: Retail
+                  pickupDate: '2026-06-15'
+                  customerCode: ABC
+                  customerNumber: '123'
+      responses:
+        '200':
+          description: Successful retrieval of pickup locations
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PickupLocationResponse'
+              example:
+                locations:
+                - pickupLocationId: '123456789'
+                  locationType: ParcelLocker
+                  name: PostNL Pickup Point
+                  address:
+                    countryIso: NL
+                    postalCode: 1234AB
+                    houseNumber: '123'
+                    houseNumberAddition: A
+                    street: Main Street
+                    city: Amsterdam
+                  coordinates:
+                    latitude: 52.3676
+                    longitude: 4.9041
+                  distance: 20
+                  openingTimes:
+                  - day: Monday
+                    times:
+                    - from: 08:00:00
+                      until: '20:00:00'
+                  sustainability:
+                    code: '01'
+                    description: Sustainable delivery
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                detail: See the errors property for more details.
+                errors:
+                  countryIso:
+                  - The countryIso field is required.
+                  address:
+                  - The address field is required.
+        '401':
+          description: Invalid apikey
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: Business error occurred.
+                status: 404
+                detail: See the errors property for more details.
+                errors:
+                  request:
+                  - No locations found for payload
+        '405':
+          description: Method not allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+        '429':
+          description: Too many requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequests'
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: Unknown error occurred.
+                status: 500
+                errors:
+                  request:
+                  - Error message.
+        '503':
+          description: Service Unavailable
+        '504':
+          description: Gateway Timeout
+      tags:
+      - Shipment
+    servers:
+    - url: https://api-sandbox.postnl.nl
+      description: Non-Production server
+    - url: https://api.postnl.nl
+      description: Production server
+  /shipment/delivery/v4/return/generate:
+    post:
+      description: Create a return shipment with the provided details, it will return generated labels
+      operationId: CreateReturnShipment
+      requestBody:
+        description: The details of the return shipment to create
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReturnShipmentRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShipmentResponse'
+        '400':
+          description: One or more business errors occurred
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse_4'
+        '401':
+          description: Invalid apikey
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+        '405':
+          description: Method not allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+        '429':
+          description: Too many requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequests'
+      tags:
+      - Shipment
+      summary: Create return shipment
+      x-summary-source: derived
+    servers:
+    - url: https://api-sandbox.postnl.nl
+      description: Non-Production server
+    - url: https://api.postnl.nl
+      description: Production server
+  /shipment/delivery/v4/labelconfirm:
+    post:
+      description: Create a shipment with the provided details, it will return generated labels and barcodes if not provided
+      operationId: CreateShipment
+      requestBody:
+        description: The details of the shipment to create
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShipmentRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShipmentResponse'
+        '400':
+          description: One or more business errors occurred
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse_5'
+        '401':
+          description: Invalid apikey
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+        '405':
+          description: Method not allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+        '429':
+          description: Too many requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequests'
+      tags:
+      - Shipment
+      summary: Create shipment
+      x-summary-source: derived
+    servers:
+    - url: https://api-sandbox.postnl.nl
+      description: Non-Production server
+    - url: https://api.postnl.nl
+      description: Production server
+  /shipment/delivery/v4/timeframe/multipleservices:
+    post:
+      summary: Get available delivery dates and time windows for multiple services
+      description: This API can be used to determine the delivery date and time window of multiple services.
+      operationId: GetDeliveryDateWithMultipleServices
+      requestBody:
+        x-name: request
+        required: true
+        x-position: 1
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServicesDeliveryDateRequest'
+            examples:
+              Example 1:
+                value:
+                  handoverDate: '2026-06-15'
+                  receiverAddress:
+                    countryIso: BE
+                    postalCode: '8000'
+                    street: Langerei
+                    city: Brugge
+                  services:
+                  - daytime
+                  - evening
+                  shipmentType: parcel
+                  numberOfDays: 1
+                  customerCode: ABC
+                  customerNumber: '123'
+              Example 2:
+                value:
+                  handoverDate: '2026-06-15'
+                  receiverAddress:
+                    countryIso: NL
+                    postalCode: 2521CA
+                    street: null
+                    city: null
+                  services:
+                  - daytime
+                  - evening
+                  shipmentType: parcel
+                  numberOfDays: 1
+                  customerCode: ABC
+                  customerNumber: '123'
+      responses:
+        '200':
+          description: Successful retrieval of available delivery dates and time windows
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServicesDeliveryDateResponse'
+              example:
+                deliveryDates:
+                - services:
+                  - service: daytime
+                    timeFrame:
+                      from: 08:30:00
+                      until: '21:30:00'
+                    sustainability:
+                      code: '01'
+                      description: Sustainable delivery
+                    shipmentType: parcel
+                    availability: true
+                    reason: null
+                  - service: evening
+                    timeFrame: null
+                    sustainability: null
+                    shipmentType: parcel
+                    availability: false
+                    reason: This postal code is not within the service area for the requested product
+                  deliveryDate: '2025-12-31'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                detail: See the errors property for more details.
+                errors:
+                  address:
+                  - The address field is required.
+                  postalCode:
+                  - The postalCode field is required
+        '401':
+          description: Invalid apikey
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: Business error occurred.
+                status: 404
+                detail: See the errors property for more details.
+                errors:
+                  request:
+                  - This postalCode value cannot be found.
+        '405':
+          description: Method not allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+        '429':
+          description: Too many requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequests'
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: Unknown error occurred.
+                status: 500
+                errors:
+                  request:
+                  - Error message.
+        '503':
+          description: Service Unavailable
+        '504':
+          description: Gateway Timeout
+      tags:
+      - Shipment
+    servers:
+    - url: https://api-sandbox.postnl.nl
+      description: Non-Production server
+    - url: https://api.postnl.nl
+      description: Production server
+  /shipment/delivery/v4/timeframe/singleservice:
+    post:
+      summary: Get available delivery dates and time windows
+      description: This API can be used to determine the delivery date and time window of a specific service.
+      operationId: GetDeliveryDate
+      requestBody:
+        x-name: request
+        required: true
+        x-position: 1
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeliveryDateRequest'
+            examples:
+              Example 1:
+                value:
+                  handoverDate: '2026-06-15'
+                  deliveryDays: 2
+                  receiverAddress:
+                    countryIso: BE
+                    postalCode: '8000'
+                    street: Langerei
+                    city: Brugge
+                  service: daytime
+                  shipmentType: parcel
+                  customerCode: ABC
+                  customerNumber: '123'
+              Example 2:
+                value:
+                  handoverDate: '2026-06-15'
+                  deliveryDays: 2
+                  receiverAddress:
+                    countryIso: NL
+                    postalCode: 2521CA
+                    street: null
+                    city: null
+                  service: daytime
+                  shipmentType: parcel
+                  customerCode: ABC
+                  customerNumber: '123'
+      responses:
+        '200':
+          description: Successful retrieval of available delivery dates and time windows
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeliveryDateResponse'
+              example:
+                deliveryDates:
+                - deliveryDate: '2025-12-31'
+                  timeFrame:
+                    from: 08:30:00
+                    until: '21:30:00'
+                  sustainability:
+                    code: '01'
+                    description: Sustainable delivery
+                  service: daytime
+                  shipmentType: parcel
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                detail: See the errors property for more details.
+                errors:
+                  address:
+                  - The address field is required.
+                  postalCode:
+                  - The postalCode field is required
+        '401':
+          description: Invalid apikey
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: Business error occurred.
+                status: 404
+                detail: See the errors property for more details.
+                errors:
+                  request:
+                  - This postalCode value cannot be found.
+        '405':
+          description: Method not allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+        '429':
+          description: Too many requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequests'
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: Unknown error occurred.
+                status: 500
+                errors:
+                  request:
+                  - Error message.
+        '503':
+          description: Service Unavailable
+        '504':
+          description: Gateway Timeout
+      tags:
+      - Shipment
+    servers:
+    - url: https://api-sandbox.postnl.nl
+      description: Non-Production server
+    - url: https://api.postnl.nl
+      description: Production server
+components:
+  schemas:
+    MethodNotAllowed:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Only POST requests allowed
+        http_status_code:
+          type: number
+          example: 405
+    BadRequestResponse:
+      type: object
+      description: The fields returned in a bad request response.
+      additionalProperties: false
+      properties:
+        type:
+          type: string
+          description: A URI reference that identifies the problem type according to RFC 9457.
+          example: https://tools.ietf.org/html/rfc9457#section-3.1
+        title:
+          type: string
+          description: A short, human-readable summary of the problem type.
+          example: One or more validation errors occurred.
+        status:
+          type: integer
+          description: HTTP status code generated by the origin server.
+          example: 400
+        errors:
+          type: object
+          description: A map of error categories to lists of error messages.
+          example:
+            CustomerCode:
+            - CustomerCode must be 1-4 letters.
+          additionalProperties:
+            type: array
+            items:
+              type: string
+        traceId:
+          type: string
+          example: 00-f8bd486e5e0079e87aaf596c95c7fa34-e9d798feb208535f-01
+    CreateBarcodesResponse:
+      type: object
+      description: Response object containing the generated barcodes and optional warnings or metadata.
+      additionalProperties: false
+      properties:
+        barcodes:
+          type: array
+          example:
+          - 3SDEVC090807060
+          items:
+            type: string
+    Unauthorized:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Failed to resolve API Key variable 'request.header.apikey'
+        http_status_code:
+          type: number
+          example: 401
+    TooManyRequests:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Too many requests. Rate limit exceeded!
+        http_status_code:
+          type: number
+          example: 429
+    CreateBarcodesRequest:
+      type: object
+      description: Input parameters for generating barcodes, customer details, optional numeric range and quantity.
+      additionalProperties: false
+      required:
+      - customerNumber
+      - customerCode
+      properties:
+        customerNumber:
+          type: string
+          description: Your customer number assigned by PostNL. Consult the 'Manage API'-module in 'MijnPostNL zakelijk' for your API-account details.
+          maxLength: 10
+          minLength: 1
+          pattern: ^\d+$
+          example: '11223344'
+        customerCode:
+          type: string
+          description: Your customer code assigned by PostNL. Consult the 'Manage API'-module in 'MijnPostNL zakelijk' for your API-account details.  customerCode provided by PostNL, only allowed characters
+          maxLength: 4
+          minLength: 1
+          pattern: ^[A-Za-z]{1,4}$
+          example: DEVC
+        serieStart:
+          type: string
+          description: Lower bound of the barcode range. Must be provided together with serieEnd. Digits only, same length as serieEnd. Returned barcodes in the array are greater than or equal to this value.
+          default: '000000000'
+          maxLength: 9
+          minLength: 7
+          pattern: ^\d{7,9}$
+          example: '000000000'
+        serieEnd:
+          type: string
+          description: Upper bound of the barcode range. Must be provided together with serieStart. Digits only, same length as serieStart. Returned barcodes in the array are less than or equal to this value.
+          default: '999999999'
+          maxLength: 9
+          minLength: 7
+          pattern: ^\d{7,9}$
+          example: '999999999'
+        numberOfBarcodes:
+          type: integer
+          description: Number of barcodes to return. Defaults to one. When a range is supplied, all identifiers fall within it.
+          default: 1
+          maximum: 100.0
+          minimum: 1.0
+          example: 1
+    ConfirmShipmentResponse:
+      type: object
+      additionalProperties: false
+      properties:
+        traceId:
+          type: string
+          description: The trace Id within the PostNL landscape of this request
+          example: 12345678-1234-1234-1234-123456789012
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConfirmResponseItem'
+        warnings:
+          type: array
+          description: A list of warnings that occurred during the processing of the request, which are not blocking
+          items:
+            $ref: '#/components/schemas/ResponseWarning'
+    Dimensions:
+      type: object
+      description: The dimensions of the shipment item
+      additionalProperties: false
+      properties:
+        height:
+          type: integer
+          description: The height of the parcel in mm
+          minimum: 0.0
+          example: 101
+        length:
+          type: integer
+          description: The length of the parcel in mm
+          minimum: 0.0
+          example: 420
+        volume:
+          type: integer
+          description: The volume of the parcel in cubic cm
+          minimum: 0.0
+          example: 8908
+        weight:
+          type: integer
+          description: The weight of the parcel in grams
+          minimum: 0.0
+          example: 1144
+        width:
+          type: integer
+          description: The width of the parcel in mm
+          minimum: 0.0
+          example: 210
+    ShipmentType:
+      type: string
+      x-extensible-enum:
+      - parcel
+      - letterbox
+      - packet
+      - parcelnonstandard
+      - letter
+    Customs:
+      type: object
+      description: Object used when customs information is needed for the import or export of items
+      additionalProperties: false
+      properties:
+        transactionCode:
+          description: The transactionCode describing the type of shipment this is. Refer to reference table to find correct value
+          allOf:
+          - $ref: '#/components/schemas/TransactionCode'
+        currency:
+          type: string
+          description: The currency used for all values of the items in the customs section based on ISO3
+          maxLength: 3
+          minLength: 3
+          pattern: ^[A-Z]{3}$
+          example: EUR
+        handleAsNonDeliverable:
+          type: boolean
+          description: "Determines what to do when the shipment cannot be delivered the first time\n            (if this is set to true,the shipment will be returned after the first failed attempt)"
+          default: false
+          example: true
+        senderIdentification:
+          type: string
+          description: "Use only when available. Is related to the ITMATT sender.identification.reference field.\n            Depending on the destination with this ID the customs process can be faster.\n            Only fill in this reference number if the sender is registered as Trusted Shipper in the country of destination.\n            Example:VOEC-number in Norway."
+          maxLength: 50
+        receiverIdentification:
+          type: string
+          description: "Use only when available. Is related to the ITMATT addressee.identification.reference field.\n            Depending on the destination with this ID the customs process can be faster.\n            Only fill in this reference number if the sender is registered in the country of destination.\n            Example:BSN in Brazil."
+        content:
+          type: array
+          description: Array used to declare items in shipment for customs purposes
+          items:
+            $ref: '#/components/schemas/CustomsContent'
+        associatedDocument:
+          description: Fill in if applicable. Mandatory for Parcel shipments with the transactionCode 11, 21, or 32
+          allOf:
+          - $ref: '#/components/schemas/AssociatedDocument'
+    TransactionCode:
+      type: string
+      x-extensible-enum:
+      - '11'
+      - '21'
+      - '32'
+      - '91'
+    DeliveryLocation:
+      type: object
+      description: Can be used to specify an alternative delivery location, overriding the receiver address
+      additionalProperties: false
+      properties:
+        pickupLocationId:
+          type: string
+          description: The pickup point id of the location where the shipment should be delivered, for example a PostNL location or automated parcel locker
+          example: '910216'
+    Address:
+      type: object
+      description: A postal address
+      additionalProperties: false
+      required:
+      - countryIso
+      properties:
+        city:
+          type: string
+          description: A city is a recognized area within a particular country that has a common name
+          maxLength: 35
+          example: s Gravenhage
+        countryIso:
+          type: string
+          description: A countryIso is a recognized ISO2 code for an area that has a common name
+          maxLength: 2
+          minLength: 2
+          pattern: ^[A-Z]{2}$
+          example: NL
+        houseNumber:
+          type: string
+          description: A houseNumber is an identifying indicator that identifies a particular building on a street or road
+          maxLength: 10
+          example: '3'
+        houseNumberAddition:
+          type: string
+          description: "A houseNumberAddition is an identifying indicator that identifies a particular part of a building on a street or road\n            in case there are multiple residents living at the same address"
+          maxLength: 10
+          example: bis
+        postalCode:
+          type: string
+          description: A postalCode is a code of letters and digits that identifies a geographical area that is added to an address and is used by the postal service to sort mail
+          maxLength: 17
+          example: 2521CA
+        street:
+          type: string
+          description: A street is an identifying name that is given to a street or road
+          maxLength: 95
+          example: Waldorpstraat
+        addressLine:
+          type: string
+          description: "An addressLine is a combination of the elements that identifies a particular address within a city.\n            Can only be used for a combination of Street, HouseNumber and HouseNumberAddition"
+          example: Waldorpstraat 3 bis
+        companyName:
+          type: string
+          description: Name of the company at this address
+          maxLength: 35
+          example: PostNL
+        departmentName:
+          type: string
+          description: Name of the department at this address
+          maxLength: 35
+          example: Finance department
+        internationalAddressData:
+          description: Fields specific to international shipment addresses
+          allOf:
+          - $ref: '#/components/schemas/InternationalAddress'
+    GuaranteedBefore:
+      type: string
+      x-extensible-enum:
+      - '10:00'
+      - '12:00'
+      - '17:00'
+    Services:
+      type: object
+      description: The services that can be used for the shipment
+      additionalProperties: false
+      properties:
+        insuredValue:
+          type: number
+          description: The value of the shipment in EUR, used to insure the shipment when provided
+          format: decimal
+          example: 100.99
+        deliveryWindow:
+          description: The delivery window service that can be used for the shipment
+          allOf:
+          - $ref: '#/components/schemas/DeliveryWindow'
+        statedAddressOnly:
+          type: boolean
+          description: When set to true, the shipment will only be delivered to the stated address
+        returnWhenNotHome:
+          type: boolean
+          description: When set to true, the shipment will be returned to the sender when the shipment cannot be delivered to the stated address
+        minimalAgeCheck:
+          description: The age that the receiver must be to receive the shipment
+          allOf:
+          - $ref: '#/components/schemas/MinimalAgeCheck'
+        deliveryConfirmation:
+          description: The type of confirmation that is required for the delivery, either a signature or a deliverycode
+          example: signature
+          allOf:
+          - $ref: '#/components/schemas/DeliveryConfirmation'
+        adrLq:
+          type: boolean
+          description: When a contract exists for goods that have Limited Quantity hazardous materials then set this to true if this is an ADR LQ shipment
+        registered:
+          type: boolean
+          description: When set to true, the shipment will be sent as a registered parcel or mail item
+        idCheck:
+          type: boolean
+          description: Add ID check to registered letters
+    Duration:
+      type: string
+      x-extensible-enum:
+      - 24hours
+      - non24hours
+    Contact:
+      type: object
+      description: Contact information of a person
+      additionalProperties: false
+      properties:
+        email:
+          type: string
+          description: The email address of the contact person
+          maxLength: 50
+          example: jan@jansen.nl
+        firstName:
+          type: string
+          description: The first name of the contact person
+          maxLength: 35
+          example: Jan
+        lastName:
+          type: string
+          description: The last name of the contact person
+          maxLength: 35
+          example: Jansen
+        mobileNumber:
+          type: string
+          description: The mobile number of the contact person
+          maxLength: 17
+          minLength: 7
+          example: 0612345678
+    DeliveryConfirmation:
+      type: string
+      x-extensible-enum:
+      - signature
+      - deliverycode
+    Bundle:
+      type: string
+      x-extensible-enum:
+      - track_trace
+      - insured
+      - insured_plus
+      - untracked
+    ConfirmShipmentRequest:
+      type: object
+      description: The details of a shipment to be created
+      additionalProperties: false
+      required:
+      - receiver
+      - sender
+      - shipmentType
+      properties:
+        receiver:
+          description: The receiver of the shipment
+          allOf:
+          - $ref: '#/components/schemas/Receiver'
+        sender:
+          description: The sender of the shipment
+          allOf:
+          - $ref: '#/components/schemas/Customer'
+        deliveryLocation:
+          description: Can be used to specify an alternative delivery location, overriding the receiver address
+          allOf:
+          - $ref: '#/components/schemas/DeliveryLocation'
+        returnOptions:
+          description: The return options for the shipment
+          allOf:
+          - $ref: '#/components/schemas/ReturnOptions'
+        itemCount:
+          type: integer
+          description: The number of items in the shipment, with a maximum of 50
+          maximum: 50.0
+          minimum: 1.0
+          example: 2
+        items:
+          type: array
+          description: The details per item in the shipment
+          items:
+            $ref: '#/components/schemas/ConfirmShipmentItem'
+        shipmentType:
+          example: letterbox
+          allOf:
+          - $ref: '#/components/schemas/ShipmentType'
+        services:
+          description: The services that can be used for the shipment
+          allOf:
+          - $ref: '#/components/schemas/Services'
+        handoverDate:
+          type: string
+          description: The date on which the shipment is handed over
+          format: date
+          example: '2024-04-20'
+        internationalShipmentData:
+          description: Data necessary for international shipments
+          allOf:
+          - $ref: '#/components/schemas/InternationalConfirmShipmentData'
+    Customer:
+      type: object
+      description: The details of a customer
+      additionalProperties: false
+      required:
+      - customerNumber
+      - customerCode
+      - address
+      properties:
+        customerNumber:
+          type: string
+          maxLength: 10
+          minLength: 1
+          example: '123456'
+        customerCode:
+          type: string
+          maxLength: 4
+          minLength: 1
+          example: DEVC
+        address:
+          description: The address of the customer
+          allOf:
+          - $ref: '#/components/schemas/Address'
+        undeliverableReturnAddress:
+          description: The undeliverable return address for the customer
+          allOf:
+          - $ref: '#/components/schemas/Address'
+        contact:
+          description: The contact information of the customer
+          allOf:
+          - $ref: '#/components/schemas/Contact'
+    MinimalAgeCheck:
+      type: string
+      x-extensible-enum:
+      - 18+
+    DeliveryWindow:
+      type: object
+      description: The delivery window service that can be used for the shipment
+      additionalProperties: false
+      properties:
+        service:
+          description: The delivery window service that can be used for the shipment
+          allOf:
+          - $ref: '#/components/schemas/Service'
+        guaranteedBefore:
+          description: The time before which the delivery is guaranteed to be delivered, using the Guaranteed Before service
+          example: '10:00'
+          allOf:
+          - $ref: '#/components/schemas/GuaranteedBefore'
+        duration:
+          description: The duration of the delivery window service
+          example: 24hours
+          allOf:
+          - $ref: '#/components/schemas/Duration'
+    InternationalAddress:
+      type: object
+      description: Fields specific to an international shipment address
+      additionalProperties: false
+      properties:
+        area:
+          type: string
+          description: Area of the address
+          maxLength: 35
+          example: Area 51
+        buildingName:
+          type: string
+          description: Buildingname of the address
+          maxLength: 35
+          example: Main building
+        doorCode:
+          type: string
+          description: Doorcode of the address
+          maxLength: 35
+          example: A1
+        floor:
+          type: string
+          description: Floor of the address
+          maxLength: 35
+          example: '3'
+        region:
+          type: string
+          description: Region of the address
+          maxLength: 35
+          example: California
+    Service:
+      type: string
+      x-extensible-enum:
+      - evening
+    CustomerReferences:
+      type: object
+      description: The references of a shipment used by the customer
+      additionalProperties: false
+      properties:
+        costCenter:
+          type: string
+          description: The cost center reference of the shipment
+          example: costCenter
+        shipmentReference:
+          type: string
+          description: The customer reference of the shipment
+          example: reference
+        returnReference:
+          type: string
+          description: The customer reference of the return shipment
+          example: 'RMA: 66532'
+        shipmentRemark:
+          type: string
+          description: An additional remark for the shipment
+          example: remark
+    CustomsContent:
+      type: object
+      description: Item declaration used for customs purposes
+      additionalProperties: false
+      required:
+      - countryOfOrigin
+      - description
+      - hsTariffNumber
+      - quantity
+      - value
+      - weight
+      properties:
+        countryOfOrigin:
+          type: string
+          description: Country where the shipped item was produced based on ISO2
+          maxLength: 2
+          minLength: 2
+          pattern: ^[A-Z]{2}$
+          example: NL
+        description:
+          type: string
+          description: Description of the shipped items
+          maxLength: 35
+          minLength: 2
+          example: T-Shirts
+        hsTariffNumber:
+          type: string
+          description: The Harmonized System number of the shipped item with 6, 8 or 10 characters
+          maxLength: 10
+          minLength: 6
+          pattern: ^\d{6}$|^\d{8}$|^\d{10}$
+          example: '610990'
+        quantity:
+          type: integer
+          description: Number of the items within the shipment. Cannot be negative
+          minimum: 1.0
+          example: 2
+        value:
+          type: number
+          description: Fill the total value of the item(s)
+          format: decimal
+          minimum: 0.01
+          example: 3.19
+        weight:
+          type: integer
+          description: Total net weight of the item(s) in grams. Max weight allowed of 32000
+          maximum: 32000.0
+          minimum: 1.0
+          example: 450
+    ConfirmShipmentItem:
+      type: object
+      description: The details per item in the shipment
+      additionalProperties: false
+      required:
+      - barcode
+      properties:
+        barcode:
+          type: string
+          description: The barcode of the item, generated or provided by the customer. This could be a 3S (domestic shipments) or S10 (international shipments) barcode.
+          maxLength: 15
+          minLength: 12
+          example: 3SDEVC123456789
+        dimensions:
+          description: The dimensions of the shipment item
+          allOf:
+          - $ref: '#/components/schemas/Dimensions'
+        customerReferences:
+          description: The customer references for the shipment item
+          allOf:
+          - $ref: '#/components/schemas/CustomerReferences'
+        codingText:
+          type: string
+          example: '#X486T4C#51#1417#'
+    Receiver:
+      type: object
+      description: The details of the receiver of the shipment
+      additionalProperties: false
+      required:
+      - address
+      properties:
+        contact:
+          allOf:
+          - $ref: '#/components/schemas/Contact'
+        address:
+          $ref: '#/components/schemas/Address'
+        type:
+          description: Define the kind of receiver, possibly used to plan delivery times inside business hours. Only used for parcel shipments send to EU countries
+          example: consumer
+          allOf:
+          - $ref: '#/components/schemas/ReceiverType'
+    ConfirmResponseItem:
+      type: object
+      additionalProperties: false
+      properties:
+        barcode:
+          type: string
+          description: The barcode of the shipment, generated or provided by the customer.
+          example: 3SDEVC123456789
+        shipmentReference:
+          type: string
+          description: The customer reference of the shipment, which is the same as the customer reference in the request
+          example: '1234567890'
+        returnReference:
+          type: string
+          description: The customer reference of the return shipment, which is the same as the return reference in the request
+          example: 0987654321
+        returnBarcode:
+          type: string
+          description: The barcode of the return shipment, provided by the customer
+          example: 3SDEVC159487236
+    ResponseWarning:
+      type: object
+      additionalProperties: false
+      properties:
+        description:
+          type: string
+          example: Postalcode validation failed, housenumber not within known range
+    ReceiverType:
+      type: string
+      x-extensible-enum:
+      - business
+      - consumer
+    InternationalConfirmShipmentData:
+      type: object
+      description: Data necessary for international shipments
+      additionalProperties: false
+      properties:
+        pudo:
+          type: boolean
+          description: A boolean to indicate whether or not a dropOff should be used or not
+          example: false
+        partnerId:
+          type: string
+          description: The Id of the selected Partner for shipping provided when a label is generated.
+          example: PNL-01/B2B/MULTIPLE/Good
+        partnerBarcode:
+          type: string
+          description: The barcode provided by the partner when a label is generated.
+          example: 05211234567890M
+        bundle:
+          description: The type of service bundle that is used for the shipment
+          example: track_trace
+          allOf:
+          - $ref: '#/components/schemas/Bundle'
+        customs:
+          description: Object used when customs information is needed for the import or export of items
+          allOf:
+          - $ref: '#/components/schemas/Customs'
+    ReturnPeriod:
+      type: string
+      x-extensible-enum:
+      - '35'
+      - '100'
+      - '200'
+      - '365'
+    BadRequestResponse_2:
+      type: object
+      additionalProperties: false
+      properties:
+        type:
+          type: string
+          description: A URI reference that identifies the problem type according to RFC 9457
+          example: https://www.rfc-editor.org/rfc/rfc9457.html
+        title:
+          type: string
+          description: A short, human-readable summary of the problem type
+        status:
+          type: integer
+          description: HTTP status code generated by the origin server
+        errors:
+          type: object
+          description: An error object detailing the cause(s) of failure
+          additionalProperties:
+            type: array
+            items:
+              type: string
+        traceId:
+          type: string
+          description: The trace Id within the PostNL landscape of this request
+          example: 12345678-1234-1234-1234-123456789012
+    AssociatedDocument:
+      type: object
+      description: Fill in if applicable. Mandatory for Parcel shipments with the transactionCode 11, 21, or 32
+      additionalProperties: false
+      properties:
+        type:
+          description: Fill in if applicable. Mandatory for Parcel shipments with the transactionCode 11, 21, or 32
+          example: invoice
+          allOf:
+          - $ref: '#/components/schemas/AssociatedDocumentType'
+        number:
+          type: string
+          description: Fill in if applicable. Mandatory for Parcel shipments with the transactionCode 11, 21, or 32
+          minLength: 1
+          example: '123354'
+    AssociatedDocumentType:
+      type: string
+      x-extensible-enum:
+      - certificate
+      - invoice
+      - license
+    ReturnOptions:
+      type: object
+      description: The return options for the shipment
+      additionalProperties: false
+      properties:
+        returnBarcode:
+          type: string
+          description: This field contains the return barcode that will be used for the label in the box
+          maxLength: 15
+          minLength: 12
+          example: 3SDEVC123456789
+        returnPeriod:
+          description: The number of days the shipment can be returned to the sender. Options are 35, 100, 200, 365
+          allOf:
+          - $ref: '#/components/schemas/ReturnPeriod'
+        returnAddress:
+          description: The address to which the shipment can be returned
+          allOf:
+          - $ref: '#/components/schemas/Address'
+        valuableReturn:
+          type: boolean
+          description: Indicates if the return shipment contains valuable goods..
+          example: true
+    PageOrientation:
+      type: string
+      x-extensible-enum:
+      - portrait
+      - landscape
+    InternationalShipmentData:
+      type: object
+      description: Data necessary for international shipments
+      additionalProperties: false
+      properties:
+        pudo:
+          type: boolean
+          description: A boolean to indicate whether or not a dropOff should be used or not
+          example: false
+        bundle:
+          description: The type of service bundle that is used for the shipment
+          example: track_trace
+          allOf:
+          - $ref: '#/components/schemas/Bundle'
+        customs:
+          description: Object used when customs information is needed for the import or export of items
+          allOf:
+          - $ref: '#/components/schemas/Customs_2'
+    OutputType:
+      type: string
+      x-extensible-enum:
+      - zpl
+      - pdf
+      - gif
+      - jpg
+      - png
+    Resolution:
+      type: string
+      x-extensible-enum:
+      - '200'
+      - '300'
+      - '600'
+    Customs_2:
+      type: object
+      description: Object used when customs information is needed for the import or export of items
+      additionalProperties: false
+      properties:
+        transactionCode:
+          description: The transactionCode describing the type of shipment this is. Refer to reference table to find correct value
+          allOf:
+          - $ref: '#/components/schemas/TransactionCode'
+        currency:
+          type: string
+          description: The currency used for all values of the items in the customs section based on ISO3
+          maxLength: 3
+          minLength: 3
+          pattern: ^[A-Z]{3}$
+          example: EUR
+        handleAsNonDeliverable:
+          type: boolean
+          description: "Determines what to do when the shipment cannot be delivered the first time\n            (if this is set to true,the shipment will be returned after the first failed attempt)"
+          default: false
+          example: true
+        senderIdentification:
+          type: string
+          description: "Use only when available. Is related to the ITMATT sender.identification.reference field.\n            Depending on the destination with this ID the customs process can be faster.\n            Only fill in this reference number if the sender is registered as Trusted Shipper in the country of destination.\n            Example:VOEC-number in Norway."
+          maxLength: 50
+        receiverIdentification:
+          type: string
+          description: "Use only when available. Is related to the ITMATT addressee.identification.reference field.\n            Depending on the destination with this ID the customs process can be faster.\n            Only fill in this reference number if the sender is registered in the country of destination.\n            Example:BSN in Brazil."
+        labelSignature:
+          type: string
+          description: "GIF image of the signature (as a base64 encoded string) max size 280x60 mm (1058x226 pixels, we recommend 50% of the size).\n            This can be used to automatically sign the customs forms. The value of this element can have a maximum size of 65536 characters.\n            Note that the total request can have a maximum size of 200KB.\n            Larger requests will not be accepted by the server for performance reasons.\n            Requests that exceed this limit will not return a validation error,but a HTTP 404 error."
+          example: R0lG...AAA7
+        content:
+          type: array
+          description: Array used to declare items in shipment for customs purposes
+          items:
+            $ref: '#/components/schemas/CustomsContent'
+        associatedDocument:
+          description: Fill in if applicable. Mandatory for Parcel shipments with the transactionCode 11, 21, or 32
+          allOf:
+          - $ref: '#/components/schemas/AssociatedDocument'
+    ShipmentItem:
+      type: object
+      description: The details per item in the shipment
+      additionalProperties: false
+      properties:
+        barcode:
+          type: string
+          description: The barcode of the item, generated or provided by the customer. This could be a 3S (domestic shipments) or S10 (international shipments) barcode.
+          example: 3SDEVC123456789
+        dimensions:
+          description: The dimensions of the shipment item
+          allOf:
+          - $ref: '#/components/schemas/Dimensions'
+        customerReferences:
+          description: The customer references for the shipment item
+          allOf:
+          - $ref: '#/components/schemas/CustomerReferences'
+    ShipmentResponse:
+      type: object
+      description: The response of a successful shipment creation
+      additionalProperties: false
+      properties:
+        traceId:
+          type: string
+          description: The trace Id within the PostNL landscape of this request
+          example: 12345678-1234-1234-1234-123456789012
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResponseItem'
+        warnings:
+          type: array
+          description: A list of warnings that occurred during the processing of the request, which are not blocking
+          items:
+            $ref: '#/components/schemas/ResponseWarning'
+    ResponseItem:
+      type: object
+      additionalProperties: false
+      properties:
+        shipmentReference:
+          type: string
+          description: The customer reference of the shipment, which is the same as the customer reference in the request
+          example: '1234567890'
+        returnReference:
+          type: string
+          description: The customer reference of the return shipment, which is the same as the return reference in the request
+          example: 0987654321
+        returnBarcode:
+          type: string
+          description: The barcode of the return shipment, provided by the customer
+          example: 3SDEVC159487236
+        labels:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResponseLabel'
+        barcode:
+          type: string
+          description: The barcode of the shipment, generated or provided by the customer
+          example: 3SDEVC123456789
+        partnerId:
+          type: string
+          description: The Id of the selected Partner for shipping provided when a label is generated.
+          example: PNL-01/B2B/MULTIPLE/Good
+        partnerBarcode:
+          type: string
+          description: The barcode provided by the partner when a label is generated.
+          example: 05211234567890M
+        codingText:
+          type: string
+          example: '#X486T4C#51#1417#'
+    ResponseLabel:
+      type: object
+      additionalProperties: false
+      properties:
+        label:
+          type: string
+          description: Base64 encoded binary data of the label
+          example: iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABaElEQVR42mNk
+        outputType:
+          type: string
+          description: The file format of the label content
+          example: pdf
+        labelType:
+          type: string
+          description: The type of the label that is in the content
+          example: Label
+    BadRequestResponse_3:
+      type: object
+      additionalProperties: false
+      properties:
+        type:
+          type: string
+          description: A URI reference that identifies the problem type according to RFC 9457
+          example: https://www.rfc-editor.org/rfc/rfc9457.html
+        title:
+          type: string
+          description: A short, human-readable summary of the problem type
+        status:
+          type: integer
+          description: HTTP status code generated by the origin server
+        errors:
+          type: object
+          description: An error object detailing the cause(s) of failure
+          additionalProperties:
+            type: array
+            items:
+              type: string
+        traceId:
+          type: string
+          description: The trace Id within the PostNL landscape of this request
+          example: 12345678-1234-1234-1234-123456789012
+    ShipmentRequest:
+      type: object
+      description: The details of a shipment to be created
+      additionalProperties: false
+      required:
+      - receiver
+      - sender
+      - shipmentType
+      properties:
+        receiver:
+          description: The receiver of the shipment
+          allOf:
+          - $ref: '#/components/schemas/Receiver'
+        sender:
+          description: The sender of the shipment
+          allOf:
+          - $ref: '#/components/schemas/Customer'
+        deliveryLocation:
+          description: Can be used to specify an alternative delivery location, overriding the receiver address
+          allOf:
+          - $ref: '#/components/schemas/DeliveryLocation'
+        returnOptions:
+          description: The return options for the shipment
+          allOf:
+          - $ref: '#/components/schemas/ReturnOptions'
+        itemCount:
+          type: integer
+          description: The number of items in the shipment, with a maximum of 50
+          maximum: 50.0
+          minimum: 1.0
+          example: 2
+        items:
+          type: array
+          description: The details per item in the shipment
+          items:
+            $ref: '#/components/schemas/ShipmentItem'
+        shipmentType:
+          example: letterbox
+          allOf:
+          - $ref: '#/components/schemas/ShipmentType'
+        services:
+          description: The services that can be used for the shipment
+          allOf:
+          - $ref: '#/components/schemas/Services'
+        handoverDate:
+          type: string
+          description: The date on which the shipment is handed over
+          format: date
+          example: '2024-04-20'
+        labelSettings:
+          description: The information (type and orientation) used to generate a label
+          allOf:
+          - $ref: '#/components/schemas/LabelSettings'
+        internationalShipmentData:
+          description: Data necessary for international shipments
+          allOf:
+          - $ref: '#/components/schemas/InternationalShipmentData'
+    LabelSettings:
+      type: object
+      description: The information (type and orientation) used to generate a label
+      additionalProperties: false
+      properties:
+        outputType:
+          description: The file format of the label
+          example: pdf
+          allOf:
+          - $ref: '#/components/schemas/OutputType'
+        pageOrientation:
+          description: Orientation of the page the label is printed on
+          example: portrait
+          allOf:
+          - $ref: '#/components/schemas/PageOrientation'
+        resolution:
+          description: Resolution of the label that is returned in DPI.
+          default: '200'
+          example: '200'
+          allOf:
+          - $ref: '#/components/schemas/Resolution'
+    LocationType:
+      type: string
+      description: Describes available location types
+      default: Retail
+      x-extensible-enum:
+      - Retail
+      - ParcelLocker
+    ReceiverAddress:
+      type: object
+      additionalProperties: false
+      required:
+      - countryIso
+      - postalCode
+      properties:
+        countryIso:
+          type: string
+          description: Country of the reference address (ISO 3166-1 alpha-2)
+          minLength: 2
+          pattern: ^[A-Z]{2}$
+        postalCode:
+          type: string
+          description: Postal code of the reference address
+          maxLength: 17
+          minLength: 4
+        street:
+          type:
+          - string
+          - 'null'
+          description: Name of the street of the reference address
+          maxLength: 95
+        city:
+          type:
+          - string
+          - 'null'
+          description: City of the reference address
+          maxLength: 35
+        houseNumber:
+          type:
+          - string
+          - 'null'
+          description: House number of the reference address
+          maxLength: 35
+        houseNumberAddition:
+          type:
+          - string
+          - 'null'
+          description: Addition to the house number of the reference address
+          maxLength: 35
+    PickupNearAddressRequest:
+      type: object
+      additionalProperties: false
+      required:
+      - receiverAddress
+      - pickupDate
+      - customerCode
+      - customerNumber
+      properties:
+        numberOfLocations:
+          type: integer
+          description: Field that specifies the number of desired locations by the webshops
+          format: int32
+          default: 10
+          maximum: 10
+          minimum: 1
+        receiverAddress:
+          description: Object, that contains address information that will be used as a reference to retrieve pickup locations
+          allOf:
+          - $ref: '#/components/schemas/ReceiverAddress'
+        locationType:
+          description: Field that specifies the type of locations that are desired as pickup possibility; either Retail or ParcelLocker
+          allOf:
+          - $ref: '#/components/schemas/LocationType'
+        pickupDate:
+          type: string
+          description: 'Field that specifies the date on which the parcel needs to be delivered at the pickup location. Must be today or a future date. If unsure, use tomorrow''s date (today + 1). Format: yyyy-MM-dd (e.g. "2026-03-10").'
+          format: date
+        customerCode:
+          type: string
+          description: The unique code to identify the customer
+          minLength: 1
+        customerNumber:
+          type: string
+          description: The unique number to identify the customer
+          minLength: 1
+    Address_2:
+      type: object
+      additionalProperties: false
+      properties:
+        countryIso:
+          type: string
+          description: Country code
+        postalCode:
+          type: string
+          description: Postal code
+        houseNumber:
+          type: string
+          description: House number
+        houseNumberAddition:
+          type: string
+          description: Addition to house number
+        street:
+          type: string
+          description: Street
+        city:
+          type: string
+          description: City
+    ProblemDetails:
+      type: object
+      additionalProperties:
+        type:
+        - object
+        - 'null'
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+    PickupLocationResponse:
+      type: object
+      additionalProperties: false
+      properties:
+        locations:
+          type: array
+          description: List of locations
+          items:
+            $ref: '#/components/schemas/Location'
+    ValidationProblemDetails:
+      allOf:
+      - $ref: '#/components/schemas/HttpValidationProblemDetails'
+      - type: object
+        additionalProperties:
+          type:
+          - object
+          - 'null'
+        properties:
+          errors:
+            type: object
+            additionalProperties:
+              type: array
+              items:
+                type: string
+    PickupNearCoordinatesRequest:
+      type: object
+      additionalProperties: false
+      required:
+      - coordinates
+      - pickupDate
+      - receiverCountryIso
+      - customerCode
+      - customerNumber
+      properties:
+        numberOfLocations:
+          type: integer
+          description: Field that specifies the number of desired locations by the webshops
+          format: int32
+          default: 10
+          maximum: 10
+          minimum: 1
+        coordinates:
+          description: Object that contains the reference point marked in coordinates from which locations need to be retrieved
+          allOf:
+          - $ref: '#/components/schemas/Coordinate'
+        locationType:
+          description: Field that specifies the type of locations that are desired as pickup possibility; either Retail or ParcelLocker
+          allOf:
+          - $ref: '#/components/schemas/LocationType'
+        pickupDate:
+          type: string
+          description: 'Field that specifies the date on which the parcel needs to be delivered at the pickup location. Must be today or a future date. If unsure, use tomorrow''s date (today + 1). Format: yyyy-MM-dd (e.g. "2026-03-10").'
+          format: date
+        receiverCountryIso:
+          type: string
+          description: Restricts the returned locations to the specified country. Country ISO format (ISO 3166-1 alpha-2)
+          minLength: 2
+          pattern: ^[A-Z]{2}$
+        customerCode:
+          type: string
+          description: The unique code to identify the customer
+          minLength: 1
+        customerNumber:
+          type: string
+          description: The unique number to identify the customer
+          minLength: 1
+    PickupLocationLookupResponse:
+      type: object
+      additionalProperties: false
+      properties:
+        location:
+          description: Location details
+          allOf:
+          - $ref: '#/components/schemas/LocationStatus'
+    Location:
+      type: object
+      additionalProperties: false
+      properties:
+        pickupLocationId:
+          type: string
+          description: Unique identifier of the pickup location
+        locationType:
+          description: Type of location
+          allOf:
+          - $ref: '#/components/schemas/LocationType'
+        name:
+          type: string
+          description: Name of the location
+        address:
+          description: Address of the location
+          allOf:
+          - $ref: '#/components/schemas/Address_2'
+        coordinates:
+          description: Coordinates of the location
+          allOf:
+          - $ref: '#/components/schemas/CoordinateResponse'
+        distance:
+          type: number
+          description: Distance to location from centre point of requested area
+          format: double
+        openingTimes:
+          type: array
+          description: Weekday list containing the opening times for that weekday
+          items:
+            $ref: '#/components/schemas/OpeningTime'
+        sustainability:
+          description: Indicates how sustainable this location is
+          allOf:
+          - $ref: '#/components/schemas/Sustainability'
+    OpeningTime:
+      type: object
+      additionalProperties: false
+      properties:
+        day:
+          type: string
+          description: Day of the week for which the opening times are applicable
+        times:
+          type: array
+          description: Time of the day
+          items:
+            $ref: '#/components/schemas/TimeFrame'
+    Sustainability:
+      type: object
+      additionalProperties: false
+      properties:
+        code:
+          description: Code of sustainability
+          allOf:
+          - $ref: '#/components/schemas/SustainabilityCode'
+        description:
+          type: string
+          description: Description of sustainability
+    Coordinate:
+      type: object
+      additionalProperties: false
+      required:
+      - latitude
+      - longitude
+      properties:
+        latitude:
+          type: number
+          description: Latitude of the location
+          format: double
+        longitude:
+          type: number
+          description: Longitude of the location
+          format: double
+    SustainabilityCode:
+      type: string
+      description: Describes available sustainability codes
+      default: '00'
+      x-extensible-enum:
+      - '00'
+      - '01'
+      - '02'
+      - '03'
+    HttpValidationProblemDetails:
+      allOf:
+      - $ref: '#/components/schemas/ProblemDetails'
+      - type: object
+        additionalProperties:
+          type:
+          - object
+          - 'null'
+        properties:
+          errors:
+            type: object
+            additionalProperties:
+              type: array
+              items:
+                type: string
+    LocationStatus:
+      type: object
+      additionalProperties: false
+      properties:
+        pickupLocationId:
+          type: string
+          description: Identifier of the pickup location
+        pickupLocationAvailable:
+          type: boolean
+          description: Boolean that indicates whether the requested location is available for checkout on the specified date
+        locationType:
+          description: Type of location
+          allOf:
+          - $ref: '#/components/schemas/LocationType'
+        name:
+          type: string
+          description: Name of the location
+        address:
+          description: Address of the location
+          allOf:
+          - $ref: '#/components/schemas/Address_2'
+        coordinates:
+          description: Coordinates of the location
+          allOf:
+          - $ref: '#/components/schemas/CoordinateResponse'
+        openingTimes:
+          type: array
+          description: Opening hours of the location
+          items:
+            $ref: '#/components/schemas/OpeningTime'
+        sustainability:
+          description: Indicates how sustainable this location is
+          allOf:
+          - $ref: '#/components/schemas/Sustainability'
+    PickupLocationLookupRequest:
+      type: object
+      additionalProperties: false
+      required:
+      - pickupLocationId
+      - countryIso
+      - pickupDate
+      - customerCode
+      - customerNumber
+      properties:
+        pickupLocationId:
+          type: string
+          description: Identifier of the pickup location
+          minLength: 1
+        countryIso:
+          type: string
+          description: Country in which the location resides
+          minLength: 2
+          pattern: ^[A-Z]{2}$
+        pickupDate:
+          type: string
+          description: 'Date on which the parcel will be collected from the location by the consumer. Must be today or a future date. If unsure, use tomorrow''s date (today + 1). Format: yyyy-MM-dd (e.g. "2026-03-10").'
+          format: date
+        customerCode:
+          type: string
+          description: The unique code to identify the customer
+          minLength: 1
+        customerNumber:
+          type: string
+          description: The unique number to identify the customer
+          minLength: 1
+    CoordinateResponse:
+      type: object
+      additionalProperties: false
+      properties:
+        latitude:
+          type: number
+          description: Latitude of the location
+          format: double
+        longitude:
+          type: number
+          description: Longitude of the location
+          format: double
+    TimeFrame:
+      type: object
+      additionalProperties: false
+      properties:
+        from:
+          type: string
+          description: Starting time of the opening period (HH:mm:ss)
+          format: time
+        until:
+          type: string
+          description: Closing time of the opening period (HH:mm:ss)
+          format: time
+    ReturnShipmentReturnOptions:
+      type: object
+      description: The return options for the shipment
+      additionalProperties: false
+      properties:
+        domestic:
+          description: Domestic return options
+          allOf:
+          - $ref: '#/components/schemas/DomesticReturnOptions'
+        shipmentInternational:
+          description: International return options
+          allOf:
+          - $ref: '#/components/schemas/ReturnShipmentInternationalReturnOptions'
+    NetworkType:
+      type: string
+      x-extensible-enum:
+      - postal
+      - commercial
+    ReturnShipmentReceiver:
+      type: object
+      description: The details of a customer
+      additionalProperties: false
+      required:
+      - address
+      - customerNumber
+      - customerCode
+      properties:
+        contact:
+          description: Contact information of a person
+          allOf:
+          - $ref: '#/components/schemas/Contact'
+        address:
+          description: A postal address
+          allOf:
+          - $ref: '#/components/schemas/Address'
+        undeliverableReturnAddress:
+          description: The undeliverable return address for this customer
+          allOf:
+          - $ref: '#/components/schemas/Address'
+        customerNumber:
+          type: string
+          maxLength: 10
+          minLength: 1
+          example: '123456'
+        customerCode:
+          type: string
+          maxLength: 4
+          minLength: 1
+          example: DEVC
+    ReturnShipmentType:
+      type: string
+      x-extensible-enum:
+      - parcel
+      - packet
+    ReturnShipmentItem:
+      type: object
+      additionalProperties: false
+      properties:
+        barcode:
+          type: string
+          description: The barcode of the item, generated or provided by the customer
+          example: 3SDEVC123456789
+        dimensions:
+          description: The dimensions of the return shipment item
+          allOf:
+          - $ref: '#/components/schemas/Dimensions'
+        customerReferences:
+          description: The references of a shipment used by the customer
+          allOf:
+          - $ref: '#/components/schemas/CustomerReferences'
+    ReturnShipmentInternationalReturnOptions:
+      type: object
+      additionalProperties: false
+      properties:
+        networkType:
+          description: This field is used for International Returns to determine whether the international operator should deliver through commercial or postal network
+          example: commercial
+          allOf:
+          - $ref: '#/components/schemas/NetworkType'
+        consolidationMode:
+          description: This field is used for International Returns to determine whether a customer wants to provide their shipment consolidated
+          example: none
+          allOf:
+          - $ref: '#/components/schemas/ConsolidationMode'
+    ReturnShipmentLabelSettings:
+      type: object
+      description: The information (type and orientation) used to generate a label
+      additionalProperties: false
+      required:
+      - printMethod
+      properties:
+        printMethod:
+          type: string
+          description: Specifies which party will print the shipment label. Sending the return from BE means only consumerPrint is available. Sending from NL means only retailPrint is available.
+          minLength: 1
+          example: consumer
+        outputType:
+          description: The file format of the label
+          default: pdf
+          example: pdf
+          allOf:
+          - $ref: '#/components/schemas/OutputType'
+        pageOrientation:
+          description: Orientation of the page the label is printed on
+          example: portrait
+          allOf:
+          - $ref: '#/components/schemas/PageOrientation'
+        resolution:
+          description: Resolution of the label that is returned in DPI.
+          default: '200'
+          example: '200'
+          allOf:
+          - $ref: '#/components/schemas/Resolution'
+    ReturnShipmentRequest:
+      type: object
+      description: The details of a return shipment to be created
+      additionalProperties: false
+      required:
+      - receiver
+      - sender
+      - labelSettings
+      - shipmentType
+      properties:
+        receiver:
+          description: The receiver details of the return shipment
+          allOf:
+          - $ref: '#/components/schemas/ReturnShipmentReceiver'
+        sender:
+          description: The sender details of the return shipment
+          allOf:
+          - $ref: '#/components/schemas/ReturnShipmentSender'
+        labelSettings:
+          description: The information used to generate a label
+          allOf:
+          - $ref: '#/components/schemas/ReturnShipmentLabelSettings'
+        returnOptions:
+          description: The return options for the shipment
+          allOf:
+          - $ref: '#/components/schemas/ReturnShipmentReturnOptions'
+        items:
+          type: array
+          description: The details of the return in the shipment
+          items:
+            $ref: '#/components/schemas/ReturnShipmentItem'
+        shipmentType:
+          allOf:
+          - $ref: '#/components/schemas/ReturnShipmentType'
+    ReturnShipmentSender:
+      type: object
+      description: The sender details of a return shipment
+      additionalProperties: false
+      required:
+      - address
+      properties:
+        contact:
+          description: Contact information of a person
+          allOf:
+          - $ref: '#/components/schemas/Contact'
+        address:
+          description: A postal address
+          allOf:
+          - $ref: '#/components/schemas/Address'
+    ConsolidationMode:
+      type: string
+      x-extensible-enum:
+      - none
+      - bulk
+    DomesticReturnOptions:
+      type: object
+      additionalProperties: false
+      properties:
+        valuableReturn:
+          type: boolean
+          description: Specifies whether or not the return is valuable
+        returnPeriod:
+          description: The number of days the shipment can be returned to the sender. Only values allowed are 20 or 35.
+          allOf:
+          - $ref: '#/components/schemas/ReturnShipmentReturnPeriod'
+    BadRequestResponse_4:
+      type: object
+      additionalProperties: false
+      properties:
+        type:
+          type: string
+          description: A URI reference that identifies the problem type according to RFC 9457
+          example: https://www.rfc-editor.org/rfc/rfc9457.html
+        title:
+          type: string
+          description: A short, human-readable summary of the problem type
+        status:
+          type: integer
+          description: HTTP status code generated by the origin server
+        errors:
+          type: object
+          description: An error object detailing the cause(s) of failure
+          additionalProperties:
+            type: array
+            items:
+              type: string
+        traceId:
+          type: string
+          description: The trace Id within the PostNL landscape of this request
+          example: 12345678-1234-1234-1234-123456789012
+    ReturnShipmentReturnPeriod:
+      type: string
+      x-extensible-enum:
+      - '20'
+      - '35'
+    InternationalShipmentData_2:
+      type: object
+      description: Data necessary for international shipments
+      additionalProperties: false
+      properties:
+        pudo:
+          type: boolean
+          description: A boolean to indicate whether or not a dropOff should be used or not
+          example: false
+        bundle:
+          description: The type of service bundle that is used for the shipment
+          example: track_trace
+          allOf:
+          - $ref: '#/components/schemas/Bundle'
+        customs:
+          description: Object used when customs information is needed for the import or export of items
+          allOf:
+          - $ref: '#/components/schemas/Customs_3'
+    Customs_3:
+      type: object
+      description: Object used when customs information is needed for the import or export of items
+      additionalProperties: false
+      properties:
+        transactionCode:
+          description: The transactionCode describing the type of shipment this is. Refer to reference table to find correct value
+          allOf:
+          - $ref: '#/components/schemas/TransactionCode'
+        currency:
+          type: string
+          description: The currency used for all values of the items in the customs section based on ISO3
+          maxLength: 3
+          minLength: 3
+          pattern: ^[A-Z]{3}$
+          example: EUR
+        handleAsNonDeliverable:
+          type: boolean
+          description: "Determines what to do when the shipment cannot be delivered the first time\n            (if this is set to true,the shipment will be returned after the first failed attempt)"
+          default: false
+          example: true
+        senderIdentification:
+          type: string
+          description: "Use only when available. Is related to the ITMATT sender.identification.reference field.\n            Depending on the destination with this ID the customs process can be faster.\n            Only fill in this reference number if the sender is registered as Trusted Shipper in the country of destination.\n            Example:VOEC-number in Norway."
+          maxLength: 50
+        receiverIdentification:
+          type: string
+          description: "Use only when available. Is related to the ITMATT addressee.identification.reference field.\n            Depending on the destination with this ID the customs process can be faster.\n            Only fill in this reference number if the sender is registered in the country of destination.\n            Example:BSN in Brazil."
+        labelSignature:
+          type: string
+          description: "GIF image of the signature (as a base64 encoded string) max size 280x60 mm (1058x226 pixels, we recommend 50% of the size).\n            This can be used to automatically sign the customs forms. The value of this element can have a maximum size of 65536 characters.\n            Note that the total request can have a maximum size of 200KB.\n            Larger requests will not be accepted by the server for performance reasons.\n            Requests that exceed this limit will not return a validation error,but a HTTP 404 error."
+          example: R0lG...AAA7
+        content:
+          type: array
+          description: Array used to declare items in shipment for customs purposes
+          items:
+            $ref: '#/components/schemas/CustomsContent'
+        associatedDocument:
+          description: Fill in if applicable. Mandatory for Parcel shipments with the transactionCode 11, 21, or 32
+          allOf:
+          - $ref: '#/components/schemas/AssociatedDocument'
+    BadRequestResponse_5:
+      type: object
+      additionalProperties: false
+      properties:
+        type:
+          type: string
+          description: A URI reference that identifies the problem type according to RFC 9457
+          example: https://www.rfc-editor.org/rfc/rfc9457.html
+        title:
+          type: string
+          description: A short, human-readable summary of the problem type
+        status:
+          type: integer
+          description: HTTP status code generated by the origin server
+        errors:
+          type: object
+          description: An error object detailing the cause(s) of failure
+          additionalProperties:
+            type: array
+            items:
+              type: string
+        traceId:
+          type: string
+          description: The trace Id within the PostNL landscape of this request
+          example: 12345678-1234-1234-1234-123456789012
+    ShipmentType_2:
+      type: string
+      description: Describes available shipment types
+      default: parcel
+      x-extensible-enum:
+      - parcel
+    Address_3:
+      type: object
+      additionalProperties: false
+      required:
+      - countryIso
+      - postalCode
+      properties:
+        countryIso:
+          type: string
+          description: Country of the recipient (ISO 3166-1 alpha-2)
+          minLength: 2
+          pattern: ^(BE|NL)$
+        postalCode:
+          type: string
+          description: Postal code of the recipient
+          maxLength: 17
+          minLength: 4
+        street:
+          type:
+          - string
+          - 'null'
+          description: Name of the street of the recipient
+          maxLength: 95
+        city:
+          type:
+          - string
+          - 'null'
+          description: City of the recipient address
+          maxLength: 35
+    DeliveryDateResponse:
+      type: object
+      additionalProperties: false
+      properties:
+        deliveryDates:
+          type: array
+          description: Date of possible delivery dates based on how many delivery days requested
+          items:
+            $ref: '#/components/schemas/DeliveryDate'
+    DeliveryDateRequest:
+      type: object
+      additionalProperties: false
+      required:
+      - handoverDate
+      - receiverAddress
+      - customerCode
+      - customerNumber
+      properties:
+        handoverDate:
+          type: string
+          description: 'The date on which the user hands over the shipment to PostNL before the cutoff time. Must be today or a future date. If unsure, use tomorrow''s date (today + 1). Format: yyyy-MM-dd (e.g. "2026-03-10").'
+          format: date
+        deliveryDays:
+          type: integer
+          description: The number of delivery days there will be in the response
+          format: int32
+          default: 1
+          maximum: 14
+          minimum: 1
+        receiverAddress:
+          description: The address of the receiver
+          allOf:
+          - $ref: '#/components/schemas/Address_3'
+        service:
+          description: The service that a user can use
+          allOf:
+          - $ref: '#/components/schemas/ServiceType'
+        shipmentType:
+          description: Indicates what kind of type a shipment is
+          allOf:
+          - $ref: '#/components/schemas/ShipmentType_2'
+        customerCode:
+          type: string
+          description: The unique code to identify the customer
+          minLength: 1
+        customerNumber:
+          type: string
+          description: The unique number to identify the customer
+          minLength: 1
+    DeliveryDate:
+      type: object
+      additionalProperties: false
+      properties:
+        deliveryDate:
+          type: string
+          description: Date on which PostNL expects to deliver the shipment
+          format: date
+        timeFrame:
+          description: Timeframe in which PostNL expects to deliver the shipment
+          allOf:
+          - $ref: '#/components/schemas/TimeFrame_2'
+        sustainability:
+          description: Indicates how sustainable the delivery will be
+          allOf:
+          - $ref: '#/components/schemas/Sustainability'
+        service:
+          description: The services that a user can use
+          allOf:
+          - $ref: '#/components/schemas/ServiceType'
+        shipmentType:
+          description: Indicates what kind of type a shipment is
+          allOf:
+          - $ref: '#/components/schemas/ShipmentType_2'
+    ServicesDeliveryDateResponse:
+      type: object
+      additionalProperties: false
+      properties:
+        deliveryDates:
+          type: array
+          description: Date of possible delivery dates based on how many products requested
+          items:
+            $ref: '#/components/schemas/ServiceDeliveryDate'
+    ServicesDeliveryDateRequest:
+      type: object
+      additionalProperties: false
+      required:
+      - handoverDate
+      - receiverAddress
+      - customerCode
+      - customerNumber
+      properties:
+        handoverDate:
+          type: string
+          description: 'The date on which the user hands over the shipment to PostNL before the cutoff time. Must be today + 1 or a future date. If unsure, use tomorrow''s date (today + 1). Format: yyyy-MM-dd (e.g. "2026-03-10").'
+          format: date
+        receiverAddress:
+          description: The address of the receiver
+          allOf:
+          - $ref: '#/components/schemas/Address_3'
+        services:
+          type: array
+          description: The services that a user can use
+          items:
+            $ref: '#/components/schemas/ServiceType'
+        shipmentType:
+          description: Indicates what kind of type a shipment is
+          allOf:
+          - $ref: '#/components/schemas/ShipmentType_2'
+        numberOfDays:
+          type: integer
+          description: The number of days that is needed to look ahead for the availability of the requested services
+          format: int32
+          default: 1
+          maximum: 14
+          minimum: 1
+        customerCode:
+          type: string
+          description: The unique code to identify the customer
+          minLength: 1
+        customerNumber:
+          type: string
+          description: The unique number to identify the customer
+          minLength: 1
+    ServiceDeliveryDate:
+      type: object
+      additionalProperties: false
+      properties:
+        services:
+          type: array
+          description: List of requested services and their availability for the specified delivery date
+          items:
+            $ref: '#/components/schemas/ServiceDelivery'
+        deliveryDate:
+          type: string
+          description: Date on which PostNL expects to deliver the shipment
+          format: date
+    ServiceDelivery:
+      type: object
+      additionalProperties: false
+      properties:
+        service:
+          description: Service for which the date is applicable
+          allOf:
+          - $ref: '#/components/schemas/ServiceType'
+        timeFrame:
+          description: Timeframe in which PostNL expects to deliver the shipment
+          allOf:
+          - $ref: '#/components/schemas/TimeFrame_2'
+        sustainability:
+          description: Indicates how sustainable the delivery will be
+          allOf:
+          - $ref: '#/components/schemas/Sustainability'
+        shipmentType:
+          description: Type of shipment for which the date is applicable
+          allOf:
+          - $ref: '#/components/schemas/ShipmentType_2'
+        availability:
+          type: boolean
+          description: Indicates the availability of the service on the date
+        reason:
+          type:
+          - string
+          - 'null'
+          description: Reason describing why a service is not available on the specified delivery date
+    ServiceType:
+      type: string
+      description: Describes available service types
+      default: daytime
+      x-extensible-enum:
+      - daytime
+      - evening
+      - guaranteed before 10
+      - guaranteed before 12
+      - guaranteed before 17
+    TimeFrame_2:
+      type: object
+      additionalProperties: false
+      properties:
+        from:
+          type: string
+          description: Start of the timeframe (HH:mm:ss)
+          format: time
+        until:
+          type: string
+          description: End of the timeframe (HH:mm:ss)
+          format: time
+  securitySchemes:
+    apikey:
+      type: apiKey
+      name: apikey
+      in: header
+x-refined-from:
+- postnl-barcode-v4-openapi.json
+- postnl-confirm-v4-openapi.json
+- postnl-labelling-v4-openapi.json
+- postnl-locations-v4-openapi.json
+- postnl-return-v4-openapi.json
+- postnl-shipment-v4-openapi.json
+- postnl-timeframe-v4-openapi.json
