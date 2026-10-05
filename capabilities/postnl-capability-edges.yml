@@ -1,0 +1,61 @@
+slug: postnl
+provider: postnl
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 5
+edges:
+- tag: Shipment
+  spec_file: postnl-shipment-api-openapi.yml
+  capability_id: BC-520.50
+  capability_id_l1: BC-520
+  capability_name: Logistics Operations Management
+  confidence: 0.85
+  evidence: '"Create barcodes", "Confirm shipment", "Create label", "Create return shipment", "Get available
+    delivery dates and time windows"'
+  reason: Operations create shipments, labels, barcodes and return shipments and determine delivery windows
+    — core parcel transport/shipping execution, i.e. logistics operations.
+- tag: Labelling
+  spec_file: postnl-labelling-api-openapi.yml
+  capability_id: BC-520.50
+  capability_id_l1: BC-520
+  capability_name: Logistics Operations Management
+  confidence: 0.82
+  evidence: '"Generate a label and confirmation"; schemas labellingLabel, labellingCustomsContent, shipmentAddress'
+  reason: Produces shipping labels (including customs content) and shipment confirmation — core outbound
+    transport/logistics execution.
+- tag: Barcode
+  spec_file: postnl-barcode-api-openapi.yml
+  capability_id: BC-520.50
+  capability_id_l1: BC-520
+  capability_name: Logistics Operations Management
+  confidence: 0.78
+  evidence: '"Generate a unique barcode to use for your shipping label"'
+  reason: Generates carrier barcodes for shipping labels — an operational parcel shipping/logistics execution
+    function.
+- tag: Confirming
+  spec_file: postnl-confirming-api-openapi.yml
+  capability_id: BC-520.50
+  capability_id_l1: BC-520
+  capability_name: Logistics Operations Management
+  confidence: 0.78
+  evidence: '"Confirm a shipment to PostNL"; schemas confirmingShipment, confirmingResponseShipment'
+  reason: Confirms a shipment with the carrier so it enters the transport network — parcel logistics execution.
+- tag: ShippingStatus
+  spec_file: postnl-shippingstatus-api-openapi.yml
+  capability_id: BC-520.50
+  capability_id_l1: BC-520
+  capability_name: Logistics Operations Management
+  confidence: 0.78
+  evidence: '"Receive status information about your shipments"; GetStatusByBarcode "Returns the statuses
+    for a particular barcode"; GetShipmentSignature'
+  reason: Track-and-trace of shipment status and proof-of-delivery signatures is shipment visibility within
+    transport execution, mapping to logistics operations. Some ambiguity with order fulfilment visibility.
