@@ -122,78 +122,7 @@ paths:
                   detail:
                     errorcode: Validation Fault
 components:
-  examples:
-    cpcSuccessMultipleAddresses:
-      value:
-      - city: UTRECHT
-        postalCode: 3532VA
-        streetName: Bilderdijkstraat
-        houseNumber: 9
-        formattedAddress:
-        - Bilderdijkstraat 9
-        - 3532VA UTRECHT
-      - city: UTRECHT
-        postalCode: 3532VA
-        streetName: Bilderdijkstraat
-        houseNumber: 9
-        houseNumberAddition: A
-        formattedAddress:
-        - Bilderdijkstraat 9 A
-        - 3532VA UTRECHT
-      - city: UTRECHT
-        postalCode: 3532VA
-        streetName: Bilderdijkstraat
-        houseNumber: 9
-        houseNumberAddition: ABS
-        formattedAddress:
-        - Bilderdijkstraat 9 ABS
-        - 3532VA UTRECHT
-    cpcSuccessNoAddress:
-      value: []
-    cpcSuccessSingleAddress:
-      value:
-      - city: UTRECHT
-        postalCode: 3571ZZ
-        streetName: Molengraaffplantsoen
-        houseNumber: 74
-        houseNumberAddition: bis
-        formattedAddress:
-        - Molengraaffplantsoen 74 bis
-        - 3571ZZ UTRECHT
   schemas:
-    MethodNotAllowedOnlyGetPost:
-      type: object
-      properties:
-        message:
-          type: string
-          example: Only GET & POST requests allowed
-        http_status_code:
-          type: number
-          example: 405
-    InternalServerError:
-      type: object
-      properties:
-        fault:
-          type: object
-          properties:
-            faultstring:
-              type: string
-              example: Unexpected token in object literal
-            detail:
-              type: object
-              properties:
-                errorcode:
-                  type: string
-                  example: Validation Fault
-    Unauthorized:
-      type: object
-      properties:
-        message:
-          type: string
-          example: Failed to resolve API Key variable 'request.header.apikey'
-        http_status_code:
-          type: number
-          example: 401
     postalcodeCheckAddress:
       type: object
       properties:
@@ -225,11 +154,27 @@ components:
           example:
           - Molengraaffplantsoen 74
           - 3571ZZ UTRECHT
-    postalcodeCheckResponse:
-      type: array
-      description: Array of addresses found. If no exact match is available, multiple addresses will be returned.
-      items:
-        $ref: '#/components/schemas/postalcodeCheckAddress'
+    MethodNotAllowedOnlyGetPost:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Only GET & POST requests allowed
+        http_status_code:
+          type: number
+          example: 405
+    postalcodeCheckError:
+      type: object
+      properties:
+        status:
+          type: string
+          example: '400'
+        title:
+          type: string
+          example: Bad request
+        detail:
+          type: string
+          example: Input field 'housenumber' must be a number
     TooManyRequests:
       type: object
       properties:
@@ -246,18 +191,73 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/postalcodeCheckError'
-    postalcodeCheckError:
+    Unauthorized:
       type: object
       properties:
-        status:
+        message:
           type: string
-          example: '400'
-        title:
-          type: string
-          example: Bad request
-        detail:
-          type: string
-          example: Input field 'housenumber' must be a number
+          example: Failed to resolve API Key variable 'request.header.apikey'
+        http_status_code:
+          type: number
+          example: 401
+    postalcodeCheckResponse:
+      type: array
+      description: Array of addresses found. If no exact match is available, multiple addresses will be returned.
+      items:
+        $ref: '#/components/schemas/postalcodeCheckAddress'
+    InternalServerError:
+      type: object
+      properties:
+        fault:
+          type: object
+          properties:
+            faultstring:
+              type: string
+              example: Unexpected token in object literal
+            detail:
+              type: object
+              properties:
+                errorcode:
+                  type: string
+                  example: Validation Fault
+  examples:
+    cpcSuccessSingleAddress:
+      value:
+      - city: UTRECHT
+        postalCode: 3571ZZ
+        streetName: Molengraaffplantsoen
+        houseNumber: 74
+        houseNumberAddition: bis
+        formattedAddress:
+        - Molengraaffplantsoen 74 bis
+        - 3571ZZ UTRECHT
+    cpcSuccessNoAddress:
+      value: []
+    cpcSuccessMultipleAddresses:
+      value:
+      - city: UTRECHT
+        postalCode: 3532VA
+        streetName: Bilderdijkstraat
+        houseNumber: 9
+        formattedAddress:
+        - Bilderdijkstraat 9
+        - 3532VA UTRECHT
+      - city: UTRECHT
+        postalCode: 3532VA
+        streetName: Bilderdijkstraat
+        houseNumber: 9
+        houseNumberAddition: A
+        formattedAddress:
+        - Bilderdijkstraat 9 A
+        - 3532VA UTRECHT
+      - city: UTRECHT
+        postalCode: 3532VA
+        streetName: Bilderdijkstraat
+        houseNumber: 9
+        houseNumberAddition: ABS
+        formattedAddress:
+        - Bilderdijkstraat 9 ABS
+        - 3532VA UTRECHT
   securitySchemes:
     APIKeyHeader:
       type: apiKey

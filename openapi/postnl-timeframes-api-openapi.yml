@@ -195,22 +195,6 @@ paths:
                     errorcode: Validation Fault
 components:
   schemas:
-    NoTimeframesOptions:
-      type: object
-      description: The option for which no timeframe was calculated for a specific date
-      properties:
-        string:
-          type: string
-          enum:
-          - Daytime
-          - Today
-          - Sameday
-          - Evening
-          - Morning
-          - Noon
-          - Sunday
-          - Afternoon
-          example: Evening
     MethodNotAllowedOnlyGetPost:
       type: object
       properties:
@@ -220,79 +204,6 @@ components:
         http_status_code:
           type: number
           example: 405
-    InternalServerError:
-      type: object
-      properties:
-        fault:
-          type: object
-          properties:
-            faultstring:
-              type: string
-              example: Unexpected token in object literal
-            detail:
-              type: object
-              properties:
-                errorcode:
-                  type: string
-                  example: Validation Fault
-    Unauthorized:
-      type: object
-      properties:
-        message:
-          type: string
-          example: Failed to resolve API Key variable 'request.header.apikey'
-        http_status_code:
-          type: number
-          example: 401
-    timeframesResponseObject:
-      type: object
-      properties:
-        TimeframeTimeframe:
-          type: array
-          items:
-            type: object
-            properties:
-              From:
-                type: string
-                description: The start time of the expected delivery window
-                example: '12:30:00'
-              Options:
-                type: object
-                description: The delivery option for which the timeframe is calculated. See [Delivery Options](https://developer.postnl.nl/docs/#/http/reference-data/reference-codes/delivery-options) for possible values.
-                properties:
-                  string:
-                    type: string
-                    enum:
-                    - Daytime
-                    - Today
-                    - Sameday
-                    - Evening
-                    - Morning
-                    - Noon
-                    - Sunday
-                    - Afternoon
-                    example: Daytime
-              To:
-                type: string
-                description: The end time of the expected delivery window
-                example: '14:30:00'
-              Sustainability:
-                type: object
-                description: Sustainability score; see [Sustainability codes](https://developer.postnl.nl/docs/#/http/reference-data/reference-codes/sustainability-codes) for possible values.
-                properties:
-                  Code:
-                    type: string
-                    description: Sustainability score code
-                    example: '02'
-                    enum:
-                    - '00'
-                    - '01'
-                    - '02'
-                    - '03'
-                  Description:
-                    type: string
-                    description: Sustainability score code description
-                    example: Sustainable option
     TooManyRequests:
       type: object
       properties:
@@ -313,24 +224,6 @@ components:
       - Noon
       - Sunday
       - Afternoon
-    InvalidRequest:
-      type: object
-      properties:
-        Date:
-          type: string
-          format: date-time
-        Error:
-          type: object
-          properties:
-            ErrorCode:
-              type: string
-              example: '3000'
-            ErrorDescription:
-              type: string
-              example: Request format is invalid
-        RequestId:
-          type: string
-          example: 09fd61fe-0099-4349-b71d-dce5c2472be9
     timeframeResponse:
       type: object
       properties:
@@ -389,6 +282,113 @@ components:
                         type: string
                         description: Sustainability score code description
                         example: Sustainable option
+    InvalidRequest:
+      type: object
+      properties:
+        Date:
+          type: string
+          format: date-time
+        Error:
+          type: object
+          properties:
+            ErrorCode:
+              type: string
+              example: '3000'
+            ErrorDescription:
+              type: string
+              example: Request format is invalid
+        RequestId:
+          type: string
+          example: 09fd61fe-0099-4349-b71d-dce5c2472be9
+    timeframesResponseObject:
+      type: object
+      properties:
+        TimeframeTimeframe:
+          type: array
+          items:
+            type: object
+            properties:
+              From:
+                type: string
+                description: The start time of the expected delivery window
+                example: '12:30:00'
+              Options:
+                type: object
+                description: The delivery option for which the timeframe is calculated. See [Delivery Options](https://developer.postnl.nl/docs/#/http/reference-data/reference-codes/delivery-options) for possible values.
+                properties:
+                  string:
+                    type: string
+                    enum:
+                    - Daytime
+                    - Today
+                    - Sameday
+                    - Evening
+                    - Morning
+                    - Noon
+                    - Sunday
+                    - Afternoon
+                    example: Daytime
+              To:
+                type: string
+                description: The end time of the expected delivery window
+                example: '14:30:00'
+              Sustainability:
+                type: object
+                description: Sustainability score; see [Sustainability codes](https://developer.postnl.nl/docs/#/http/reference-data/reference-codes/sustainability-codes) for possible values.
+                properties:
+                  Code:
+                    type: string
+                    description: Sustainability score code
+                    example: '02'
+                    enum:
+                    - '00'
+                    - '01'
+                    - '02'
+                    - '03'
+                  Description:
+                    type: string
+                    description: Sustainability score code description
+                    example: Sustainable option
+    Unauthorized:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Failed to resolve API Key variable 'request.header.apikey'
+        http_status_code:
+          type: number
+          example: 401
+    NoTimeframesOptions:
+      type: object
+      description: The option for which no timeframe was calculated for a specific date
+      properties:
+        string:
+          type: string
+          enum:
+          - Daytime
+          - Today
+          - Sameday
+          - Evening
+          - Morning
+          - Noon
+          - Sunday
+          - Afternoon
+          example: Evening
+    InternalServerError:
+      type: object
+      properties:
+        fault:
+          type: object
+          properties:
+            faultstring:
+              type: string
+              example: Unexpected token in object literal
+            detail:
+              type: object
+              properties:
+                errorcode:
+                  type: string
+                  example: Validation Fault
   securitySchemes:
     APIKeyHeader:
       type: apiKey

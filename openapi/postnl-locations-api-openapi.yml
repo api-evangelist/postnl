@@ -574,123 +574,6 @@ components:
         http_status_code:
           type: number
           example: 405
-    locationResponseSingle:
-      type: object
-      properties:
-        GetLocationsResult:
-          $ref: '#/components/schemas/getLocationsResultSingle'
-    InternalServerError:
-      type: object
-      properties:
-        fault:
-          type: object
-          properties:
-            faultstring:
-              type: string
-              example: Unexpected token in object literal
-            detail:
-              type: object
-              properties:
-                errorcode:
-                  type: string
-                  example: Validation Fault
-    locationsResponseMultiple:
-      type: object
-      properties:
-        GetLocationsResult:
-          $ref: '#/components/schemas/getLocationsResultMultiple'
-    Unauthorized:
-      type: object
-      properties:
-        message:
-          type: string
-          example: Failed to resolve API Key variable 'request.header.apikey'
-        http_status_code:
-          type: number
-          example: 401
-    locationsOpeningHours:
-      type: object
-      description: The standard opening times of the pickup location
-      properties:
-        Monday:
-          type: object
-          properties:
-            string:
-              type: string
-              example: 08:00-18:00
-        Tuesday:
-          type: object
-          properties:
-            string:
-              type: string
-              example: 08:00-18:00
-        Wednesday:
-          type: object
-          properties:
-            string:
-              type: string
-              example: 08:00-18:00
-        Thursday:
-          type: object
-          properties:
-            string:
-              type: string
-              example: 08:00-18:00
-        Friday:
-          type: object
-          properties:
-            string:
-              type: string
-              example: 08:00-18:00
-        Saturday:
-          type: object
-          properties:
-            string:
-              type: string
-              example: 10:00-16:00
-        Sunday:
-          type: object
-          properties:
-            string:
-              type: string
-              example: 10:00-14:00
-    locationsAddress:
-      type: object
-      properties:
-        City:
-          type: string
-          description: The city of the pickup location address
-          example: Hoofddorp
-        Countrycode:
-          type: string
-          description: The country of the pickup location address
-          example: NL
-        HouseNr:
-          type: integer
-          format: int32
-          description: The house number of the pickup location address
-          example: 42
-        HouseNrExt:
-          type: string
-          description: The house number extension of the pickup location address
-          example: '-60'
-        Remark:
-          type: string
-          description: Additional information about the pickup location
-          example: Dit is een Pakketpunt. Pakketten die je op werkdagen vóór lichtingstijd afgeeft, bezorgen we binnen Nederland de volgende dag. Op zaterdag worden alléén pakketten die je afgeeft voor 15:00 uur maandag bezorgd.
-        Street:
-          type: string
-          description: The street of the pickup location address
-          example: Siriusdreef
-        Zipcode:
-          type: string
-          description: The zipcode of the pickup location address
-          example: 2132WT
-    getLocationsResultSingle:
-      type: object
-      properties:
-        ResponseLocation:
-          $ref: '#/components/schemas/location'
     location:
       type: object
       properties:
@@ -760,6 +643,18 @@ components:
           type: string
           description: The retail network belonging to the pickup location. Can be ignored, no longer used
           example: PNPNL-01
+    getLocationsResultSingle:
+      type: object
+      properties:
+        ResponseLocation:
+          $ref: '#/components/schemas/location'
+    getLocationsResultMultiple:
+      type: object
+      properties:
+        ResponseLocation:
+          type: array
+          items:
+            $ref: '#/components/schemas/location'
     TooManyRequests:
       type: object
       properties:
@@ -769,20 +664,11 @@ components:
         http_status_code:
           type: number
           example: 429
-    getLocationsResultMultiple:
+    locationResponseSingle:
       type: object
       properties:
-        ResponseLocation:
-          type: array
-          items:
-            $ref: '#/components/schemas/location'
-    locationsDeliveryOption:
-      type: string
-      default: PG
-      enum:
-      - PG
-      - PA
-      - PG_EX
+        GetLocationsResult:
+          $ref: '#/components/schemas/getLocationsResultSingle'
     InvalidRequest:
       type: object
       properties:
@@ -801,6 +687,120 @@ components:
         RequestId:
           type: string
           example: 09fd61fe-0099-4349-b71d-dce5c2472be9
+    locationsResponseMultiple:
+      type: object
+      properties:
+        GetLocationsResult:
+          $ref: '#/components/schemas/getLocationsResultMultiple'
+    locationsOpeningHours:
+      type: object
+      description: The standard opening times of the pickup location
+      properties:
+        Monday:
+          type: object
+          properties:
+            string:
+              type: string
+              example: 08:00-18:00
+        Tuesday:
+          type: object
+          properties:
+            string:
+              type: string
+              example: 08:00-18:00
+        Wednesday:
+          type: object
+          properties:
+            string:
+              type: string
+              example: 08:00-18:00
+        Thursday:
+          type: object
+          properties:
+            string:
+              type: string
+              example: 08:00-18:00
+        Friday:
+          type: object
+          properties:
+            string:
+              type: string
+              example: 08:00-18:00
+        Saturday:
+          type: object
+          properties:
+            string:
+              type: string
+              example: 10:00-16:00
+        Sunday:
+          type: object
+          properties:
+            string:
+              type: string
+              example: 10:00-14:00
+    Unauthorized:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Failed to resolve API Key variable 'request.header.apikey'
+        http_status_code:
+          type: number
+          example: 401
+    locationsDeliveryOption:
+      type: string
+      default: PG
+      enum:
+      - PG
+      - PA
+      - PG_EX
+    locationsAddress:
+      type: object
+      properties:
+        City:
+          type: string
+          description: The city of the pickup location address
+          example: Hoofddorp
+        Countrycode:
+          type: string
+          description: The country of the pickup location address
+          example: NL
+        HouseNr:
+          type: integer
+          format: int32
+          description: The house number of the pickup location address
+          example: 42
+        HouseNrExt:
+          type: string
+          description: The house number extension of the pickup location address
+          example: '-60'
+        Remark:
+          type: string
+          description: Additional information about the pickup location
+          example: Dit is een Pakketpunt. Pakketten die je op werkdagen vóór lichtingstijd afgeeft, bezorgen we binnen Nederland de volgende dag. Op zaterdag worden alléén pakketten die je afgeeft voor 15:00 uur maandag bezorgd.
+        Street:
+          type: string
+          description: The street of the pickup location address
+          example: Siriusdreef
+        Zipcode:
+          type: string
+          description: The zipcode of the pickup location address
+          example: 2132WT
+    InternalServerError:
+      type: object
+      properties:
+        fault:
+          type: object
+          properties:
+            faultstring:
+              type: string
+              example: Unexpected token in object literal
+            detail:
+              type: object
+              properties:
+                errorcode:
+                  type: string
+                  example: Validation Fault
   securitySchemes:
     APIKeyHeader:
       type: apiKey

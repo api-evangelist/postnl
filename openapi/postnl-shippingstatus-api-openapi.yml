@@ -452,79 +452,140 @@ paths:
                     errorcode: Validation Fault
 components:
   schemas:
-    currentStatusShipment:
+    shippingstatusResponseSignature:
       type: object
       properties:
-        MainBarcode:
-          type: string
-          description: The main barcode of the shipment
-          example: 3SDEVC6659149
-        Barcode:
-          type: string
-          description: The barcode of the shipment
-          example: 3SDEVC6659149
-        ShipmentAmount:
-          type: string
-          description: The amount of parcels in the multi-collo shipment
-          example: '2'
-        ShipmentCounter:
-          type: string
-          description: The sequence of this parcel in the multi-collo shipment
-          example: '1'
-        Customer:
-          $ref: '#/components/schemas/shippingstatusCustomer'
-        ProductCode:
-          type: string
-          description: The product code of the shipment
-          example: 003085
-        ProductDescription:
-          type: string
-          description: The description of the product code
-          example: Standaard Zending
-        Reference:
-          type: string
-          description: The customer reference belonging to the shipment
-          example: REF-1234567
-        DeliveryDate:
-          type: string
-          description: The expected delivery date of the shipment
-          example: '2016-04-20'
-        Dimension:
-          $ref: '#/components/schemas/shippingstatusDimension'
-        Address:
-          type: array
-          description: A list of addresses belonging to the shipment
-          items:
-            $ref: '#/components/schemas/shippingstatusAddress'
-        ProductOptions:
-          type: array
-          description: A list of product options.
-          items:
-            $ref: '#/components/schemas/shippingstatusProductOptions'
-        Status:
+        Signature:
           type: object
-          description: The current status of the shipment (see the [Status codes](https://developer.postnl.nl/docs/#/http/reference-data/t-t-status-codes/event-codes) for possible values.
           properties:
-            TimeStamp:
+            Barcode:
               type: string
-              description: The status timestamp
-              example: 07-11-2022 19:10:28
-            StatusCode:
+              example: 3SDEVC317858754
+              description: The barcode of the shipment for which the signature is returned
+            SignatureDate:
               type: string
-              description: The status code
-              example: '1'
-            StatusDescription:
+              description: The date of the signature
+              example: '2022-11-07T19:28:16'
+            SignatureImage:
               type: string
-              description: The status description
-              example: Zending voorgemeld
-            PhaseCode:
-              type: string
-              description: The phase code
-              example: '1'
-            PhaseDescription:
-              type: string
-              description: The phase description
-              example: Collectie
+              description: The signature content; base64 encoded GIF format.
+              example: iVBORw0KGgoAAAANSUhEUgAAAogAAAGTCAYAAACrs[TRUNCATED]
+        Warnings:
+          type: object
+          properties:
+            Warning:
+              $ref: '#/components/schemas/shippingstatusWarning'
+    TooManyRequests:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Too many requests. Rate limit exceeded!
+        http_status_code:
+          type: number
+          example: 429
+    shippingstatusCustomer:
+      type: object
+      properties:
+        CustomerCode:
+          type: string
+          description: The customer code of the shipment
+          example: DEVC
+        CustomerNumber:
+          type: string
+          description: The customer number of the shipment
+          example: '11223344'
+        Name:
+          type: string
+          description: The customer name
+          example: PostNL Parcels
+    shippingstatusResponse:
+      type: object
+      properties:
+        CompleteStatus:
+          type: object
+          description: The current status and old statuses of the shipment
+          properties:
+            Shipment:
+              $ref: '#/components/schemas/completeStatusShipment'
+        CurrentStatus:
+          type: object
+          description: The current status and old statuses of the shipment
+          properties:
+            Shipment:
+              $ref: '#/components/schemas/currentStatusShipment'
+        Warnings:
+          description: Possible warnings (see [Error Codes](https://developer.postnl.nl/docs/#/http/reference-data/error-codes) for possible values)
+          type: array
+          items:
+            $ref: '#/components/schemas/shippingstatusWarning'
+    shippingstatusWarning:
+      type: object
+      properties:
+        Message:
+          type: string
+          description: Warning message
+          example: No signature found
+        Code:
+          type: string
+          description: Warning code
+          example: '2'
+    updatedShipmentStatus:
+      type: object
+      description: The status update. See [Status codes](https://developer.postnl.nl/docs/#/http/reference-data/error-codes) for possible values.
+      properties:
+        Timestamp:
+          type: string
+          description: The timestamp of the update
+          example: '2022-11-07T12:36:41'
+        StatusCode:
+          type: string
+          description: The status code
+          example: '1'
+        StatusDescription:
+          type: string
+          description: The status description
+          example: Zending voorgemeld
+        PhaseCode:
+          type: string
+          description: The phase code
+          example: '1'
+        PhaseDescription:
+          type: string
+          description: The phase description
+          example: Collectie
+    Unauthorized:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Failed to resolve API Key variable 'request.header.apikey'
+        http_status_code:
+          type: number
+          example: 401
+    shippingstatusDimension:
+      type: object
+      properties:
+        Weight:
+          type: string
+          description: The weight of the shipment
+          example: '100'
+        Height:
+          type: string
+          description: The height of the shipment
+          example: '200'
+        Length:
+          type: string
+          description: The length of the shipment
+          example: '300'
+        Width:
+          type: string
+          description: The width of the shipment
+          example: '400'
+        Volume:
+          type: string
+          description: The volume of the shipment
+          example: '5000'
     completeStatusShipment:
       type: object
       properties:
@@ -672,75 +733,111 @@ components:
                 type: string
                 description: The phase description
                 example: Collectie
-    shippingstatusValidationFault:
+    MethodNotAllowedOnlyGet:
       type: object
       properties:
-        fault:
-          type: object
-          properties:
-            faultstring:
-              type: string
-              example: no barcode supplied in path
-            detail:
-              type: object
-              properties:
-                errorcode:
-                  type: string
-                  example: Validation Fault
-    shippingstatusProductOption:
-      type: object
-      properties:
-        OptionCode:
+        message:
           type: string
-          description: The product option code for this ProductOption.
-          example: '6'
-        CharacteristicCode:
+          example: Only GET requests allowed
+        http_status_code:
+          type: number
+          example: 405
+    currentStatusShipment:
+      type: object
+      properties:
+        MainBarcode:
           type: string
-          description: The characteristic of the ProductOption.
-          example: '118'
-    shippingstatusResponseSignature:
-      type: object
-      properties:
-        Signature:
-          type: object
-          properties:
-            Barcode:
-              type: string
-              example: 3SDEVC317858754
-              description: The barcode of the shipment for which the signature is returned
-            SignatureDate:
-              type: string
-              description: The date of the signature
-              example: '2022-11-07T19:28:16'
-            SignatureImage:
-              type: string
-              description: The signature content; base64 encoded GIF format.
-              example: iVBORw0KGgoAAAANSUhEUgAAAogAAAGTCAYAAACrs[TRUNCATED]
-        Warnings:
-          type: object
-          properties:
-            Warning:
-              $ref: '#/components/schemas/shippingstatusWarning'
-    shippingstatusResponse:
-      type: object
-      properties:
-        CompleteStatus:
-          type: object
-          description: The current status and old statuses of the shipment
-          properties:
-            Shipment:
-              $ref: '#/components/schemas/completeStatusShipment'
-        CurrentStatus:
-          type: object
-          description: The current status and old statuses of the shipment
-          properties:
-            Shipment:
-              $ref: '#/components/schemas/currentStatusShipment'
-        Warnings:
-          description: Possible warnings (see [Error Codes](https://developer.postnl.nl/docs/#/http/reference-data/error-codes) for possible values)
+          description: The main barcode of the shipment
+          example: 3SDEVC6659149
+        Barcode:
+          type: string
+          description: The barcode of the shipment
+          example: 3SDEVC6659149
+        ShipmentAmount:
+          type: string
+          description: The amount of parcels in the multi-collo shipment
+          example: '2'
+        ShipmentCounter:
+          type: string
+          description: The sequence of this parcel in the multi-collo shipment
+          example: '1'
+        Customer:
+          $ref: '#/components/schemas/shippingstatusCustomer'
+        ProductCode:
+          type: string
+          description: The product code of the shipment
+          example: 003085
+        ProductDescription:
+          type: string
+          description: The description of the product code
+          example: Standaard Zending
+        Reference:
+          type: string
+          description: The customer reference belonging to the shipment
+          example: REF-1234567
+        DeliveryDate:
+          type: string
+          description: The expected delivery date of the shipment
+          example: '2016-04-20'
+        Dimension:
+          $ref: '#/components/schemas/shippingstatusDimension'
+        Address:
           type: array
+          description: A list of addresses belonging to the shipment
           items:
-            $ref: '#/components/schemas/shippingstatusWarning'
+            $ref: '#/components/schemas/shippingstatusAddress'
+        ProductOptions:
+          type: array
+          description: A list of product options.
+          items:
+            $ref: '#/components/schemas/shippingstatusProductOptions'
+        Status:
+          type: object
+          description: The current status of the shipment (see the [Status codes](https://developer.postnl.nl/docs/#/http/reference-data/t-t-status-codes/event-codes) for possible values.
+          properties:
+            TimeStamp:
+              type: string
+              description: The status timestamp
+              example: 07-11-2022 19:10:28
+            StatusCode:
+              type: string
+              description: The status code
+              example: '1'
+            StatusDescription:
+              type: string
+              description: The status description
+              example: Zending voorgemeld
+            PhaseCode:
+              type: string
+              description: The phase code
+              example: '1'
+            PhaseDescription:
+              type: string
+              description: The phase description
+              example: Collectie
+    shippingstatusResponseUpdatedShipments:
+      type: array
+      items:
+        type: object
+        properties:
+          Barcode:
+            type: string
+            example: 3SDEVC5672025
+            description: The barcode belonging to the status update
+          CreationDate:
+            type: string
+            example: '2022-11-07T00:00:00'
+            description: The date of the update
+          CustomerNumber:
+            type: string
+            example: '11223344'
+            description: The customer number
+          CustomerCode:
+            type: string
+            example: DEVC
+            description: The customer code
+          Status:
+            $ref: '#/components/schemas/updatedShipmentStatus'
     shippingstatusAmount:
       type: object
       description: The amounts belonging to the shipment
@@ -753,21 +850,22 @@ components:
           type: string
           description: The insurance amount of the shipment
           example: EUR500.00
-    shippingstatusCustomer:
+    shippingstatusProductOptions:
       type: object
       properties:
-        CustomerCode:
+        ProductOption:
+          $ref: '#/components/schemas/shippingstatusProductOption'
+    shippingstatusProductOption:
+      type: object
+      properties:
+        OptionCode:
           type: string
-          description: The customer code of the shipment
-          example: DEVC
-        CustomerNumber:
+          description: The product option code for this ProductOption.
+          example: '6'
+        CharacteristicCode:
           type: string
-          description: The customer number of the shipment
-          example: '11223344'
-        Name:
-          type: string
-          description: The customer name
-          example: PostNL Parcels
+          description: The characteristic of the ProductOption.
+          example: '118'
     shippingstatusAddress:
       type: object
       properties:
@@ -831,119 +929,21 @@ components:
           type: string
           description: An additional remark
           example: No doorbell
-    shippingstatusProductOptions:
+    shippingstatusValidationFault:
       type: object
       properties:
-        ProductOption:
-          $ref: '#/components/schemas/shippingstatusProductOption'
-    MethodNotAllowedOnlyGet:
-      type: object
-      properties:
-        message:
-          type: string
-          example: Only GET requests allowed
-        http_status_code:
-          type: number
-          example: 405
-    shippingstatusWarning:
-      type: object
-      properties:
-        Message:
-          type: string
-          description: Warning message
-          example: No signature found
-        Code:
-          type: string
-          description: Warning code
-          example: '2'
-    shippingstatusDimension:
-      type: object
-      properties:
-        Weight:
-          type: string
-          description: The weight of the shipment
-          example: '100'
-        Height:
-          type: string
-          description: The height of the shipment
-          example: '200'
-        Length:
-          type: string
-          description: The length of the shipment
-          example: '300'
-        Width:
-          type: string
-          description: The width of the shipment
-          example: '400'
-        Volume:
-          type: string
-          description: The volume of the shipment
-          example: '5000'
-    Unauthorized:
-      type: object
-      properties:
-        message:
-          type: string
-          example: Failed to resolve API Key variable 'request.header.apikey'
-        http_status_code:
-          type: number
-          example: 401
-    updatedShipmentStatus:
-      type: object
-      description: The status update. See [Status codes](https://developer.postnl.nl/docs/#/http/reference-data/error-codes) for possible values.
-      properties:
-        Timestamp:
-          type: string
-          description: The timestamp of the update
-          example: '2022-11-07T12:36:41'
-        StatusCode:
-          type: string
-          description: The status code
-          example: '1'
-        StatusDescription:
-          type: string
-          description: The status description
-          example: Zending voorgemeld
-        PhaseCode:
-          type: string
-          description: The phase code
-          example: '1'
-        PhaseDescription:
-          type: string
-          description: The phase description
-          example: Collectie
-    TooManyRequests:
-      type: object
-      properties:
-        message:
-          type: string
-          example: Too many requests. Rate limit exceeded!
-        http_status_code:
-          type: number
-          example: 429
-    shippingstatusResponseUpdatedShipments:
-      type: array
-      items:
-        type: object
-        properties:
-          Barcode:
-            type: string
-            example: 3SDEVC5672025
-            description: The barcode belonging to the status update
-          CreationDate:
-            type: string
-            example: '2022-11-07T00:00:00'
-            description: The date of the update
-          CustomerNumber:
-            type: string
-            example: '11223344'
-            description: The customer number
-          CustomerCode:
-            type: string
-            example: DEVC
-            description: The customer code
-          Status:
-            $ref: '#/components/schemas/updatedShipmentStatus'
+        fault:
+          type: object
+          properties:
+            faultstring:
+              type: string
+              example: no barcode supplied in path
+            detail:
+              type: object
+              properties:
+                errorcode:
+                  type: string
+                  example: Validation Fault
   examples:
     shippingstatusExampleResponseSignature:
       value:
@@ -951,6 +951,223 @@ components:
           Barcode: 3SDEVC317858754
           SignatureDate: '2022-11-07T19:28:16'
           SignatureImage: iVBORw0KGgoAAAANSUhEUgAAAogAAAGTCAYAAACrs[TRUNCATED]
+    shippingstatusExampleResponseSingleShipmentComplete:
+      value:
+        CompleteStatus:
+          Shipment:
+            MainBarcode: 3SDEVC288882229
+            Barcode: 3SDEVC288882229
+            ShipmentAmount: '1'
+            ShipmentCounter: '1'
+            Customer:
+              CustomerCode: DEVC
+              CustomerNumber: '11223344'
+              Name: Testaccount API PNP
+            ProductCode: 002285
+            ProductDescription: Parcels, domestic &lt;= 10 kg
+            Reference: '202213331635095807'
+            DeliveryDate: '2022-11-08'
+            Dimension:
+              Height: '125'
+              Length: '250'
+              Volume: '6250'
+              Weight: '180'
+              Width: '200'
+            Address:
+            - AddressType: '01'
+              Building: {}
+              City: Utrecht
+              CompanyName: {}
+              CountryCode: NL
+              DepartmentName: {}
+              District: {}
+              FirstName: Peter
+              Floor: {}
+              HouseNumber: '74'
+              HouseNumberSuffix: {}
+              LastName: de Ruiter
+              Region: {}
+              Remark: {}
+              Street: Molengraaffplantsoen
+              Zipcode: 3571ZZ
+            - AddressType: '02'
+              Building: {}
+              City: Hoofddorp
+              CompanyName: PostNL Pakketten
+              CountryCode: NL
+              DepartmentName: {}
+              District: {}
+              FirstName: {}
+              Floor: {}
+              HouseNumber: '42'
+              HouseNumberSuffix: '-60'
+              LastName: {}
+              Region: {}
+              Remark: {}
+              Street: Siriusdreef
+              Zipcode: 2132WT
+            Event:
+            - Code: J05
+              Description: Driver is en route
+              DestinationLocationCode: {}
+              LocationCode: '171966'
+              RouteCode: 20221108_HD_171966_0444
+              RouteName: 0444 Spijkenisse 12
+              TimeStamp: 08-11-2022 10:13:20
+            - Code: J01
+              Description: Shipment has been sorted
+              DestinationLocationCode: '171967'
+              LocationCode: '171967'
+              RouteCode: '444'
+              RouteName: 0444 Spijkenisse 12
+              TimeStamp: 08-11-2022 09:58:11
+            - Code: B01
+              Description: Shipment received by PostNL
+              DestinationLocationCode: '171967'
+              LocationCode: '212124'
+              RouteCode: '444'
+              RouteName: 0444 Spijkenisse 12
+              TimeStamp: 08-11-2022 00:08:39
+            - Code: A01
+              Description: Shipment expected, but not yet arrived at PostNL
+              DestinationLocationCode: {}
+              LocationCode: '888888'
+              RouteCode: {}
+              RouteName: {}
+              TimeStamp: 07-11-2022 19:19:31
+            ProductOptions:
+            - OptionCode: '6'
+              CharacteristicCode: '118'
+            Expectation:
+              ETAFrom: '2022-11-08T14:50:00'
+              ETATo: '2022-11-08T16:50:00'
+            Status:
+              TimeStamp: 08-11-2022 10:13:20
+              StatusCode: '7'
+              StatusDescription: Shipment out for delivery
+              PhaseCode: '3'
+              PhaseDescription: Distribution
+            OldStatus:
+            - TimeStamp: 08-11-2022 10:13:20
+              StatusCode: '7'
+              StatusDescription: Shipment out for delivery
+              PhaseCode: '3'
+              PhaseDescription: Distribution
+            - TimeStamp: 08-11-2022 10:13:20
+              StatusCode: '99'
+              StatusDescription: Not applicable
+              PhaseCode: '99'
+              PhaseDescription: Not applicable
+            - TimeStamp: 08-11-2022 10:12:59
+              StatusCode: '99'
+              StatusDescription: Not applicable
+              PhaseCode: '99'
+              PhaseDescription: Not applicable
+            - TimeStamp: 08-11-2022 09:58:50
+              StatusCode: '99'
+              StatusDescription: Not applicable
+              PhaseCode: '99'
+              PhaseDescription: Not applicable
+            - TimeStamp: 08-11-2022 09:58:11
+              StatusCode: '5'
+              StatusDescription: Shipment sorted
+              PhaseCode: '2'
+              PhaseDescription: Sorting
+            - TimeStamp: 08-11-2022 00:10:11.081
+              StatusCode: '99'
+              StatusDescription: Not applicable
+              PhaseCode: '99'
+              PhaseDescription: Not applicable
+            - TimeStamp: 08-11-2022 00:08:39
+              StatusCode: '2'
+              StatusDescription: Shipment accepted
+              PhaseCode: '1'
+              PhaseDescription: Collection
+            - TimeStamp: 07-11-2022 19:20:53.471
+              StatusCode: '99'
+              StatusDescription: Not applicable
+              PhaseCode: '99'
+              PhaseDescription: Not applicable
+            - TimeStamp: 07-11-2022 19:20:52
+              StatusCode: '99'
+              StatusDescription: Not applicable
+              PhaseCode: '99'
+              PhaseDescription: Not applicable
+            - TimeStamp: 07-11-2022 19:19:31
+              StatusCode: '1'
+              StatusDescription: Shipment pre-alerted
+              PhaseCode: '1'
+              PhaseDescription: Collection
+    shippingstatusExampleResponseNoShipment:
+      value:
+        CompleteStatus: {}
+        Warnings:
+        - Message: No shipment found
+          Code: '2'
+    shippingstatusExampleResponseSingleShipmentCurrent:
+      value:
+        CurrentStatus:
+          Shipment:
+            MainBarcode: 3SDEVC288882229
+            Barcode: 3SDEVC288882229
+            ShipmentAmount: '1'
+            ShipmentCounter: '1'
+            Customer:
+              CustomerCode: DEVC
+              CustomerNumber: '11223344'
+              Name: Testaccount API PNP
+            ProductCode: 002285
+            ProductDescription: Parcels, domestic &lt;= 10 kg
+            Reference: '202213331635095807'
+            DeliveryDate: '2022-11-08'
+            Dimension:
+              Height: '125'
+              Length: '250'
+              Volume: '6250'
+              Weight: '180'
+              Width: '200'
+            Address:
+            - AddressType: '01'
+              Building: {}
+              City: Utrecht
+              CompanyName: {}
+              CountryCode: NL
+              DepartmentName: {}
+              District: {}
+              FirstName: Peter
+              Floor: {}
+              HouseNumber: '74'
+              HouseNumberSuffix: {}
+              LastName: de Ruiter
+              Region: {}
+              Remark: {}
+              Street: Molengraaffplantsoen
+              Zipcode: 3571ZZ
+            - AddressType: '02'
+              Building: {}
+              City: Hoofddorp
+              CompanyName: PostNL Pakketten
+              CountryCode: NL
+              DepartmentName: {}
+              District: {}
+              FirstName: {}
+              Floor: {}
+              HouseNumber: '42'
+              HouseNumberSuffix: '-60'
+              LastName: {}
+              Region: {}
+              Remark: {}
+              Street: Siriusdreef
+              Zipcode: 2132WT
+            ProductOptions:
+            - OptionCode: '6'
+              CharacteristicCode: '118'
+            Status:
+              TimeStamp: 08-11-2022 10:13:20
+              StatusCode: '7'
+              StatusDescription: Shipment out for delivery
+              PhaseCode: '3'
+              PhaseDescription: Distribution
     shippingstatusExampleResponseNoSignature:
       value:
         Warnings:
@@ -1134,153 +1351,6 @@ components:
               StatusDescription: Zending voorgemeld
               PhaseCode: '1'
               PhaseDescription: Collectie
-    shippingstatusExampleResponseSingleShipmentComplete:
-      value:
-        CompleteStatus:
-          Shipment:
-            MainBarcode: 3SDEVC288882229
-            Barcode: 3SDEVC288882229
-            ShipmentAmount: '1'
-            ShipmentCounter: '1'
-            Customer:
-              CustomerCode: DEVC
-              CustomerNumber: '11223344'
-              Name: Testaccount API PNP
-            ProductCode: 002285
-            ProductDescription: Parcels, domestic &lt;= 10 kg
-            Reference: '202213331635095807'
-            DeliveryDate: '2022-11-08'
-            Dimension:
-              Height: '125'
-              Length: '250'
-              Volume: '6250'
-              Weight: '180'
-              Width: '200'
-            Address:
-            - AddressType: '01'
-              Building: {}
-              City: Utrecht
-              CompanyName: {}
-              CountryCode: NL
-              DepartmentName: {}
-              District: {}
-              FirstName: Peter
-              Floor: {}
-              HouseNumber: '74'
-              HouseNumberSuffix: {}
-              LastName: de Ruiter
-              Region: {}
-              Remark: {}
-              Street: Molengraaffplantsoen
-              Zipcode: 3571ZZ
-            - AddressType: '02'
-              Building: {}
-              City: Hoofddorp
-              CompanyName: PostNL Pakketten
-              CountryCode: NL
-              DepartmentName: {}
-              District: {}
-              FirstName: {}
-              Floor: {}
-              HouseNumber: '42'
-              HouseNumberSuffix: '-60'
-              LastName: {}
-              Region: {}
-              Remark: {}
-              Street: Siriusdreef
-              Zipcode: 2132WT
-            Event:
-            - Code: J05
-              Description: Driver is en route
-              DestinationLocationCode: {}
-              LocationCode: '171966'
-              RouteCode: 20221108_HD_171966_0444
-              RouteName: 0444 Spijkenisse 12
-              TimeStamp: 08-11-2022 10:13:20
-            - Code: J01
-              Description: Shipment has been sorted
-              DestinationLocationCode: '171967'
-              LocationCode: '171967'
-              RouteCode: '444'
-              RouteName: 0444 Spijkenisse 12
-              TimeStamp: 08-11-2022 09:58:11
-            - Code: B01
-              Description: Shipment received by PostNL
-              DestinationLocationCode: '171967'
-              LocationCode: '212124'
-              RouteCode: '444'
-              RouteName: 0444 Spijkenisse 12
-              TimeStamp: 08-11-2022 00:08:39
-            - Code: A01
-              Description: Shipment expected, but not yet arrived at PostNL
-              DestinationLocationCode: {}
-              LocationCode: '888888'
-              RouteCode: {}
-              RouteName: {}
-              TimeStamp: 07-11-2022 19:19:31
-            ProductOptions:
-            - OptionCode: '6'
-              CharacteristicCode: '118'
-            Expectation:
-              ETAFrom: '2022-11-08T14:50:00'
-              ETATo: '2022-11-08T16:50:00'
-            Status:
-              TimeStamp: 08-11-2022 10:13:20
-              StatusCode: '7'
-              StatusDescription: Shipment out for delivery
-              PhaseCode: '3'
-              PhaseDescription: Distribution
-            OldStatus:
-            - TimeStamp: 08-11-2022 10:13:20
-              StatusCode: '7'
-              StatusDescription: Shipment out for delivery
-              PhaseCode: '3'
-              PhaseDescription: Distribution
-            - TimeStamp: 08-11-2022 10:13:20
-              StatusCode: '99'
-              StatusDescription: Not applicable
-              PhaseCode: '99'
-              PhaseDescription: Not applicable
-            - TimeStamp: 08-11-2022 10:12:59
-              StatusCode: '99'
-              StatusDescription: Not applicable
-              PhaseCode: '99'
-              PhaseDescription: Not applicable
-            - TimeStamp: 08-11-2022 09:58:50
-              StatusCode: '99'
-              StatusDescription: Not applicable
-              PhaseCode: '99'
-              PhaseDescription: Not applicable
-            - TimeStamp: 08-11-2022 09:58:11
-              StatusCode: '5'
-              StatusDescription: Shipment sorted
-              PhaseCode: '2'
-              PhaseDescription: Sorting
-            - TimeStamp: 08-11-2022 00:10:11.081
-              StatusCode: '99'
-              StatusDescription: Not applicable
-              PhaseCode: '99'
-              PhaseDescription: Not applicable
-            - TimeStamp: 08-11-2022 00:08:39
-              StatusCode: '2'
-              StatusDescription: Shipment accepted
-              PhaseCode: '1'
-              PhaseDescription: Collection
-            - TimeStamp: 07-11-2022 19:20:53.471
-              StatusCode: '99'
-              StatusDescription: Not applicable
-              PhaseCode: '99'
-              PhaseDescription: Not applicable
-            - TimeStamp: 07-11-2022 19:20:52
-              StatusCode: '99'
-              StatusDescription: Not applicable
-              PhaseCode: '99'
-              PhaseDescription: Not applicable
-            - TimeStamp: 07-11-2022 19:19:31
-              StatusCode: '1'
-              StatusDescription: Shipment pre-alerted
-              PhaseCode: '1'
-              PhaseDescription: Collection
     shippingstatusExampleResponseUpdatedShipments:
       value:
       - Barcode: 3SDEVC2260332157
@@ -1323,76 +1393,6 @@ components:
           StatusDescription: Zending voorgemeld
           PhaseCode: '1'
           PhaseDescription: Collectie
-    shippingstatusExampleResponseSingleShipmentCurrent:
-      value:
-        CurrentStatus:
-          Shipment:
-            MainBarcode: 3SDEVC288882229
-            Barcode: 3SDEVC288882229
-            ShipmentAmount: '1'
-            ShipmentCounter: '1'
-            Customer:
-              CustomerCode: DEVC
-              CustomerNumber: '11223344'
-              Name: Testaccount API PNP
-            ProductCode: 002285
-            ProductDescription: Parcels, domestic &lt;= 10 kg
-            Reference: '202213331635095807'
-            DeliveryDate: '2022-11-08'
-            Dimension:
-              Height: '125'
-              Length: '250'
-              Volume: '6250'
-              Weight: '180'
-              Width: '200'
-            Address:
-            - AddressType: '01'
-              Building: {}
-              City: Utrecht
-              CompanyName: {}
-              CountryCode: NL
-              DepartmentName: {}
-              District: {}
-              FirstName: Peter
-              Floor: {}
-              HouseNumber: '74'
-              HouseNumberSuffix: {}
-              LastName: de Ruiter
-              Region: {}
-              Remark: {}
-              Street: Molengraaffplantsoen
-              Zipcode: 3571ZZ
-            - AddressType: '02'
-              Building: {}
-              City: Hoofddorp
-              CompanyName: PostNL Pakketten
-              CountryCode: NL
-              DepartmentName: {}
-              District: {}
-              FirstName: {}
-              Floor: {}
-              HouseNumber: '42'
-              HouseNumberSuffix: '-60'
-              LastName: {}
-              Region: {}
-              Remark: {}
-              Street: Siriusdreef
-              Zipcode: 2132WT
-            ProductOptions:
-            - OptionCode: '6'
-              CharacteristicCode: '118'
-            Status:
-              TimeStamp: 08-11-2022 10:13:20
-              StatusCode: '7'
-              StatusDescription: Shipment out for delivery
-              PhaseCode: '3'
-              PhaseDescription: Distribution
-    shippingstatusExampleResponseNoShipment:
-      value:
-        CompleteStatus: {}
-        Warnings:
-        - Message: No shipment found
-          Code: '2'
     shippingstatusExampleResponseUpdatedShipmentsNoUpdates:
       value: []
   securitySchemes:

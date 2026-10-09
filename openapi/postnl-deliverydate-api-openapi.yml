@@ -418,20 +418,6 @@ components:
         http_status_code:
           type: number
           example: 405
-    deliverydateOption:
-      type: string
-      enum:
-      - Daytime
-      - Evening
-      - Morning
-      - Noon
-      - Afternoon
-    deliverydateShippingResponse:
-      type: object
-      properties:
-        SentDate:
-          type: string
-          example: 29-06-2022
     InternalServerError:
       type: object
       properties:
@@ -447,27 +433,6 @@ components:
                 errorcode:
                   type: string
                   example: Validation Fault
-    Unauthorized:
-      type: object
-      properties:
-        message:
-          type: string
-          example: Failed to resolve API Key variable 'request.header.apikey'
-        http_status_code:
-          type: number
-          example: 401
-    deliverydateOptions:
-      type: object
-      description: The delivery options for which a delivery date is returned. Only one delivery option is specified. See [Delivery Options](https://developer.postnl.nl/docs/#/http/reference-data/reference-codes/delivery-options) for possible values.
-      properties:
-        string:
-          type: string
-          enum:
-          - Daytime
-          - Evening
-          - Morning
-          - Noon
-          - Afternoon
     TooManyRequests:
       type: object
       properties:
@@ -477,24 +442,6 @@ components:
         http_status_code:
           type: number
           example: 429
-    deliverydateInvalidResponse:
-      type: object
-      properties:
-        Date:
-          type: string
-          format: date-time
-        Error:
-          type: object
-          properties:
-            ErrorCode:
-              type: string
-              example: '3000'
-            ErrorDescription:
-              type: string
-              example: Request format is invalid
-        RequestId:
-          type: string
-          example: 09fd61fe-0099-4349-b71d-dce5c2472be9
     deliverydateDeliveryResponse:
       type: object
       properties:
@@ -520,6 +467,59 @@ components:
               type: string
               description: Sustainability score code description
               example: Sustainable option
+    deliverydateInvalidResponse:
+      type: object
+      properties:
+        Date:
+          type: string
+          format: date-time
+        Error:
+          type: object
+          properties:
+            ErrorCode:
+              type: string
+              example: '3000'
+            ErrorDescription:
+              type: string
+              example: Request format is invalid
+        RequestId:
+          type: string
+          example: 09fd61fe-0099-4349-b71d-dce5c2472be9
+    deliverydateOption:
+      type: string
+      enum:
+      - Daytime
+      - Evening
+      - Morning
+      - Noon
+      - Afternoon
+    Unauthorized:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Failed to resolve API Key variable 'request.header.apikey'
+        http_status_code:
+          type: number
+          example: 401
+    deliverydateOptions:
+      type: object
+      description: The delivery options for which a delivery date is returned. Only one delivery option is specified. See [Delivery Options](https://developer.postnl.nl/docs/#/http/reference-data/reference-codes/delivery-options) for possible values.
+      properties:
+        string:
+          type: string
+          enum:
+          - Daytime
+          - Evening
+          - Morning
+          - Noon
+          - Afternoon
+    deliverydateShippingResponse:
+      type: object
+      properties:
+        SentDate:
+          type: string
+          example: 29-06-2022
   securitySchemes:
     APIKeyHeader:
       type: apiKey

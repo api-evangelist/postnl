@@ -145,6 +145,23 @@ components:
         http_status_code:
           type: number
           example: 405
+    barcodeResponseInvalid:
+      type: object
+      properties:
+        errors:
+          type: array
+          description: A list of errors. See [Error codes](https://developer.postnl.nl/docs/#/http/reference-data/error-codes) for possible values.
+          items:
+            $ref: '#/components/schemas/barcodeError'
+    TooManyRequests:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Too many requests. Rate limit exceeded!
+        http_status_code:
+          type: number
+          example: 429
     barcodeError:
       type: object
       properties:
@@ -156,6 +173,21 @@ components:
           type: string
           description: The error code
           example: '8'
+    Unauthorized:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Failed to resolve API Key variable 'request.header.apikey'
+        http_status_code:
+          type: number
+          example: 401
+    barcodeResponse:
+      type: object
+      properties:
+        Barcode:
+          type: string
+          example: 3SDEVC903942795
     InternalServerError:
       type: object
       properties:
@@ -171,38 +203,6 @@ components:
                 errorcode:
                   type: string
                   example: Validation Fault
-    Unauthorized:
-      type: object
-      properties:
-        message:
-          type: string
-          example: Failed to resolve API Key variable 'request.header.apikey'
-        http_status_code:
-          type: number
-          example: 401
-    TooManyRequests:
-      type: object
-      properties:
-        message:
-          type: string
-          example: Too many requests. Rate limit exceeded!
-        http_status_code:
-          type: number
-          example: 429
-    barcodeResponse:
-      type: object
-      properties:
-        Barcode:
-          type: string
-          example: 3SDEVC903942795
-    barcodeResponseInvalid:
-      type: object
-      properties:
-        errors:
-          type: array
-          description: A list of errors. See [Error codes](https://developer.postnl.nl/docs/#/http/reference-data/error-codes) for possible values.
-          items:
-            $ref: '#/components/schemas/barcodeError'
   securitySchemes:
     APIKeyHeader:
       type: apiKey
